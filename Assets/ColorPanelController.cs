@@ -32,4 +32,11 @@ public class ColorPanelController : MonoBehaviour
 
         _Collider.GetComponent<Rigidbody>().AddForce(transform.up * m_JumpForce, ForceMode.Impulse);
     }
+
+    public bool ChangeColor(Prototyping.Jordi.WeaponScript.WeaponColor color)
+    {
+        //Here you change the weapon material of the block and stuff.
+        Debug.Log("Changing color!");
+        return false;
+    }
 }

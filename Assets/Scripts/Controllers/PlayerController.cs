@@ -1,7 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Prototyping.Jordi;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     Vector3 m_Movement;
@@ -9,7 +13,9 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider m_Collider;
     float m_HAxis;
     float m_VAxis;
-
+    private bool fire;
+    public WeaponScript equippedWeapon;
+    public Camera m_AttachedCamera;
 
     [Range(0.1f, 10.0f)] public float m_Speed;
     [Range(0.1f, 10.0f)] public float m_JumpForce;
@@ -23,6 +29,9 @@ public class PlayerController : MonoBehaviour
     {
         m_RigidBody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<CapsuleCollider>();
+        //m_AttachedCamera = GetComponent<Camera>(); //Debug.LogWarning("No camera found in PlayerController");
+        if(equippedWeapon == null) equippedWeapon = GetComponent<WeaponScript>() ?? gameObject.AddComponent<WeaponScript>();
+        equippedWeapon.Init(this);
     }
 
     void Update()
@@ -30,7 +39,10 @@ public class PlayerController : MonoBehaviour
         m_HAxis = Input.GetAxisRaw("Horizontal");
         m_VAxis = Input.GetAxisRaw("Vertical");
         m_Movement = new Vector3(m_HAxis, 0, m_VAxis);
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            equippedWeapon.MainFire();
+        }
         Jump();
 
         if (IsGrounded())
