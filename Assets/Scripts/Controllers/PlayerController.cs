@@ -43,6 +43,10 @@ public class PlayerController : MonoBehaviour
         {
             equippedWeapon.MainFire();
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            equippedWeapon.AltFire();
+        }
         Jump();
 
         if (IsGrounded())

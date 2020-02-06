@@ -13,6 +13,13 @@ namespace Prototyping.Jordi
             Blue
         }
 
+
+        [Header("Materials")] public Material defaultMaterial;
+        public Material redMaterial;
+        public Material greenMaterial;
+        public Material blueMaterial;
+        private Material currentMaterial;
+        
         [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 50f;
 
@@ -33,7 +40,7 @@ namespace Prototyping.Jordi
             var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
-                hit.collider.gameObject.GetComponent<ColorPanelController>()?.ChangeColor(_currentColor);
+                hit.collider.gameObject.GetComponent<ColorPanelController>()?.ChangeColor(_currentColor, currentMaterial);
                 //Debug.DrawRay(lRay.origin, hit.point, Color.green, 3f);
             }
         }
@@ -46,6 +53,23 @@ namespace Prototyping.Jordi
         private void ChangeColor(WeaponColor newColor)
         {
             //Change material and play sounds?
+            switch(newColor)
+            {
+                case WeaponColor.None:
+                    currentMaterial = defaultMaterial;
+                    break;
+                case WeaponColor.Red:
+                    currentMaterial = redMaterial;
+                    break;
+                case WeaponColor.Green:
+                    currentMaterial = greenMaterial;
+                    break;
+                case WeaponColor.Blue:
+                    currentMaterial = blueMaterial;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
+            }
             _currentColor = newColor;
         }
     }
