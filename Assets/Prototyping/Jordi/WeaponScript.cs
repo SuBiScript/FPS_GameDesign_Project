@@ -13,13 +13,12 @@ namespace Prototyping.Jordi
             Blue
         }
 
-
         [Header("Materials")] public Material defaultMaterial;
         public Material redMaterial;
         public Material greenMaterial;
         public Material blueMaterial;
-        private Material currentMaterial;
-        
+        private Material _currentMaterial;
+
         [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 50f;
 
@@ -34,42 +33,58 @@ namespace Prototyping.Jordi
             ChangeColor(WeaponColor.Red);
         }
 
+        public void Something(string var)
+        {
+            switch (_currentColor)
+            {
+                case WeaponColor.None:
+                    break;
+                case WeaponColor.Red:
+                    break;
+                case WeaponColor.Green:
+                    break;
+                case WeaponColor.Blue:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         public void MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
             var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
-                hit.collider.gameObject.GetComponent<ColorPanelController>()?.ChangeColor(_currentColor, currentMaterial);
+                hit.collider.gameObject.GetComponent<ColorPanelController>()
+                    ?.ChangeColor(_currentColor, _currentMaterial);
                 //Debug.DrawRay(lRay.origin, hit.point, Color.green, 3f);
             }
         }
 
-        public void AltFire()
-        {
-            ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
-        }
+        public void AltFire() => ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
 
         private void ChangeColor(WeaponColor newColor)
         {
             //Change material and play sounds?
-            switch(newColor)
+            switch (newColor)
             {
                 case WeaponColor.None:
-                    currentMaterial = defaultMaterial;
+                    _currentMaterial = defaultMaterial;
                     break;
                 case WeaponColor.Red:
-                    currentMaterial = redMaterial;
+                    _currentMaterial = redMaterial;
                     break;
                 case WeaponColor.Green:
-                    currentMaterial = greenMaterial;
+                    _currentMaterial = greenMaterial;
                     break;
                 case WeaponColor.Blue:
-                    currentMaterial = blueMaterial;
+                    _currentMaterial = blueMaterial;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
             }
+
             _currentColor = newColor;
         }
     }
