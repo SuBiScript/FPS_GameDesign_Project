@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using UnityEditor.Localization.Editor;
 using Weapon;
 using UnityEngine;
 
@@ -22,7 +23,17 @@ public class PlayerController : MonoBehaviour
     public PhysicMaterial m_ZeroFriction;
     public PhysicMaterial m_Friction;
     public LayerMask m_GroundLayers;
-    [HideInInspector] public bool m_PanelJump;
+    private bool _PanelJump;
+    public bool m_PanelJump
+    {
+        get { return _PanelJump; }
+        set
+        {
+            /*if (!value)
+                m_RigidBody.velocity = Vector3.zero;*/
+            _PanelJump = value;
+        }
+    }
 
 
     void Start()
@@ -30,7 +41,8 @@ public class PlayerController : MonoBehaviour
         m_RigidBody = GetComponent<Rigidbody>();
         m_Collider = GetComponent<CapsuleCollider>();
         //m_AttachedCamera = GetComponent<Camera>(); //Debug.LogWarning("No camera found in PlayerController");
-        if(equippedWeapon == null) equippedWeapon = GetComponent<WeaponScript>() ?? gameObject.AddComponent<WeaponScript>();
+        if (equippedWeapon == null)
+            equippedWeapon = GetComponent<WeaponScript>() ?? gameObject.AddComponent<WeaponScript>();
         equippedWeapon.Init(this);
     }
 
@@ -47,15 +59,14 @@ public class PlayerController : MonoBehaviour
         {
             equippedWeapon.AltFire();
         }
-        Jump();
 
+        if (Input.GetButtonDown("Jump"))
+            Jump();
+        
         if (IsGrounded())
         {
-            m_Collider.material = m_Friction;
             m_PanelJump = false;
         }
-        else
-            m_Collider.material = m_ZeroFriction;
     }
 
     void FixedUpdate()
@@ -66,12 +77,13 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        m_RigidBody.MovePosition(transform.position + Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
+        m_RigidBody.MovePosition(transform.position +
+                                 Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
     }
 
     void Jump()
     {
-        if (IsGrounded() && !m_PanelJump && Input.GetButtonDown("Jump"))
+        if (IsGrounded() && !m_PanelJump)
         {
             m_RigidBody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
         }
@@ -79,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.CheckCapsule(m_Collider.bounds.center, new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z), m_Collider.radius * .9f, m_GroundLayers);
+        return Physics.CheckCapsule(m_Collider.bounds.center,
+            new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
+            m_Collider.radius * .9f, m_GroundLayers);
     }
 }

@@ -46,32 +46,22 @@ namespace ColorPanels
             }
         }
 
-        public void OnTriggerDelegateEnter(Collider collider) => Interact(collider);
 
         private void OnTriggerExit(Collider other) => DetachObject(other.GetComponent<Rigidbody>());
 
-        private void OnCollisionEnter(Collision other) => Interact(other);
+        private void OnCollisionEnter(Collision other) => InteractTwo(other);
 
-        private void Interact(Collision other)
+        private void InteractTwo(Collision other) //OnCollision
         {
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
-                    Debug.Log("RED Activated!");
-                    if (attachedObjectRigidbody == null)
-                    {
-                        attachedObjectRigidbody = other.gameObject.GetComponent<Rigidbody>();
-                        attachedObjectRigidbody.useGravity = false;
-                    }
-
                     break;
                 case WeaponScript.WeaponColor.Green:
-                    Debug.Log("GREEN Activated!");
                     break;
                 case WeaponScript.WeaponColor.Blue:
-                    Debug.Log("BLUE Activated!");
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up);
                     break;
                 default:
@@ -79,15 +69,15 @@ namespace ColorPanels
             }
         }
 
-        private void Interact(Collider collider)
+        public void OnTriggerDelegateEnter(Collider collider) => Interact(collider);
+
+        private void Interact(Collider collider) //OnTrigger
         {
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.None:
-                    Debug.Log("NO EFFECT");
                     break;
                 case WeaponScript.WeaponColor.Red:
-                    Debug.Log("RED Activated!");
                     if (attachedObjectRigidbody == null)
                     {
                         attachedObjectRigidbody = collider.GetComponent<Rigidbody>();
@@ -96,11 +86,8 @@ namespace ColorPanels
 
                     break;
                 case WeaponScript.WeaponColor.Green:
-                    Debug.Log("GREEN Activated!");
                     break;
                 case WeaponScript.WeaponColor.Blue:
-                    Debug.Log("BLUE Activated!");
-                    ColorPanelEffects.ThrowObject(this.gameObject, collider, transform.up);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
