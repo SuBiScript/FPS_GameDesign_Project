@@ -16,6 +16,7 @@ namespace ColorPanels
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Delegate On TriggerEnter");
             parentController.OnTriggerDelegateEnter(other);
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4470792435820687606}
   - component: {fileID: 3311227798633015924}
   - component: {fileID: 2914184555015650391}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: TriggerZone
   m_TagString: Triggers
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2471712570939305329}
   - component: {fileID: 2471712570939305331}
   - component: {fileID: 2471712570939305330}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MeshRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2471712571241641595}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AttractPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,9 +306,8 @@ GameObject:
   - component: {fileID: 7437692251183304474}
   - component: {fileID: 2471712571257258586}
   - component: {fileID: 2471712571257258584}
-  - component: {fileID: 2471712571257258585}
   - component: {fileID: 2471712571257258599}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ColorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +323,7 @@ Transform:
   m_GameObject: {fileID: 5867245193151003913}
   m_LocalRotation: {x: 0.7071068, y: 0.70710677, z: 0, w: 0}
   m_LocalPosition: {x: 0.54, y: 0, z: -0.15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 2471712570575584316}
   - {fileID: 2471712570939305329}
@@ -360,21 +359,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.040647015, y: 0.0066145402, z: 0.047784008}
-  m_Center: {x: 0.00000482798, y: 0.00005375619, z: -0.0000000019868216}
---- !u!65 &2471712571257258585
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5867245193151003913}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.0355332, y: 0.006249381, z: 0.03481618}
-  m_Center: {x: 0.00039104643, y: 0.005887851, z: -0.0005664031}
+  m_Size: {x: 0.4623861, y: 0.10829806, z: 0.44996834}
+  m_Center: {x: 0.0009241253, y: 0.022892535, z: 0.005232364}
 --- !u!114 &2471712571257258599
 MonoBehaviour:
   m_ObjectHideFlags: 0

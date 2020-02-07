@@ -50,24 +50,56 @@ namespace ColorPanels
 
         private void OnTriggerExit(Collider other) => DetachObject(other.GetComponent<Rigidbody>());
 
-        private void Interact(Collider collider)
+        private void OnCollisionEnter(Collision other) => Interact(other);
+
+        private void Interact(Collision other)
         {
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
-                    //Debug.Log("RED Activated!");
+                    Debug.Log("RED Activated!");
                     if (attachedObjectRigidbody == null)
                     {
-                        attachedObjectRigidbody = collider.GetComponent<Rigidbody>();
+                        attachedObjectRigidbody = other.gameObject.GetComponent<Rigidbody>();
                         attachedObjectRigidbody.useGravity = false;
                     }
+
                     break;
                 case WeaponScript.WeaponColor.Green:
                     Debug.Log("GREEN Activated!");
                     break;
                 case WeaponScript.WeaponColor.Blue:
+                    Debug.Log("BLUE Activated!");
+                    ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void Interact(Collider collider)
+        {
+            switch (currentMode)
+            {
+                case WeaponScript.WeaponColor.None:
+                    Debug.Log("NO EFFECT");
+                    break;
+                case WeaponScript.WeaponColor.Red:
+                    Debug.Log("RED Activated!");
+                    if (attachedObjectRigidbody == null)
+                    {
+                        attachedObjectRigidbody = collider.GetComponent<Rigidbody>();
+                        attachedObjectRigidbody.useGravity = false;
+                    }
+
+                    break;
+                case WeaponScript.WeaponColor.Green:
+                    Debug.Log("GREEN Activated!");
+                    break;
+                case WeaponScript.WeaponColor.Blue:
+                    Debug.Log("BLUE Activated!");
                     ColorPanelEffects.ThrowObject(this.gameObject, collider, transform.up);
                     break;
                 default:

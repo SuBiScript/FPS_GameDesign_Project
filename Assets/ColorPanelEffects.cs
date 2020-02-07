@@ -14,6 +14,15 @@ namespace ColorPanels
             collider.GetComponent<Rigidbody>()?.AddForce(caller != null ? caller.transform.up : direction * jumpForce,
                 ForceMode.Impulse);
         }
+        
+        public static void ThrowObject(GameObject caller, Collision collider, Vector3 direction)
+        {
+            var jumpForce = collider.gameObject.CompareTag("Player")
+                ? (GameController.Instance.m_PlayerController.IsGrounded() ? 10f : 12.5f)
+                : 25f;
+            collider.gameObject.GetComponent<Rigidbody>()?.AddForce(caller != null ? caller.transform.up : direction * jumpForce,
+                ForceMode.Impulse);
+        }
 
         public static void AttractObject(Rigidbody attracted, GameObject attractor, float force = 5f)
         {

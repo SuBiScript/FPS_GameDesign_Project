@@ -21,7 +21,7 @@ namespace Weapon
         private Material _currentMaterial;
 
         [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
-        public float maxRange = 50f;
+        public float maxRange = 150f;
 
         public LayerMask layerMask;
 
@@ -59,7 +59,6 @@ namespace Weapon
             {
                 hit.collider.gameObject.GetComponent<ColorPanelController>()
                     ?.ChangeColor(_currentColor, _currentMaterial);
-                //Debug.DrawRay(lRay.origin, hit.point, Color.green, 3f);
             }
         }
 
