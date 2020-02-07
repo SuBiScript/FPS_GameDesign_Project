@@ -57,7 +57,7 @@ namespace Weapon
             var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
-                hit.collider.gameObject.GetComponent<ColorPanelController>()
+                hit.collider.gameObject.GetComponent<ColorPanelObject>()
                     ?.ChangeColor(_currentColor, _currentMaterial);
             }
         }

@@ -7,11 +7,11 @@ namespace ColorPanels
 {
     public class TriggerDelegate : MonoBehaviour
     {
-        private ColorPanelController parentController;
+        private ColorPanelObject parentController;
 
         private void Start()
         {
-            parentController = GetComponentInParent<ColorPanelController>();
+            parentController = GetComponentInParent<ColorPanelObject>();
         }
 
         private void OnTriggerEnter(Collider other)
