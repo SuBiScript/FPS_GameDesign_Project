@@ -68,7 +68,7 @@ namespace ColorPanels
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         public void OnTriggerDelegateEnter(Collider collider) => Interact(collider);
 
         private void Interact(Collider collider) //OnTrigger
@@ -93,7 +93,7 @@ namespace ColorPanels
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+//ChangColorZone
         public bool ChangeColor(WeaponScript.WeaponColor color, Material material)
         {
             //Here you change the weapon material of the block and stuff.
