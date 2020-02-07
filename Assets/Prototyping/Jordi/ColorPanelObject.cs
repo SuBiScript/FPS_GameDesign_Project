@@ -1,18 +1,17 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Weapon;
 using UnityEngine;
 
 namespace ColorPanels
 {
-    public class ColorPanelController : MonoBehaviour
+    public class ColorPanelObject : MonoBehaviour
     {
         //float m_JumpForce = 10.0f;
         public Material defaultMaterial;
         public WeaponScript.WeaponColor currentMode;
         public MeshRenderer meshRenderer;
         public GameObject dragPosition;
-        [CanBeNull] private Rigidbody attachedObjectRigidbody;
+        private Rigidbody attachedObjectRigidbody;
 
         void Start()
         {
@@ -107,9 +106,10 @@ namespace ColorPanels
             return true;
         }
 
-        public void DetachObject(Rigidbody other)
+        public void DetachObject(Rigidbody other) //DetachObject
         {
             if (attachedObjectRigidbody == null || other != attachedObjectRigidbody) return;
+            
             attachedObjectRigidbody.useGravity = true;
             attachedObjectRigidbody = null;
         }
