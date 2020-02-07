@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Prototyping.Jordi;
+using Weapon;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]

@@ -1,7 +1,8 @@
 ﻿using System;
+using ColorPanels;
 using UnityEngine;
 
-namespace Prototyping.Jordi
+namespace Weapon
 {
     public class WeaponScript : MonoBehaviour
     {
