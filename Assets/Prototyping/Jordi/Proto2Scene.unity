@@ -316,12 +316,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 78705143824216782, guid: 945fd6c2b12785748813b91d2fa5d7a5,
-        type: 3}
-      propertyPath: colorPanelProperties
-      value: 
-      objectReference: {fileID: 11400000, guid: 9dd05c7ae7f290b4d8e43e1b67e4abae,
-        type: 2}
     - target: {fileID: 5867245193151003913, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}
       propertyPath: m_Name
@@ -768,6 +762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276872442061934491, guid: 78a176f0e68381f46a41afc9b11b07a7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1276872442061934493, guid: 78a176f0e68381f46a41afc9b11b07a7,
         type: 3}

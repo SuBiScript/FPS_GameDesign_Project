@@ -19,4 +19,4 @@ MonoBehaviour:
   playerPropulsionForce: 10
   playerOnAirPropulsionForce: 12.5
   objectPropulsionForce: 25
-  setPlatformPropulsion: 1
+  setPanelJump: 1
