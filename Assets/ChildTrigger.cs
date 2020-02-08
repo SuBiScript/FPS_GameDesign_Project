@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ColorPanels
 {
-    public class TriggerDelegate : MonoBehaviour
+    public class ChildTrigger : MonoBehaviour
     {
         private ColorPanelObject parentController;
 
@@ -14,9 +14,7 @@ namespace ColorPanels
             parentController = GetComponentInParent<ColorPanelObject>();
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            parentController.OnTriggerDelegateEnter(other);
-        }
+        private void OnTriggerEnter(Collider other) => parentController.OnChildTriggerEnter(other);
+        private void OnTriggerExit(Collider other) => parentController.OnChildTriggerExit(other);
     }
 }
