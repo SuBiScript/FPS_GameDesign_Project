@@ -39,7 +39,7 @@ public class HealthManager : MonoBehaviour
     void Start()
     {
         m_AttachedGameObject = this.gameObject;
-        m_OwnerIsPlayer = m_AttachedGameObject == GameController.Instance.m_PlayerController.gameObject;
+        m_OwnerIsPlayer = m_AttachedGameObject == GameController.Instance.m_PlayerComponents.PlayerController.gameObject;
 
         m_CurrentHealth = m_MaxHealth;
         m_CurrentShield = m_MaxShield;
@@ -48,12 +48,6 @@ public class HealthManager : MonoBehaviour
 
         //Register into the Events
         m_OnDamageTaken.AddListener(CheckDeath);
-        if (!m_OwnerIsPlayer)
-        {
-            m_OnDamageTaken.AddListener(UpdateCanvas);
-            UpdateCanvas();
-        }
-
         m_CharacterDeath.AddListener(OnCharacterDeath);
         m_RespawnCharacter.AddListener(OnCharacterRespawn);
     }
@@ -131,15 +125,6 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    private void UpdateCanvas()
-    {
-        if (m_CanvasHealthBar == null || m_CanvasShieldBar == null) return;
-        float l_HealthPercentile = m_CurrentHealth * 1.0f / m_MaxHealth;
-        m_CanvasHealthBar.color = ColorFromGradient(l_HealthPercentile);
-        m_CanvasHealthBar.fillAmount = m_CurrentHealth * 1.0f / m_MaxHealth;
-        m_CanvasShieldBar.fillAmount = m_CurrentShield * 1.0f / m_MaxShield;
-    }
-
     private void OnCharacterDeath()
     {
         if (m_DisableOnDeath)
@@ -155,7 +140,7 @@ public class HealthManager : MonoBehaviour
         m_IsAttachedCharacterDead = !(m_CurrentHealth > 0);
         if (m_IsAttachedCharacterDead)
         {
-            Debug.LogWarning($"ERROR While respawning {this.gameObject.name}", this.gameObject);
+            Debug.LogWarning($"ERROR While respawning {this.gameObject.name}");
         }
     }
 
