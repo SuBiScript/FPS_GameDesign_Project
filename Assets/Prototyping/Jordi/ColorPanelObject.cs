@@ -30,6 +30,9 @@ namespace ColorPanels
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
+
+                    break;
+                case WeaponScript.WeaponColor.Green:
                     try
                     {
                         ColorPanelEffects.AttractObject(_attachedObjectRigidbody, dragPosition);
@@ -37,9 +40,6 @@ namespace ColorPanels
                     catch (NullReferenceException)
                     {
                     }
-
-                    break;
-                case WeaponScript.WeaponColor.Green:
                     break;
                 case WeaponScript.WeaponColor.Blue:
                     break;
@@ -78,14 +78,13 @@ namespace ColorPanels
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
+                    break;
+                case WeaponScript.WeaponColor.Green:
                     if (_attachedObjectRigidbody == null)
                     {
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
                         _attachedObjectRigidbody.useGravity = false;
                     }
-
-                    break;
-                case WeaponScript.WeaponColor.Green:
                     break;
                 case WeaponScript.WeaponColor.Blue:
                     break;

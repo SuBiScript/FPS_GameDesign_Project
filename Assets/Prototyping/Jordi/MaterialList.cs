@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Default Material List", menuName = "Properties/Material List", order = 2)]
 public class MaterialList : ScriptableObject
