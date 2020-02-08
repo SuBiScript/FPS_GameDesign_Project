@@ -316,6 +316,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 78705143824216782, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: colorPanelProperties
+      value: 
+      objectReference: {fileID: 11400000, guid: 9dd05c7ae7f290b4d8e43e1b67e4abae,
+        type: 2}
     - target: {fileID: 5867245193151003913, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}
       propertyPath: m_Name
