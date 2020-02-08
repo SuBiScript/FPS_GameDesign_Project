@@ -758,36 +758,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_OcclusionCulling
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: far clip plane
-      value: 290.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1257500901502798060, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: field of view
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 1276872442061934491, guid: 78a176f0e68381f46a41afc9b11b07a7,
         type: 3}
       propertyPath: m_Name
@@ -847,31 +817,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276872442762184817, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276872442762184822, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276872442762184822, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276872442762184822, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1276872442762184822, guid: 78a176f0e68381f46a41afc9b11b07a7,
-        type: 3}
-      propertyPath: m_TargetEye
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78a176f0e68381f46a41afc9b11b07a7, type: 3}
