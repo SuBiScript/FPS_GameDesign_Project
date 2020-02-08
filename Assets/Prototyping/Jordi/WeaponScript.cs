@@ -14,10 +14,8 @@ namespace Weapon
             Blue
         }
 
-        [Header("Materials")] public Material defaultMaterial;
-        public Material redMaterial;
-        public Material greenMaterial;
-        public Material blueMaterial;
+        public MaterialList materialList;
+        public MeshRenderer weaponMeshRenderer;
         private Material _currentMaterial;
 
         [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
@@ -32,23 +30,7 @@ namespace Weapon
         {
             m_AttachedCharacter = attachedCharacter;
             ChangeColor(WeaponColor.Red);
-        }
-
-        public void Something(string var)
-        {
-            switch (_currentColor)
-            {
-                case WeaponColor.None:
-                    break;
-                case WeaponColor.Red:
-                    break;
-                case WeaponColor.Green:
-                    break;
-                case WeaponColor.Blue:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            ChangeMeshRendererMaterial();
         }
 
         public void MainFire()
@@ -70,22 +52,29 @@ namespace Weapon
             switch (newColor)
             {
                 case WeaponColor.None:
-                    _currentMaterial = defaultMaterial;
+                    _currentMaterial = materialList.defaultMaterial;
                     break;
                 case WeaponColor.Red:
-                    _currentMaterial = redMaterial;
+                    _currentMaterial = materialList.redMaterial;
                     break;
                 case WeaponColor.Green:
-                    _currentMaterial = greenMaterial;
+                    _currentMaterial = materialList.greenMaterial;
                     break;
                 case WeaponColor.Blue:
-                    _currentMaterial = blueMaterial;
+                    _currentMaterial = materialList.blueMaterial;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
             }
-
             _currentColor = newColor;
+            ChangeMeshRendererMaterial();
+        }
+
+        private void ChangeMeshRendererMaterial()
+        {
+            Material[] newWeaponMaterial = weaponMeshRenderer.materials;
+            newWeaponMaterial[0] = _currentMaterial;
+            weaponMeshRenderer.materials = newWeaponMaterial;
         }
     }
 }

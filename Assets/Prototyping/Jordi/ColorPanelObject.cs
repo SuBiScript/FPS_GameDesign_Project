@@ -18,9 +18,9 @@ namespace ColorPanels
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
             var temp = meshRenderer.materials;
-            temp[1] = colorPanelProperties.defaultMaterial;
+            temp[1] = colorPanelProperties.materialList.defaultMaterial;
             meshRenderer.sharedMaterials = temp;
-            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.defaultMaterial);
+            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.materialList.defaultMaterial);
         }
 
         void Update()
