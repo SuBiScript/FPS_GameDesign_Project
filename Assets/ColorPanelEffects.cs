@@ -61,7 +61,7 @@ namespace ColorPanels
         {
             Vector3 temp = (attractor.transform.position - attracted.transform.position);
             if (temp.magnitude > 0.2f)
-                attracted.AddForce(temp, ForceMode.Force);
+                attracted.AddForce(temp * force, ForceMode.Force);
         }
     }
 }

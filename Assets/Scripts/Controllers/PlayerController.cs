@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ColorPanels;
 using JetBrains.Annotations;
 using UnityEditor.Localization.Editor;
 using Weapon;
@@ -49,6 +50,15 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButtonDown(1))
         {
             equippedWeapon.AltFire();
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            equippedWeapon.AttractObject();
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            equippedWeapon.DetachObject();
         }
 
         if (Input.GetButtonDown("Jump"))
