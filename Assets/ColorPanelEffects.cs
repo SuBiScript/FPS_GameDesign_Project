@@ -14,7 +14,7 @@ namespace ColorPanels
             var isPlayer = collider.CompareTag("Player");
             float jumpForce = ComputeJumpForce(isPlayer, properties);
             if (isPlayer && properties.setPanelJump)
-                GameController.Instance.m_PlayerController.PlatformJump();
+                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump();
 
             try
             {
@@ -34,7 +34,7 @@ namespace ColorPanels
             var isPlayer = collision.gameObject.CompareTag("Player");
             float jumpForce = ComputeJumpForce(isPlayer, properties);
             if (isPlayer && properties.setPanelJump)
-                GameController.Instance.m_PlayerController.PlatformJump();
+                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump();
 
             try
             {
@@ -51,7 +51,7 @@ namespace ColorPanels
         private static float ComputeJumpForce(bool isPlayer, ColorPanelProperties properties)
         {
             return isPlayer
-                ? (GameController.Instance.m_PlayerController.IsGrounded()
+                ? (GameController.Instance.m_PlayerComponents.PlayerController.IsGrounded()
                     ? properties.playerPropulsionForce
                     : properties.playerOnAirPropulsionForce)
                 : properties.objectPropulsionForce;
@@ -61,7 +61,7 @@ namespace ColorPanels
         {
             Vector3 temp = (attractor.transform.position - attracted.transform.position);
             if (temp.magnitude > 0.2f)
-                attracted.AddForce(temp, ForceMode.Force);
+                attracted.AddForce(temp * force, ForceMode.Force);
         }
     }
 }

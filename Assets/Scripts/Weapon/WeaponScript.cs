@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using ColorPanels;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Weapon
 
         public MaterialList materialList;
         public MeshRenderer weaponMeshRenderer;
+        [Header("Attract Settings")] public GameObject attractPoint;
         private Material _currentMaterial;
 
         [Header("Raycast Settings")]
@@ -25,11 +27,13 @@ namespace Weapon
         public LayerMask layerMask;
 
         private PlayerController m_AttachedCharacter;
+        private Rigidbody _attachedRigidbody;
         private WeaponColor _currentColor = WeaponColor.None;
 
         public void Init(PlayerController attachedCharacter)
         {
             m_AttachedCharacter = attachedCharacter;
+            _attachedRigidbody = null;
             ChangeColor(WeaponColor.Red);
             ChangeMeshRendererMaterial();
         }
@@ -46,6 +50,30 @@ namespace Weapon
         }
 
         public void AltFire() => ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+
+        public void AttractObject()
+        {
+            if (_attachedRigidbody != null)
+            {
+                Debug.Log("ATTRACTING");
+                ColorPanelEffects.AttractObject(_attachedRigidbody, attractPoint, 5f);
+            }
+            else
+            {
+                Debug.Log("PICKING RB");
+                var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+                if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
+                {
+                    _attachedRigidbody = hit.collider.gameObject.GetComponent<Rigidbody>();
+                }
+            }
+        }
+
+        public void DetachObject()
+        {
+            if (_attachedRigidbody == null) return;
+            _attachedRigidbody = null;
+        }
 
         private void ChangeColor(WeaponColor newColor)
         {
@@ -67,6 +95,7 @@ namespace Weapon
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
             }
+
             _currentColor = newColor;
             ChangeMeshRendererMaterial();
         }
