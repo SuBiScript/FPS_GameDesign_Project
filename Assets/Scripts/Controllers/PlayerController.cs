@@ -23,18 +23,8 @@ public class PlayerController : MonoBehaviour
     public PhysicMaterial m_ZeroFriction;
     public PhysicMaterial m_Friction;
     public LayerMask m_GroundLayers;
-    private bool _PanelJump;
-    public bool m_PanelJump
-    {
-        get { return _PanelJump; }
-        set
-        {
-            /*if (!value)
-                m_RigidBody.velocity = Vector3.zero;*/
-            _PanelJump = value;
-        }
-    }
-
+    private bool m_PanelJump;
+    private int airFrames;
 
     void Start()
     {
@@ -44,6 +34,7 @@ public class PlayerController : MonoBehaviour
         if (equippedWeapon == null)
             equippedWeapon = GetComponent<WeaponScript>() ?? gameObject.AddComponent<WeaponScript>();
         equippedWeapon.Init(this);
+        airFrames = 0;
     }
 
     void Update()
@@ -62,23 +53,33 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
             Jump();
-        
-        if (IsGrounded())
+
+        if (IsGrounded() && airFrames <= 0)
         {
             m_PanelJump = false;
+        }
+        else if(airFrames > 0)
+        {
+            airFrames -= 1;
         }
     }
 
     void FixedUpdate()
     {
-        if (!m_PanelJump)
-            Move();
+        Move();
+    }
+
+    public void PlatformJump()
+    {
+        m_PanelJump = true;
+        airFrames = 5;
     }
 
     void Move()
     {
-        m_RigidBody.MovePosition(transform.position +
-                                 Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
+        if (!m_PanelJump)
+            m_RigidBody.MovePosition(transform.position +
+                                     Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
     }
 
     void Jump()
@@ -93,6 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.CheckCapsule(m_Collider.bounds.center,
             new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
-            m_Collider.radius * .9f, m_GroundLayers);
+            m_Collider.radius * 0.1f, m_GroundLayers);
     }
 }

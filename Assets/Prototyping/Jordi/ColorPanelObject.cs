@@ -6,21 +6,21 @@ namespace ColorPanels
 {
     public class ColorPanelObject : MonoBehaviour
     {
-        //float m_JumpForce = 10.0f;
-        public Material defaultMaterial;
-        public WeaponScript.WeaponColor currentMode;
+        private WeaponScript.WeaponColor currentMode { get; set; }
+        [Header("Basic Settings")] public ColorPanelProperties colorPanelProperties;
         public MeshRenderer meshRenderer;
-        public GameObject dragPosition;
-        private Rigidbody attachedObjectRigidbody;
+
+        [Header("Magnet Mode Settings")] public GameObject dragPosition;
+        private Rigidbody _attachedObjectRigidbody;
 
         void Start()
         {
             //meshRenderer = GetComponent<MeshRenderer>();
-            attachedObjectRigidbody = null;
+            _attachedObjectRigidbody = null;
             var temp = meshRenderer.materials;
-            temp[1] = defaultMaterial;
+            temp[1] = colorPanelProperties.defaultMaterial;
             meshRenderer.sharedMaterials = temp;
-            ChangeColor(WeaponScript.WeaponColor.None, defaultMaterial);
+            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.defaultMaterial);
         }
 
         void Update()
@@ -30,9 +30,12 @@ namespace ColorPanels
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
-                    if (attachedObjectRigidbody != null)
+                    try
                     {
-                        ColorPanelEffects.AttractObject(attachedObjectRigidbody, dragPosition);
+                        ColorPanelEffects.AttractObject(_attachedObjectRigidbody, dragPosition);
+                    }
+                    catch (NullReferenceException)
+                    {
                     }
 
                     break;
@@ -46,11 +49,9 @@ namespace ColorPanels
         }
 
 
-        private void OnTriggerExit(Collider other) => DetachObject(other.GetComponent<Rigidbody>());
+        private void OnCollisionEnter(Collision other) => OnCollisionInteract(other);
 
-        private void OnCollisionEnter(Collision other) => InteractTwo(other);
-
-        private void InteractTwo(Collision other) //OnCollision
+        private void OnCollisionInteract(Collision other) //OnCollision
         {
             switch (currentMode)
             {
@@ -61,26 +62,26 @@ namespace ColorPanels
                 case WeaponScript.WeaponColor.Green:
                     break;
                 case WeaponScript.WeaponColor.Blue:
-                    ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up);
+                    ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
-        public void OnTriggerDelegateEnter(Collider collider) => Interact(collider);
 
-        private void Interact(Collider collider) //OnTrigger
+        public void OnChildTriggerEnter(Collider objectCollider) => OnTriggerInteract(objectCollider);
+
+        private void OnTriggerInteract(Collider collidedCollider) //OnTrigger
         {
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.None:
                     break;
                 case WeaponScript.WeaponColor.Red:
-                    if (attachedObjectRigidbody == null)
+                    if (_attachedObjectRigidbody == null)
                     {
-                        attachedObjectRigidbody = collider.GetComponent<Rigidbody>();
-                        attachedObjectRigidbody.useGravity = false;
+                        _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
+                        _attachedObjectRigidbody.useGravity = false;
                     }
 
                     break;
@@ -92,13 +93,15 @@ namespace ColorPanels
                     throw new ArgumentOutOfRangeException();
             }
         }
-//ChangColorZone
+
+        public void OnChildTriggerExit(Collider other) => DetachObject(other.GetComponent<Rigidbody>());
+
         public bool ChangeColor(WeaponScript.WeaponColor color, Material material)
         {
             //Here you change the weapon material of the block and stuff.
             if (currentMode == color) return false;
 
-            DetachObject(attachedObjectRigidbody);
+            DetachObject(_attachedObjectRigidbody);
             currentMode = color;
             var temp = meshRenderer.materials;
             temp[1] = material;
@@ -106,12 +109,18 @@ namespace ColorPanels
             return true;
         }
 
-        public void DetachObject(Rigidbody other) //DetachObject
+        private void DetachObject(Rigidbody other) //DetachObject
         {
-            if (attachedObjectRigidbody == null || other != attachedObjectRigidbody) return;
-            
-            attachedObjectRigidbody.useGravity = true;
-            attachedObjectRigidbody = null;
+            try
+            {
+                if (other != _attachedObjectRigidbody) return;
+
+                _attachedObjectRigidbody.useGravity = true;
+                _attachedObjectRigidbody = null;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
     }
 }
