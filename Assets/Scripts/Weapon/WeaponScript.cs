@@ -18,7 +18,8 @@ namespace Weapon
         public MeshRenderer weaponMeshRenderer;
         private Material _currentMaterial;
 
-        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")]
+        [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
@@ -44,7 +45,7 @@ namespace Weapon
             }
         }
 
-        public void AltFire() => ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+        public void AltFire() => ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
 
         private void ChangeColor(WeaponColor newColor)
         {

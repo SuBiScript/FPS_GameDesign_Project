@@ -9,7 +9,7 @@ public class GameController : Singleton<GameController>
 {
     [Header("Required attributes")]
     public PlayerController m_PlayerController;
-
+    public CanvasController m_CanvasController;
 
     KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
     KeyCode m_DebugLockKeyCode = KeyCode.O;
