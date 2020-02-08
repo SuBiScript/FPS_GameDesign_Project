@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,8 +33,31 @@ public class GameController : Singleton<GameController>
         m_PlayerDied = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        var playerGameObject = FindObjectOfType<PlayerController>();
-        m_PlayerComponents = new PlayerComponents(playerGameObject, playerGameObject.GetComponent<HealthManager>());
+        
+        AddPlayerComponents();
+    }
+
+    private void AddPlayerComponents()
+    {
+        try
+        {
+            var playerGameObject = FindObjectOfType<PlayerController>();
+            m_PlayerComponents = new PlayerComponents(playerGameObject, playerGameObject.GetComponent<HealthManager>());
+            m_PlayerComponents.HealthManager.onCharacterDeath.AddListener(OnPlayerDeath);
+        }
+        catch (NullReferenceException)
+        {
+            Debug.LogError("FATAL ERROR. Player components not found.");
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void OnPlayerDeath() //TODO Add player death functionality, a.k.a. show menus or play sounds.
+    {
+        if (m_PlayerDied) return;
+        
+        m_PlayerDied = true;
+        Debug.LogWarning("Player has died.");
     }
     
     

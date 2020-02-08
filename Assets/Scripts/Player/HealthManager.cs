@@ -19,11 +19,10 @@ public class HealthManager : MonoBehaviour
 
     [Header("Shield Settings")] public int m_MaxShield;
     [Range(0.0f, 1.0f)] public float m_ShieldAbsorbption;
-    private float m_HealthAbsorbption;
 
-    [Header("Events")] public UnityEvent m_OnDamageTaken;
-    public UnityEvent m_CharacterDeath;
-    public UnityEvent m_RespawnCharacter;
+    [Header("Events")] public UnityEvent onDamageTaken;
+    public UnityEvent onCharacterDeath;
+    public UnityEvent onCharacterRespawn;
 
     private bool m_OwnerIsPlayer;
 
@@ -43,13 +42,12 @@ public class HealthManager : MonoBehaviour
 
         m_CurrentHealth = m_MaxHealth;
         m_CurrentShield = m_MaxShield;
-        m_HealthAbsorbption = 1.0f - m_ShieldAbsorbption;
         m_IsAttachedCharacterDead = (m_CurrentHealth <= 0);
 
         //Register into the Events
-        m_OnDamageTaken.AddListener(CheckDeath);
-        m_CharacterDeath.AddListener(OnCharacterDeath);
-        m_RespawnCharacter.AddListener(OnCharacterRespawn);
+        onDamageTaken.AddListener(CheckDeath);
+        onCharacterDeath.AddListener(OnCharacterDeath);
+        onCharacterRespawn.AddListener(OnCharacterRespawn);
     }
 
     public void DealDamage(float amount)
@@ -74,7 +72,7 @@ public class HealthManager : MonoBehaviour
             m_CurrentHealth -= l_Damage;
         }
 
-        m_OnDamageTaken.Invoke();
+        onDamageTaken.Invoke();
         if (!m_OwnerIsPlayer)
             Debug.Log($"{this.gameObject.name} stats: {m_CurrentHealth} / {m_CurrentShield}");
     }
@@ -121,7 +119,7 @@ public class HealthManager : MonoBehaviour
         {
             m_CurrentHealth = 0;
             m_IsAttachedCharacterDead = true;
-            m_CharacterDeath.Invoke();
+            onCharacterDeath.Invoke();
         }
     }
 
