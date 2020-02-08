@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da6481d1175ecc4785e42174b1bce28, type: 3}
   m_Name: Default Material List
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 0}
-  redMaterial: {fileID: 0}
-  greenMaterial: {fileID: 0}
-  blueMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 2100000, guid: 4ef4279f6a325174b902104be0d46abc, type: 2}
+  redMaterial: {fileID: 2100000, guid: 1c6f02ede68a9b645a963f17f8839323, type: 2}
+  greenMaterial: {fileID: 2100000, guid: 2ba68a60601905c4097962229bd91d09, type: 2}
+  blueMaterial: {fileID: 2100000, guid: fbcef3d39eb71e6498723c2c4fa28a21, type: 2}

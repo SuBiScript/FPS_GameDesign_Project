@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 7437692251183304474}
   - component: {fileID: 2471712571257258584}
   - component: {fileID: 78705143824216782}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ColorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
