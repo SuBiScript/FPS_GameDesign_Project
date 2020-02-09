@@ -12,7 +12,7 @@ namespace Utils
             Cheats.DamagePlayer(999);
         }
 
-        [MenuItem("Cheats/Player/God Mode =)")]
+        [MenuItem("Cheats/Player/God Mode =) #G")]
         public static void GodMode()
         {
             if (!Application.isPlaying)
@@ -23,7 +23,7 @@ namespace Utils
             GameController.Instance.m_PlayerComponents.HealthManager.m_GodMode = true;
         }
 
-        [MenuItem("Cheats/Player/Normal Mode =(")]
+        [MenuItem("Cheats/Player/Normal Mode =( %#G")]
         public static void NormalMode()
         {
             if (!Application.isPlaying)
