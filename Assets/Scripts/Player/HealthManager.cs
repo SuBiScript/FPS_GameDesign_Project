@@ -8,6 +8,7 @@ public class HealthManager : MonoBehaviour
 {
     [Header("General Settings")] public bool m_DisableOnDeath;
     public bool m_SpawnLootOnDeath;
+    [HideInInspector] public bool m_GoodMode;
 
     [Header("Health Settings")] public int m_MaxHealth;
     public Gradient m_Gradient;
@@ -52,7 +53,7 @@ public class HealthManager : MonoBehaviour
 
     public void DealDamage(float amount)
     {
-        int l_Damage = (int) amount;
+        int l_Damage = (int)amount;
         if (m_IsAttachedCharacterDead) return;
         if (l_Damage <= 0)
         {
@@ -62,14 +63,15 @@ public class HealthManager : MonoBehaviour
 
         if (m_CurrentShield > 0)
         {
-            var shieldDamage = (int) Mathf.Ceil(l_Damage * m_ShieldAbsorbption);
+            var shieldDamage = (int)Mathf.Ceil(l_Damage * m_ShieldAbsorbption);
             m_CurrentShield -= shieldDamage;
             m_CurrentHealth -= l_Damage - shieldDamage;
             if (m_CurrentShield < 0) m_CurrentShield = 0;
         }
         else
         {
-            m_CurrentHealth -= l_Damage;
+            if (!m_GoodMode)
+                m_CurrentHealth -= l_Damage;
         }
 
         onDamageTaken.Invoke();

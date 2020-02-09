@@ -12,6 +12,28 @@ namespace Utils
             Cheats.DamagePlayer(999);
         }
 
+        [MenuItem("Cheats/Player/God Mode =)")]
+        public static void GodMode()
+        {
+            if (!Application.isPlaying)
+            {
+                Debug.LogError("Game not running");
+                return;
+            }
+            GameController.Instance.m_PlayerComponents.HealthManager.m_GoodMode = true;
+        }
+
+        [MenuItem("Cheats/Player/Normal Mode =(")]
+        public static void NormalMode()
+        {
+            if (!Application.isPlaying)
+            {
+                Debug.LogError("Game not running");
+                return;
+            }
+            GameController.Instance.m_PlayerComponents.HealthManager.m_GoodMode = false;
+        }
+
         [MenuItem("Cheats/Player/Replenish Shield")]
         public static void ReplenishShields()
         {

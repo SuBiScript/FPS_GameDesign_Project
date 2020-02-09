@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (!GameController.Instance.m_AngleLocked)
+        if (!GameController.Instance.m_AngleLocked && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
             Aiming();
     }
 

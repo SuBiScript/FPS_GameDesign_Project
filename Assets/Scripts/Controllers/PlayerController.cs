@@ -43,11 +43,11 @@ public class PlayerController : MonoBehaviour
         m_HAxis = Input.GetAxisRaw("Horizontal");
         m_VAxis = Input.GetAxisRaw("Vertical");
         m_Movement = new Vector3(m_HAxis, 0, m_VAxis);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
         {
             equippedWeapon.MainFire();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
         {
             equippedWeapon.AltFire();
         }
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
             m_PanelJump = false;
             ChangeColliderFriction(false);
         }
-        else if(airFrames > 0)
+        else if (airFrames > 0)
         {
             airFrames -= 1;
         }
@@ -77,7 +77,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if (!GameController.Instance.m_PlayerDied)
+            Move();
     }
 
     public void PlatformJump()

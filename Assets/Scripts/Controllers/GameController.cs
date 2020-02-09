@@ -8,6 +8,13 @@ using UnityEngine.Events;
 
 public class GameController : Singleton<GameController>
 {
+    [Header("Required attributes")]
+    public PlayerController m_PlayerController;
+    public CanvasController m_CanvasController;
+    public GameObject m_PauseMenu;
+    public GameObject m_GameOverMenu;
+    public Image m_BloodFrame;
+
     KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
     KeyCode m_DebugLockKeyCode = KeyCode.O;
     [HideInInspector] public bool m_AngleLocked;
@@ -57,12 +64,17 @@ public class GameController : Singleton<GameController>
         if (m_PlayerDied) return;
         
         m_PlayerDied = true;
+        m_BloodFrame.gameObject.SetActive(true);
+        Invoke("GameOver", 1.5f);
         Debug.LogWarning("Player has died.");
     }
-    
-    
+
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape) && !m_GamePaused && !m_PlayerDied)
+            Pause();
+
 #if UNITY_EDITOR
         UnityEditorUpdates();
 #endif
@@ -87,5 +99,25 @@ public class GameController : Singleton<GameController>
         }
 
     }
-    #endif
+#endif
+
+    void Pause()
+    {
+        m_PauseMenu.SetActive(true);
+        m_GamePaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+        m_CanvasController.gameObject.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        //AudioManager.instance.StopAllSounds();
+        m_GameOverMenu.SetActive(true);
+        m_GamePaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0;
+    }
 }
