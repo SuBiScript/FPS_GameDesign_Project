@@ -12,9 +12,11 @@ namespace ColorPanels
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
         private Rigidbody _attachedObjectRigidbody;
+        public bool m_AttachingObject;
+        public float m_AttachingObjectSpeed;
+        public GameObject m_AttachingPosition;
 
-        [Header("LineRenderer Settings")]
-        public LineRenderer m_LineRenderer;
+        [Header("LineRenderer Settings")] public LineRenderer m_LineRenderer;
         public LayerMask m_CollisionLayerMask;
         [Range(1f, 400.0f)] public float m_MaxLineDistance;
         bool m_CreateLine;
@@ -28,6 +30,7 @@ namespace ColorPanels
             meshRenderer.sharedMaterials = temp;
             ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.materialList.defaultMaterial);
             m_CreateLine = false;
+            m_AttachingObject = false;
         }
 
         void Update()
@@ -48,11 +51,12 @@ namespace ColorPanels
                     m_CreateLine = false;
                     try
                     {
-                        ColorPanelEffects.AttractObject(_attachedObjectRigidbody, dragPosition);
+                        ColorPanelEffects.UpdateAttachedObject(_attachedObjectRigidbody, dragPosition);
                     }
                     catch (NullReferenceException)
                     {
                     }
+
                     break;
                 case WeaponScript.WeaponColor.Blue:
                     m_CreateLine = false;
@@ -67,7 +71,8 @@ namespace ColorPanels
             Vector3 l_EndRaycastPosition = Vector3.forward * m_MaxLineDistance;
             RaycastHit l_RaycastHit;
 
-            if (Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward), out l_RaycastHit, m_MaxLineDistance, m_CollisionLayerMask.value))
+            if (Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward),
+                out l_RaycastHit, m_MaxLineDistance, m_CollisionLayerMask.value))
             {
                 l_EndRaycastPosition = Vector3.forward * l_RaycastHit.distance;
 
@@ -75,7 +80,8 @@ namespace ColorPanels
                 {
                     if (!GameController.Instance.m_PlayerDied)
                     {
-                        l_RaycastHit.transform.GetComponent<HealthManager>().DealDamage(l_RaycastHit.transform.GetComponent<HealthManager>().m_MaxHealth);
+                        l_RaycastHit.transform.GetComponent<HealthManager>()
+                            .DealDamage(l_RaycastHit.transform.GetComponent<HealthManager>().m_MaxHealth);
                     }
                 }
 
@@ -97,17 +103,9 @@ namespace ColorPanels
         {
             switch (currentMode)
             {
-                case WeaponScript.WeaponColor.None:
-                    break;
-                case WeaponScript.WeaponColor.Red:
-                    break;
-                case WeaponScript.WeaponColor.Green:
-                    break;
                 case WeaponScript.WeaponColor.Blue:
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -117,32 +115,25 @@ namespace ColorPanels
         {
             switch (currentMode)
             {
-                case WeaponScript.WeaponColor.None:
-                    break;
-                case WeaponScript.WeaponColor.Red:
-                    break;
                 case WeaponScript.WeaponColor.Green:
                     if (_attachedObjectRigidbody == null)
                     {
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
-                        _attachedObjectRigidbody.useGravity = false;
+                        AttachObject(_attachedObjectRigidbody);
                     }
+
                     break;
-                case WeaponScript.WeaponColor.Blue:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        public void OnChildTriggerExit(Collider other) => DetachObject(other.GetComponent<Rigidbody>());
+        public void OnChildTriggerExit(Collider other) => DetachObject();
 
         public bool ChangeColor(WeaponScript.WeaponColor color, Material material)
         {
             //Here you change the weapon material of the block and stuff.
             if (currentMode == color) return false;
 
-            DetachObject(_attachedObjectRigidbody);
+            DetachObject();
             currentMode = color;
             var temp = meshRenderer.materials;
             temp[1] = material;
@@ -150,18 +141,25 @@ namespace ColorPanels
             return true;
         }
 
-        private void DetachObject(Rigidbody other) //DetachObject
+        private void AttachObject(Rigidbody l_ObjectToAttach)
         {
-            try
-            {
-                if (other != _attachedObjectRigidbody) return;
+            if (m_AttachingObject) return;
+            m_AttachingObject = true;
+            _attachedObjectRigidbody = l_ObjectToAttach;
+            _attachedObjectRigidbody.useGravity = false;
+            _attachedObjectRigidbody.isKinematic = true;
+        }
 
-                _attachedObjectRigidbody.useGravity = true;
-                _attachedObjectRigidbody = null;
-            }
-            catch (NullReferenceException)
+        private void DetachObject(float l_DetachForce = 10f)
+        {
+            if (!m_AttachingObject) return;
+            m_AttachingObject = false;
+            if (!_attachedObjectRigidbody.CompareTag("Attached"))
             {
+                _attachedObjectRigidbody.useGravity = true;
+                _attachedObjectRigidbody.isKinematic = false;
             }
+            _attachedObjectRigidbody = null;
         }
     }
 }

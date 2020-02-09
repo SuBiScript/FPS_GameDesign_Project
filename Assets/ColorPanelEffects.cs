@@ -63,5 +63,33 @@ namespace ColorPanels
             if (temp.magnitude > 0.2f)
                 attracted.AddForce(temp * force, ForceMode.Force);
         }
+
+        public static void UpdateAttachedObject(Rigidbody objectAttached, GameObject m_AttachingPosition,
+            float m_AttachingObjectSpeed = 25f)
+        {
+            if (objectAttached == null || m_AttachingPosition == null) return;
+            //m_ObjectAttached.gameObject.transform.parent = m_Parent;
+            Vector3 l_EulerAngles = m_AttachingPosition.transform.rotation.eulerAngles;
+
+            Quaternion m_AttachingObjectStartRotation = objectAttached.transform.rotation;
+            Vector3 l_Direction = m_AttachingPosition.transform.position - objectAttached.transform.position;
+
+            float l_Distance = l_Direction.magnitude;
+            float l_Movement = m_AttachingObjectSpeed * Time.deltaTime;
+
+            if (l_Movement >= l_Distance)
+            {
+                objectAttached.MovePosition(m_AttachingPosition.transform.position);
+                objectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
+            }
+            else
+            {
+                l_Direction /= l_Distance;
+                objectAttached.MovePosition(objectAttached.transform.position + l_Direction * l_Movement);
+                objectAttached.MoveRotation(Quaternion.Lerp(m_AttachingObjectStartRotation,
+                    Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z),
+                    1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
+            }
+        }
     }
 }

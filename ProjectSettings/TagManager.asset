@@ -12,6 +12,7 @@ TagManager:
   - MeshAttached
   - Switch
   - Laser
+  - Attached
   layers:
   - Default
   - TransparentFX

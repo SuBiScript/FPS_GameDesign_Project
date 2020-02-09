@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1277114073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277114074}
+  m_Layer: 0
+  m_Name: AttractPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277114074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277114073}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.518, y: 0.148, z: 1.311}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1276872442141793957}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1276872441876354425
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,8 +192,6 @@ MonoBehaviour:
   m_AttachedCamera: {fileID: 1276872442762184822}
   m_Speed: 6.22
   m_JumpForce: 40
-  m_ZeroFriction: {fileID: 0}
-  m_Friction: {fileID: 0}
   m_GroundLayers:
     serializedVersion: 2
     m_Bits: 9216
@@ -181,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DisableOnDeath: 0
   m_SpawnLootOnDeath: 0
+  m_GodMode: 0
   m_MaxHealth: 100
   m_Gradient:
     serializedVersion: 2
@@ -253,6 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3164929474587154446}
+  - {fileID: 1277114074}
   m_Father: {fileID: 1276872441876354430}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -89.34901, z: 0}
@@ -268,9 +298,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b913f5bc19956fc43b70c90df2dc57dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ObjectAttacher:
+    m_AttachingObject: 0
+    m_ObjectAttached: {fileID: 0}
+    m_AttachingObjectSpeed: 10
+    m_AttachingPosition: {fileID: 1277114073}
   materialList: {fileID: 11400000, guid: e9d00430d34571644b6743702f052d25, type: 2}
   weaponMeshRenderer: {fileID: 399581504825106113}
-  attractPoint: {fileID: 0}
+  attractPoint: {fileID: 2141267345345653277}
   _weaponMaterial: {fileID: 2100000, guid: a8f0617f846b3254f93a3f8326cc553c, type: 2}
   maxRange: 150
   layerMask:
@@ -451,6 +486,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bcf2104be3921948842a510012b8c32, type: 3}
+--- !u!1 &2141267345345653277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2824694758845405422, guid: 9bcf2104be3921948842a510012b8c32,
+    type: 3}
+  m_PrefabInstance: {fileID: 4216525544790684403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3164929474587154446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1254267005636553469, guid: 9bcf2104be3921948842a510012b8c32,
