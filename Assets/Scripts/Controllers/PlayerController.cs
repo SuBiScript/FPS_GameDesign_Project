@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using ColorPanels;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEditor.Localization.Editor;
 using Weapon;
 using UnityEngine;
@@ -21,8 +23,6 @@ public class PlayerController : MonoBehaviour
 
     [Range(0.1f, 10.0f)] public float m_Speed;
     [Range(0.1f, 10.0f)] public float m_JumpForce;
-    public PhysicMaterial m_ZeroFriction;
-    public PhysicMaterial m_Friction;
     public LayerMask m_GroundLayers;
     private bool m_PanelJump;
     private int airFrames;
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded() && airFrames <= 0)
         {
             m_PanelJump = false;
+            ChangeColliderFriction(false);
         }
         else if(airFrames > 0)
         {
@@ -92,11 +93,18 @@ public class PlayerController : MonoBehaviour
                                      Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
     }
 
+    void ChangeColliderFriction(bool OnAir)
+    {
+        m_Collider.material.dynamicFriction = OnAir ? 0f : 500f;
+        m_Collider.material.staticFriction = OnAir ? 0f : 500f;
+    }
+
     void Jump()
     {
         if (IsGrounded() && !m_PanelJump)
         {
             m_RigidBody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            ChangeColliderFriction(true);
         }
     }
 
@@ -104,6 +112,6 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.CheckCapsule(m_Collider.bounds.center,
             new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
-            m_Collider.radius * 0.1f, m_GroundLayers);
+            m_Collider.radius * 0.025f, m_GroundLayers);
     }
 }
