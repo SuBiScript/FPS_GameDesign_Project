@@ -35,11 +35,22 @@ public class CanvasController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void ChangeReticleColor(bool red)
+    public void ChangeReticleColor(int color)
     {
-        if (red)
-            m_Reticle.color = Color.red;
-        else
-            m_Reticle.color = Color.yellow;
+        switch (color)
+        {
+            case 1:
+                m_Reticle.color = Color.red;
+                break;
+            case 2:
+                m_Reticle.color = Color.green;
+                break;
+            case 3:
+                m_Reticle.color = Color.blue;
+                break;
+            default:
+                m_Reticle.color = Color.yellow;
+                break;
+        }
     }
 }

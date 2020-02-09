@@ -138,13 +138,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276872442061934491}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0.05
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1276872442061934488
 MonoBehaviour:
@@ -161,12 +161,12 @@ MonoBehaviour:
   equippedWeapon: {fileID: 1276872442141793962}
   m_AttachedCamera: {fileID: 1276872442762184822}
   m_Speed: 6.22
-  m_JumpForce: 4.09
+  m_JumpForce: 40
   m_ZeroFriction: {fileID: 0}
   m_Friction: {fileID: 0}
   m_GroundLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 9216
 --- !u!114 &5601941656053268860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,15 +211,15 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  m_MaxShield: 100
+  m_MaxShield: 0
   m_ShieldAbsorbption: 0.6
-  m_OnDamageTaken:
+  onDamageTaken:
     m_PersistentCalls:
       m_Calls: []
-  m_CharacterDeath:
+  onCharacterDeath:
     m_PersistentCalls:
       m_Calls: []
-  m_RespawnCharacter:
+  onCharacterRespawn:
     m_PersistentCalls:
       m_Calls: []
   m_CanvasHealthBar: {fileID: 0}
@@ -270,6 +270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialList: {fileID: 11400000, guid: e9d00430d34571644b6743702f052d25, type: 2}
   weaponMeshRenderer: {fileID: 399581504825106113}
+  attractPoint: {fileID: 0}
+  _weaponMaterial: {fileID: 2100000, guid: a8f0617f846b3254f93a3f8326cc553c, type: 2}
   maxRange: 150
   layerMask:
     serializedVersion: 2

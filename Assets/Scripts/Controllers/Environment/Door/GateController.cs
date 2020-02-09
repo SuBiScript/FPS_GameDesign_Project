@@ -95,4 +95,10 @@ public class GateController : MonoBehaviour
         m_Locked = !m_Locked;
         UpdateGateStatus();
     }
+
+    public void SwithStatus(bool door)
+    {
+        m_Locked = door;
+        UpdateGateStatus();
+    }
 }

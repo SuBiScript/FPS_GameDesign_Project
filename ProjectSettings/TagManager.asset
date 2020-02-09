@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Cube
   - Triggers
+  - Trigger
+  - UI
+  - Turret
+  - MeshAttached
+  - Switch
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -20,7 +26,7 @@ TagManager:
   - Terrain
   - Interactables
   - Weapon
-  - 
+  - Blocking
   - 
   - 
   - 

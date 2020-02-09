@@ -19,6 +19,8 @@ namespace Weapon
         public MeshRenderer weaponMeshRenderer;
         [Header("Attract Settings")] public GameObject attractPoint;
         private Material _currentMaterial;
+        public Material _weaponMaterial;
+
 
         [Header("Raycast Settings")]
         [Tooltip("Max range for the Ray Casting")]
@@ -29,6 +31,10 @@ namespace Weapon
         private PlayerController m_AttachedCharacter;
         private Rigidbody _attachedRigidbody;
         private WeaponColor _currentColor = WeaponColor.None;
+
+
+        //Material mymat = GetComponent<Renderer>().material;
+        //mymat.SetColor("_EmissionColor", Color.red);
 
         public void Init(PlayerController attachedCharacter)
         {
@@ -82,15 +88,22 @@ namespace Weapon
             {
                 case WeaponColor.None:
                     _currentMaterial = materialList.defaultMaterial;
+                    //_weaponMaterial.SetColor("_EmissionColor", Color.yellow);
                     break;
                 case WeaponColor.Red:
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Red);
                     _currentMaterial = materialList.redMaterial;
+                    //_weaponMaterial.SetColor("_EmissionColor", Color.red);
                     break;
                 case WeaponColor.Green:
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Green);
                     _currentMaterial = materialList.greenMaterial;
+                    //_weaponMaterial.SetColor("_EmissionColor", Color.green);
                     break;
                 case WeaponColor.Blue:
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Blue);
                     _currentMaterial = materialList.blueMaterial;
+                    //_weaponMaterial.SetColor("_EmissionColor", Color.blue);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
