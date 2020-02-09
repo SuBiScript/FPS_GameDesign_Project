@@ -55,7 +55,7 @@ namespace Weapon
                 m_ObjectAttached.useGravity = true;
                 m_ObjectAttached.isKinematic = false;
                 m_ObjectAttached.AddForce(m_AttachingPosition.transform.forward * l_DetachForce, ForceMode.Impulse);
-                m_ObjectAttached.tag = "Untagged";
+                m_ObjectAttached.tag = "Cube";
                 m_ObjectAttached = null;
             }
         }
@@ -113,7 +113,6 @@ namespace Weapon
         {
             if (m_ObjectAttacher.m_ObjectAttached != null)
             {
-                Debug.Log("ENTERING THE ATTRACTOBJCET IN PLAYER");
                 m_ObjectAttacher.UpdateAttachedObject();
             }
             else
@@ -121,9 +120,15 @@ namespace Weapon
                 var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
                 if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
                 {
-                    var rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                    rb.velocity = Vector3.zero;
-                    m_ObjectAttacher.AttachObject(rb);
+                    try
+                    {
+                        var rb = hit.collider.gameObject.GetComponent<Rigidbody>();
+                        rb.velocity = Vector3.zero;
+                        m_ObjectAttacher.AttachObject(rb);
+                    }
+                    catch (MissingComponentException)
+                    {
+                    }
                 }
             }
         }
