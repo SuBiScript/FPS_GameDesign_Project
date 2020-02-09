@@ -14,7 +14,6 @@ namespace ColorPanels
         private Rigidbody _attachedObjectRigidbody;
         public bool m_AttachingObject;
         public float m_AttachingObjectSpeed;
-        public GameObject m_AttachingPosition;
 
         [Header("LineRenderer Settings")] public LineRenderer m_LineRenderer;
         public LayerMask m_CollisionLayerMask;
@@ -51,7 +50,8 @@ namespace ColorPanels
                     m_CreateLine = false;
                     try
                     {
-                        ColorPanelEffects.UpdateAttachedObject(_attachedObjectRigidbody, dragPosition);
+                        ColorPanelEffects.UpdateAttachedObject(_attachedObjectRigidbody, dragPosition,
+                            m_AttachingObjectSpeed);
                     }
                     catch (NullReferenceException)
                     {
@@ -159,6 +159,7 @@ namespace ColorPanels
                 _attachedObjectRigidbody.useGravity = true;
                 _attachedObjectRigidbody.isKinematic = false;
             }
+
             _attachedObjectRigidbody = null;
         }
     }

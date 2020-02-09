@@ -14,7 +14,16 @@ namespace ColorPanels
             parentController = GetComponentInParent<ColorPanelObject>();
         }
 
-        private void OnTriggerEnter(Collider other) => parentController.OnChildTriggerEnter(other);
-        private void OnTriggerExit(Collider other) => parentController.OnChildTriggerExit(other);
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
+                parentController.OnChildTriggerEnter(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
+                parentController.OnChildTriggerExit(other);
+        }
     }
 }

@@ -43,11 +43,13 @@ public class PlayerController : MonoBehaviour
         m_HAxis = Input.GetAxisRaw("Horizontal");
         m_VAxis = Input.GetAxisRaw("Vertical");
         m_Movement = new Vector3(m_HAxis, 0, m_VAxis);
-        if (Input.GetMouseButtonDown(0) && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
+        if (Input.GetMouseButtonDown(0) && !GameController.Instance.m_GamePaused &&
+            !GameController.Instance.m_PlayerDied)
         {
             equippedWeapon.MainFire();
         }
-        else if (Input.GetMouseButtonDown(1) && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
+        else if (Input.GetMouseButtonDown(1) && !GameController.Instance.m_GamePaused &&
+                 !GameController.Instance.m_PlayerDied)
         {
             equippedWeapon.AltFire();
         }
@@ -73,8 +75,6 @@ public class PlayerController : MonoBehaviour
         {
             airFrames -= 1;
         }
-
-        Debug.Log(IsGrounded());
     }
 
     void FixedUpdate()
@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
         //    new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
         //    m_Collider.radius * 0.025f, m_GroundLayers);
 
-        return Physics.Raycast(m_Collider.bounds.center, Vector3.down, m_Collider.bounds.extents.y + .1f, m_GroundLayers);
+        return Physics.Raycast(m_Collider.bounds.center, Vector3.down, m_Collider.bounds.extents.y + .1f,
+            m_GroundLayers);
     }
 }
