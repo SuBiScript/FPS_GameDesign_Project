@@ -75,7 +75,7 @@ public class RefractionCubeEffect : MonoBehaviour
         {
             l_EndRaycastPosition = Vector3.forward * l_RaycastHit.distance;
 
-            if (l_RaycastHit.collider.tag == "Cube")
+            if (l_RaycastHit.collider.tag == "Cube" || l_RaycastHit.collider.tag == "Attached")
                 l_RaycastHit.collider.GetComponent<RefractionCubeEffect>().CreateRefraction();
             else if (l_RaycastHit.collider.tag == "Switch")
             {
