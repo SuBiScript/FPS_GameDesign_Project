@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
         {
             airFrames -= 1;
         }
+
+        Debug.Log(IsGrounded());
     }
 
     void FixedUpdate()
@@ -111,8 +113,10 @@ public class PlayerController : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.CheckCapsule(m_Collider.bounds.center,
-            new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
-            m_Collider.radius * 0.025f, m_GroundLayers);
+        //return Physics.CheckCapsule(m_Collider.bounds.center,
+        //    new Vector3(m_Collider.bounds.center.x, m_Collider.bounds.min.y, m_Collider.center.z),
+        //    m_Collider.radius * 0.025f, m_GroundLayers);
+
+        return Physics.Raycast(m_Collider.bounds.center, Vector3.down, m_Collider.bounds.extents.y + .1f, m_GroundLayers);
     }
 }
