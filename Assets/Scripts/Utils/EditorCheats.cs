@@ -20,7 +20,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.m_GoodMode = true;
+            GameController.Instance.m_PlayerComponents.HealthManager.m_GodMode = true;
         }
 
         [MenuItem("Cheats/Player/Normal Mode =(")]
@@ -31,7 +31,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.m_GoodMode = false;
+            GameController.Instance.m_PlayerComponents.HealthManager.m_GodMode = false;
         }
 
         [MenuItem("Cheats/Player/Replenish Shield")]

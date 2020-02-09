@@ -8,7 +8,7 @@ public class HealthManager : MonoBehaviour
 {
     [Header("General Settings")] public bool m_DisableOnDeath;
     public bool m_SpawnLootOnDeath;
-    [HideInInspector] public bool m_GoodMode;
+    [HideInInspector] public bool m_GodMode;
 
     [Header("Health Settings")] public int m_MaxHealth;
     public Gradient m_Gradient;
@@ -39,7 +39,8 @@ public class HealthManager : MonoBehaviour
     void Start()
     {
         m_AttachedGameObject = this.gameObject;
-        m_OwnerIsPlayer = m_AttachedGameObject == GameController.Instance.m_PlayerComponents.PlayerController.gameObject;
+        m_OwnerIsPlayer = m_AttachedGameObject ==
+                          GameController.Instance.m_PlayerComponents.PlayerController.gameObject;
 
         m_CurrentHealth = m_MaxHealth;
         m_CurrentShield = m_MaxShield;
@@ -53,8 +54,8 @@ public class HealthManager : MonoBehaviour
 
     public void DealDamage(float amount)
     {
-        int l_Damage = (int)amount;
-        if (m_IsAttachedCharacterDead) return;
+        int l_Damage = (int) amount;
+        if (m_IsAttachedCharacterDead ||m_GodMode) return;
         if (l_Damage <= 0)
         {
             Debug.LogError($"Someone sent incorrect damage values to {this.gameObject.name}");
@@ -63,15 +64,14 @@ public class HealthManager : MonoBehaviour
 
         if (m_CurrentShield > 0)
         {
-            var shieldDamage = (int)Mathf.Ceil(l_Damage * m_ShieldAbsorbption);
+            var shieldDamage = (int) Mathf.Ceil(l_Damage * m_ShieldAbsorbption);
             m_CurrentShield -= shieldDamage;
             m_CurrentHealth -= l_Damage - shieldDamage;
             if (m_CurrentShield < 0) m_CurrentShield = 0;
         }
         else
         {
-            if (!m_GoodMode)
-                m_CurrentHealth -= l_Damage;
+            m_CurrentHealth -= l_Damage;
         }
 
         onDamageTaken.Invoke();
