@@ -24,7 +24,7 @@ namespace Weapon
             public void UpdateAttachedObject()
             {
                 if (m_ObjectAttached == null) return;
-                m_ObjectAttached.gameObject.transform.parent = m_AttachingPosition.transform;
+                //m_ObjectAttached.gameObject.transform.parent = m_Parent;
                 if (m_AttachingObject)
                 {
                     ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached, m_AttachingPosition,
@@ -46,15 +46,16 @@ namespace Weapon
                 m_ObjectAttached.tag = "Attached";
                 m_ObjectAttached.useGravity = false;
                 m_ObjectAttached.isKinematic = true;
+                m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
             }
 
             public void DetachObject(float l_DetachForce = 20f)
             {
                 if (!m_AttachingObject) return;
-                m_ObjectAttached.gameObject.transform.parent = null;
                 m_AttachingObject = false;
                 m_ObjectAttached.useGravity = true;
                 m_ObjectAttached.isKinematic = false;
+                m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                 m_ObjectAttached.AddForce(m_AttachingPosition.transform.forward * l_DetachForce, ForceMode.Impulse);
                 m_ObjectAttached.tag = "Cube";
                 m_ObjectAttached = null;
@@ -79,8 +80,7 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")]
-        [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
@@ -110,7 +110,7 @@ namespace Weapon
             }
         }
 
-        public void AltFire() => ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+        public void AltFire() => ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
 
         public void AttractObject()
         {
@@ -151,17 +151,17 @@ namespace Weapon
                     //_weaponMaterial.SetColor("_EmissionColor", Color.yellow);
                     break;
                 case WeaponColor.Red:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Red);
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Red);
                     _currentMaterial = materialList.redMaterial;
                     //_weaponMaterial.SetColor("_EmissionColor", Color.red);
                     break;
                 case WeaponColor.Green:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Green);
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Green);
                     _currentMaterial = materialList.greenMaterial;
                     //_weaponMaterial.SetColor("_EmissionColor", Color.green);
                     break;
                 case WeaponColor.Blue:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int)WeaponColor.Blue);
+                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Blue);
                     _currentMaterial = materialList.blueMaterial;
                     //_weaponMaterial.SetColor("_EmissionColor", Color.blue);
                     break;

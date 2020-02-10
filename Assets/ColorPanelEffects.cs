@@ -68,7 +68,7 @@ namespace ColorPanels
             float m_AttachingObjectSpeed = 25f)
         {
             if (objectAttached == null || m_AttachingPosition == null) return;
-            //m_ObjectAttached.gameObject.transform.parent = m_Parent;
+            //objectAttached.gameObject.transform.parent = m_AttachingPosition.transform;
             Vector3 l_EulerAngles = m_AttachingPosition.transform.rotation.eulerAngles;
 
             Quaternion m_AttachingObjectStartRotation = objectAttached.transform.rotation;
