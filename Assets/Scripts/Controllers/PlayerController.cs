@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         m_PanelJump = true;
         airFrames = 5;
+        ChangeColliderFriction(true);
     }
 
     void Move()
@@ -96,11 +97,15 @@ public class PlayerController : MonoBehaviour
                                      Time.fixedDeltaTime * m_Speed * transform.TransformDirection(m_Movement));
     }
 
-    void ChangeColliderFriction(bool OnAir)
+    void ChangeColliderFriction(bool onAir)
     {
-        m_Collider.material.dynamicFriction = OnAir ? 0f : 500f;
-        m_Collider.material.frictionCombine = OnAir ? PhysicMaterialCombine.Minimum : PhysicMaterialCombine.Maximum;
-        m_Collider.material.staticFriction = OnAir ? 0f : 500f;
+        PhysicMaterial tempMaterial = m_Collider.material;
+        tempMaterial.dynamicFriction = onAir ? 0f : 1;
+        tempMaterial.frictionCombine = onAir ? PhysicMaterialCombine.Minimum : PhysicMaterialCombine.Maximum;
+        tempMaterial.staticFriction = onAir ? 0f : 1f;
+        Debug.Log("1" + tempMaterial.dynamicFriction);
+        m_Collider.material = tempMaterial;
+        Debug.Log("2" + m_Collider.material.dynamicFriction);
     }
 
     void Jump()
