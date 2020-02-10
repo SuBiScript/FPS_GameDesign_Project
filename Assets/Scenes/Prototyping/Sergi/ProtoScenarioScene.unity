@@ -902,7 +902,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175283027}
-  m_Material: {fileID: 13400000, guid: 15750b42ce0475247acea8546ebef9ee, type: 2}
+  m_Material: {fileID: 13400000, guid: c2ad6c7e188422547882dc8408082deb, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -6096,6 +6096,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9dd05c7ae7f290b4d8e43e1b67e4abae,
         type: 2}
+    - target: {fileID: 78705143824216782, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_AttachingObjectSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2471712571241641595, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -11055,6 +11060,12 @@ PrefabInstance:
       propertyPath: layerMask.m_Bits
       value: 2048
       objectReference: {fileID: 0}
+    - target: {fileID: 1276872442141793962, guid: 78a176f0e68381f46a41afc9b11b07a7,
+        type: 3}
+      propertyPath: materialList
+      value: 
+      objectReference: {fileID: 11400000, guid: 5fb67addbc791a04db1a596d21184038,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78a176f0e68381f46a41afc9b11b07a7, type: 3}
 --- !u!1001 &5604255813164921587

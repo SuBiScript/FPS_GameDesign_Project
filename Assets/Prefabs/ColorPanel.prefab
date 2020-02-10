@@ -490,7 +490,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 2471712570939305330}
   dragPosition: {fileID: 2471712571241641594}
   m_AttachingObject: 0
-  m_AttachingObjectSpeed: 0
+  m_AttachingObjectSpeed: 10
   m_LineRenderer: {fileID: 1962871064}
   m_CollisionLayerMask:
     serializedVersion: 2

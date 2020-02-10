@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using ColorPanels;
 using UnityEngine;
@@ -59,7 +60,6 @@ namespace Weapon
                 m_ObjectAttached.AddForce(m_AttachingPosition.transform.forward * l_DetachForce, ForceMode.Impulse);
                 m_ObjectAttached.tag = "Cube";
                 m_ObjectAttached = null;
-
             }
         }
 
@@ -95,6 +95,7 @@ namespace Weapon
         public void Init(PlayerController attachedCharacter)
         {
             m_AttachedCharacter = attachedCharacter;
+            materialList = Instantiate(materialList);
             ChangeColor(WeaponColor.Red);
             ChangeMeshRendererMaterial();
         }
@@ -148,22 +149,18 @@ namespace Weapon
             {
                 case WeaponColor.None:
                     _currentMaterial = materialList.defaultMaterial;
-                    //_weaponMaterial.SetColor("_EmissionColor", Color.yellow);
                     break;
                 case WeaponColor.Red:
                     GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Red);
                     _currentMaterial = materialList.redMaterial;
-                    //_weaponMaterial.SetColor("_EmissionColor", Color.red);
                     break;
                 case WeaponColor.Green:
                     GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Green);
                     _currentMaterial = materialList.greenMaterial;
-                    //_weaponMaterial.SetColor("_EmissionColor", Color.green);
                     break;
                 case WeaponColor.Blue:
                     GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Blue);
                     _currentMaterial = materialList.blueMaterial;
-                    //_weaponMaterial.SetColor("_EmissionColor", Color.blue);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
@@ -176,7 +173,17 @@ namespace Weapon
         private void ChangeMeshRendererMaterial()
         {
             Material[] newWeaponMaterial = weaponMeshRenderer.materials;
-            newWeaponMaterial[0] = _currentMaterial;
+            try
+            {
+                Material emissiveWithColor = new Material(materialList.emissiveMaterial);
+                emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.color);
+                newWeaponMaterial[0] = emissiveWithColor;
+            }
+            catch (NullReferenceException)
+            {
+                newWeaponMaterial[0] = _currentMaterial;
+            }
+
             weaponMeshRenderer.materials = newWeaponMaterial;
         }
     }

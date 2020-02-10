@@ -7,5 +7,5 @@ public class MaterialList : ScriptableObject
     public Material redMaterial;
     public Material greenMaterial;
     public Material blueMaterial;
-    public Material EmessiveMaterial;
+    public Material emissiveMaterial;
 }
