@@ -13,8 +13,8 @@ namespace ColorPanels
         {
             var isPlayer = collider.CompareTag("Player");
             float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer && properties.setPanelJump)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump();
+            if (isPlayer)
+                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
 
             try
             {
@@ -33,8 +33,8 @@ namespace ColorPanels
         {
             var isPlayer = collision.gameObject.CompareTag("Player");
             float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer && properties.setPanelJump)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump();
+            if (isPlayer)
+                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
 
             try
             {

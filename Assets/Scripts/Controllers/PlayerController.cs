@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public Camera m_AttachedCamera;
 
     [Range(0.1f, 10.0f)] public float m_Speed;
-    [Range(0.1f, 10.0f)] public float m_JumpForce;
+    [Range(0.1f, 60.0f)] public float m_JumpForce;
     public LayerMask m_GroundLayers;
     private bool m_PanelJump;
     private int airFrames;
@@ -83,10 +83,10 @@ public class PlayerController : MonoBehaviour
             Move();
     }
 
-    public void PlatformJump()
+    public void PlatformJump(bool panelJump)
     {
-        m_PanelJump = true;
         airFrames = 5;
+        m_PanelJump = panelJump;
         ChangeColliderFriction(true);
     }
 
@@ -99,13 +99,11 @@ public class PlayerController : MonoBehaviour
 
     void ChangeColliderFriction(bool onAir)
     {
-        PhysicMaterial tempMaterial = m_Collider.material;
+        PhysicMaterial tempMaterial = new PhysicMaterial();
         tempMaterial.dynamicFriction = onAir ? 0f : 1;
         tempMaterial.frictionCombine = onAir ? PhysicMaterialCombine.Minimum : PhysicMaterialCombine.Maximum;
         tempMaterial.staticFriction = onAir ? 0f : 1f;
-        Debug.Log("1" + tempMaterial.dynamicFriction);
         m_Collider.material = tempMaterial;
-        Debug.Log("2" + m_Collider.material.dynamicFriction);
     }
 
     void Jump()
@@ -113,6 +111,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded() && !m_PanelJump)
         {
             m_RigidBody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            airFrames = 5;
             ChangeColliderFriction(true);
         }
     }
