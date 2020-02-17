@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8144e68797d7e4db9ce612afef2e4d, type: 3}
   m_Name: ControllableJUMP
   m_EditorClassIdentifier: 
-  materialList: {fileID: 11400000, guid: e9d00430d34571644b6743702f052d25, type: 2}
+  materialList: {fileID: 11400000, guid: b3ccc48bba671094e876a742569fb608, type: 2}
   playerPropulsionForce: 100
   playerOnAirPropulsionForce: 125
   objectPropulsionForce: 125

@@ -24,7 +24,7 @@ namespace ColorPanels
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
-            ChangeColor(WeaponScript.WeaponColor.Blue, colorPanelProperties.materialList.defaultMaterial);
+            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.materialList.defaultMaterial);
             m_CreateLine = false;
             m_AttachingObject = false;
         }

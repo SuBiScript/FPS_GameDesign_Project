@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using ColorPanels;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Weapon
 {
@@ -99,8 +100,7 @@ namespace Weapon
         {
             m_AttachedCharacter = attachedCharacter;
             materialList = Instantiate(materialList);
-            ChangeColor(WeaponColor.Red);
-            ChangeMeshRendererMaterial();
+            ChangeColor(WeaponColor.Blue);
         }
 
         public void MainFire()
@@ -178,9 +178,7 @@ namespace Weapon
             Material[] newWeaponMaterial = weaponMeshRenderer.materials;
             try
             {
-                emissiveWithColor = emissiveWithColor == null
-                    ? new Material(materialList.emissiveMaterial)
-                    : emissiveWithColor;
+                emissiveWithColor = new Material(materialList.emissiveMaterial);
                 emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.color);
                 newWeaponMaterial[0] = emissiveWithColor;
             }
