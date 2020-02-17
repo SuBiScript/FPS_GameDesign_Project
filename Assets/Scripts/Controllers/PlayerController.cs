@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     void ChangeColliderFriction(bool onAir)
     {
-        PhysicMaterial tempMaterial = new PhysicMaterial();
+        PhysicMaterial tempMaterial = m_Collider.material;
         tempMaterial.dynamicFriction = onAir ? 0f : 1;
         tempMaterial.frictionCombine = onAir ? PhysicMaterialCombine.Minimum : PhysicMaterialCombine.Maximum;
         tempMaterial.staticFriction = onAir ? 0f : 1f;
