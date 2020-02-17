@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.4811321, g: 0.4788626, b: 0.4788626, a: 1}
+  m_AmbientSkyColor: {r: 0.764151, g: 0.7317106, b: 0.7317106, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -2762,6 +2762,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 495536062}
     m_Modifications:
+    - target: {fileID: 2471712570575584314, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471712570939305330, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 50ae09a6d65daec41a9560396c77fde7, type: 2}
+    - target: {fileID: 2471712570939305330, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: aed75d00785c37c47b3500188d2a37a9, type: 2}
     - target: {fileID: 2471712571241641595, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}
       propertyPath: m_LocalPosition.y
