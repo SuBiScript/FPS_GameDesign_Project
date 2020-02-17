@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("DemoScene");
+        SceneManager.LoadScene("PostpoScene");
         //AudioManager.instance.Stop("MenuSong");
     }
 
