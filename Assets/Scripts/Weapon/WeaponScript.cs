@@ -76,7 +76,10 @@ namespace Weapon
         public MaterialList materialList;
         public MeshRenderer weaponMeshRenderer;
         [Header("Attract Settings")] public GameObject attractPoint;
+
+        private Material emissiveWithColor;
         private Material _currentMaterial;
+
         public Material _weaponMaterial;
 
 
@@ -175,7 +178,9 @@ namespace Weapon
             Material[] newWeaponMaterial = weaponMeshRenderer.materials;
             try
             {
-                Material emissiveWithColor = new Material(materialList.emissiveMaterial);
+                emissiveWithColor = emissiveWithColor == null
+                    ? new Material(materialList.emissiveMaterial)
+                    : emissiveWithColor;
                 emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.color);
                 newWeaponMaterial[0] = emissiveWithColor;
             }
