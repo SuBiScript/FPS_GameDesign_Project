@@ -24,10 +24,7 @@ namespace ColorPanels
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
-            var temp = meshRenderer.materials;
-            temp[1] = colorPanelProperties.materialList.defaultMaterial;
-            meshRenderer.sharedMaterials = temp;
-            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.materialList.defaultMaterial);
+            ChangeColor(WeaponScript.WeaponColor.Blue, colorPanelProperties.materialList.defaultMaterial);
             m_CreateLine = false;
             m_AttachingObject = false;
         }
@@ -134,13 +131,16 @@ namespace ColorPanels
             if (currentMode == color) return false;
 
             DetachObject();
+            
             currentMode = color;
             var temp = meshRenderer.materials;
-            temp[1] = material;
+            Material simpleMaterial = temp[1];
+            simpleMaterial.SetColor("_EmissionColor", material.color);
+            temp[1] = simpleMaterial;
             meshRenderer.materials = temp;
+            
             return true;
         }
-
         private void AttachObject(Rigidbody l_ObjectToAttach)
         {
             if (m_AttachingObject) return;
