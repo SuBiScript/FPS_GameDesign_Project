@@ -34,14 +34,14 @@ namespace PlayerFSM
         /// <summary>
         /// Automatic update. Add all Update functions here.
         /// </summary>
-        public virtual void OnStateTick()
+        public virtual void OnStateTick(float deltaTime)
         {
         }
 
         /// <summary>
         /// Automatic FixedUpdate. Add all FixedUpdate updates here. 
         /// </summary>
-        public virtual void OnStateFixedTick()
+        public virtual void OnStateFixedTick(float fixedTime)
         {
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -16,25 +17,22 @@ namespace PlayerFSM
         protected State currentState;
 
         public CharacterController characterController;
-        public Brain currentBrain { get; private set; }
 
         private void Start()
         {
             characterController = GetComponent<CharacterController>();
-            currentBrain = characterController.defaultBrain;
             SwitchState<Player_State_Walk>();
         }
 
-        private void Update()
+        public void UpdateTick(float deltaTime)
         {
-            currentBrain.GetActions();
-            currentState.OnStateTick();
+            currentState.OnStateTick(deltaTime);
             currentState.OnStateCheckTransition();
         }
 
-        private void FixedUpdate()
+        public void FixedUpdateTick(float fixedTime)
         {
-            currentState.OnStateFixedTick();
+            currentState.OnStateFixedTick(fixedTime);
         }
 
         /// <summary>
@@ -52,6 +50,15 @@ namespace PlayerFSM
                 if(oldState)
                     oldState.StateExit();
                 currentState.StateEnter();
+                try
+                {
+                    Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
+
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log($"{currentState.GetType()}");
+                }
                 return true;
             }
 

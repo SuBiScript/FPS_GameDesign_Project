@@ -11,12 +11,12 @@ public static class MovementManager
         gameObject.transform.position += direction * (speed * Time.deltaTime);
     }
 
-    public static void MoveRigidbody(Rigidbody rigidbody, Vector3 direction, float speed)
+    public static void MoveRigidbody(Rigidbody rigidbody, Vector3 direction, float speed, float fixedDeltaTime)
     {
         if (rigidbody == null) return;
         rigidbody.MovePosition(
-            rigidbody.transform.position +
-            rigidbody.transform.TransformDirection(direction) * (speed * Time.fixedTime));
+            rigidbody.gameObject.transform.position +
+            rigidbody.gameObject.transform.TransformDirection(direction) * (speed * fixedDeltaTime));
     }
 
     /// <summary>
@@ -24,9 +24,9 @@ public static class MovementManager
     /// </summary>
     /// <param name="rigidbody">The rigidbody you want to move.</param>
     /// <param name="direction">Normalized direction of the force</param>
-    /// <param name="force">Amount of force added</param>
-    /// <param name="forceMode">Rigidbody forcemode parameter</param>
-    public static void RigidbodyAddForce(Rigidbody rigidbody, Vector3 direction, float force, ForceMode forceMode)
+    /// <param name="force">Amount of force added. Default 10f</param>
+    /// <param name="forceMode">Rigidbody forcemode parameter. Default ForceMode.Impulse</param>
+    public static void RigidbodyAddForce(Rigidbody rigidbody, Vector3 direction, float force = 10f, ForceMode forceMode = ForceMode.Impulse)
     {
         if (rigidbody == null) return;
         rigidbody.AddForce(direction * force, forceMode);

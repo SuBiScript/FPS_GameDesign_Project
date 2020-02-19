@@ -10,15 +10,15 @@ public class StateOne : PlayerFSM.State
         base.OnStateInitialize(machine);
     }
 
-    public override void OnStateTick()
+    public override void OnStateTick(float deltaTime)
     {
-        base.OnStateTick();
+        base.OnStateTick(deltaTime);
     }
 
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (!Machine.currentBrain.Interacting)
+        if (!Machine.characterController.currentBrain.Interacting)
         {
             Machine.SwitchState<StateTwo>();
         }

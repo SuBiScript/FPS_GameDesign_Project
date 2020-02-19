@@ -3,10 +3,11 @@ using UnityEngine;
 
 public abstract class CharacterController : MonoBehaviour
 {
-    [Header("Required Components")] 
-    public Brain defaultBrain;
-    public State defaultState;
-    public StateMachine stateMachine;
+    //[Header("Required Components")] 
+    public Brain defaultBrain{ get; protected set; }
+    public Brain currentBrain { get; protected set; }
+    public State defaultState { get; protected set; }
+    public StateMachine stateMachine { get; protected set; }
     public Rigidbody rigidbody;
 
     [Space(5)] [Header("Properties")]

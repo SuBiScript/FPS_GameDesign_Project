@@ -8,6 +8,7 @@ public class CharacterProperties : ScriptableObject
 {
     public float WalkSpeed = 1f;
     public float RunSpeed = 2f;
+    public float OnAirSpeed = 0.5f;
     public float JumpForce = 7f;
     
 }

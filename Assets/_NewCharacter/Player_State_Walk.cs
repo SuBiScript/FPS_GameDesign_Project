@@ -5,38 +5,49 @@ using UnityEngine;
 
 public class Player_State_Walk : State
 {
+    private Rigidbody attachedRigidbody;
+    private float WalkSpeed;
+
     protected override void OnStateInitialize(StateMachine machine)
     {
         base.OnStateInitialize(machine);
     }
 
-    public override void OnStateTick()
+    public override void OnStateTick(float deltaTime)
     {
-        base.OnStateTick();
+        base.OnStateTick(deltaTime);
     }
 
-    public override void OnStateFixedTick()
+    public override void OnStateFixedTick(float fixedTime)
     {
-        base.OnStateFixedTick();
-        if (Machine.currentBrain.Direction != Vector3.zero)
+        base.OnStateFixedTick(fixedTime);
+        Debug.Log(fixedTime);
+
+        if (Machine.characterController.currentBrain.Direction != Vector3.zero)
         {
-            MovementManager.MoveRigidbody(Machine.characterController.rigidbody, Machine.currentBrain.Direction,
-                Machine.characterController.characterProperties.WalkSpeed);
+            MovementManager.MoveRigidbody(
+                attachedRigidbody,
+                Machine.characterController.currentBrain.Direction,
+                WalkSpeed,
+                fixedTime);
         }
     }
 
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (Machine.currentBrain.Jumping)
+        if (Machine.characterController.currentBrain.Jumping)
         {
             Machine.SwitchState<Player_State_Jumping>();
+            return;
         }
     }
 
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
+        WalkSpeed = Machine.characterController.characterProperties.WalkSpeed;
+        attachedRigidbody = Machine.characterController.rigidbody;
     }
 
     protected override void OnStateExit()
