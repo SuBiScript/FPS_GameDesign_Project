@@ -1,22 +1,40 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.XR;
 
 namespace PlayerFSM
 {
     public class StateMachine : MonoBehaviour
     {
         protected List<State> statesList = new List<State>();
+
+        //public State initialState;
         protected State currentState;
 
-        public Brain defaultBrain;
+        public CharacterController characterController;
         public Brain currentBrain { get; private set; }
+
+        private void Start()
+        {
+            characterController = GetComponent<CharacterController>();
+            currentBrain = characterController.defaultBrain;
+            SwitchState<Player_State_Walk>();
+        }
 
         private void Update()
         {
-            currentState.Update();
+            currentBrain.GetActions();
+            currentState.OnStateTick();
+            currentState.OnStateCheckTransition();
+        }
+
+        private void FixedUpdate()
+        {
+            currentState.OnStateFixedTick();
         }
 
         /// <summary>
@@ -25,43 +43,63 @@ namespace PlayerFSM
         /// <param name="newState">
         /// The state object to set as the currentState</param>
         /// <returns></returns>
-        protected virtual bool SwitchState(State newState)
+        protected virtual bool SetState(State newState)
         {
             if (newState && newState != currentState)
             {
-                if (currentState) currentState.OnStateExit();
+                State oldState = currentState;
                 currentState = newState;
-                currentState.OnStateEnter();
+                if(oldState)
+                    oldState.StateExit();
+                currentState.StateEnter();
                 return true;
             }
 
             return false;
         }
-        
+
+        public void ForceSetState(State state)
+        {
+            SetState(state);
+        }
+
         /// <summary>
         /// Switches the currentState to a State of a given type, checking if it already exists.
         /// </summary>
-        /// <typeparam name="TState">
+        /// <typeparam name="StateType">
         /// The type of the State to use for the currentState</typeparam>
         /// <returns>Whether the State was changed</returns>
-        public virtual bool SwitchState<TState>() where TState : State, new()
+        public virtual bool SwitchState<StateType>() where StateType : State
         {
             //if the state can be found in the list of states 
             //already created, switch to the existing version
             foreach (State state in statesList)
             {
-                if (state is TState)
+                if (state is StateType)
                 {
-                    return SwitchState(state);
+                    return SetState(state);
                 }
+            }
+
+            State stateComponent = GetComponent<StateType>();
+            if (stateComponent)
+            {
+                stateComponent.Initialize(this);
+                statesList.Add(stateComponent);
+                return SetState(stateComponent);
             }
 
             //if the state is not found in the list, 
             //make a new instance
-            State newState = new TState();
-            newState.OnStateInitialize(this);
+            State newState = gameObject.AddComponent<StateType>();
+            newState.Initialize(this);
             statesList.Add(newState);
-            return SwitchState(newState);
+            return SetState(newState);
+        }
+
+        public State GetCurrentState
+        {
+            get { return currentState; }
         }
     }
 }

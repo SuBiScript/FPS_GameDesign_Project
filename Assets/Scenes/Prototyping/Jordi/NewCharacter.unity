@@ -401,9 +401,12 @@ GameObject:
   - component: {fileID: 1354414591}
   - component: {fileID: 1354414590}
   - component: {fileID: 1354414589}
+  - component: {fileID: 1354414593}
   - component: {fileID: 1354414588}
-  - component: {fileID: 1354414587}
+  - component: {fileID: 1354414594}
   - component: {fileID: 1354414586}
+  - component: {fileID: 1354414587}
+  - component: {fileID: 1354414592}
   m_Layer: 0
   m_Name: Palyer
   m_TagString: Untagged
@@ -436,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee86bdab77c4cda4cb576ade19e848a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultBrain: {fileID: 1354414586}
+  characterController: {fileID: 0}
 --- !u!65 &1354414588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -511,3 +514,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354414592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354414585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1010b5610b8e6b74387c504589b84f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Machine: {fileID: 0}
+--- !u!54 &1354414593
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354414585}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1354414594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354414585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ffb5d222b2154f4e9e5d881706243c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultBrain: {fileID: 0}
+  defaultState: {fileID: 0}
+  stateMachine: {fileID: 0}
+  rigidbody: {fileID: 0}
+  characterProperties: {fileID: 11400000, guid: 9773d99673d1b9243bfd3a37aafa1569,
+    type: 2}

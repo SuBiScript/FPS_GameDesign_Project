@@ -1,18 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using PlayerFSM;
 using UnityEngine;
 
-public class PlayerControllerFSM : MonoBehaviour
+[RequireComponent(typeof(Brain))]
+[RequireComponent(typeof(State))]
+[RequireComponent(typeof(StateMachine))]
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerControllerFSM : CharacterController
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public void Awake()
     {
-        
+        if (defaultBrain == null)
+            defaultBrain = GetComponent<Brain>();
+        if (defaultState == null)
+            defaultState = GetComponent<State>();
+        if (stateMachine == null)
+            stateMachine = GetComponent<StateMachine>();
+        if (rigidbody == null)
+            rigidbody = GetComponent<Rigidbody>();
+        characterProperties = characterProperties == null
+            ? ScriptableObject.CreateInstance<CharacterProperties>()
+            : Instantiate(characterProperties);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            stateMachine.enabled = !stateMachine.enabled;
+        }
     }
 }

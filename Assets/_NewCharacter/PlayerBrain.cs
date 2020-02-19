@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBrain : Brain
 {
@@ -24,8 +20,9 @@ public class PlayerBrain : Brain
         Interacting = Input.GetButton(inputNames.Interact ?? "Interact");
 
         //Directional input control.
-        Direction = new Vector2(
+        Direction = new Vector3(
             Input.GetAxis(inputNames.HorizontalMovement ?? "Horizontal"),
+            0f,
             Input.GetAxis(inputNames.ForwardMovement ?? "Vertical")
             );
         Forward = Direction.y > 0f;
