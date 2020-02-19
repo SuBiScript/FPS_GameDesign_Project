@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        m_Character = GameController.Instance.m_PlayerComponents.PlayerController.gameObject;
+        m_Character = GameController.Instance.playerComponents.PlayerController.gameObject;
     }
 
     void Update()

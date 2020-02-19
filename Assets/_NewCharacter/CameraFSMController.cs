@@ -7,6 +7,7 @@ public class CameraFSMController : MonoBehaviour
     Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     GameObject m_Character;
+    public Camera attachedCamera { get; private set; }
 
     [Range(0.1f, 10.0f)] public float m_Sensitivity = 1f;
     [Range(0.1f, 10.0f)] public float m_Smoothing = 3f;
@@ -14,14 +15,14 @@ public class CameraFSMController : MonoBehaviour
     [Range(-100.0f, 100.0f)] public float m_MaxPitch = 70f;
     public Transform m_PitchControllerTransform;
 
-    void Start()
+    void Awake()
     {
         m_Character = GetComponentInParent<PlayerControllerFSM>().gameObject;
+        attachedCamera = GetComponent<Camera>();
     }
 
     void Update()
     {
-        
         Aiming();
     }
 

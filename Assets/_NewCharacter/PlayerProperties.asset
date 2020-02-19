@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkSpeed: 6
   RunSpeed: 8
-  OnAirSpeed: 3
+  OnAirSpeed: 0
   JumpForce: 10

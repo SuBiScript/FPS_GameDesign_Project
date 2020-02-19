@@ -6,8 +6,7 @@ using UnityEngine;
 public class Player_State_Jumping : State
 {
     private Rigidbody attachedRigidbody;
-    private float WalkSpeed;
-    
+
     protected override void OnStateInitialize(StateMachine machine)
     {
         base.OnStateInitialize(machine);
@@ -16,42 +15,28 @@ public class Player_State_Jumping : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
-        
     }
 
-    public override void OnStateFixedTick(float fixedTime)
+    public override void OnStateFixedTick(float fixedDeltaTime)
     {
-        base.OnStateFixedTick(fixedTime);
-        if (Machine.characterController.currentBrain.Direction != Vector3.zero)
-        {
-            MovementManager.MoveRigidbody(
-                attachedRigidbody, 
-                Machine.characterController.currentBrain.Direction,
-                WalkSpeed,
-                fixedTime);
-        }
+        base.OnStateFixedTick(fixedDeltaTime);
     }
 
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (attachedRigidbody.velocity.y <= 0f)
-        {
-            Machine.SwitchState<Player_State_Falling>();
-            return;
-        }
+        Machine.SwitchState<Player_State_OnAir>();
     }
 
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        WalkSpeed = Machine.characterController.characterProperties.WalkSpeed;
-        
+
         MovementManager.RigidbodyAddForce(
-            Machine.characterController.rigidbody, 
+            Machine.characterController.rigidbody,
             Machine.transform.up,
-            Machine.characterController.characterProperties.JumpForce, 
+            Machine.characterController.characterProperties.JumpForce,
             ForceMode.Impulse);
     }
 

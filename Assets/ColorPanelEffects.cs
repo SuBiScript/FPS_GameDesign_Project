@@ -8,33 +8,20 @@ namespace ColorPanels
 {
     public static class ColorPanelEffects
     {
-        public static void ThrowObject(GameObject caller, Collider collider, Vector3 direction,
-            ColorPanelProperties properties)
-        {
-            var isPlayer = collider.CompareTag("Player");
-            float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
-
-            try
-            {
-                var colliderRigidbody = collider.GetComponent<Rigidbody>();
-                colliderRigidbody.velocity = Vector3.zero;
-                colliderRigidbody.AddForce(caller != null ? caller.transform.up * jumpForce : direction * jumpForce,
-                    ForceMode.Impulse);
-            }
-            catch (NullReferenceException)
-            {
-            }
-        }
-
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
             ColorPanelProperties properties)
         {
-            var isPlayer = collision.gameObject.CompareTag("Player");
-            float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
+            float jumpForce;
+            try
+            {
+                var player = collision.gameObject.GetComponent<PlayerControllerFSM>();
+                player.MakeItJump();
+                jumpForce = ComputeJumpForce(true, properties);
+            }
+            catch (NullReferenceException)
+            {
+                jumpForce = ComputeJumpForce(false, properties);
+            }
 
             try
             {
@@ -51,7 +38,7 @@ namespace ColorPanels
         private static float ComputeJumpForce(bool isPlayer, ColorPanelProperties properties)
         {
             return isPlayer
-                ? (GameController.Instance.m_PlayerComponents.PlayerController.IsGrounded()
+                ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()
                     ? properties.playerPropulsionForce
                     : properties.playerOnAirPropulsionForce)
                 : properties.objectPropulsionForce;

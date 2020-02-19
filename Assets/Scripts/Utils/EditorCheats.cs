@@ -20,7 +20,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.m_GodMode = true;
+            GameController.Instance.playerComponents.HealthManager.m_GodMode = true;
         }
 
         [MenuItem("Cheats/Player/Normal Mode =( %#G")]
@@ -31,7 +31,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.m_GodMode = false;
+            GameController.Instance.playerComponents.HealthManager.m_GodMode = false;
         }
 
         [MenuItem("Cheats/Player/Replenish Shield")]
@@ -42,7 +42,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.RestoreShield(999);
+            GameController.Instance.playerComponents.HealthManager.RestoreShield(999);
         }
 
         public static void GiveShields(int amount)
@@ -52,7 +52,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.RestoreShield(amount);
+            GameController.Instance.playerComponents.HealthManager.RestoreShield(amount);
         }
 
         [MenuItem("Cheats/Player/Replenish Health")]
@@ -63,7 +63,7 @@ namespace Utils
                 Debug.LogError("Game not running");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.RestoreHealth(999);
+            GameController.Instance.playerComponents.HealthManager.RestoreHealth(999);
         }
 
         public static void GiveHealth(int amount)
@@ -73,7 +73,7 @@ namespace Utils
                 Debug.LogError("The game is not running!");
                 return;
             }
-            GameController.Instance.m_PlayerComponents.HealthManager.RestoreHealth(amount);
+            GameController.Instance.playerComponents.HealthManager.RestoreHealth(amount);
         }
     }
 }

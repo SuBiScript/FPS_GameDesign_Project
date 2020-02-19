@@ -41,7 +41,7 @@ namespace PlayerFSM
         /// <summary>
         /// Automatic FixedUpdate. Add all FixedUpdate updates here. 
         /// </summary>
-        public virtual void OnStateFixedTick(float fixedTime)
+        public virtual void OnStateFixedTick(float fixedDeltaTime)
         {
         }
 

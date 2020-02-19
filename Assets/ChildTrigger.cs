@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace ColorPanels
@@ -16,14 +17,30 @@ namespace ColorPanels
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
+            try
+            {
+                other.gameObject.GetComponent<PlayerControllerFSM>();
                 parentController.OnChildTriggerEnter(other);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            //if (other.gameObject != GameController.Instance.playerComponents.PlayerController.gameObject)
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
+            try
+            {
+                other.gameObject.GetComponent<PlayerControllerFSM>();
                 parentController.OnChildTriggerExit(other);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            //if (other.gameObject != GameController.Instance.playerComponents.PlayerController.gameObject)
         }
     }
 }

@@ -89,14 +89,10 @@ namespace Weapon
 
         public LayerMask layerMask;
 
-        private PlayerController m_AttachedCharacter;
+        private PlayerControllerFSM m_AttachedCharacter;
         private WeaponColor _currentColor = WeaponColor.None;
 
-
-        //Material mymat = GetComponent<Renderer>().material;
-        //mymat.SetColor("_EmissionColor", Color.red);
-
-        public void Init(PlayerController attachedCharacter)
+        public void Init(PlayerControllerFSM attachedCharacter)
         {
             m_AttachedCharacter = attachedCharacter;
             materialList = Instantiate(materialList);
@@ -106,7 +102,7 @@ namespace Weapon
         public void MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
-            var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+            var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
                 hit.collider.gameObject.GetComponent<ColorPanelObject>()
@@ -124,7 +120,7 @@ namespace Weapon
             }
             else
             {
-                var lRay = m_AttachedCharacter.m_AttachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+                var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
                 if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
                 {
                     try
@@ -154,15 +150,15 @@ namespace Weapon
                     _currentMaterial = materialList.defaultMaterial;
                     break;
                 case WeaponColor.Red:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Red);
+                    ChangeReticleColor(WeaponColor.Red);
                     _currentMaterial = materialList.redMaterial;
                     break;
                 case WeaponColor.Green:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Green);
+                    ChangeReticleColor(WeaponColor.Green);
                     _currentMaterial = materialList.greenMaterial;
                     break;
                 case WeaponColor.Blue:
-                    GameController.Instance.m_CanvasController.ChangeReticleColor((int) WeaponColor.Blue);
+                    ChangeReticleColor(WeaponColor.Blue);
                     _currentMaterial = materialList.blueMaterial;
                     break;
                 default:
@@ -171,6 +167,15 @@ namespace Weapon
 
             _currentColor = newColor;
             ChangeMeshRendererMaterial();
+        }
+
+        private void ChangeReticleColor(WeaponColor color)
+        {
+            try
+            {
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
+            }
+            catch(NullReferenceException){}
         }
 
         private void ChangeMeshRendererMaterial()

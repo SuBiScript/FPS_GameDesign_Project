@@ -21,7 +21,6 @@ public class Player_State_Walk : State
     public override void OnStateFixedTick(float fixedTime)
     {
         base.OnStateFixedTick(fixedTime);
-        Debug.Log(fixedTime);
 
         if (Machine.characterController.currentBrain.Direction != Vector3.zero)
         {
@@ -39,7 +38,6 @@ public class Player_State_Walk : State
         if (Machine.characterController.currentBrain.Jumping)
         {
             Machine.SwitchState<Player_State_Jumping>();
-            return;
         }
     }
 

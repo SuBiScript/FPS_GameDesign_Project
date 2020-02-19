@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using PlayerFSM;
 using UnityEngine;
 
-public class Player_State_Falling : State
+public class Player_State_OnAir : State
 {
     private Rigidbody attachedRigidbody;
     private float onAirSpeed;
-
+    private float timer;
     protected override void OnStateInitialize(StateMachine machine)
     {
         base.OnStateInitialize(machine);
@@ -16,25 +16,27 @@ public class Player_State_Falling : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
+        if (timer > 0f) timer -= deltaTime;
     }
 
-    public override void OnStateFixedTick(float fixedTime)
+    public override void OnStateFixedTick(float fixedDeltaTime)
     {
-        base.OnStateFixedTick(fixedTime);
+        base.OnStateFixedTick(fixedDeltaTime);
         if (Machine.characterController.currentBrain.Direction != Vector3.zero)
         {
             MovementManager.MoveRigidbody(
                 attachedRigidbody,
                 Machine.characterController.currentBrain.Direction,
                 onAirSpeed,
-                fixedTime);
+                fixedDeltaTime);
         }
+
     }
 
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (attachedRigidbody.velocity.y >= 0f)
+        if (timer <= 0f)
         {
             Machine.SwitchState<Player_State_Walk>();
         }
@@ -43,12 +45,16 @@ public class Player_State_Falling : State
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
+        timer = 3f;
         attachedRigidbody = Machine.characterController.rigidbody;
-        onAirSpeed = Machine.characterController.characterProperties.OnAirSpeed;
+        onAirSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
+            ? Machine.characterController.characterProperties.WalkSpeed
+            : Machine.characterController.characterProperties.OnAirSpeed;
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
+        ((PlayerControllerFSM) Machine.characterController).enableAirControl = true;
     }
 }

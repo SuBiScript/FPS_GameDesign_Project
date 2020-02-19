@@ -107,7 +107,7 @@ public class MovingPlatform : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Player")
-            GameController.Instance.m_PlayerController.transform.parent = transform;
+            GameController.Instance.playerComponents.PlayerController.transform.parent = transform;
 
         if (m_PlatformType == PlatformType.Trigger)
         {
@@ -120,7 +120,7 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerExit(Collider col)
     {
         if (col.tag == "Player")
-            GameController.Instance.m_PlayerController.transform.parent = null;
+            GameController.Instance.playerComponents.PlayerController.transform.parent = null;
 
         if (m_PlatformType == PlatformType.Trigger)
         {

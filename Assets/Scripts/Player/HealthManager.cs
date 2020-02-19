@@ -10,37 +10,25 @@ public class HealthManager : MonoBehaviour
     public bool m_SpawnLootOnDeath;
     [HideInInspector] public bool m_GodMode;
 
-    [Header("Health Settings")] public int m_MaxHealth;
-    public Gradient m_Gradient;
-
-    public Color ColorFromGradient(float value) //Between 0 to 1
-    {
-        return m_Gradient.Evaluate(value);
-    }
-
-    [Header("Shield Settings")] public int m_MaxShield;
+    [Header("Stats")] public int m_MaxHealth;
+    public int m_MaxShield;
     [Range(0.0f, 1.0f)] public float m_ShieldAbsorbption;
 
-    [Header("Events")] public UnityEvent onDamageTaken;
+    [Space(10)] [Header("Events")] public UnityEvent onDamageTaken;
     public UnityEvent onCharacterDeath;
     public UnityEvent onCharacterRespawn;
-
-    private bool m_OwnerIsPlayer;
 
     private int m_CurrentHealth;
     private int m_CurrentShield;
 
-    [Header("UI Images")] public Image m_CanvasHealthBar;
-    public Image m_CanvasShieldBar;
-
     private GameObject m_AttachedGameObject;
+    private bool m_OwnerIsPlayer;
     private bool m_IsAttachedCharacterDead;
 
     void Start()
     {
         m_AttachedGameObject = this.gameObject;
-        m_OwnerIsPlayer = m_AttachedGameObject ==
-                          GameController.Instance.m_PlayerComponents.PlayerController.gameObject;
+        m_OwnerIsPlayer = m_AttachedGameObject == GameController.Instance.playerComponents.PlayerController.gameObject;
 
         m_CurrentHealth = m_MaxHealth;
         m_CurrentShield = m_MaxShield;
@@ -55,7 +43,7 @@ public class HealthManager : MonoBehaviour
     public void DealDamage(float amount)
     {
         int l_Damage = (int) amount;
-        if (m_IsAttachedCharacterDead ||m_GodMode) return;
+        if (m_IsAttachedCharacterDead || m_GodMode) return;
         if (l_Damage <= 0)
         {
             Debug.LogError($"Someone sent incorrect damage values to {this.gameObject.name}");
