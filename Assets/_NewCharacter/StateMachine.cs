@@ -78,7 +78,6 @@ namespace PlayerFSM
         /// <returns>Whether the State was changed</returns>
         public virtual bool SwitchState<StateType>() where StateType : State
         {
-            if (currentState is StateType) return false;
             //if the state can be found in the list of states 
             //already created, switch to the existing version
             foreach (State state in statesList)

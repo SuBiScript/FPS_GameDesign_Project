@@ -16,4 +16,4 @@ MonoBehaviour:
   playerPropulsionForce: 10
   playerOnAirPropulsionForce: 12.5
   objectPropulsionForce: 12.5
-  setPanelJump: 0
+  enableAirControl: 0

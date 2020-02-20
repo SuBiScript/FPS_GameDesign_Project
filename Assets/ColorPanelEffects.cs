@@ -11,19 +11,19 @@ namespace ColorPanels
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
             ColorPanelProperties properties)
         {
-            PlayerControllerFSM player;
-            float jumpForce;
             bool isPlayer = false;
             try
             {
-                player = collision.gameObject.GetComponent<PlayerControllerFSM>();
-                player.MakeItJump(properties.setPanelJump);
+                var player = collision.gameObject.GetComponent<PlayerControllerFSM>();
+                player.MakeItJump(properties.enableAirControl);
                 isPlayer = true;
             }
             catch (NullReferenceException)
             {
             }
-            jumpForce = ComputeJumpForce(isPlayer, properties);
+            
+            var jumpForce = ComputeJumpForce(isPlayer, properties);
+            
             try
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();

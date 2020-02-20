@@ -1,5 +1,6 @@
 ﻿using System;
 using PlayerFSM;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using Weapon;
 
@@ -82,10 +83,12 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
     {
         Bounds bounds = attachedCollider.bounds;
         Vector3 boundExtents = bounds.extents;
-        if (Physics.BoxCast(bounds.center, boundExtents, Vector3.down,
-            Quaternion.identity, groundDetectionRange, walkableLayers))
-            return true;
-        return false;
+        RaycastHit rayCastHitInfo;
+        bool returnVal = Physics.SphereCast(bounds.center, 2f, Vector3.down,
+            out rayCastHitInfo,
+            groundDetectionRange,
+            walkableLayers);
+        Debug.Log(rayCastHitInfo.collider.gameObject.name);
+        return returnVal;
     }
-
 }

@@ -600,7 +600,7 @@ PrefabInstance:
     - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: groundDetectionRange
-      value: 0.15
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}

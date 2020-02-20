@@ -7,5 +7,5 @@ public class ColorPanelProperties : ScriptableObject
     public float playerPropulsionForce = 10f;
     public float playerOnAirPropulsionForce = 12.5f;
     public float objectPropulsionForce = 25f;
-    public bool setPanelJump = true;
+    public bool enableAirControl = true;
 }

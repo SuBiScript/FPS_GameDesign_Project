@@ -42,17 +42,20 @@ public class Player_State_Walk : State
             return;
         }
 
-        if (!((PlayerControllerFSM) Machine.characterController).IsGrounded())
+        var isGrounded = ((PlayerControllerFSM) Machine.characterController).IsGrounded();
+        Debug.Log(isGrounded);
+        if (!isGrounded)
         {
             coyoteFrames++;
             if (coyoteFrames >= Machine.characterController.characterProperties.MaxCoyoteFrames)
             {
-                
+                Machine.SwitchState<Player_State_OnAir>();
             }
         }
         else if (coyoteFrames > 0)
         {
             coyoteFrames = 0;
+            Debug.Log("RESETTING COYOTEFRAMES");
         }
     }
 
@@ -61,6 +64,7 @@ public class Player_State_Walk : State
         base.OnStateEnter();
         WalkSpeed = Machine.characterController.characterProperties.WalkSpeed;
         attachedRigidbody = Machine.characterController.rigidbody;
+        coyoteFrames = 0;
     }
 
     protected override void OnStateExit()

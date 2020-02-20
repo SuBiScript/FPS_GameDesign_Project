@@ -49,12 +49,11 @@ public class Player_State_OnAir : State
         attachedRigidbody = Machine.characterController.rigidbody;
         onAirSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.WalkSpeed
-            : Machine.characterController.characterProperties.OnAirSpeed;
+            : 0f;
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
-        ((PlayerControllerFSM) Machine.characterController).enableAirControl = true;
     }
 }
