@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 961816293}
   - component: {fileID: 961816292}
   - component: {fileID: 961816291}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,6 +443,12 @@ Transform:
 --- !u!1 &1053164416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1276872442061934491, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+    type: 3}
+  m_PrefabInstance: {fileID: 3626339020037147996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1053164422 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 1276872442061934494, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
     type: 3}
   m_PrefabInstance: {fileID: 3626339020037147996}
   m_PrefabAsset: {fileID: 0}
@@ -560,10 +566,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1276872442061934495, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+    - target: {fileID: 1276872442061934494, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1276872442061934495, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1276872442141793962, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
@@ -576,5 +587,20 @@ PrefabInstance:
       propertyPath: equippedWeapon
       value: 
       objectReference: {fileID: 289063077}
+    - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: walkableLayers.m_Bits
+      value: 3072
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: attachedCollider
+      value: 
+      objectReference: {fileID: 1053164422}
+    - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: groundDetectionRange
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}

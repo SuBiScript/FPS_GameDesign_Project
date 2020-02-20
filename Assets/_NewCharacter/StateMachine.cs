@@ -47,18 +47,18 @@ namespace PlayerFSM
             {
                 State oldState = currentState;
                 currentState = newState;
-                if(oldState)
+                if (oldState)
                     oldState.StateExit();
                 currentState.StateEnter();
                 try
                 {
                     Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
-
                 }
                 catch (NullReferenceException)
                 {
                     Debug.Log($"{currentState.GetType()}");
                 }
+
                 return true;
             }
 
@@ -78,6 +78,7 @@ namespace PlayerFSM
         /// <returns>Whether the State was changed</returns>
         public virtual bool SwitchState<StateType>() where StateType : State
         {
+            if (currentState is StateType) return false;
             //if the state can be found in the list of states 
             //already created, switch to the existing version
             foreach (State state in statesList)

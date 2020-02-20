@@ -7,6 +7,7 @@ public class Player_State_Walk : State
 {
     private Rigidbody attachedRigidbody;
     private float WalkSpeed;
+    private int coyoteFrames;
 
     protected override void OnStateInitialize(StateMachine machine)
     {
@@ -38,6 +39,20 @@ public class Player_State_Walk : State
         if (Machine.characterController.currentBrain.Jumping)
         {
             Machine.SwitchState<Player_State_Jumping>();
+            return;
+        }
+
+        if (!((PlayerControllerFSM) Machine.characterController).IsGrounded())
+        {
+            coyoteFrames++;
+            if (coyoteFrames >= Machine.characterController.characterProperties.MaxCoyoteFrames)
+            {
+                
+            }
+        }
+        else if (coyoteFrames > 0)
+        {
+            coyoteFrames = 0;
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using PlayerFSM;
+﻿using System;
+using PlayerFSM;
 using UnityEngine;
 using Weapon;
 
@@ -6,11 +7,15 @@ using Weapon;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerControllerFSM : CharacterController , IPlatformJump
+public class PlayerControllerFSM : CharacterController, IPlatformJump
 {
     public CameraFSMController cameraController;
     public bool enableAirControl;
     public WeaponScript equippedWeapon;
+    public LayerMask walkableLayers;
+    public Collider attachedCollider;
+    [Range(0f, 1f)] public float groundDetectionRange = 0.2f;
+
     public void Awake()
     {
         if (defaultBrain == null)
@@ -25,13 +30,15 @@ public class PlayerControllerFSM : CharacterController , IPlatformJump
             stateMachine = GetComponent<StateMachine>();
         if (rigidbody == null)
             rigidbody = GetComponent<Rigidbody>();
-        if(cameraController == null)
+        if (cameraController == null)
             cameraController = GetComponent<CameraFSMController>();
         if (equippedWeapon == null)
             equippedWeapon = GetComponentInChildren<WeaponScript>();
         characterProperties = characterProperties == null
             ? ScriptableObject.CreateInstance<CharacterProperties>()
             : Instantiate(characterProperties);
+
+        attachedCollider = GetComponent<Collider>();
     }
 
     private void Start()
@@ -49,36 +56,36 @@ public class PlayerControllerFSM : CharacterController , IPlatformJump
 
         if (currentBrain.isActiveAndEnabled)
             currentBrain.GetActions();
-        
-        if(currentBrain.Shooting)
+
+        if (currentBrain.Shooting)
             equippedWeapon.MainFire();
-        if(currentBrain.Aiming)
+        if (currentBrain.Aiming)
             equippedWeapon.AltFire();
-        
+
         if (stateMachine.isActiveAndEnabled)
             stateMachine.UpdateTick(Time.deltaTime);
-        
-                
     }
 
     private void FixedUpdate()
     {
         if (stateMachine.isActiveAndEnabled)
             stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
-        
-        //Debug.Log(rigidbody.velocity);
     }
 
-    public void MakeItJump()
+    public void MakeItJump(bool airControl)
     {
-        enableAirControl = false;
+        enableAirControl = airControl;
         stateMachine.SwitchState<Player_State_OnAir>();
     }
 
-    public bool IsGrounded() //TODO Improve method to compute ground detection
+    public bool IsGrounded()
     {
-        if (stateMachine.GetCurrentState is Player_State_OnAir || stateMachine.GetCurrentState is Player_State_Jumping)
-            return false;
-        return true;
+        Bounds bounds = attachedCollider.bounds;
+        Vector3 boundExtents = bounds.extents;
+        if (Physics.BoxCast(bounds.center, boundExtents, Vector3.down,
+            Quaternion.identity, groundDetectionRange, walkableLayers))
+            return true;
+        return false;
     }
+
 }

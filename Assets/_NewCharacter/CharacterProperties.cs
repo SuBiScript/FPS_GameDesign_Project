@@ -10,5 +10,7 @@ public class CharacterProperties : ScriptableObject
     public float RunSpeed = 2f;
     public float OnAirSpeed = 0.5f;
     public float JumpForce = 7f;
-    
+
+    public int MaxCoyoteFrames = 10;
+
 }

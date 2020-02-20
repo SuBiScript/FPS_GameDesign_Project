@@ -36,7 +36,7 @@ public class Player_State_OnAir : State
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (timer <= 0f)
+        if (((PlayerControllerFSM)Machine.characterController).IsGrounded() && timer <= 0f)
         {
             Machine.SwitchState<Player_State_Walk>();
         }
@@ -45,7 +45,7 @@ public class Player_State_OnAir : State
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
-        timer = 3f;
+        timer = 0.2f; //Safety Timer
         attachedRigidbody = Machine.characterController.rigidbody;
         onAirSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.WalkSpeed

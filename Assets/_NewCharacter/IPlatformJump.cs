@@ -1,4 +1,4 @@
 ﻿public interface IPlatformJump
 {
-    void MakeItJump();
+    void MakeItJump(bool airControl);
 }

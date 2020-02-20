@@ -17,30 +17,12 @@ namespace ColorPanels
 
         private void OnTriggerEnter(Collider other)
         {
-            try
-            {
-                other.gameObject.GetComponent<PlayerControllerFSM>();
-                parentController.OnChildTriggerEnter(other);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-            //if (other.gameObject != GameController.Instance.playerComponents.PlayerController.gameObject)
+            parentController.OnChildTriggerEnter(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            try
-            {
-                other.gameObject.GetComponent<PlayerControllerFSM>();
-                parentController.OnChildTriggerExit(other);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-            //if (other.gameObject != GameController.Instance.playerComponents.PlayerController.gameObject)
+            parentController.OnChildTriggerExit(other);
         }
     }
 }
