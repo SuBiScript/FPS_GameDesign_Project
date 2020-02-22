@@ -18,6 +18,10 @@ public class InputNames : ScriptableObject
     
     [Header("Game")] 
     public string Interact = "Interact";
-    
-    
+
+    [Header("Menu")]
+    public string Submit = "Submit";
+    public string Cancel = "Cancel";
+
+
 }

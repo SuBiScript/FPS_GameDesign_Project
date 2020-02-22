@@ -18,8 +18,8 @@ public class PlayerBrain : Brain
         Running = Input.GetButtonDown(inputNames.Run ?? "Run");
         Crouching = Input.GetButtonDown(inputNames.Crouch ?? "Crouch");
         Interacting = Input.GetButton(inputNames.Interact ?? "Interact");
-        Submit = Interacting = Input.GetButton(inputNames.Interact ?? "Submit");
-        Cancel = Interacting = Input.GetButton(inputNames.Interact ?? "Cancel");
+        Submit = Input.GetButton(inputNames.Submit ?? "Submit");
+        Cancel = Input.GetButton(inputNames.Cancel ?? "Cancel");
 
         //Directional input control.
         Direction = new Vector3(
