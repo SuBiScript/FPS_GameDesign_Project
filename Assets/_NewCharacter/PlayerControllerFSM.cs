@@ -1,6 +1,4 @@
-﻿using System;
-using PlayerFSM;
-using UnityEditor.IMGUI.Controls;
+﻿using PlayerFSM;
 using UnityEngine;
 using Weapon;
 
