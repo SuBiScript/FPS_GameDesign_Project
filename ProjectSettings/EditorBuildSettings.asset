@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 285c0acf0b472364ba9ae196904362cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PostpoScene.unity
     guid: 0e1783e3249b7e048a4ecc1ceaa8589c
+  - enabled: 1
+    path: Assets/Scenes/Prototyping/Jordi/NewCharacter.unity
+    guid: 95f53c224adcc5d439919b5138c0ecd0
   m_configObjects: {}

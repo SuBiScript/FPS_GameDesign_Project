@@ -15,6 +15,7 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
     public WeaponScript equippedWeapon;
     public LayerMask walkableLayers;
     public Collider attachedCollider;
+    public Transform m_PitchControllerTransform;
 
     [Header("Ground Detection")] public Transform groundPosition;
     [Range(0.1f, 10f)]public float castRadius = 1f;

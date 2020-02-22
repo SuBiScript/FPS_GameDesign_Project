@@ -13,9 +13,20 @@ namespace Weapon
         public class ObjectAttacher
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
+
+
+
+            [Header("Attaching Object")]
+            [HideInInspector] public bool m_AttachedObject;
             public Rigidbody m_ObjectAttached;
             public float m_AttachingObjectSpeed;
-            public GameObject m_AttachingPosition;
+            public Transform m_AttachingPosition;
+            [HideInInspector] public Quaternion m_AttachingObjectStartRotation;
+            [HideInInspector] public bool m_GravityShot;
+            [HideInInspector] public bool m_CubeButton; // if cube has been attached
+            [HideInInspector] public bool m_Rendered;
+
+
 
             public ObjectAttacher()
             {
@@ -29,7 +40,7 @@ namespace Weapon
                 //m_ObjectAttached.gameObject.transform.parent = m_Parent;
                 if (m_AttachingObject)
                 {
-                    ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached, m_AttachingPosition,
+                    ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached, m_AttachingPosition.GetComponent<GameObject>(),
                         m_AttachingObjectSpeed);
                 }
 
@@ -62,6 +73,74 @@ namespace Weapon
                 m_ObjectAttached.tag = "Cube";
                 m_ObjectAttached = null;
             }
+
+            //new attach method
+            public void UpdateAttachedObject_()
+            {
+                Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
+                m_CubeButton = true;
+                m_ObjectAttached.isKinematic = true;
+                m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
+
+                if (!m_AttachedObject)
+                {
+                    Vector3 l_Direction = m_AttachingPosition.transform.position - m_ObjectAttached.transform.position;
+                    float l_Distance = l_Direction.magnitude;
+                    float l_Movement = m_AttachingObjectSpeed * Time.deltaTime;
+
+                    if (l_Movement >= l_Distance)
+                    {
+                        m_AttachedObject = true;
+                        m_ObjectAttached.MovePosition(m_AttachingPosition.position);
+                        m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
+                    }
+                    else
+                    {
+                        l_Direction /= l_Distance;
+                        m_ObjectAttached.MovePosition(m_ObjectAttached.transform.position + l_Direction * l_Movement);
+                        m_ObjectAttached.MoveRotation(Quaternion.Lerp(m_AttachingObjectStartRotation, Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
+                    }
+                }
+                else
+                {
+                    m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
+                    m_ObjectAttached.MovePosition(m_AttachingPosition.position);
+
+                    //if (!m_Rendered)
+                    //{
+                    //    m_ChildsAttachedObject = m_ObjectAttached.GetComponentsInChildren<Transform>();
+                    //    foreach (Transform child in m_ChildsAttachedObject)
+                    //    {
+                    //        if (child.tag == "MeshAttached")
+                    //            child.gameObject.layer = LayerMask.NameToLayer("AttachedObject");
+                    //    }
+                    //    m_ObjectAttached.transform.parent = GameManager.gameMaster.m_PlayerController.m_PitchControllerTransform;
+                    //    m_Rendered = true;
+                    //}
+
+                    m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
+                }
+            }
+
+            public void DetachObject_(float force)
+            {
+                //foreach (Transform child in m_ChildsAttachedObject)
+                //{
+                //    if (child.tag == "MeshAttached")
+                //        child.gameObject.layer = LayerMask.NameToLayer("Blocking");
+                //}
+
+                AudioManager.instance.Play("DetachObject");
+                m_Rendered = false;
+                m_GravityShot = false;
+                m_AttachedObject = false;
+                m_CubeButton = false;
+                m_ObjectAttached.transform.parent = null;
+                m_ObjectAttached.useGravity = true;
+                m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
+                m_ObjectAttached.isKinematic = false;
+                m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
+            }
         }
 
         public ObjectAttacher m_ObjectAttacher = new ObjectAttacher();
@@ -84,7 +163,8 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")]
+        [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
@@ -99,18 +179,38 @@ namespace Weapon
             ChangeColor(WeaponColor.Blue);
         }
 
+        private void FixedUpdate()
+        {
+            if (m_ObjectAttacher.m_GravityShot)
+                m_ObjectAttacher.UpdateAttachedObject_();
+        }
+
         public void MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
-                hit.collider.gameObject.GetComponent<ColorPanelObject>()
+                if (!m_ObjectAttacher.m_AttachedObject)
+                {
+
+                    hit.collider.gameObject.GetComponent<ColorPanelObject>()
                     ?.ChangeColor(_currentColor, _currentMaterial);
+
+                    if (hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
+                    {
+                        m_ObjectAttacher.m_ObjectAttached = hit.transform.GetComponent<Rigidbody>();
+                        m_ObjectAttacher.m_AttachingObjectStartRotation = m_ObjectAttacher.m_ObjectAttached.transform.rotation;
+                        m_ObjectAttacher.m_GravityShot = true;
+                    }
+
+
+                }
+
             }
         }
 
-        public void AltFire() => ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+        public void AltFire() => ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
 
         public void AttractObject()
         {
@@ -175,7 +275,7 @@ namespace Weapon
             {
                 GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
             }
-            catch(NullReferenceException){}
+            catch (NullReferenceException) { }
         }
 
         private void ChangeMeshRendererMaterial()
