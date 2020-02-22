@@ -8,22 +8,13 @@ namespace ColorPanels
 {
     public static class ColorPanelEffects
     {
+        private static ColorPanelProperties lastPanelProperties;
+        private static Vector3 jumpDirection;
+        
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
             ColorPanelProperties properties)
         {
-            bool isPlayer = false;
-            try
-            {
-                var player = collision.gameObject.GetComponent<PlayerControllerFSM>();
-                player.MakeItJump(properties.enableAirControl);
-                isPlayer = true;
-            }
-            catch (NullReferenceException)
-            {
-            }
-            
-            var jumpForce = ComputeJumpForce(isPlayer, properties);
-            
+           var jumpForce = ComputeJumpForce(false, properties);
             try
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();
@@ -35,6 +26,18 @@ namespace ColorPanels
             {
             }
             
+        }
+
+        public static void PlayerJump(PlayerControllerFSM player, Rigidbody rigidbody)
+        {
+            player.enableAirControl = lastPanelProperties.enableAirControl; 
+            rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
+        }
+
+        public static void PanelSetProperties(ColorPanelProperties panelProperties, Vector3 direction)
+        {
+            lastPanelProperties = panelProperties;
+            jumpDirection = direction;
         }
 
         private static float ComputeJumpForce(bool isPlayer, ColorPanelProperties properties)

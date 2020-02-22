@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PlayerFSM;
 using UnityEngine;
 
-public class Player_State_OnAir : State
+public class Player_State_Falling : State
 {
     private Rigidbody attachedRigidbody;
     private float movementSpeed;
-    
+
     protected override void OnStateInitialize(StateMachine machine)
     {
         base.OnStateInitialize(machine);
@@ -29,15 +30,14 @@ public class Player_State_OnAir : State
                 movementSpeed,
                 fixedDeltaTime);
         }
-
     }
 
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (attachedRigidbody.velocity.y <= 0f)
+        if (((PlayerControllerFSM) Machine.characterController).IsGrounded())
         {
-            Machine.SwitchState<Player_State_Falling>();
+            Machine.SwitchState<Player_State_Walk>();
         }
     }
 
