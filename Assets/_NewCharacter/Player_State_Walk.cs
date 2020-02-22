@@ -36,9 +36,7 @@ public class Player_State_Walk : State
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (Machine.characterController.currentBrain.Jumping &&
-            Machine.characterController.rigidbody.velocity.y >= 0f
-            && Machine.characterController.rigidbody.velocity.y < 0.2f)
+        if (Machine.characterController.currentBrain.Jumping)
         {
             Machine.SwitchState<Player_State_Jumping>();
             return;

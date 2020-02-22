@@ -205,7 +205,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 78705143824216782, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
 --- !u!1 &804519759
 GameObject:
@@ -439,6 +440,10 @@ PrefabInstance:
       propertyPath: m_Depth
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1616957864, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.984
+      objectReference: {fileID: 0}
     - target: {fileID: 1276872442061934491, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_Name
@@ -502,7 +507,17 @@ PrefabInstance:
     - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: groundDetectionRange
-      value: 1
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: walkableLayers.m_Bits
+      value: 3072
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145116302652009300, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: castRadius
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}

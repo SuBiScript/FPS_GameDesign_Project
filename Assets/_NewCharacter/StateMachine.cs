@@ -41,7 +41,7 @@ namespace PlayerFSM
         /// <param name="newState">
         /// The state object to set as the currentState</param>
         /// <returns></returns>
-        protected virtual bool SetState(State newState)
+        protected virtual State SetState(State newState)
         {
             if (newState && newState != currentState)
             {
@@ -50,19 +50,19 @@ namespace PlayerFSM
                 if (oldState)
                     oldState.StateExit();
                 currentState.StateEnter();
-                /*try
+                try
                 {
-                    //Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
+                    Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
                 }
                 catch (NullReferenceException)
                 {
-                    //Debug.Log($"{currentState.GetType()}");
-                }*/
+                    Debug.Log($"{currentState.GetType()}");
+                }
 
-                return true;
+                return currentState;
             }
 
-            return false;
+            return null;
         }
 
         public void ForceSetState(State state)
@@ -76,7 +76,7 @@ namespace PlayerFSM
         /// <typeparam name="StateType">
         /// The type of the State to use for the currentState</typeparam>
         /// <returns>Whether the State was changed</returns>
-        public virtual bool SwitchState<StateType>() where StateType : State
+        public virtual State SwitchState<StateType>() where StateType : State
         {
             //if the state can be found in the list of states 
             //already created, switch to the existing version

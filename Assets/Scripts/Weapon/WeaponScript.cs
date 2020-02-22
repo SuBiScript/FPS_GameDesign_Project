@@ -14,8 +14,6 @@ namespace Weapon
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
 
-
-
             [Header("Attaching Object")]
             [HideInInspector] public bool m_AttachedObject;
             public Rigidbody m_ObjectAttached;
@@ -25,8 +23,6 @@ namespace Weapon
             [HideInInspector] public bool m_GravityShot;
             [HideInInspector] public bool m_CubeButton; // if cube has been attached
             [HideInInspector] public bool m_Rendered;
-
-
 
             public ObjectAttacher()
             {
@@ -80,7 +76,9 @@ namespace Weapon
                 Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
                 m_CubeButton = true;
                 m_ObjectAttached.isKinematic = true;
-                m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
+                //m_ObjectAttached.useGravity = false;
+                //m_ObjectAttached.detectCollisions = true;
+                //m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
 
                 if (!m_AttachedObject)
                 {
@@ -129,8 +127,6 @@ namespace Weapon
                 //    if (child.tag == "MeshAttached")
                 //        child.gameObject.layer = LayerMask.NameToLayer("Blocking");
                 //}
-
-                AudioManager.instance.Play("DetachObject");
                 m_Rendered = false;
                 m_GravityShot = false;
                 m_AttachedObject = false;
@@ -191,11 +187,11 @@ namespace Weapon
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
+
                 if (!m_ObjectAttacher.m_AttachedObject)
                 {
-
-                    hit.collider.gameObject.GetComponent<ColorPanelObject>()
-                    ?.ChangeColor(_currentColor, _currentMaterial);
+                    hit.collider.gameObject.GetComponent<ColorPanelObjectFSM>()
+                        ?.ChangeColor(_currentColor, _currentMaterial);
 
                     if (hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
                     {
@@ -203,14 +199,20 @@ namespace Weapon
                         m_ObjectAttacher.m_AttachingObjectStartRotation = m_ObjectAttacher.m_ObjectAttached.transform.rotation;
                         m_ObjectAttacher.m_GravityShot = true;
                     }
-
-
                 }
-
             }
         }
 
-        public void AltFire() => ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+        public void AltFire()
+        {
+
+            if (!m_ObjectAttacher.m_AttachedObject)
+                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+            else
+            {
+                m_ObjectAttacher.DetachObject_(0);
+            }
+        }
 
         public void AttractObject()
         {

@@ -1,6 +1,4 @@
-﻿using System;
-using PlayerFSM;
-using UnityEditor.IMGUI.Controls;
+﻿using PlayerFSM;
 using UnityEngine;
 using Weapon;
 
@@ -8,7 +6,7 @@ using Weapon;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerControllerFSM : CharacterController, IPlatformJump
+public class PlayerControllerFSM : CharacterController
 {
     public CameraFSMController cameraController;
     public bool enableAirControl;
@@ -18,8 +16,7 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
     public Transform m_PitchControllerTransform;
 
     [Header("Ground Detection")] public Transform groundPosition;
-    [Range(0.1f, 10f)]public float castRadius = 1f;
-    [Range(0f, 10f)] public float groundDetectionRange = 0.2f;
+    [Range(0.1f, 10f)] public float castRadius = 1f;
     public bool isPlayerGrounded { get; private set; }
 
     public void Awake()
@@ -80,20 +77,11 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
             stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
     }
 
-    public void MakeItJump(bool airControl)
-    {
-        enableAirControl = airControl;
-        stateMachine.SwitchState<Player_State_OnAir>();
-    }
-
     private bool CheckOnGround()
     {
-        RaycastHit rayCastHitInfo;
-        bool returnVal = Physics.SphereCast(groundPosition.position, castRadius, Vector3.down,
-            out rayCastHitInfo,
-            groundDetectionRange,
-            walkableLayers);
-        return returnVal;
+        bool foundGround;
+        var list = Physics.OverlapSphere(groundPosition.position,castRadius, walkableLayers);
+        return list.Length > 0;
     }
 
     public bool IsGrounded() => isPlayerGrounded;

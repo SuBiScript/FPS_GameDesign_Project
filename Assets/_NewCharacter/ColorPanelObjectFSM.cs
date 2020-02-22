@@ -101,6 +101,14 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Blue:
+                    var pcController = other.gameObject.GetComponent<PlayerControllerFSM>();
+                    if (pcController != null)
+                    {
+                        ColorPanelEffects.PanelSetProperties(colorPanelProperties, transform.up);
+                        pcController.stateMachine.SwitchState<Player_State_PlatformJumping>();
+                        return;
+                    }
+
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
                     break;
             }
@@ -113,6 +121,8 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
+                    if (collidedCollider.CompareTag("Player")) return;
+
                     if (_attachedObjectRigidbody == null)
                     {
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
@@ -131,16 +141,17 @@ namespace ColorPanels
             if (currentMode == color) return false;
 
             DetachObject();
-            
+
             currentMode = color;
             var temp = meshRenderer.materials;
             Material simpleMaterial = temp[1];
             simpleMaterial.SetColor("_EmissionColor", material.color);
             temp[1] = simpleMaterial;
             meshRenderer.materials = temp;
-            
+
             return true;
         }
+
         private void AttachObject(Rigidbody l_ObjectToAttach)
         {
             if (m_AttachingObject) return;

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ColorPanels;
 using PlayerFSM;
 using UnityEngine;
 
-public class Player_State_Jumping : State
+public class Player_State_PlatformJumping : State
 {
     private Rigidbody attachedRigidbody;
+    private float timer;
 
     protected override void OnStateInitialize(StateMachine machine)
     {
@@ -32,25 +34,15 @@ public class Player_State_Jumping : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        
-        RemoveVerticalSpeed();
-        ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
-        MovementManager.RigidbodyAddForce(
-            Machine.characterController.rigidbody,
-            Machine.transform.up,
-            Machine.characterController.characterProperties.JumpForce,
-            ForceMode.Impulse);
-    }
-
-    private void RemoveVerticalSpeed()
-    {
-        Vector3 rbSpeed = attachedRigidbody.velocity;
-        rbSpeed.y = 0f;
-        attachedRigidbody.velocity = rbSpeed;
+        ColorPanelEffects.PlayerJump(((PlayerControllerFSM)Machine.characterController), attachedRigidbody);
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
+    }
+
+    public void SetPanelSettings()
+    {
     }
 }
