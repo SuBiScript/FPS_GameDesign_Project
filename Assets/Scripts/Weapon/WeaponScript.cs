@@ -23,6 +23,8 @@ namespace Weapon
             [HideInInspector] public bool m_GravityShot;
             [HideInInspector] public bool m_CubeButton; // if cube has been attached
             [HideInInspector] public bool m_Rendered;
+            [HideInInspector] public bool m_ParentAttached;
+
 
             public ObjectAttacher()
             {
@@ -75,9 +77,9 @@ namespace Weapon
             {
                 Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
                 m_CubeButton = true;
+                //m_ObjectAttached.constraints = RigidbodyConstraints.None;
                 m_ObjectAttached.isKinematic = true;
-                //m_ObjectAttached.useGravity = false;
-                //m_ObjectAttached.detectCollisions = true;
+                m_ObjectAttached.WakeUp();
                 //m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
 
                 if (!m_AttachedObject)
@@ -116,7 +118,11 @@ namespace Weapon
                     //    m_Rendered = true;
                     //}
 
-                    m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
+                    if (!m_ParentAttached)
+                    {
+                        m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
+                        m_ParentAttached = true;
+                    }
                 }
             }
 
@@ -132,6 +138,7 @@ namespace Weapon
                 m_AttachedObject = false;
                 m_CubeButton = false;
                 m_ObjectAttached.transform.parent = null;
+                m_ParentAttached = false;
                 m_ObjectAttached.useGravity = true;
                 m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                 m_ObjectAttached.isKinematic = false;
