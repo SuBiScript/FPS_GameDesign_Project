@@ -12,7 +12,9 @@ public abstract class Brain : MonoBehaviour
     public bool Backwards { get; protected set; }
     public bool Right { get; protected set; }
     public bool Left { get; protected set; }
-    
+    public bool Cancel { get; protected set; }
+    public bool Submit { get; protected set; }
+
     public Vector3 Direction { get; protected set; }
 
     public abstract void GetActions();

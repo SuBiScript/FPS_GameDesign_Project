@@ -6,18 +6,20 @@ public class PlayerBrain : Brain
 
     private void Start()
     {
-        if(inputNames == null) Debug.LogWarning($"Controls in {gameObject.name} could not work.", gameObject);
+        if (inputNames == null) Debug.LogWarning($"Controls in {gameObject.name} could not work.", gameObject);
     }
 
     public override void GetActions()
     {
         //All available buttons
-        Shooting = Input.GetButtonDown(inputNames.Shoot ?? "Shoot");
+        Shooting = Mathf.Round(Input.GetAxisRaw(inputNames.Shoot ?? "Shoot")) > 0 || Input.GetButtonDown(inputNames.Shoot ?? "Shoot");
         Aiming = Input.GetButtonDown(inputNames.ChangeColor ?? "Change Color");
         Jumping = Input.GetButtonDown(inputNames.Jump ?? "Jump");
         Running = Input.GetButtonDown(inputNames.Run ?? "Run");
         Crouching = Input.GetButtonDown(inputNames.Crouch ?? "Crouch");
         Interacting = Input.GetButton(inputNames.Interact ?? "Interact");
+        Submit = Interacting = Input.GetButton(inputNames.Interact ?? "Submit");
+        Cancel = Interacting = Input.GetButton(inputNames.Interact ?? "Cancel");
 
         //Directional input control.
         Direction = new Vector3(
