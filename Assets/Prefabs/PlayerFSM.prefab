@@ -104,6 +104,36 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &1616957863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1616957864}
+  m_Layer: 8
+  m_Name: GroundPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1616957864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616957863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1276872442061934493}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276872441876354425
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +184,7 @@ GameObject:
   - component: {fileID: 3390242176658832922}
   - component: {fileID: 2781708504010587828}
   - component: {fileID: 4145116302652009300}
+  - component: {fileID: 1053164426}
   m_Layer: 8
   m_Name: PlayerFSM
   m_TagString: Player
@@ -173,6 +204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1276872441876354430}
+  - {fileID: 1616957864}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 115.547005, z: 0}
@@ -245,14 +277,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276872442061934491}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0.05
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4379489249874346560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +340,42 @@ MonoBehaviour:
   characterProperties: {fileID: 11400000, guid: 9773d99673d1b9243bfd3a37aafa1569,
     type: 2}
   cameraController: {fileID: 3663055502801973478}
+  enableAirControl: 0
+  equippedWeapon: {fileID: 1276872442141793962}
+  walkableLayers:
+    serializedVersion: 2
+    m_Bits: 3072
+  attachedCollider: {fileID: 1276872442061934494}
+  groundPosition: {fileID: 1616957864}
+  castRadius: 1
+  groundDetectionRange: 1.2
+--- !u!114 &1053164426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276872442061934491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b2f7bb2190d3e409bf44eacbe7e26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DisableOnDeath: 0
+  m_SpawnLootOnDeath: 0
+  m_GodMode: 0
+  m_MaxHealth: 100
+  m_MaxShield: 100
+  m_ShieldAbsorbption: 1
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterRespawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1276872442141793956
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +426,7 @@ MonoBehaviour:
     m_ObjectAttached: {fileID: 0}
     m_AttachingObjectSpeed: 10
     m_AttachingPosition: {fileID: 1277114073}
-  materialList: {fileID: 11400000, guid: e9d00430d34571644b6743702f052d25, type: 2}
+  materialList: {fileID: 11400000, guid: 5fb67addbc791a04db1a596d21184038, type: 2}
   weaponMeshRenderer: {fileID: 399581504825106113}
   attractPoint: {fileID: 2141267345345653277}
   _weaponMaterial: {fileID: 2100000, guid: a8f0617f846b3254f93a3f8326cc553c, type: 2}

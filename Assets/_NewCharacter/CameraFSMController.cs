@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CameraFSMController : MonoBehaviour
@@ -7,6 +9,10 @@ public class CameraFSMController : MonoBehaviour
     Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     GameObject m_Character;
+
+    public KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
+    public KeyCode m_DebugLockKeyCode = KeyCode.O;
+    private bool m_AngleLocked;
     public Camera attachedCamera { get; private set; }
 
     [Range(0.1f, 10.0f)] public float m_Sensitivity = 1f;
@@ -17,13 +23,24 @@ public class CameraFSMController : MonoBehaviour
 
     void Awake()
     {
+        m_AngleLocked = false;
         m_Character = GetComponentInParent<PlayerControllerFSM>().gameObject;
         attachedCamera = GetComponent<Camera>();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Update()
     {
-        Aiming();
+        if (!m_AngleLocked)
+            Aiming();
+#if UNITY_EDITOR
+        LockCameraAndMouse();
+#endif
     }
 
     void Aiming()
@@ -43,4 +60,18 @@ public class CameraFSMController : MonoBehaviour
         m_PitchControllerTransform.localRotation = Quaternion.AngleAxis(-m_MouseLook.y, Vector3.right);
         m_Character.transform.localRotation = Quaternion.AngleAxis(m_MouseLook.x, m_Character.transform.up);
     }
+
+    /// <summary>
+    /// Unity editor stuff
+    /// </summary>
+#if UNITY_EDITOR
+    void LockCameraAndMouse()
+    {
+        if (Input.GetKeyDown(m_DebugLockAngleKeyCode))
+            m_AngleLocked = !m_AngleLocked;
+
+        if (Input.GetKeyDown(m_DebugLockKeyCode))
+            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+#endif
 }

@@ -45,7 +45,7 @@ public class Player_State_OnAir : State
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
-        timer = 0.2f; //Safety Timer
+        timer = 0.1f; //Safety Timer
         attachedRigidbody = Machine.characterController.rigidbody;
         onAirSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.WalkSpeed

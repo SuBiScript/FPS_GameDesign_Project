@@ -15,7 +15,11 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
     public WeaponScript equippedWeapon;
     public LayerMask walkableLayers;
     public Collider attachedCollider;
-    [Range(0f, 1f)] public float groundDetectionRange = 0.2f;
+
+    [Header("Ground Detection")] public Transform groundPosition;
+    [Range(0.1f, 10f)]public float castRadius = 1f;
+    [Range(0f, 10f)] public float groundDetectionRange = 0.2f;
+    public bool isPlayerGrounded { get; private set; }
 
     public void Awake()
     {
@@ -55,6 +59,8 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
             stateMachine.enabled = !stateMachine.enabled;
         }
 
+        isPlayerGrounded = CheckOnGround();
+
         if (currentBrain.isActiveAndEnabled)
             currentBrain.GetActions();
 
@@ -79,16 +85,15 @@ public class PlayerControllerFSM : CharacterController, IPlatformJump
         stateMachine.SwitchState<Player_State_OnAir>();
     }
 
-    public bool IsGrounded()
+    private bool CheckOnGround()
     {
-        Bounds bounds = attachedCollider.bounds;
-        Vector3 boundExtents = bounds.extents;
         RaycastHit rayCastHitInfo;
-        bool returnVal = Physics.SphereCast(bounds.center, 2f, Vector3.down,
+        bool returnVal = Physics.SphereCast(groundPosition.position, castRadius, Vector3.down,
             out rayCastHitInfo,
             groundDetectionRange,
             walkableLayers);
-        Debug.Log(rayCastHitInfo.collider.gameObject.name);
         return returnVal;
     }
+
+    public bool IsGrounded() => isPlayerGrounded;
 }

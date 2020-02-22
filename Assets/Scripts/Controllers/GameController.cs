@@ -13,9 +13,7 @@ public class GameController : Singleton<GameController>
     public GameObject m_GameOverMenu;
     public Image m_BloodFrame;
 
-    KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
-    KeyCode m_DebugLockKeyCode = KeyCode.O;
-    [HideInInspector] public bool m_AngleLocked;
+
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
 
@@ -37,8 +35,6 @@ public class GameController : Singleton<GameController>
     {
         m_GamePaused = false;
         m_PlayerDied = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         AddPlayerComponents();
     }
@@ -71,32 +67,10 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !m_GamePaused && !m_PlayerDied)
-            Pause();
-
-#if UNITY_EDITOR
-        UnityEditorUpdates();
-#endif
+        /*if (Input.GetKeyDown(KeyCode.Escape) && !m_GamePaused && !m_PlayerDied) //TODO Readd pause menu
+            Pause();*/
     }
 
-    /// <summary>
-    /// Unity editor stuff
-    /// </summary>
-#if UNITY_EDITOR
-    void UnityEditorUpdates()
-    {
-        if (Input.GetKeyDown(m_DebugLockAngleKeyCode))
-            m_AngleLocked = !m_AngleLocked;
-
-        if (Input.GetKeyDown(m_DebugLockKeyCode))
-        {
-            if (Cursor.lockState == CursorLockMode.Locked)
-                Cursor.lockState = CursorLockMode.None;
-            else
-                Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-#endif
 
     void Pause()
     {

@@ -16,4 +16,4 @@ MonoBehaviour:
   RunSpeed: 8
   OnAirSpeed: 0
   JumpForce: 10
-  MaxCoyoteFrames: 10
+  MaxCoyoteFrames: 30

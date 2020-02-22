@@ -36,14 +36,15 @@ public class Player_State_Walk : State
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (Machine.characterController.currentBrain.Jumping)
+        if (Machine.characterController.currentBrain.Jumping &&
+            Machine.characterController.rigidbody.velocity.y >= 0f
+            && Machine.characterController.rigidbody.velocity.y < 0.2f)
         {
             Machine.SwitchState<Player_State_Jumping>();
             return;
         }
 
         var isGrounded = ((PlayerControllerFSM) Machine.characterController).IsGrounded();
-        Debug.Log(isGrounded);
         if (!isGrounded)
         {
             coyoteFrames++;
@@ -55,7 +56,6 @@ public class Player_State_Walk : State
         else if (coyoteFrames > 0)
         {
             coyoteFrames = 0;
-            Debug.Log("RESETTING COYOTEFRAMES");
         }
     }
 
