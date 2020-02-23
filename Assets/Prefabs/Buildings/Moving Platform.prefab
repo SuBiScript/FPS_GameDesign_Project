@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4505113094692126}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Waypoint 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4919702553194968}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343572368040026}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -13.5}
+  m_LocalPosition: {x: 0, y: 0, z: -8.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4120441853834388}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4120441853834388}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Moving Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459543618119328}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.29, y: -3.25, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 65381834123643914}
   - component: {fileID: 114396199043977892}
   - component: {fileID: 7275787124458518459}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: PlatformSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &65381834123643914
 BoxCollider:
@@ -204,8 +204,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4900131, y: 1.9321222, z: 3.8705304}
-  m_Center: {x: 0, y: 1.066061, z: 0.0036290884}
+  m_Size: {x: 3.4900131, y: 0.45258975, z: 3.8705304}
+  m_Center: {x: 0, y: 0.3262949, z: 0.0036290884}
 --- !u!114 &114396199043977892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4906709834310220}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -91,7 +91,7 @@ public class RefractionCubeEffect : MonoBehaviour
         }
         m_LineRenderer.SetPosition(1, l_EndRaycastPosition);
 
-        m_Collider.height = l_RaycastHit.distance;
+        m_Collider.height = l_RaycastHit.distance + 1;
         m_Collider.center = new Vector3(0, 0, (l_RaycastHit.distance / 2));
     }
 }
