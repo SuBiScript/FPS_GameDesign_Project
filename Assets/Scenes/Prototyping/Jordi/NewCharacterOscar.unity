@@ -1279,6 +1279,11 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8850334317767176092, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: walkableLayers.m_Bits
+      value: 76800
+      objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176094, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_Name
