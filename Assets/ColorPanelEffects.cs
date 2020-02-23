@@ -8,11 +8,11 @@ namespace ColorPanels
 {
     public static class ColorPanelEffects
     {
-        private static ColorPanelProperties lastPanelProperties;
+        private static ColorPanelObjectFSM.ColorPanelProperties lastPanelProperties;
         private static Vector3 jumpDirection;
         
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
-            ColorPanelProperties properties)
+            ColorPanelObjectFSM.ColorPanelProperties properties)
         {
            var jumpForce = ComputeJumpForce(false, properties);
             try
@@ -34,13 +34,13 @@ namespace ColorPanels
             rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
         }
 
-        public static void PanelSetProperties(ColorPanelProperties panelProperties, Vector3 direction)
+        public static void PanelSetProperties(ColorPanelObjectFSM.ColorPanelProperties panelProperties, Vector3 direction)
         {
             lastPanelProperties = panelProperties;
             jumpDirection = direction;
         }
 
-        private static float ComputeJumpForce(bool isPlayer, ColorPanelProperties properties)
+        private static float ComputeJumpForce(bool isPlayer, ColorPanelObjectFSM.ColorPanelProperties properties)
         {
             return isPlayer
                 ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()

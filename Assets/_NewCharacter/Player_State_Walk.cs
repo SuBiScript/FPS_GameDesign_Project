@@ -69,5 +69,6 @@ public class Player_State_Walk : State
     protected override void OnStateExit()
     {
         base.OnStateExit();
+        coyoteFrames = 0;
     }
 }

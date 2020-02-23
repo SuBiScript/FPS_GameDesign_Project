@@ -48,6 +48,8 @@ public class Player_State_Falling : State
         movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.WalkSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
+        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
+
     }
 
     protected override void OnStateExit()

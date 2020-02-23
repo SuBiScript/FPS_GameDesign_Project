@@ -7,7 +7,7 @@ namespace ColorPanels
     public class ColorPanelObject : MonoBehaviour
     {
         private WeaponScript.WeaponColor currentMode { get; set; }
-        [Header("Basic Settings")] public ColorPanelProperties colorPanelProperties;
+        [Header("Basic Settings")] public ColorPanelObjectFSM.ColorPanelProperties colorPanelProperties;
         public MeshRenderer meshRenderer;
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
