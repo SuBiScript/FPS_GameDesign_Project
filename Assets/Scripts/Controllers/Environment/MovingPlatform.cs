@@ -77,6 +77,8 @@ public class MovingPlatform : MonoBehaviour
         {
             Vector3 l_Direction = (m_PatrolPositions[m_CurrentPatrolPositionId].position - transform.position).normalized;
             m_RigidBody.MovePosition(transform.position + l_Direction * m_MaxSpeed * Time.fixedDeltaTime);
+
+            //transform.position += ((l_Direction * m_MaxSpeed) * Time.fixedDeltaTime);
             //transform.position = Vector3.MoveTowards(transform.position, m_PatrolPositions[m_CurrentPatrolPositionId].position, m_MaxSpeed * Time.deltaTime);
         }
     }

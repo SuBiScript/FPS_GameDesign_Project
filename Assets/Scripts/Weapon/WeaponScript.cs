@@ -101,8 +101,18 @@ namespace Weapon
                 }
                 else
                 {
-                    m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
-                    m_ObjectAttached.MovePosition(m_AttachingPosition.position);
+
+                    //l_EulerAngles.Set(0.0f, l_EulerAngles.y, l_EulerAngles.x);
+                    //l_EulerAngles = l_EulerAngles.normalized * 0.001f;
+                    //Quaternion deltaRotation = Quaternion.Euler(l_EulerAngles);
+                    //m_ObjectAttached.MoveRotation(m_ObjectAttached.rotation * deltaRotation);
+                    m_ObjectAttached.WakeUp();
+                    m_ObjectAttached.transform.rotation = Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z);
+                    //m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
+                    //m_ObjectAttached.MoveRotation(Quaternion.Slerp(m_AttachingObjectStartRotation, Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 0.01f));
+                    //Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 0.05f);
+                    //m_ObjectAttached.MovePosition(m_AttachingPosition.position);
+                    m_ObjectAttached.transform.position = m_AttachingPosition.position;
 
                     if (!m_Rendered)
                     {
@@ -114,9 +124,9 @@ namespace Weapon
                             m_ObjectAttached.isKinematic = true;
                             m_ObjectAttached.WakeUp();
                             m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
+                            m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
+                            m_Rendered = true;
                         }
-                        //m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
-                        m_Rendered = true;
                     }
                 }
             }
@@ -248,7 +258,7 @@ namespace Weapon
 
         public void RestoreLayers()
         {
-            Invoke("RestoringLayers", .1f);
+            Invoke("RestoringLayers", .2f);
         }
 
         void RestoringLayers()
