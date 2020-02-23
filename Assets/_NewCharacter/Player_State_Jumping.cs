@@ -35,6 +35,7 @@ public class Player_State_Jumping : State
         
         RemoveVerticalSpeed();
         ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
+        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
         MovementManager.RigidbodyAddForce(
             Machine.characterController.rigidbody,
             Machine.transform.up,

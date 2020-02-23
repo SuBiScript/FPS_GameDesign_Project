@@ -48,10 +48,13 @@ public class Player_State_OnAir : State
         movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.WalkSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
+        
+        
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
+        
     }
 }

@@ -50,14 +50,14 @@ namespace PlayerFSM
                 if (oldState)
                     oldState.StateExit();
                 currentState.StateEnter();
-                try
+                /*try
                 {
                     Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
                 }
                 catch (NullReferenceException)
                 {
                     Debug.Log($"{currentState.GetType()}");
-                }
+                }*/
 
                 return currentState;
             }

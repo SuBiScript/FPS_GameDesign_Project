@@ -23,7 +23,7 @@ public class Player_State_Walk : State
     {
         base.OnStateFixedTick(fixedTime);
 
-        if (Machine.characterController.currentBrain.Direction != Vector3.zero)
+        if (Machine.characterController.currentBrain.Direction != Vector3.zero || Machine.characterController.transform.parent != null)
         {
             MovementManager.MoveRigidbody(
                 attachedRigidbody,
@@ -62,6 +62,7 @@ public class Player_State_Walk : State
         base.OnStateEnter();
         WalkSpeed = Machine.characterController.characterProperties.WalkSpeed;
         attachedRigidbody = Machine.characterController.rigidbody;
+        ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(true);
         coyoteFrames = 0;
     }
 

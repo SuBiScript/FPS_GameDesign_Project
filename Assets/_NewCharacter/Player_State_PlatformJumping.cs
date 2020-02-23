@@ -35,14 +35,11 @@ public class Player_State_PlatformJumping : State
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
         ColorPanelEffects.PlayerJump(((PlayerControllerFSM)Machine.characterController), attachedRigidbody);
+        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
-    }
-
-    public void SetPanelSettings()
-    {
     }
 }
