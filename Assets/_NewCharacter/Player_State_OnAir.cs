@@ -46,7 +46,7 @@ public class Player_State_OnAir : State
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
         movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
-            ? Machine.characterController.characterProperties.WalkSpeed
+            ? Machine.characterController.characterProperties.AirControlSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
         
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);

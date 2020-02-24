@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerProperties
   m_EditorClassIdentifier: 
   WalkSpeed: 6
+  AirControlSpeed: 3
   RunSpeed: 8
   OnAirSpeed: 0
   JumpForce: 5
