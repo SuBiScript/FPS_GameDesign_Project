@@ -19,6 +19,7 @@ namespace ColorPanels
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();
                 collisionRigidbody.velocity = Vector3.zero;
+                collisionRigidbody.mass = 1f;
                 collisionRigidbody.AddForce(caller != null ? caller.transform.up * jumpForce : direction * jumpForce,
                     ForceMode.Impulse);
             }

@@ -12,11 +12,11 @@ namespace Weapon
         [System.Serializable]
         public class ObjectAttacher
         {
-            [Header("Attaching Object")]
-            public bool m_AttachingObject;
+            [Header("Attaching Object")] public bool m_AttachingObject;
 
-            [Header("Attaching Object")]
-            [HideInInspector] public bool m_AttachedObject;
+            [Header("Attaching Object")] [HideInInspector]
+            public bool m_AttachedObject;
+
             public Rigidbody m_ObjectAttached;
             public float m_AttachingObjectSpeed;
             public Transform m_AttachingPosition;
@@ -24,7 +24,10 @@ namespace Weapon
             [HideInInspector] public bool m_GravityShot;
             [HideInInspector] public bool m_CubeButton; // if cube has been attached
             [HideInInspector] public bool m_Rendered;
-            [HideInInspector] public Transform[] m_ChildsAttachedObject; //change Layer attribute for rendering object attached
+
+            [HideInInspector]
+            public Transform[] m_ChildsAttachedObject; //change Layer attribute for rendering object attached
+
             public WeaponScript weapon;
 
             public ObjectAttacher()
@@ -39,7 +42,8 @@ namespace Weapon
                 //m_ObjectAttached.gameObject.transform.parent = m_Parent;
                 if (m_AttachingObject)
                 {
-                    ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached, m_AttachingPosition.GetComponent<GameObject>(),
+                    ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached,
+                        m_AttachingPosition.GetComponent<GameObject>(),
                         m_AttachingObjectSpeed);
                 }
 
@@ -96,12 +100,13 @@ namespace Weapon
                     {
                         l_Direction /= l_Distance;
                         m_ObjectAttached.MovePosition(m_ObjectAttached.transform.position + l_Direction * l_Movement);
-                        m_ObjectAttached.MoveRotation(Quaternion.Lerp(m_AttachingObjectStartRotation, Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
+                        m_ObjectAttached.MoveRotation(Quaternion.Lerp(m_AttachingObjectStartRotation,
+                            Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z),
+                            1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
                     }
                 }
                 else
                 {
-
                     //l_EulerAngles.Set(0.0f, l_EulerAngles.y, l_EulerAngles.x);
                     //l_EulerAngles = l_EulerAngles.normalized * 0.001f;
                     //Quaternion deltaRotation = Quaternion.Euler(l_EulerAngles);
@@ -124,20 +129,30 @@ namespace Weapon
                             m_ObjectAttached.isKinematic = true;
                             m_ObjectAttached.WakeUp();
                             m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
-                            m_ObjectAttached.transform.parent = GameController.Instance.playerComponents.PlayerController.m_PitchControllerTransform;
+                            m_ObjectAttached.transform.parent = GameController.Instance.playerComponents
+                                .PlayerController.m_PitchControllerTransform;
                             m_Rendered = true;
                         }
                     }
                 }
             }
 
-            public void DetachObject_(float force)
+            public void AttachObjectVer2(Rigidbody rb)
+            {
+                rb.gameObject.tag = "Attached";
+                m_ObjectAttached = rb;
+                m_AttachingObjectStartRotation = m_ObjectAttached.transform.rotation;
+                m_GravityShot = true;
+            }
+
+            public void DetachObjectVer2(float force)
             {
                 foreach (Transform child in m_ChildsAttachedObject)
                 {
                     //if (child.tag == "MeshAttached")
                     child.gameObject.layer = LayerMask.NameToLayer("Cube");
                 }
+
                 m_Rendered = false;
                 m_GravityShot = false;
                 m_AttachedObject = false;
@@ -146,9 +161,10 @@ namespace Weapon
                 m_ObjectAttached.useGravity = true;
                 m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                 m_ObjectAttached.isKinematic = false;
+                m_ObjectAttached.gameObject.tag = "Cube";
+                weapon.RestoreMass();
                 m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
                 weapon.RestoreLayers();
-                weapon.RestoreMass();
             }
         }
 
@@ -172,8 +188,7 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")]
-        [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
@@ -200,7 +215,6 @@ namespace Weapon
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
-
                 if (!m_ObjectAttacher.m_AttachedObject)
                 {
                     hit.collider.gameObject.GetComponent<ColorPanelObjectFSM>()
@@ -208,10 +222,7 @@ namespace Weapon
 
                     if (hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
                     {
-                        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
-                        m_ObjectAttacher.m_ObjectAttached = hit.transform.GetComponent<Rigidbody>();
-                        m_ObjectAttacher.m_AttachingObjectStartRotation = m_ObjectAttacher.m_ObjectAttached.transform.rotation;
-                        m_ObjectAttacher.m_GravityShot = true;
+                        AttractObject(hit);
                     }
                 }
             }
@@ -219,36 +230,25 @@ namespace Weapon
 
         public void AltFire()
         {
-
             if (!m_ObjectAttacher.m_AttachedObject)
-                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+                ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
             else
             {
-                m_ObjectAttacher.DetachObject_(0);
+                m_ObjectAttacher.DetachObjectVer2(0);
             }
         }
 
-        public void AttractObject()
+        public void AttractObject(RaycastHit hitInfo)
         {
-            if (m_ObjectAttacher.m_ObjectAttached != null)
+            try
             {
-                m_ObjectAttacher.UpdateAttachedObject();
+                var rb = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
+                rb.velocity = Vector3.zero;
+                m_ObjectAttacher.AttachObjectVer2(rb);
             }
-            else
+            catch (MissingComponentException)
             {
-                var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-                if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
-                {
-                    try
-                    {
-                        var rb = hit.collider.gameObject.GetComponent<Rigidbody>();
-                        rb.velocity = Vector3.zero;
-                        m_ObjectAttacher.AttachObject(rb);
-                    }
-                    catch (MissingComponentException)
-                    {
-                    }
-                }
             }
         }
 
@@ -264,7 +264,7 @@ namespace Weapon
 
         void RestoringLayers()
         {
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);           
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);
         }
 
         public void RestoreMass()
@@ -272,7 +272,7 @@ namespace Weapon
             m_ObjectAttacher.m_ObjectAttached.mass = 0.01f;
             Invoke("RestoringMass", .2f);
         }
-        
+
         void RestoringMass()
         {
             m_ObjectAttacher.m_ObjectAttached.mass = 1;
@@ -310,9 +310,11 @@ namespace Weapon
         {
             try
             {
-                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int) color);
             }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         private void ChangeMeshRendererMaterial()

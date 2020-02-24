@@ -113,7 +113,7 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (_attachedObjectRigidbody == null && !collidedCollider.gameObject.CompareTag("Player"))
+                    if (_attachedObjectRigidbody == null && !collidedCollider.gameObject.CompareTag("Player") && !collidedCollider.gameObject.CompareTag("Attached"))
                     {
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
                         AttachObject(_attachedObjectRigidbody);

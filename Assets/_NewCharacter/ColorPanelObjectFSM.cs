@@ -142,7 +142,7 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (collidedCollider.CompareTag("Player")) return;
+                    if (collidedCollider.CompareTag("Player") || collidedCollider.CompareTag("Attached")) return;
 
                     if (_attachedObjectRigidbody == null)
                     {
