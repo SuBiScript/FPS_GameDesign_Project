@@ -7,7 +7,7 @@ namespace ColorPanels
     public class ColorPanelObject : MonoBehaviour
     {
         private WeaponScript.WeaponColor currentMode { get; set; }
-        [Header("Basic Settings")] public ColorPanelProperties colorPanelProperties;
+        [Header("Basic Settings")] public ColorPanelObjectFSM.ColorPanelProperties colorPanelProperties;
         public MeshRenderer meshRenderer;
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
@@ -113,7 +113,7 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (_attachedObjectRigidbody == null)
+                    if (_attachedObjectRigidbody == null && !collidedCollider.gameObject.CompareTag("Player") && !collidedCollider.gameObject.CompareTag("Attached"))
                     {
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
                         AttachObject(_attachedObjectRigidbody);

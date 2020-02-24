@@ -9,7 +9,7 @@ namespace Utils
         {
             if (Application.isPlaying)
             {
-                GameController.Instance.m_PlayerComponents.HealthManager.DealDamage(damage);
+                GameController.Instance.playerComponents.HealthManager.DealDamage(damage);
             }
             else
             {

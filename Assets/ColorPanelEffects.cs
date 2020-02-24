@@ -8,50 +8,43 @@ namespace ColorPanels
 {
     public static class ColorPanelEffects
     {
-        public static void ThrowObject(GameObject caller, Collider collider, Vector3 direction,
-            ColorPanelProperties properties)
-        {
-            var isPlayer = collider.CompareTag("Player");
-            float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
-
-            try
-            {
-                var colliderRigidbody = collider.GetComponent<Rigidbody>();
-                colliderRigidbody.velocity = Vector3.zero;
-                colliderRigidbody.AddForce(caller != null ? caller.transform.up * jumpForce : direction * jumpForce,
-                    ForceMode.Impulse);
-            }
-            catch (NullReferenceException)
-            {
-            }
-        }
-
+        private static ColorPanelObjectFSM.ColorPanelProperties lastPanelProperties;
+        private static Vector3 jumpDirection;
+        
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
-            ColorPanelProperties properties)
+            ColorPanelObjectFSM.ColorPanelProperties properties)
         {
-            var isPlayer = collision.gameObject.CompareTag("Player");
-            float jumpForce = ComputeJumpForce(isPlayer, properties);
-            if (isPlayer)
-                GameController.Instance.m_PlayerComponents.PlayerController.PlatformJump(properties.setPanelJump);
-
+           var jumpForce = ComputeJumpForce(false, properties);
             try
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();
                 collisionRigidbody.velocity = Vector3.zero;
+                collisionRigidbody.mass = 1f;
                 collisionRigidbody.AddForce(caller != null ? caller.transform.up * jumpForce : direction * jumpForce,
                     ForceMode.Impulse);
             }
             catch (NullReferenceException)
             {
             }
+            
         }
 
-        private static float ComputeJumpForce(bool isPlayer, ColorPanelProperties properties)
+        public static void PlayerJump(PlayerControllerFSM player, Rigidbody rigidbody)
+        {
+            player.enableAirControl = lastPanelProperties.enableAirControl; 
+            rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
+        }
+
+        public static void PanelSetProperties(ColorPanelObjectFSM.ColorPanelProperties panelProperties, Vector3 direction)
+        {
+            lastPanelProperties = panelProperties;
+            jumpDirection = direction;
+        }
+
+        private static float ComputeJumpForce(bool isPlayer, ColorPanelObjectFSM.ColorPanelProperties properties)
         {
             return isPlayer
-                ? (GameController.Instance.m_PlayerComponents.PlayerController.IsGrounded()
+                ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()
                     ? properties.playerPropulsionForce
                     : properties.playerOnAirPropulsionForce)
                 : properties.objectPropulsionForce;

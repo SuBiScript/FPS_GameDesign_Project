@@ -29,8 +29,8 @@ TagManager:
   - Weapon
   - Blocking
   - Postprocessing
-  - 
-  - 
+  - AttachedObject
+  - Cube
   - 
   - 
   - 

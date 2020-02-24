@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ControllableJUMP
   m_EditorClassIdentifier: 
   materialList: {fileID: 11400000, guid: b3ccc48bba671094e876a742569fb608, type: 2}
-  playerPropulsionForce: 100
-  playerOnAirPropulsionForce: 125
-  objectPropulsionForce: 125
-  setPanelJump: 0
+  playerPropulsionForce: 10
+  playerOnAirPropulsionForce: 12.5
+  objectPropulsionForce: 12.5
+  enableAirControl: 1

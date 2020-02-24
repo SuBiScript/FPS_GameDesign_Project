@@ -73,7 +73,7 @@ public class GateController : MonoBehaviour
             for (int i = 0; i < m_StatusMaterials.Length; ++i)
             {
                 var locked = m_Locked;
-                m_StatusMaterials[i].SetColor(c_ColorText, locked ? m_LockedColor : m_UnlockedColor);
+                //m_StatusMaterials[i].SetColor(c_ColorText, locked ? m_LockedColor : m_UnlockedColor);
                 m_StatusMaterials[i].SetColor(c_EmissionColor, locked ? m_LockedColor : m_UnlockedColor);
             }
         }

@@ -77,6 +77,8 @@ public class MovingPlatform : MonoBehaviour
         {
             Vector3 l_Direction = (m_PatrolPositions[m_CurrentPatrolPositionId].position - transform.position).normalized;
             m_RigidBody.MovePosition(transform.position + l_Direction * m_MaxSpeed * Time.fixedDeltaTime);
+
+            //transform.position += ((l_Direction * m_MaxSpeed) * Time.fixedDeltaTime);
             //transform.position = Vector3.MoveTowards(transform.position, m_PatrolPositions[m_CurrentPatrolPositionId].position, m_MaxSpeed * Time.deltaTime);
         }
     }
@@ -107,7 +109,10 @@ public class MovingPlatform : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         if (col.tag == "Player")
-            GameController.Instance.m_PlayerController.transform.parent = transform;
+        {
+            GameController.Instance.playerComponents.PlayerController.transform.parent = transform;
+            Debug.Log("Attache");
+        }
 
         if (m_PlatformType == PlatformType.Trigger)
         {
@@ -120,7 +125,7 @@ public class MovingPlatform : MonoBehaviour
     private void OnTriggerExit(Collider col)
     {
         if (col.tag == "Player")
-            GameController.Instance.m_PlayerController.transform.parent = null;
+            GameController.Instance.playerComponents.PlayerController.transform.parent = null;
 
         if (m_PlatformType == PlatformType.Trigger)
         {

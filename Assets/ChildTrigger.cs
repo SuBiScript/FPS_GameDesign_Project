@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace ColorPanels
 {
     public class ChildTrigger : MonoBehaviour
     {
-        private ColorPanelObject parentController;
+        private ColorPanelObjectFSM parentController;
 
         private void Start()
         {
-            parentController = GetComponentInParent<ColorPanelObject>();
+            parentController = GetComponentInParent<ColorPanelObjectFSM>();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
-                parentController.OnChildTriggerEnter(other);
+            parentController.OnChildTriggerEnter(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject != GameController.Instance.m_PlayerComponents.PlayerController.gameObject)
-                parentController.OnChildTriggerExit(other);
+            parentController.OnChildTriggerExit(other);
         }
     }
 }
