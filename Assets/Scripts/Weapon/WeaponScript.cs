@@ -148,6 +148,7 @@ namespace Weapon
                 m_ObjectAttached.isKinematic = false;
                 m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
                 weapon.RestoreLayers();
+                weapon.RestoreMass();
             }
         }
 
@@ -258,12 +259,23 @@ namespace Weapon
 
         public void RestoreLayers()
         {
-            Invoke("RestoringLayers", .2f);
+            Invoke("RestoringLayers", .1f);
         }
 
         void RestoringLayers()
         {
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);           
+        }
+
+        public void RestoreMass()
+        {
+            m_ObjectAttacher.m_ObjectAttached.mass = 0.01f;
+            Invoke("RestoringMass", .2f);
+        }
+        
+        void RestoringMass()
+        {
+            m_ObjectAttacher.m_ObjectAttached.mass = 1;
         }
 
         private void ChangeColor(WeaponColor newColor)
