@@ -236,7 +236,7 @@ MonoBehaviour:
   materialList: {fileID: 11400000, guid: 5fb67addbc791a04db1a596d21184038, type: 2}
   weaponMeshRenderer: {fileID: 8850334318459946756}
   attractPoint: {fileID: 8850334318459946759}
-  _weaponMaterial: {fileID: 2100000, guid: ab0a2c1d9688bf944af6a3f85e86b6ca, type: 2}
+  _weaponMaterial: {fileID: 2100000, guid: a8f0617f846b3254f93a3f8326cc553c, type: 2}
   maxRange: 150
   layerMask:
     serializedVersion: 2
@@ -586,7 +586,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8850334318459946759}
-  m_Mesh: {fileID: -2447663833701438053, guid: d9d6604f44514be43b8d354267c0d1ac, type: 3}
+  m_Mesh: {fileID: -8680938414677883297, guid: ee7b87423d71c644ea2bb65e2641c1c1, type: 3}
 --- !u!23 &8850334318459946756
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -606,7 +606,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0a2f3e1d1c33ac043bd9303a66b90fbd, type: 2}
-  - {fileID: 2100000, guid: ab0a2c1d9688bf944af6a3f85e86b6ca, type: 2}
+  - {fileID: 1818301327667839434, guid: ee7b87423d71c644ea2bb65e2641c1c1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
