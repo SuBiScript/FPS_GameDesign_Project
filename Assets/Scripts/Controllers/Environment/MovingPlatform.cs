@@ -108,10 +108,12 @@ public class MovingPlatform : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
+        if (col.gameObject == this.gameObject)
+            return;
+
         if (col.tag == "Player")
         {
             GameController.Instance.playerComponents.PlayerController.transform.parent = transform;
-            Debug.Log("Attache");
         }
 
         if (m_PlatformType == PlatformType.Trigger)
