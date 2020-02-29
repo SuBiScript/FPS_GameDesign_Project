@@ -324,11 +324,11 @@ namespace Weapon
             {
                 emissiveWithColor = new Material(materialList.emissiveMaterial);
                 emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.color);
-                newWeaponMaterial[0] = emissiveWithColor;
+                newWeaponMaterial[1] = emissiveWithColor;
             }
             catch (NullReferenceException)
             {
-                newWeaponMaterial[0] = _currentMaterial;
+                newWeaponMaterial[1] = _currentMaterial;
             }
 
             weaponMeshRenderer.materials = newWeaponMaterial;
