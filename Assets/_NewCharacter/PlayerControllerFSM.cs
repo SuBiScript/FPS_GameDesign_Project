@@ -1,4 +1,5 @@
-﻿using PlayerFSM;
+﻿using ColorPanels;
+using PlayerFSM;
 using UnityEngine;
 using Weapon;
 
@@ -9,7 +10,7 @@ using Weapon;
 public class PlayerControllerFSM : CharacterController
 {
     public CameraFSMController cameraController;
-    public bool enableAirControl;
+    public bool enableAirControl { get; set; }
     public WeaponScript equippedWeapon;
     public Collider attachedCollider;
     public Transform m_PitchControllerTransform;
@@ -21,6 +22,7 @@ public class PlayerControllerFSM : CharacterController
 
     public PhysicMaterial onAirMaterial;
     public PhysicMaterial onGroundMaterial;
+
 
     public void Awake()
     {

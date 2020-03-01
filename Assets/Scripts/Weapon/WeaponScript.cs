@@ -192,6 +192,11 @@ namespace Weapon
         public float maxRange = 150f;
 
         public LayerMask layerMask;
+        
+        [Header("Lights")] 
+        public Color[] lightColors = new[] { Color.red, Color.green, Color.blue};
+
+        public Light playerLight;
 
         private PlayerControllerFSM m_AttachedCharacter;
         private WeaponColor _currentColor = WeaponColor.None;
@@ -289,14 +294,17 @@ namespace Weapon
                 case WeaponColor.Red:
                     ChangeReticleColor(WeaponColor.Red);
                     _currentMaterial = materialList.redMaterial;
+                    ChangeLightColor(playerLight, lightColors[0]);
                     break;
                 case WeaponColor.Green:
                     ChangeReticleColor(WeaponColor.Green);
                     _currentMaterial = materialList.greenMaterial;
+                    ChangeLightColor(playerLight, lightColors[1]);
                     break;
                 case WeaponColor.Blue:
                     ChangeReticleColor(WeaponColor.Blue);
                     _currentMaterial = materialList.blueMaterial;
+                    ChangeLightColor(playerLight, lightColors[2]);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(newColor), newColor, null);
@@ -315,6 +323,13 @@ namespace Weapon
             catch (NullReferenceException)
             {
             }
+        }
+
+        private void ChangeLightColor(Light light, Color color)
+        {
+            if (light == null) return;
+
+            light.color = color;
         }
 
         private void ChangeMeshRendererMaterial()

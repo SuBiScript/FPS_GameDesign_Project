@@ -108,8 +108,7 @@ public class MovingPlatform : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject == this.gameObject)
-            return;
+        if (col.gameObject == this.gameObject) return;
 
         if (col.tag == "Player")
         {
@@ -126,6 +125,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
+        if (col.gameObject == this.gameObject) return;
         if (col.tag == "Player")
             GameController.Instance.playerComponents.PlayerController.transform.parent = null;
 
