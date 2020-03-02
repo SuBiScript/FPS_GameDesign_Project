@@ -18,10 +18,13 @@ public class PauseController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
-        {
+        //if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
+        //{
+        //    Resume();
+        //}
+
+        if ((Input.GetButtonDown("Cancel") && !gameOver))
             Resume();
-        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
             if (!AnyButtonSelected())

@@ -72,7 +72,7 @@ public class GameController : Singleton<GameController>
     }
 
 
-    void Pause()
+    public void Pause()
     {
         if (m_PauseMenu != null)
             m_PauseMenu.SetActive(true);

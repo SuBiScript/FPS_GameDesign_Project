@@ -10,7 +10,7 @@ public static class MovementManager
 
     public static void MoveRigidbody(Rigidbody rigidbody, Vector3 direction, float speed, float fixedDeltaTime)
     {
-        if (rigidbody == null) return;
+        if (rigidbody == null || GameController.Instance.m_PlayerDied) return;
         rigidbody.MovePosition(
             rigidbody.gameObject.transform.position +
             rigidbody.gameObject.transform.TransformDirection(direction) * (speed * fixedDeltaTime));

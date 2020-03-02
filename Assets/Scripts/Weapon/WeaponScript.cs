@@ -14,7 +14,8 @@ namespace Weapon
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
 
-            [Header("Attaching Object")] [HideInInspector]
+            [Header("Attaching Object")]
+            [HideInInspector]
             public bool m_AttachedObject;
 
             public Rigidbody m_ObjectAttached;
@@ -188,13 +189,14 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")]
+        [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
-        
-        [Header("Lights")] 
-        public Color[] lightColors = new[] { Color.red, Color.green, Color.blue};
+
+        [Header("Lights")]
+        public Color[] lightColors = new[] { Color.red, Color.green, Color.blue };
 
         public Light playerLight;
 
@@ -225,7 +227,7 @@ namespace Weapon
                     hit.collider.gameObject.GetComponent<ColorPanelObjectFSM>()
                         ?.ChangeColor(_currentColor, _currentMaterial);
 
-                    if (hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
+                    if (_currentColor == WeaponColor.Green && hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
                     {
                         AttractObject(hit);
                     }
@@ -236,7 +238,7 @@ namespace Weapon
         public void AltFire()
         {
             if (!m_ObjectAttacher.m_AttachedObject)
-                ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
             else
             {
                 m_ObjectAttacher.DetachObjectVer2(0);
@@ -318,7 +320,7 @@ namespace Weapon
         {
             try
             {
-                GameController.Instance.m_CanvasController.ChangeReticleColor((int) color);
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
             }
             catch (NullReferenceException)
             {

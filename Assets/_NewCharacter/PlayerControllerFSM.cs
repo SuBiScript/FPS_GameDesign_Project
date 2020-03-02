@@ -62,6 +62,12 @@ public class PlayerControllerFSM : CharacterController
             stateMachine.enabled = !stateMachine.enabled;
         }*/
 
+        if (Input.GetButtonDown("Cancel") && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
+        {
+            Debug.Log("Escape");
+            GameController.Instance.Pause();
+        }
+
         isPlayerGrounded = CheckOnGround();
 
         if (currentBrain.isActiveAndEnabled)

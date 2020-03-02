@@ -36,8 +36,12 @@ public class CameraFSMController : MonoBehaviour
 
     void Update()
     {
-        if (!m_AngleLocked)
+        //if (!m_AngleLocked)
+        //    Aiming();
+
+        if (!m_AngleLocked && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
             Aiming();
+
 #if UNITY_EDITOR
         LockCameraAndMouse();
 #endif
