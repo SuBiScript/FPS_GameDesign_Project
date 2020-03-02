@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 870215611}
   - component: {fileID: 870215612}
   m_Layer: 16
-  m_Name: Point Light
+  m_Name: CubePointLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,12 +145,12 @@ PrefabInstance:
     - target: {fileID: 4647166714470182206, guid: 5d7d9b46b85b6f24492c080f5e6bd7e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.09
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4647166714470182206, guid: 5d7d9b46b85b6f24492c080f5e6bd7e3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.34
+      value: 9.73
       objectReference: {fileID: 0}
     - target: {fileID: 4647166714470182206, guid: 5d7d9b46b85b6f24492c080f5e6bd7e3,
         type: 3}
@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 9043722082673403820, guid: 5d7d9b46b85b6f24492c080f5e6bd7e3,
         type: 3}
       propertyPath: m_Name
-      value: CubeModelV1_3_2
+      value: CubeModel
       objectReference: {fileID: 0}
     - target: {fileID: 9043722082673403820, guid: 5d7d9b46b85b6f24492c080f5e6bd7e3,
         type: 3}
