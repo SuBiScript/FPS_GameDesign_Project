@@ -125,10 +125,10 @@ namespace Weapon
                     m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                     m_ObjectAttached.isKinematic = false;
                     m_ObjectAttached.gameObject.tag = "Cube";
-                    m_ObjectAttached = null;
                     weapon.RestoreMass();
-                    m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
                     weapon.RestoreLayers();
+                    m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
+                    m_ObjectAttached = null;
                 }
                 catch (Exception e)
                 {

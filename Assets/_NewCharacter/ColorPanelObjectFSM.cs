@@ -151,7 +151,7 @@ namespace ColorPanels
                             GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
                                 .m_ObjectAttached.gameObject)
                         {
-                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher.DetachObjectVer2(0f); //Works but doesnt allow to pick another cube
+                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher.DetachObjectVer2(0f);
                         }
 
                         var newRB = collidedCollider.GetComponent<Rigidbody>();
