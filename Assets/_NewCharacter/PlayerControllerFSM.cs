@@ -63,10 +63,7 @@ public class PlayerControllerFSM : CharacterController
         }*/
 
         if (Input.GetButtonDown("Cancel") && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
-        {
-            Debug.Log("Escape");
             GameController.Instance.Pause();
-        }
 
         isPlayerGrounded = CheckOnGround();
 
