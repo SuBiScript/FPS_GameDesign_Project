@@ -42,6 +42,7 @@ public class PlayerControllerFSM : CharacterController
             cameraController = GetComponent<CameraFSMController>();
         if (equippedWeapon == null)
             equippedWeapon = GetComponentInChildren<WeaponScript>();
+        
         characterProperties = characterProperties == null
             ? ScriptableObject.CreateInstance<CharacterProperties>()
             : Instantiate(characterProperties);
@@ -57,14 +58,6 @@ public class PlayerControllerFSM : CharacterController
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            stateMachine.enabled = !stateMachine.enabled;
-        }*/
-
-        if (Input.GetButtonDown("Cancel") && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
-            GameController.Instance.Pause();
-
         isPlayerGrounded = CheckOnGround();
 
         if (currentBrain.isActiveAndEnabled)
@@ -75,13 +68,13 @@ public class PlayerControllerFSM : CharacterController
         if (currentBrain.Aiming)
             equippedWeapon.AltFire();
 
-        if (stateMachine.isActiveAndEnabled)
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
             stateMachine.UpdateTick(Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
-        if (stateMachine.isActiveAndEnabled) //TODO Reenable stop functionality with GameController
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused) //TODO Reenable stop functionality with GameController
             stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
     }
 

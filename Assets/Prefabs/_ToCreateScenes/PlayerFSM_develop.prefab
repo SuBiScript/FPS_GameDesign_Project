@@ -623,7 +623,7 @@ MonoBehaviour:
   attachedCollider: {fileID: 8850334317767176087}
   m_PitchControllerTransform: {fileID: 8850334318145195918}
   groundPosition: {fileID: 8850334316947868405}
-  castRadius: 1
+  castRadius: 0.2
   walkableLayers:
     serializedVersion: 2
     m_Bits: 76800
