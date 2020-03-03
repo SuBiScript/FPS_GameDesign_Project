@@ -28,6 +28,7 @@ namespace ColorPanels
                 this.enableAirControl = enableAirControl;
             }
         }
+
         [Header("Basic Settings")] public ColorPanelProperties colorPanelProperties;
         public MeshRenderer meshRenderer;
 
@@ -45,7 +46,7 @@ namespace ColorPanels
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
-            ChangeColor(WeaponScript.WeaponColor.None, colorPanelProperties.materialList.defaultMaterial);
+            ChangeColor(WeaponScript.WeaponColor.None);
             m_CreateLine = false;
             m_AttachingObject = false;
         }
@@ -142,10 +143,14 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (collidedCollider.CompareTag("Player") || collidedCollider.CompareTag("Attached")) return;
+                    if (collidedCollider.CompareTag("Player")) return;
 
                     if (_attachedObjectRigidbody == null)
                     {
+                        if (GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
+                            .m_AttachedObject)
+                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
+                                .DetachObjectVer2(0f);
                         _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
                         AttachObject(_attachedObjectRigidbody);
                     }
@@ -156,21 +161,48 @@ namespace ColorPanels
 
         public void OnChildTriggerExit(Collider other) => DetachObject();
 
-        public bool ChangeColor(WeaponScript.WeaponColor color, Material material)
+        public bool ChangeColor(WeaponScript.WeaponColor color)
         {
             //Here you change the weapon material of the block and stuff.
             if (currentMode == color) return false;
 
             DetachObject();
 
-            currentMode = color;
-            var temp = meshRenderer.materials;
-            Material simpleMaterial = temp[1];
-            simpleMaterial.SetColor("_EmissionColor", material.color);
-            temp[1] = simpleMaterial;
-            meshRenderer.materials = temp;
+            InternalChangeColor(color);
 
             return true;
+        }
+
+        private void InternalChangeColor(WeaponScript.WeaponColor color)
+        {
+            Material[] objectMaterials = meshRenderer.materials;
+            Material colorIndicatorMaterialToChange = objectMaterials[1];
+            switch (color)
+            {
+                case WeaponScript.WeaponColor.None:
+                    colorIndicatorMaterialToChange.SetColor("_EmissionColor",
+                        colorPanelProperties.materialList.defaultMaterial.color);
+                    break;
+                case WeaponScript.WeaponColor.Red:
+                    colorIndicatorMaterialToChange.SetColor("_EmissionColor",
+                        colorPanelProperties.materialList.redMaterial.color);
+                    break;
+                case WeaponScript.WeaponColor.Green:
+                    colorIndicatorMaterialToChange.SetColor("_EmissionColor",
+                        colorPanelProperties.materialList.greenMaterial.color);
+                    break;
+                case WeaponScript.WeaponColor.Blue:
+                    colorIndicatorMaterialToChange.SetColor("_EmissionColor",
+                        colorPanelProperties.materialList.blueMaterial.color);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(color), color, null);
+            }
+
+            objectMaterials[1] = colorIndicatorMaterialToChange;
+            meshRenderer.materials = objectMaterials;
+
+            currentMode = color;
         }
 
         private void AttachObject(Rigidbody l_ObjectToAttach)
