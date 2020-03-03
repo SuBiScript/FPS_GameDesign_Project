@@ -1,0 +1,1 @@
+# Use "V" key to snap within the editor #
