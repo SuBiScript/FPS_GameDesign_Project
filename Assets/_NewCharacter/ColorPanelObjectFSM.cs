@@ -144,22 +144,28 @@ namespace ColorPanels
             {
                 case WeaponScript.WeaponColor.Green:
                     if (collidedCollider.CompareTag("Player")) return;
-
-                    if (_attachedObjectRigidbody == null)
+                    
+                    if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
-                        if (GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
-                            .m_AttachedObject)
+                        if (collidedCollider.CompareTag("Attached") && collidedCollider.gameObject ==
                             GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
-                                .DetachObjectVer2(0f);
-                        _attachedObjectRigidbody = collidedCollider.GetComponent<Rigidbody>();
-                        AttachObject(_attachedObjectRigidbody);
+                                .m_ObjectAttached.gameObject)
+                        {
+                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher.DetachObjectVer2(0f); //Works but doesnt allow to pick another cube
+                        }
+
+                        var newRB = collidedCollider.GetComponent<Rigidbody>();
+                        AttachObject(newRB);
                     }
 
                     break;
             }
         }
 
-        public void OnChildTriggerExit(Collider other) => DetachObject();
+        public void OnChildTriggerExit(Collider other)
+        { 
+            //DetachObject();
+        }
 
         public bool ChangeColor(WeaponScript.WeaponColor color)
         {
@@ -207,11 +213,12 @@ namespace ColorPanels
 
         private void AttachObject(Rigidbody l_ObjectToAttach)
         {
-            if (m_AttachingObject) return;
+            if (_attachedObjectRigidbody || m_AttachingObject) return;
             m_AttachingObject = true;
             _attachedObjectRigidbody = l_ObjectToAttach;
             _attachedObjectRigidbody.useGravity = false;
             _attachedObjectRigidbody.isKinematic = true;
+            _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Attach(this);
         }
 
         private void DetachObject(float l_DetachForce = 10f)
@@ -224,7 +231,13 @@ namespace ColorPanels
                 _attachedObjectRigidbody.isKinematic = false;
             }
 
+            _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Detach();
             _attachedObjectRigidbody = null;
+        }
+
+        public void ForceDetach()
+        {
+            DetachObject();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ColorPanels;
 using UnityEngine;
 
 public class RefractionCubeEffect : MonoBehaviour
@@ -16,7 +17,10 @@ public class RefractionCubeEffect : MonoBehaviour
     private Material[] m_StatusMaterials;
     private bool m_ChangeColorMaterial;
 
-    //dinamyc collider
+    public bool currentlyAttached { get; set; }
+    public ColorPanelObjectFSM AttachedOnThisPanel { get; set; }
+
+    //dynamic collider
     public CapsuleCollider m_Collider;
 
     private void Start()
@@ -40,6 +44,8 @@ public class RefractionCubeEffect : MonoBehaviour
                 m_StatusMaterials[m_StatusMaterials.Length - 1] = renderers[i].materials[j];
             }
         }
+
+        currentlyAttached = false;
     }
 
     void Update()
@@ -58,6 +64,7 @@ public class RefractionCubeEffect : MonoBehaviour
             m_ChangeColorMaterial = false;
         }
     }
+
     public void CreateRefraction()
     {
         if (m_CubeRefracted)
@@ -71,7 +78,8 @@ public class RefractionCubeEffect : MonoBehaviour
         Vector3 l_EndRaycastPosition = Vector3.forward * m_MaxLineDistance;
         RaycastHit l_RaycastHit;
 
-        if (Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward), out l_RaycastHit, m_MaxLineDistance, m_CollisionLayerMask.value))
+        if (Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward),
+            out l_RaycastHit, m_MaxLineDistance, m_CollisionLayerMask.value))
         {
             l_EndRaycastPosition = Vector3.forward * l_RaycastHit.distance;
 
@@ -85,13 +93,28 @@ public class RefractionCubeEffect : MonoBehaviour
             {
                 if (!GameController.Instance.m_PlayerDied)
                 {
-                    l_RaycastHit.transform.GetComponent<HealthManager>().DealDamage(l_RaycastHit.transform.GetComponent<HealthManager>().m_MaxHealth);
+                    l_RaycastHit.transform.GetComponent<HealthManager>()
+                        .DealDamage(l_RaycastHit.transform.GetComponent<HealthManager>().m_MaxHealth);
                 }
             }
         }
+
         m_LineRenderer.SetPosition(1, l_EndRaycastPosition);
 
         m_Collider.height = l_RaycastHit.distance + 1;
         m_Collider.center = new Vector3(0, 0, (l_RaycastHit.distance / 2));
+    }
+
+    public void Attach(ColorPanelObjectFSM attachedTo)
+    {
+        AttachedOnThisPanel = attachedTo;
+        currentlyAttached = true;
+    }
+
+    public void Detach(bool force = false)
+    {
+        if(force) AttachedOnThisPanel.ForceDetach();
+        AttachedOnThisPanel = null;
+        currentlyAttached = false;
     }
 }

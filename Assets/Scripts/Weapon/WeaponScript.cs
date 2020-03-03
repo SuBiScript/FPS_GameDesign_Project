@@ -36,48 +36,6 @@ namespace Weapon
                 m_AttachingObject = m_ObjectAttached != null;
             }
 
-            public void UpdateAttachedObject()
-            {
-                if (m_ObjectAttached == null) return;
-                //m_ObjectAttached.gameObject.transform.parent = m_Parent;
-                if (m_AttachingObject)
-                {
-                    ColorPanelEffects.UpdateAttachedObject(m_ObjectAttached,
-                        m_AttachingPosition.GetComponent<GameObject>(),
-                        m_AttachingObjectSpeed);
-                }
-
-                /*else
-                {
-                    m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
-                    m_ObjectAttached.MovePosition(m_AttachingPosition.position);
-                }*/
-            }
-
-            public void AttachObject(Rigidbody l_ObjectToAttach)
-            {
-                if (m_AttachingObject) return;
-                m_AttachingObject = true;
-                m_ObjectAttached = l_ObjectToAttach;
-                m_ObjectAttached.tag = "Attached";
-                m_ObjectAttached.useGravity = false;
-                m_ObjectAttached.isKinematic = true;
-                m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
-                Debug.Log("Attach");
-            }
-
-            public void DetachObject(float l_DetachForce = 20f)
-            {
-                if (!m_AttachingObject) return;
-                m_AttachingObject = false;
-                m_ObjectAttached.useGravity = true;
-                m_ObjectAttached.isKinematic = false;
-                m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
-                m_ObjectAttached.AddForce(m_AttachingPosition.transform.forward * l_DetachForce, ForceMode.Impulse);
-                m_ObjectAttached.tag = "Cube";
-                m_ObjectAttached = null;
-            }
-
             //new attach method
             public void UpdateAttachedObject_()
             {
@@ -139,6 +97,8 @@ namespace Weapon
 
             public void AttachObjectVer2(Rigidbody rb)
             {
+                var tryingToAttachThisObject = rb.gameObject.GetComponent<RefractionCubeEffect>();
+                if(tryingToAttachThisObject.currentlyAttached) tryingToAttachThisObject.Detach(true);
                 rb.gameObject.tag = "Attached";
                 m_ObjectAttached = rb;
                 m_AttachingObjectStartRotation = m_ObjectAttached.transform.rotation;
@@ -147,12 +107,13 @@ namespace Weapon
 
             public void DetachObjectVer2(float force)
             {
+                if (m_ObjectAttached == null) return;
+                
                 foreach (Transform child in m_ChildsAttachedObject)
                 {
                     //if (child.tag == "MeshAttached")
                     child.gameObject.layer = LayerMask.NameToLayer("Cube");
                 }
-
                 try
                 {
                     m_Rendered = false;
@@ -164,13 +125,14 @@ namespace Weapon
                     m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                     m_ObjectAttached.isKinematic = false;
                     m_ObjectAttached.gameObject.tag = "Cube";
+                    m_ObjectAttached = null;
                     weapon.RestoreMass();
                     m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
                     weapon.RestoreLayers();
                 }
-                catch (NullReferenceException)
+                catch (Exception e)
                 {
-                    Debug.LogWarning("Error while detaching Cube");
+                    Debug.Log(e.Message);
                 }
             }
         }
@@ -264,10 +226,10 @@ namespace Weapon
             }
         }
 
-        public void DetachObject()
+        /*public void DetachObject()
         {
             m_ObjectAttacher.DetachObject();
-        }
+        }*/
 
         public void RestoreLayers()
         {
