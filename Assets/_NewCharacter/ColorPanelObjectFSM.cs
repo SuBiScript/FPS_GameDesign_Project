@@ -187,19 +187,19 @@ namespace ColorPanels
             {
                 case WeaponScript.WeaponColor.None:
                     colorIndicatorMaterialToChange.SetColor("_EmissionColor",
-                        colorPanelProperties.materialList.defaultMaterial.color);
+                        colorPanelProperties.materialList.defaultMaterial.GetColor("_EmissionColor"));
                     break;
                 case WeaponScript.WeaponColor.Red:
                     colorIndicatorMaterialToChange.SetColor("_EmissionColor",
-                        colorPanelProperties.materialList.redMaterial.color);
+                        colorPanelProperties.materialList.redMaterial.GetColor("_EmissionColor"));
                     break;
                 case WeaponScript.WeaponColor.Green:
                     colorIndicatorMaterialToChange.SetColor("_EmissionColor",
-                        colorPanelProperties.materialList.greenMaterial.color);
+                        colorPanelProperties.materialList.greenMaterial.GetColor("_EmissionColor"));
                     break;
                 case WeaponScript.WeaponColor.Blue:
                     colorIndicatorMaterialToChange.SetColor("_EmissionColor",
-                        colorPanelProperties.materialList.blueMaterial.color);
+                        colorPanelProperties.materialList.blueMaterial.GetColor("_EmissionColor"));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(color), color, null);

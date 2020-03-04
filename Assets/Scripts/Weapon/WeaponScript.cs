@@ -396,7 +396,7 @@ namespace Weapon
             try
             {
                 emissiveWithColor = new Material(materialList.emissiveMaterial);
-                emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.color);
+                emissiveWithColor.SetColor("_EmissionColor", _currentMaterial.GetColor("_EmissionColor"));
                 newWeaponMaterial[1] = emissiveWithColor;
             }
             catch (NullReferenceException)
