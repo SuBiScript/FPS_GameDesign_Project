@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using ColorPanels;
@@ -14,12 +16,14 @@ namespace Weapon
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
 
-            [Header("Attaching Object")] [HideInInspector]
+            [Header("Attaching Object")]
+            [HideInInspector]
             public bool m_AttachedObject;
 
             public Rigidbody m_ObjectAttached;
             public float m_AttachingObjectSpeed;
             public Transform m_AttachingPosition;
+
             [HideInInspector] public Quaternion m_AttachingObjectStartRotation;
             [HideInInspector] public bool m_GravityShot;
             [HideInInspector] public bool m_CubeButton; // if cube has been attached
@@ -98,7 +102,7 @@ namespace Weapon
             public void AttachObjectVer2(Rigidbody rb)
             {
                 var tryingToAttachThisObject = rb.gameObject.GetComponent<RefractionCubeEffect>();
-                if(tryingToAttachThisObject.currentlyAttached) tryingToAttachThisObject.Detach(true);
+                if (tryingToAttachThisObject.currentlyAttached) tryingToAttachThisObject.Detach(true);
                 rb.gameObject.tag = "Attached";
                 m_ObjectAttached = rb;
                 m_AttachingObjectStartRotation = m_ObjectAttached.transform.rotation;
@@ -108,7 +112,7 @@ namespace Weapon
             public void DetachObjectVer2(float force)
             {
                 if (m_ObjectAttached == null) return;
-                
+
                 foreach (Transform child in m_ChildsAttachedObject)
                 {
                     //if (child.tag == "MeshAttached")
@@ -139,6 +143,10 @@ namespace Weapon
 
         public ObjectAttacher m_ObjectAttacher = new ObjectAttacher();
 
+        [Header("Weapon Effects")]
+        public List<ParticleSystem> m_WeaponParticleList;
+        public List<GameObject> m_WeaponMuzzleList;
+
         public enum WeaponColor
         {
             None,
@@ -157,12 +165,13 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")]
+        [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
 
-        [Header("Lights")] public Color[] lightColors = new[] {Color.red, Color.green, Color.blue};
+        [Header("Lights")] public Color[] lightColors = new[] { Color.red, Color.green, Color.blue };
 
         public Light playerLight;
 
@@ -185,6 +194,29 @@ namespace Weapon
         public void MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
+
+            if (!m_ObjectAttacher.m_AttachedObject)
+            {
+                switch (_currentColor)
+                {
+                    case WeaponColor.Blue:
+                        m_WeaponParticleList[0].Stop();
+                        m_WeaponParticleList[0].Play();
+                        StartCoroutine(ShotLight(m_WeaponMuzzleList[0], 0.1f));
+                        break;
+                    case WeaponColor.Green:
+                        m_WeaponParticleList[1].Stop();
+                        m_WeaponParticleList[1].Play();
+                        StartCoroutine(ShotLight(m_WeaponMuzzleList[1], 0.1f));
+                        break;
+                    case WeaponColor.Red:
+                        m_WeaponParticleList[2].Stop();
+                        m_WeaponParticleList[2].Play();
+                        StartCoroutine(ShotLight(m_WeaponMuzzleList[2], 0.1f));
+                        break;
+                }
+            }
+
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
@@ -195,17 +227,22 @@ namespace Weapon
 
                     if (_currentColor == WeaponColor.Green &&
                         hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
-                    {
                         AttractObject(hit);
-                    }
                 }
             }
+        }
+
+        public IEnumerator ShotLight(GameObject MuzzleFlash, float time)
+        {
+            MuzzleFlash.SetActive(true);
+            yield return new WaitForSeconds(time);
+            MuzzleFlash.SetActive(false);
         }
 
         public void AltFire()
         {
             if (!m_ObjectAttacher.m_AttachedObject)
-                ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
             else
             {
                 m_ObjectAttacher.DetachObjectVer2(0);
@@ -287,7 +324,7 @@ namespace Weapon
         {
             try
             {
-                GameController.Instance.m_CanvasController.ChangeReticleColor((int) color);
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
             }
             catch (NullReferenceException)
             {
