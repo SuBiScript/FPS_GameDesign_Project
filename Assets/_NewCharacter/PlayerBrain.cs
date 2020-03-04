@@ -12,7 +12,7 @@ public class PlayerBrain : Brain
     public override void GetActions()
     {
         //All available buttons
-        Shooting = Mathf.Round(Input.GetAxisRaw(inputNames.Shoot ?? "Shoot")) > 0 || Input.GetButtonDown(inputNames.Shoot ?? "Shoot");
+        Shooting = Mathf.Round(Input.GetAxis("ControllerShoot")) > 0 || Input.GetButtonDown(inputNames.Shoot ?? "Shoot");
         Aiming = Input.GetButtonDown(inputNames.ChangeColor ?? "Change Color");
         Jumping = Input.GetButtonDown(inputNames.Jump ?? "Jump");
         Running = Input.GetButtonDown(inputNames.Run ?? "Run");

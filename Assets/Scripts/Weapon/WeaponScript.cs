@@ -16,8 +16,7 @@ namespace Weapon
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
 
-            [Header("Attaching Object")]
-            [HideInInspector]
+            [Header("Attaching Object")] [HideInInspector]
             public bool m_AttachedObject;
 
             public Rigidbody m_ObjectAttached;
@@ -118,6 +117,7 @@ namespace Weapon
                     //if (child.tag == "MeshAttached")
                     child.gameObject.layer = LayerMask.NameToLayer("Cube");
                 }
+
                 try
                 {
                     m_Rendered = false;
@@ -129,7 +129,7 @@ namespace Weapon
                     m_ObjectAttached.GetComponent<Collider>().isTrigger = false;
                     m_ObjectAttached.isKinematic = false;
                     m_ObjectAttached.gameObject.tag = "Cube";
-                    weapon.RestoreMass();
+                    weapon.RestoreMass(m_ObjectAttached);
                     weapon.RestoreLayers();
                     m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
                     m_ObjectAttached = null;
@@ -143,9 +143,9 @@ namespace Weapon
 
         public ObjectAttacher m_ObjectAttacher = new ObjectAttacher();
 
-        [Header("Weapon Effects")]
-        public List<ParticleSystem> m_WeaponParticleList;
+        [Header("Weapon Effects")] public List<ParticleSystem> m_WeaponParticleList;
         public List<GameObject> m_WeaponMuzzleList;
+
 
         public enum WeaponColor
         {
@@ -165,24 +165,39 @@ namespace Weapon
         public Material _weaponMaterial;
 
 
-        [Header("Raycast Settings")]
-        [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
 
-        [Header("Lights")] public Color[] lightColors = new[] { Color.red, Color.green, Color.blue };
+        [Header("Lights")] public Color[] lightColors = new[] {Color.red, Color.green, Color.blue};
 
         public Light playerLight;
 
         private PlayerControllerFSM m_AttachedCharacter;
         private WeaponColor _currentColor = WeaponColor.None;
+        private IEnumerator restoreMassCoroutine;
+
+        [Header("Weapon Shooting Properties")] [Range(60, 1800)]
+        public float roundsPerMinute = 120;
+
+        [Range(1, 300)] public int forceAttractRepetitions = 10;
+        private float realROF;
+        private float shootTimer;
+        private IEnumerator attractObjectCoroutine;
+
 
         public void Init(PlayerControllerFSM attachedCharacter)
         {
             m_AttachedCharacter = attachedCharacter;
             materialList = Instantiate(materialList);
             ChangeColor(WeaponColor.Blue);
+            realROF = 60f / roundsPerMinute;
+        }
+
+        private void Update()
+        {
+            if (shootTimer > 0) shootTimer -= Time.deltaTime;
         }
 
         private void FixedUpdate()
@@ -194,6 +209,7 @@ namespace Weapon
         public void MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
+            if (!CanShoot()) return;
 
             if (!m_ObjectAttacher.m_AttachedObject)
             {
@@ -227,10 +243,30 @@ namespace Weapon
 
                     if (_currentColor == WeaponColor.Green &&
                         hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
-                        AttractObject(hit);
+                    {
+                        attractObjectCoroutine = AttractObjectThroughTime(hit);
+                        RestartCoroutine(attractObjectCoroutine);
+                    }
                 }
             }
+
+            shootTimer = realROF;
         }
+
+        bool CanShoot()
+        {
+            return shootTimer <= 0;
+        }
+
+        public IEnumerator AttractObjectThroughTime(RaycastHit info)
+        {
+            for (int i = 0; i < forceAttractRepetitions; i++)
+            {
+                AttractObject(info);
+                yield return null;
+            }
+        }
+
 
         public IEnumerator ShotLight(GameObject MuzzleFlash, float time)
         {
@@ -242,7 +278,7 @@ namespace Weapon
         public void AltFire()
         {
             if (!m_ObjectAttacher.m_AttachedObject)
-                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+                ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
             else
             {
                 m_ObjectAttacher.DetachObjectVer2(0);
@@ -278,20 +314,36 @@ namespace Weapon
             Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);
         }
 
-        public void RestoreMass()
+        public void RestoreMass(Rigidbody rb)
         {
-            m_ObjectAttacher.m_ObjectAttached.mass = 0.01f;
-            Invoke("RestoringMass", .2f);
+            rb.mass = 0.01f;
+            restoreMassCoroutine = RestoreMassAfterTime(rb, 0.2f);
+            RestartCoroutine(restoreMassCoroutine);
+            //Invoke("RestoringMass", .2f);
         }
 
-        void RestoringMass()
+        /*void RestoringMass(Rigidbody rigidbody)
         {
-            m_ObjectAttacher.m_ObjectAttached.mass = 1;
+            rigidbody.mass = 1;
+        }*/
+
+        IEnumerator RestoreMassAfterTime(Rigidbody rigidbody, float time)
+        {
+            yield return new WaitForSeconds(time);
+            rigidbody.mass = 1;
+        }
+
+        void RestartCoroutine(IEnumerator enumerator)
+        {
+            if (enumerator != null) StopCoroutine(enumerator);
+            StartCoroutine(enumerator);
         }
 
         private void ChangeColor(WeaponColor newColor)
         {
             //Change material and play sounds?
+            if (m_ObjectAttacher.m_ObjectAttached) return;
+
             switch (newColor)
             {
                 case WeaponColor.None:
@@ -324,7 +376,7 @@ namespace Weapon
         {
             try
             {
-                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int) color);
             }
             catch (NullReferenceException)
             {
