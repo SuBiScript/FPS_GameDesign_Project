@@ -67,7 +67,7 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !m_GamePaused && !m_PlayerDied) //TODO Readd pause menu
+        if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied) //TODO Readd pause menu
             Pause();
     }
 
