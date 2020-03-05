@@ -39,7 +39,7 @@ public class CameraFSMController : MonoBehaviour
         //if (!m_AngleLocked)
         //    Aiming();
 
-        if (!m_AngleLocked && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
+        if (!m_AngleLocked && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
             Aiming();
 
 #if UNITY_EDITOR

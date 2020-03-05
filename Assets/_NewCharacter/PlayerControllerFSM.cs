@@ -68,13 +68,13 @@ public class PlayerControllerFSM : CharacterController
         if (currentBrain.Aiming)
             equippedWeapon.AltFire();
 
-        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied)
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
             stateMachine.UpdateTick(Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
-        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused) //TODO Reenable stop functionality with GameController
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && GameController.Instance.m_IntroFinished) //TODO Reenable stop functionality with GameController
             stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
     }
 

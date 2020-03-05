@@ -47,6 +47,7 @@ public class GameController : Singleton<GameController>
         {
             m_Intro.gameObject.SetActive(false);
             m_CanvasController.ShowReticle();
+            m_IntroFinished = true;
         }
     }
 

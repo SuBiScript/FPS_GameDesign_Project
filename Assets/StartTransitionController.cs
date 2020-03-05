@@ -7,27 +7,16 @@ public class StartTransitionController : MonoBehaviour
 {
     public string m_text;
     public Vector2 position;
-    public float intensity = 0.1f;
     public PostProcessVolume volume;
 
     ChromaticAberration m_chromatic = null;
-    bool m_Ischromatic;
-
 
     private void Start()
     {
         volume.profile.TryGetSettings(out m_chromatic);
-
-        // later in this class during handling and changing
         m_chromatic.enabled.value = true;
         m_chromatic.intensity.value = 1;
     }
-
-    //private void Update()
-    //{
-    //    if (m_Ischromatic)
-    //        m_chromatic.intensity.value = Mathf.Lerp(1, 0.1f, 0.8f);
-    //}
 
     public void ShowReticle()
     {
@@ -40,11 +29,6 @@ public class StartTransitionController : MonoBehaviour
     {
         GameController.Instance.m_CanvasController.TextToDisplay(m_text, 30, position);
     }
-
-    //public void ReduceChromatic()
-    //{
-    //    m_Ischromatic = true;
-    //}
 
     public void ReduceChromatic()
     {
