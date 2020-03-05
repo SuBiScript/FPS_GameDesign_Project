@@ -19274,6 +19274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_text: Insert text here...
   position: {x: -650, y: -450}
+  intensity: 0.1
+  volume: {fileID: 2113323976}
 --- !u!4 &1576955440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4120441853834388, guid: 6860b0e968b2fca44a3baa44b9d2aaee,
@@ -25634,7 +25636,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+      objectReference: {fileID: 8300000, guid: 89f1b5aafb7925d4eab535f4eec6eef0, type: 3}
     - target: {fileID: 4878850619585821764, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}
       propertyPath: m_LocalPosition.x

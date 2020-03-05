@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Prototyping/Jordi/NewCharacter.unity
     guid: 95f53c224adcc5d439919b5138c0ecd0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prototyping/Jordi/NewCharacterOscar.unity
     guid: 12ff1265bc009724994e7c1df1a792e0
+  - enabled: 1
+    path: Assets/Scenes/Gerard/OscarDesign.unity
+    guid: 3515e1cc48c14b44988b93a1c9d42dff
   m_configObjects: {}
