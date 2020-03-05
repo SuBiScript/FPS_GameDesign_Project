@@ -12,10 +12,12 @@ public class GameController : Singleton<GameController>
     public GameObject m_PauseMenu;
     public GameObject m_GameOverMenu;
     public Image m_BloodFrame;
-
+    public GameObject m_Intro;
+    public bool m_NoIntro;
 
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
+    [HideInInspector] public bool m_IntroFinished;
 
     public struct PlayerComponents
     {
@@ -37,6 +39,15 @@ public class GameController : Singleton<GameController>
         m_PlayerDied = false;
 
         AddPlayerComponents();
+    }
+
+    private void Start()
+    {
+        if (m_NoIntro)
+        {
+            m_Intro.gameObject.SetActive(false);
+            m_CanvasController.ShowReticle();
+        }
     }
 
     private void AddPlayerComponents()
@@ -67,7 +78,7 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied) //TODO Readd pause menu
+        if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
             Pause();
     }
 

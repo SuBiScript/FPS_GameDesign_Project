@@ -49,10 +49,10 @@ MonoBehaviour:
   extendStepsSound: 0
   sounds:
   - source: {fileID: 0}
-    volume: 0
+    volume: 1
     pitch: 0
-    name: 
-    clip: {fileID: 0}
+    name: Ambience
+    clip: {fileID: 8300000, guid: 89f1b5aafb7925d4eab535f4eec6eef0, type: 3}
     loop: 0
   - source: {fileID: 0}
     volume: 0

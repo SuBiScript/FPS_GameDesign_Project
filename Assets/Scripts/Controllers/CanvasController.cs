@@ -13,6 +13,11 @@ public class CanvasController : MonoBehaviour
 
     [HideInInspector] public GameObject m_textToDisplayAnim;
 
+    private void Awake()
+    {
+        m_Reticle.enabled = false;
+    }
+
     void Start()
     {
         m_textToDisplayAnim.GetComponent<Animation>();
@@ -52,5 +57,10 @@ public class CanvasController : MonoBehaviour
                 m_Reticle.color = Color.yellow;
                 break;
         }
+    }
+
+    public void ShowReticle()
+    {
+        m_Reticle.enabled = true;
     }
 }
