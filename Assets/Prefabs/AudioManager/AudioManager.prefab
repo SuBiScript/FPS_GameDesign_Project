@@ -50,31 +50,31 @@ MonoBehaviour:
   sounds:
   - source: {fileID: 0}
     volume: 1
-    pitch: 0
+    pitch: 1
     name: Ambience
     clip: {fileID: 8300000, guid: 89f1b5aafb7925d4eab535f4eec6eef0, type: 3}
+    loop: 1
+  - source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    name: MusicLevel
+    clip: {fileID: 8300000, guid: 514bcab2fd8d6d84f9e05c199f5c7d9e, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 0
-    pitch: 0
+    volume: 0.1
+    pitch: 1
+    name: Breathing
+    clip: {fileID: 8300000, guid: a8e479000c7573c479a7c9c110648bec, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 1
+    pitch: 1
     name: 
     clip: {fileID: 0}
     loop: 0
   - source: {fileID: 0}
-    volume: 0
-    pitch: 0
-    name: 
-    clip: {fileID: 0}
-    loop: 0
-  - source: {fileID: 0}
-    volume: 0
-    pitch: 0
-    name: 
-    clip: {fileID: 0}
-    loop: 0
-  - source: {fileID: 0}
-    volume: 0
-    pitch: 0
+    volume: 1
+    pitch: 1
     name: 
     clip: {fileID: 0}
     loop: 0
