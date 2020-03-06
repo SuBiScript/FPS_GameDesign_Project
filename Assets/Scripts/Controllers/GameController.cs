@@ -41,8 +41,13 @@ public class GameController : Singleton<GameController>
         AddPlayerComponents();
 
         if (m_NoIntro)
-        {
             m_Intro.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if (m_NoIntro)
+        {
             m_CanvasController.ShowReticle();
             m_IntroFinished = true;
         }

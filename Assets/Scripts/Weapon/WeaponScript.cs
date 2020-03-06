@@ -290,7 +290,7 @@ namespace Weapon
             try
             {
                 var rb = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
-                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
+                //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
                 rb.velocity = Vector3.zero;
                 m_ObjectAttacher.AttachObjectVer2(rb);
             }
@@ -311,12 +311,12 @@ namespace Weapon
 
         void RestoringLayers()
         {
-            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);
+            //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), false);
         }
 
         public void RestoreMass(Rigidbody rb)
         {
-            rb.mass = 0.01f;
+            rb.mass = 0.001f;
             restoreMassCoroutine = RestoreMassAfterTime(rb, 0.2f);
             RestartCoroutine(restoreMassCoroutine);
             //Invoke("RestoringMass", .2f);
