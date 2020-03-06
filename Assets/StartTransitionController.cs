@@ -16,13 +16,15 @@ public class StartTransitionController : MonoBehaviour
         volume.profile.TryGetSettings(out m_chromatic);
         m_chromatic.enabled.value = true;
         m_chromatic.intensity.value = 1;
+        AudioManager.instance.Play("Breathing");
+        AudioManager.instance.Play("Ambience");
     }
 
     public void ShowReticle()
     {
         GameController.Instance.m_CanvasController.ShowReticle();
-        AudioManager.instance.Play("Ambience");
         GameController.Instance.m_IntroFinished = true;
+
     }
 
     public void ShowText()
@@ -32,6 +34,7 @@ public class StartTransitionController : MonoBehaviour
 
     public void ReduceChromatic()
     {
+        AudioManager.instance.Play("MusicLevel");
         StartCoroutine(LightInterpolation());
     }
 

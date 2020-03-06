@@ -39,10 +39,7 @@ public class GameController : Singleton<GameController>
         m_PlayerDied = false;
 
         AddPlayerComponents();
-    }
 
-    private void Start()
-    {
         if (m_NoIntro)
         {
             m_Intro.gameObject.SetActive(false);
