@@ -50,7 +50,6 @@ public class Player_State_OnAir : State
             : Machine.characterController.characterProperties.OnAirSpeed;
         
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
-
     }
 
     protected override void OnStateExit()

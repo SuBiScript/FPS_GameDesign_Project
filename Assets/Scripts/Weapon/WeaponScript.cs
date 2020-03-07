@@ -16,7 +16,8 @@ namespace Weapon
         {
             [Header("Attaching Object")] public bool m_AttachingObject;
 
-            [Header("Attaching Object")] [HideInInspector]
+            [Header("Attaching Object")]
+            [HideInInspector]
             public bool m_AttachedObject;
 
             public Rigidbody m_ObjectAttached;
@@ -158,7 +159,7 @@ namespace Weapon
         public MaterialList materialList;
         public MeshRenderer weaponMeshRenderer;
         public Material weaponMaterial;
-        
+
         [Header("Attract Settings")] public GameObject attractPoint;
 
         private Material emissiveWithColor;
@@ -166,12 +167,13 @@ namespace Weapon
 
 
 
-        [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
+        [Header("Raycast Settings")]
+        [Tooltip("Max range for the Ray Casting")]
         public float maxRange = 150f;
 
         public LayerMask layerMask;
 
-        [Header("Lights")] public Color[] lightColors = new[] {Color.red, Color.green, Color.blue};
+        [Header("Lights")] public Color[] lightColors = new[] { Color.red, Color.green, Color.blue };
 
         public Light playerLight;
 
@@ -179,7 +181,8 @@ namespace Weapon
         private WeaponColor _currentColor = WeaponColor.None;
         private IEnumerator restoreMassCoroutine;
 
-        [Header("Weapon Shooting Properties")] [Range(60, 1800)]
+        [Header("Weapon Shooting Properties")]
+        [Range(60, 1800)]
         public float roundsPerMinute = 120;
 
         [Range(1, 300)] public int forceAttractRepetitions = 10;
@@ -215,6 +218,7 @@ namespace Weapon
 
             if (!m_ObjectAttacher.m_AttachedObject)
             {
+                GameController.Instance.playerComponents.PlayerController.weaponAnimator.SetTrigger("Shoot");
                 switch (_currentColor)
                 {
                     case WeaponColor.Blue:
@@ -234,7 +238,7 @@ namespace Weapon
                         break;
                 }
             }
-            
+
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
@@ -284,7 +288,7 @@ namespace Weapon
         {
             if (!m_ObjectAttacher.m_AttachedObject)
             {
-                ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+                ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
                 return true;
             }
             else
@@ -387,7 +391,7 @@ namespace Weapon
         {
             try
             {
-                GameController.Instance.m_CanvasController.ChangeReticleColor((int) color);
+                GameController.Instance.m_CanvasController.ChangeReticleColor((int)color);
             }
             catch (NullReferenceException)
             {
@@ -403,7 +407,7 @@ namespace Weapon
 
         private void ChangeMeshRendererMaterial()
         {
-            weaponMaterial.SetColor("_EmissionColor",_currentMaterial.GetColor("_EmissionColor"));
+            weaponMaterial.SetColor("_EmissionColor", _currentMaterial.GetColor("_EmissionColor"));
             /*Material[] newWeaponMaterial = weaponMeshRenderer.materials;
             try
             {

@@ -67,8 +67,7 @@ public class PlayerControllerFSM : CharacterController
 
         if (currentBrain.Shooting)
         {
-            if (equippedWeapon.MainFire())
-                weaponAnimator.SetTrigger("Shoot");
+            equippedWeapon.MainFire();
         }
 
         if (currentBrain.Aiming)

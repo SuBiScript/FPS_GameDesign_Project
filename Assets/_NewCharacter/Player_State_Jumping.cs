@@ -32,7 +32,7 @@ public class Player_State_Jumping : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        
+
         RemoveVerticalSpeed();
         ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
@@ -41,7 +41,7 @@ public class Player_State_Jumping : State
             Machine.transform.up,
             Machine.characterController.characterProperties.JumpForce,
             ForceMode.Impulse);
-        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Jumping", true);
+        ((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetTrigger("Jumping");
     }
 
     private void RemoveVerticalSpeed()

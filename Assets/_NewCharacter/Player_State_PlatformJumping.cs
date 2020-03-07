@@ -36,7 +36,7 @@ public class Player_State_PlatformJumping : State
         attachedRigidbody = Machine.characterController.rigidbody;
         ColorPanelEffects.PlayerJump(((PlayerControllerFSM)Machine.characterController), attachedRigidbody);
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
-        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Jumping", true);
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetTrigger("Jumping");
 
     }
 
