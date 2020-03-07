@@ -211,6 +211,7 @@ namespace Weapon
         {
             //Raycast to a target (interface) to interact and change color?
             if (!CanShoot()) return false;
+            shootTimer = realROF;
 
             if (!m_ObjectAttacher.m_AttachedObject)
             {
@@ -233,25 +234,27 @@ namespace Weapon
                         break;
                 }
             }
-
+            
             var lRay = m_AttachedCharacter.cameraController.attachedCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
             if (Physics.Raycast(lRay, out var hit, maxRange, layerMask))
             {
                 if (!m_ObjectAttacher.m_AttachedObject)
                 {
-                    hit.collider.gameObject.GetComponent<ColorPanelObjectFSM>()
-                        ?.ChangeColor(_currentColor);
-
+                    var colorPanelHit = hit.collider.gameObject.GetComponent<ColorPanelObjectFSM>();
+                    if (colorPanelHit)
+                    {
+                        colorPanelHit.ChangeColor(_currentColor);
+                        return true;
+                    }
                     if (_currentColor == WeaponColor.Green &&
                         hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
                     {
                         attractObjectCoroutine = AttractObjectThroughTime(hit);
                         RestartCoroutine(attractObjectCoroutine);
+                        return false;
                     }
                 }
             }
-
-            shootTimer = realROF;
             return true;
         }
 

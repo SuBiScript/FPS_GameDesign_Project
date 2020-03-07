@@ -67,14 +67,14 @@ public class PlayerControllerFSM : CharacterController
 
         if (currentBrain.Shooting)
         {
-            equippedWeapon.MainFire();
-            weaponAnimator.SetTrigger("Shoot");
+            if (equippedWeapon.MainFire())
+                weaponAnimator.SetTrigger("Shoot");
         }
 
         if (currentBrain.Aiming)
         {
-            equippedWeapon.AltFire();
-            weaponAnimator.SetTrigger("ChangeColor");
+            if (equippedWeapon.AltFire())
+                weaponAnimator.SetTrigger("ChangeColor");
         }
 
         if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused &&
