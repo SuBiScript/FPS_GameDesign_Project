@@ -41,6 +41,7 @@ public class Player_State_Jumping : State
             Machine.transform.up,
             Machine.characterController.characterProperties.JumpForce,
             ForceMode.Impulse);
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Jumping", true);
     }
 
     private void RemoveVerticalSpeed()

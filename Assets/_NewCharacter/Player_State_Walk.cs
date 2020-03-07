@@ -23,13 +23,20 @@ public class Player_State_Walk : State
     {
         base.OnStateFixedTick(fixedTime);
 
-        if (Machine.characterController.currentBrain.Direction != Vector3.zero || Machine.characterController.transform.parent != null)
+        if (Machine.characterController.currentBrain.Direction != Vector3.zero ||
+            Machine.characterController.transform.parent != null)
         {
             MovementManager.MoveRigidbody(
                 attachedRigidbody,
                 Machine.characterController.currentBrain.Direction,
                 WalkSpeed,
                 fixedTime);
+            ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", true);
+
+        }
+        else
+        {
+            ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", false);
         }
     }
 
@@ -64,11 +71,14 @@ public class Player_State_Walk : State
         attachedRigidbody = Machine.characterController.rigidbody;
         ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(true);
         coyoteFrames = 0;
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Jumping", false);
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
         coyoteFrames = 0;
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", false);
+
     }
 }

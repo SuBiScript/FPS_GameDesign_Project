@@ -157,12 +157,13 @@ namespace Weapon
 
         public MaterialList materialList;
         public MeshRenderer weaponMeshRenderer;
+        public Material weaponMaterial;
+        
         [Header("Attract Settings")] public GameObject attractPoint;
 
         private Material emissiveWithColor;
         private Material _currentMaterial;
 
-        public Material _weaponMaterial;
 
 
         [Header("Raycast Settings")] [Tooltip("Max range for the Ray Casting")]
@@ -206,10 +207,10 @@ namespace Weapon
                 m_ObjectAttacher.UpdateAttachedObject_();
         }
 
-        public void MainFire()
+        public bool MainFire()
         {
             //Raycast to a target (interface) to interact and change color?
-            if (!CanShoot()) return;
+            if (!CanShoot()) return false;
 
             if (!m_ObjectAttacher.m_AttachedObject)
             {
@@ -251,6 +252,7 @@ namespace Weapon
             }
 
             shootTimer = realROF;
+            return true;
         }
 
         bool CanShoot()
@@ -275,14 +277,20 @@ namespace Weapon
             MuzzleFlash.SetActive(false);
         }
 
-        public void AltFire()
+        public bool AltFire()
         {
             if (!m_ObjectAttacher.m_AttachedObject)
+            {
                 ChangeColor((int) _currentColor < 3 ? _currentColor + 1 : (WeaponColor) 1);
+                return true;
+            }
             else
             {
                 m_ObjectAttacher.DetachObjectVer2(0);
+                return false;
             }
+
+            return false;
         }
 
         public void AttractObject(RaycastHit hitInfo)
@@ -392,7 +400,8 @@ namespace Weapon
 
         private void ChangeMeshRendererMaterial()
         {
-            Material[] newWeaponMaterial = weaponMeshRenderer.materials;
+            weaponMaterial.SetColor("_EmissionColor",_currentMaterial.GetColor("_EmissionColor"));
+            /*Material[] newWeaponMaterial = weaponMeshRenderer.materials;
             try
             {
                 emissiveWithColor = new Material(materialList.emissiveMaterial);
@@ -404,7 +413,12 @@ namespace Weapon
                 newWeaponMaterial[1] = _currentMaterial;
             }
 
-            weaponMeshRenderer.materials = newWeaponMaterial;
+            weaponMeshRenderer.materials = newWeaponMaterial;*/
+        }
+
+        private void OnDisable()
+        {
+            weaponMaterial.SetColor("_EmissionColor", Color.white);
         }
     }
 }

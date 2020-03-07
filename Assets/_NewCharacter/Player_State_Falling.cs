@@ -55,5 +55,7 @@ public class Player_State_Falling : State
     protected override void OnStateExit()
     {
         base.OnStateExit();
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Jumping", false);
+
     }
 }

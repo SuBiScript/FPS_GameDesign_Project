@@ -23,6 +23,7 @@ public class PlayerControllerFSM : CharacterController
     public PhysicMaterial onAirMaterial;
     public PhysicMaterial onGroundMaterial;
 
+    public Animator weaponAnimator;
 
     public void Awake()
     {
@@ -42,12 +43,13 @@ public class PlayerControllerFSM : CharacterController
             cameraController = GetComponent<CameraFSMController>();
         if (equippedWeapon == null)
             equippedWeapon = GetComponentInChildren<WeaponScript>();
-        
+
         characterProperties = characterProperties == null
             ? ScriptableObject.CreateInstance<CharacterProperties>()
             : Instantiate(characterProperties);
 
         attachedCollider = GetComponent<Collider>();
+        weaponAnimator = equippedWeapon.weaponMeshRenderer.gameObject.GetComponent<Animator>();
     }
 
     private void Start()
@@ -64,17 +66,28 @@ public class PlayerControllerFSM : CharacterController
             currentBrain.GetActions();
 
         if (currentBrain.Shooting)
+        {
             equippedWeapon.MainFire();
-        if (currentBrain.Aiming)
-            equippedWeapon.AltFire();
+            weaponAnimator.SetTrigger("Shoot");
+        }
 
-        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
+        if (currentBrain.Aiming)
+        {
+            equippedWeapon.AltFire();
+            weaponAnimator.SetTrigger("ChangeColor");
+        }
+
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused &&
+            !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
+        {
             stateMachine.UpdateTick(Time.deltaTime);
+        }
     }
 
     private void FixedUpdate()
     {
-        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused && GameController.Instance.m_IntroFinished) //TODO Reenable stop functionality with GameController
+        if (stateMachine.isActiveAndEnabled && !GameController.Instance.m_GamePaused &&
+            GameController.Instance.m_IntroFinished) //TODO Reenable stop functionality with GameController
             stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
     }
 
