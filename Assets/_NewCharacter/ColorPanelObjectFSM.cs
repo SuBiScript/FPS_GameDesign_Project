@@ -143,7 +143,16 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (collidedCollider.CompareTag("Player")) return;
+                    RefractionCubeEffect cubeEffect;
+                    try
+                    {
+                        cubeEffect = collidedCollider.GetComponent<RefractionCubeEffect>();
+                    }
+                    catch (MissingComponentException)
+                    {
+                        return;
+                    }
+                    if (collidedCollider.CompareTag("Player") || cubeEffect == null || cubeEffect.currentlyAttached) return;
                     
                     if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
