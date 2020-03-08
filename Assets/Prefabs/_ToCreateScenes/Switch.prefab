@@ -19,6 +19,14 @@ PrefabInstance:
       propertyPath: m_EventOnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SwithStatus
       objectReference: {fileID: 0}
+    - target: {fileID: 669349387, guid: b67d09dfd680a8e458ea0c02d7ed9b49, type: 3}
+      propertyPath: switchEnable
+      value: 
+      objectReference: {fileID: 8300000, guid: 3829c7e86987ed94aaaf67f364b27e64, type: 3}
+    - target: {fileID: 669349387, guid: b67d09dfd680a8e458ea0c02d7ed9b49, type: 3}
+      propertyPath: switchDisable
+      value: 
+      objectReference: {fileID: 8300000, guid: fa2d55869bacd164fafcf672d61eea11, type: 3}
     - target: {fileID: 5515226869724977054, guid: b67d09dfd680a8e458ea0c02d7ed9b49,
         type: 3}
       propertyPath: m_Name
