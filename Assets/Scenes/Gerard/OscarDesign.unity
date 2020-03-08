@@ -19279,6 +19279,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1128832132621854, guid: 60bf7d6715a140f4ba1b0b96e2d8ca14, type: 3}
+      propertyPath: m_Name
+      value: BlackfadeAnimation
+      objectReference: {fileID: 0}
     - target: {fileID: 1775529669035100, guid: 60bf7d6715a140f4ba1b0b96e2d8ca14, type: 3}
       propertyPath: m_Name
       value: BlackFadeOut
@@ -19388,7 +19392,8 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95947986138835598, guid: 60bf7d6715a140f4ba1b0b96e2d8ca14, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 60bf7d6715a140f4ba1b0b96e2d8ca14, type: 3}
 --- !u!4 &1056314304 stripped
 Transform:
@@ -34054,6 +34059,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1965701660}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1965765235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1128832132621854, guid: 60bf7d6715a140f4ba1b0b96e2d8ca14,
+    type: 3}
+  m_PrefabInstance: {fileID: 1055668156}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1965765237
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965765235}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 1f1af5cac54761141bb956d264f909fd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 1f1af5cac54761141bb956d264f909fd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!4 &1966469629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3282830944085210882, guid: a9cf84b90efb0264da76bc945feffd27,
@@ -37580,6 +37607,11 @@ PrefabInstance:
       propertyPath: startGame
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
+        type: 3}
+      propertyPath: m_BlackFade
+      value: 
+      objectReference: {fileID: 1965765235}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d110f66c4a378a64abf6e49f4781c499, type: 3}
 --- !u!1001 &8530399227615419997
