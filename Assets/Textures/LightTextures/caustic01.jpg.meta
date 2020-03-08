@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8dd8b695d21ccce48b3266ad57984594
+guid: 50732df234b690f4bb9ff7eb49e2c1e4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -24,7 +24,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
-  generateCubemap: 5
+  generateCubemap: 1
   cubemapConvolution: 0
   seamlessCubemap: 1
   textureFormat: 1
@@ -49,7 +49,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 2
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 4
   textureShape: 2

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
+#if UNITY_EDITOR
 public class SetCheckPointCheat : EditorWindow
 {
     [MenuItem("Cheats/Editor/Go to Checkpoint")]
@@ -50,3 +51,4 @@ public class SetCheckPointCheat : EditorWindow
         }
     }
 }
+#endif

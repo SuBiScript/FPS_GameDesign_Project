@@ -56,6 +56,9 @@ public class PauseController : MonoBehaviour
         GameController.Instance.playerComponents.PlayerController.Restart(CheckpointManager.GetRespawnPoint().position);
         Resume();
         GameController.Instance.ReloadGame();
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("Ambience");
+        AudioManager.instance.Play("MusicLevel");
     }
 
 
