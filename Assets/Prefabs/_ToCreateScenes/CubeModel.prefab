@@ -103,10 +103,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 870215612, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 870215612, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 870215612, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
+      propertyPath: m_ShadowRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 870215612, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 870215612, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 8900000, guid: 8dd8b695d21ccce48b3266ad57984594, type: 3}
     - target: {fileID: 1400466617731321895, guid: 6183143d9eab56547bc84e5797204b78,
         type: 3}
       propertyPath: m_Name
-      value: CubeModel (1)
+      value: CubeModel
       objectReference: {fileID: 0}
     - target: {fileID: 3355384207562119861, guid: 6183143d9eab56547bc84e5797204b78,
         type: 3}
