@@ -14,7 +14,9 @@ public class GameController : Singleton<GameController>
     public Image m_BloodFrame;
     public GameObject m_Intro;
     public bool m_NoIntro = true;
-    public Checkpoint defaultCheckpoint;
+    [Header("Checkpoint settings")] public Checkpoint defaultCheckpoint;
+
+    public bool startGame;
 
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
@@ -57,7 +59,20 @@ public class GameController : Singleton<GameController>
             m_IntroFinished = true;
         }
 
-        CheckpointManager.Init(defaultCheckpoint, FindObjectsOfType<Checkpoint>());
+        CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList() );
+        if (startGame)
+            CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
+    }
+
+    private List<Checkpoint> CreateCheckpointList()
+    {
+        List<Checkpoint> returnList = new List<Checkpoint>();
+        var temp = FindObjectsOfType<Checkpoint>();
+        foreach (Checkpoint checkpoint in temp)
+        {
+            returnList.Add(checkpoint);
+        }
+        return returnList;
     }
 
     private void AddPlayerComponents()
@@ -75,7 +90,7 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    public void OnPlayerDeath() //TODO Add player death functionality, a.k.a. show menus or play sounds.
+    public void OnPlayerDeath()
     {
         if (m_PlayerDied) return;
 
@@ -86,12 +101,19 @@ public class GameController : Singleton<GameController>
         Debug.LogWarning("Player has died.");
     }
 
+    public void ReloadGame()
+    {
+        m_PlayerDied = false;
+        playerComponents.HealthManager.onCharacterRespawn.Invoke();
+        m_BloodFrame.gameObject.SetActive(false);
+        //TODO Restart all restartable objects.
+    }
+
 
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
             Pause();
-
     }
 
 
