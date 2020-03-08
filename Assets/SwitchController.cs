@@ -9,6 +9,10 @@ public class SwitchController : MonoBehaviour
     bool m_LineButtonOpen = false;
     public GateController gate;
 
+    public AudioClip switchEnable;
+    public AudioClip switchDisable;
+    private AudioSource _audioSource;
+
     //emmision
     public Material m_StatusMaterial;
     private const string c_EmissionColor = "_EmissionColor";
@@ -17,6 +21,7 @@ public class SwitchController : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         var renderers = GetComponents<Renderer>();
         for (int i = 0; i < renderers.Length; ++i)
         {
@@ -43,6 +48,7 @@ public class SwitchController : MonoBehaviour
             m_StatusMaterials[0].SetColor(c_EmissionColor, Color.green);
             m_LineButtonOpen = true;
             m_EventOnEnter.Invoke();
+            PlaySound(switchEnable);
         }
     }
 
@@ -53,6 +59,21 @@ public class SwitchController : MonoBehaviour
             m_StatusMaterials[0].SetColor(c_EmissionColor, Color.red);
             gate.SwithStatus(true);
             m_LineButtonOpen = false;
+            PlaySound(switchDisable);
         }
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (_audioSource == null)
+        {
+            _audioSource = new AudioSource();
+            _audioSource.playOnAwake = false;
+            _audioSource.spatialBlend = 1f;
+            _audioSource.volume = 0.5f;
+        }
+
+        _audioSource.clip = clip;
+        _audioSource.Play();
     }
 }
