@@ -53,6 +53,19 @@ public class PauseController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+
+    public void ExitToMenu()
+    {
+        Time.timeScale = 1;
+
+        if (FindObjectOfType<AudioManager>() != null)
+        {
+            SceneManager.LoadScene("MainMenu");
+            AudioManager.instance.StopAllSounds();
+        }
+    }
+
+
     public void Quit()
     {
         Application.Quit();
