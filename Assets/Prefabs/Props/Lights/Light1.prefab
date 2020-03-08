@@ -67,5 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Light1
       objectReference: {fileID: 0}
+    - target: {fileID: 5838410836840904684, guid: 88a8621f93dc5844092d73f97516b138,
+        type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 8900000, guid: 50732df234b690f4bb9ff7eb49e2c1e4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88a8621f93dc5844092d73f97516b138, type: 3}
