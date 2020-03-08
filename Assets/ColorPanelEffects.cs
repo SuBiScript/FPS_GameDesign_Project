@@ -43,6 +43,7 @@ namespace ColorPanels
 
         private static float ComputeJumpForce(bool isPlayer, ColorPanelObjectFSM.ColorPanelProperties properties)
         {
+            AudioManager.instance.Play("JumpPlatform");
             return isPlayer
                 ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()
                     ? properties.playerPropulsionForce

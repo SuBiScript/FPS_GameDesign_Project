@@ -15,7 +15,7 @@ public class GameController : Singleton<GameController>
     public GameObject m_Intro;
     public bool m_NoIntro = true;
     public Checkpoint defaultCheckpoint;
-    
+
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
     [HideInInspector] public bool m_IntroFinished;
@@ -56,8 +56,8 @@ public class GameController : Singleton<GameController>
                 m_CanvasController.ShowReticle();
             m_IntroFinished = true;
         }
-        
-        CheckpointManager.Init(defaultCheckpoint,FindObjectsOfType<Checkpoint>());
+
+        CheckpointManager.Init(defaultCheckpoint, FindObjectsOfType<Checkpoint>());
     }
 
     private void AddPlayerComponents()
@@ -79,6 +79,7 @@ public class GameController : Singleton<GameController>
     {
         if (m_PlayerDied) return;
 
+        AudioManager.instance.Play("Scream");
         m_PlayerDied = true;
         m_BloodFrame.gameObject.SetActive(true);
         Invoke("GameOver", 1.5f);
@@ -90,7 +91,7 @@ public class GameController : Singleton<GameController>
     {
         if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
             Pause();
-       
+
     }
 
 

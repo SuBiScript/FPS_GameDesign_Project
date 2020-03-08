@@ -719,6 +719,16 @@ MonoBehaviour:
   equippedWeapon: {fileID: 8850334316833739102}
   attachedCollider: {fileID: 8850334317767176087}
   m_PitchControllerTransform: {fileID: 8850334318145195918}
+  m_FootstepSounds:
+  - {fileID: 8300000, guid: dd5687546dfdeb443a2c2817a460daf5, type: 3}
+  - {fileID: 8300000, guid: d5f38dadf2855c846862c97d1f6f45c9, type: 3}
+  - {fileID: 8300000, guid: c9c84b9b5bf6f814ca2ee2bd6f9a2115, type: 3}
+  - {fileID: 8300000, guid: 6fc75a86a87276c4dac073ea38369ab9, type: 3}
+  - {fileID: 8300000, guid: 8442078ac943bd640afa8359b1d608ab, type: 3}
+  - {fileID: 8300000, guid: 96f511616ff600a479798d5b4f3a6f8f, type: 3}
+  m_JumpSound: {fileID: 0}
+  m_LandSound: {fileID: 8300000, guid: c3b368aeefccee14789432a4741212d1, type: 3}
+  m_StepTimeWaking: 0.5
   groundPosition: {fileID: 8850334316947868405}
   castRadius: 0.2
   walkableLayers:
@@ -779,7 +789,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -788,9 +798,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

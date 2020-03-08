@@ -35,7 +35,7 @@ public class Player_State_Falling : State
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        if (((PlayerControllerFSM) Machine.characterController).IsGrounded())
+        if (((PlayerControllerFSM)Machine.characterController).IsGrounded())
         {
             Machine.SwitchState<Player_State_Walk>();
         }
@@ -45,7 +45,7 @@ public class Player_State_Falling : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
+        movementSpeed = ((PlayerControllerFSM)Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.AirControlSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
@@ -55,5 +55,6 @@ public class Player_State_Falling : State
     protected override void OnStateExit()
     {
         base.OnStateExit();
+        ((PlayerControllerFSM)Machine.characterController).LandSound();
     }
 }

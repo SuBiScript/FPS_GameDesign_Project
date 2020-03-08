@@ -216,9 +216,10 @@ namespace Weapon
             if (!CanShoot()) return false;
             shootTimer = realROF;
 
-            if (!m_ObjectAttacher.m_AttachedObject)
+            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished)
             {
                 GameController.Instance.playerComponents.PlayerController.weaponAnimator.SetTrigger("Shoot");
+                AudioManager.instance.Play("Shot");
                 switch (_currentColor)
                 {
                     case WeaponColor.Blue:
@@ -286,9 +287,10 @@ namespace Weapon
 
         public bool AltFire()
         {
-            if (!m_ObjectAttacher.m_AttachedObject)
+            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished)
             {
                 ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
+                AudioManager.instance.Play("ChangeColor");
                 return true;
             }
             else

@@ -42,6 +42,7 @@ public class Player_State_Jumping : State
             Machine.characterController.characterProperties.JumpForce,
             ForceMode.Impulse);
         ((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetTrigger("Jumping");
+        AudioManager.instance.Play("Jump");
     }
 
     private void RemoveVerticalSpeed()

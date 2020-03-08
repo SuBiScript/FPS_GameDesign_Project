@@ -59,7 +59,7 @@ MonoBehaviour:
     pitch: 1
     name: MusicLevel
     clip: {fileID: 8300000, guid: 514bcab2fd8d6d84f9e05c199f5c7d9e, type: 3}
-    loop: 0
+    loop: 1
   - source: {fileID: 0}
     volume: 0.1
     pitch: 1
@@ -69,12 +69,42 @@ MonoBehaviour:
   - source: {fileID: 0}
     volume: 1
     pitch: 1
-    name: 
-    clip: {fileID: 0}
+    name: Jump
+    clip: {fileID: 8300000, guid: 659ef0ab27f455d4d8c68b88af24d38d, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    name: JumpPlatform
+    clip: {fileID: 8300000, guid: 9090194291d987d4dbefee67f4ddcb60, type: 3}
     loop: 0
   - source: {fileID: 0}
     volume: 1
     pitch: 1
-    name: 
-    clip: {fileID: 0}
+    name: ChangeColor
+    clip: {fileID: 8300000, guid: 0163c1dc67955b64ba61270cfb48b55e, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    name: Shot
+    clip: {fileID: 8300000, guid: 894a6bc956af7424180be99f75712265, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 0.9
+    pitch: 1
+    name: Scream
+    clip: {fileID: 8300000, guid: 873d40caf2c087e4ab79831d8b782c1b, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    name: Magnet
+    clip: {fileID: 8300000, guid: 7085a4795a3635840ab96091d402b30a, type: 3}
+    loop: 0
+  - source: {fileID: 0}
+    volume: 0.5
+    pitch: 1
+    name: JumpPlatform
+    clip: {fileID: 8300000, guid: f792bf995ca50b349ae39e13cd890c6c, type: 3}
     loop: 0

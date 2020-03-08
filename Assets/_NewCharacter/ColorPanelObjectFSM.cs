@@ -153,7 +153,7 @@ namespace ColorPanels
                         return;
                     }
                     if (collidedCollider.CompareTag("Player") || cubeEffect == null || cubeEffect.currentlyAttached) return;
-                    
+
                     if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
                         if (collidedCollider.CompareTag("Attached") && collidedCollider.gameObject ==
@@ -172,7 +172,7 @@ namespace ColorPanels
         }
 
         public void OnChildTriggerExit(Collider other)
-        { 
+        {
             //DetachObject();
         }
 
@@ -228,6 +228,7 @@ namespace ColorPanels
             _attachedObjectRigidbody.useGravity = false;
             _attachedObjectRigidbody.isKinematic = true;
             _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Attach(this);
+            AudioManager.instance.Play("Magnet");
         }
 
         private void DetachObject(float l_DetachForce = 10f)

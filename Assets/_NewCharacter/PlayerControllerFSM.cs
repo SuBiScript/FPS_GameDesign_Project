@@ -15,6 +15,15 @@ public class PlayerControllerFSM : CharacterController
     public Collider attachedCollider;
     public Transform m_PitchControllerTransform;
 
+    [Header("Sound settings")]
+    public AudioClip[] m_FootstepSounds;
+    public AudioClip m_JumpSound;
+    public AudioClip m_LandSound;
+    [Range(0.1f, 2.0f)] public float m_StepTimeWaking;
+    private float m_StepTimeRange;
+    private float m_StepTime = 0.0f;
+    private AudioSource m_AudioSource;
+
     [Header("Ground Detection")] public Transform groundPosition;
     [Range(0.1f, 10f)] public float castRadius = 1f;
     public LayerMask walkableLayers;
@@ -50,6 +59,10 @@ public class PlayerControllerFSM : CharacterController
 
         attachedCollider = GetComponent<Collider>();
         weaponAnimator = equippedWeapon.weaponMeshRenderer.gameObject.GetComponent<Animator>();
+
+        m_AudioSource = GetComponent<AudioSource>();
+        m_StepTime = Time.time + m_StepTimeRange;
+        m_StepTimeRange = m_StepTimeWaking;
     }
 
     private void Start()
@@ -65,12 +78,12 @@ public class PlayerControllerFSM : CharacterController
         if (currentBrain.isActiveAndEnabled)
             currentBrain.GetActions();
 
-        if (currentBrain.Shooting)
+        if (currentBrain.Shooting && !GameController.Instance.m_GamePaused)
         {
             equippedWeapon.MainFire();
         }
 
-        if (currentBrain.Aiming)
+        if (currentBrain.Aiming && !GameController.Instance.m_GamePaused)
         {
             if (equippedWeapon.AltFire())
                 weaponAnimator.SetTrigger("ChangeColor");
@@ -80,6 +93,12 @@ public class PlayerControllerFSM : CharacterController
             !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
         {
             stateMachine.UpdateTick(Time.deltaTime);
+        }
+
+        if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
+        {
+            PlayFootStepAudio();
+            m_StepTime = Time.time + m_StepTimeRange;
         }
     }
 
@@ -109,5 +128,22 @@ public class PlayerControllerFSM : CharacterController
         {
             attachedCollider.material = onAirMaterial;
         }
+    }
+
+    private void PlayFootStepAudio()
+    {
+        if (!IsGrounded())
+            return;
+
+        int i = Random.Range(1, m_FootstepSounds.Length);
+        m_AudioSource.clip = m_FootstepSounds[i];
+        m_AudioSource.PlayOneShot(m_AudioSource.clip);
+        m_FootstepSounds[i] = m_FootstepSounds[0];
+        m_FootstepSounds[0] = m_AudioSource.clip;
+    }
+
+    public void LandSound()
+    {
+        m_AudioSource.PlayOneShot(m_LandSound);
     }
 }

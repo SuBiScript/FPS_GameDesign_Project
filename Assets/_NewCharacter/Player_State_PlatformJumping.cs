@@ -37,7 +37,7 @@ public class Player_State_PlatformJumping : State
         ColorPanelEffects.PlayerJump(((PlayerControllerFSM)Machine.characterController), attachedRigidbody);
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
         ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetTrigger("Jumping");
-
+        AudioManager.instance.Play("JumpPlatform");
     }
 
     protected override void OnStateExit()
