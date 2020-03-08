@@ -16,6 +16,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     private const string c_EmissionColor = "_EmissionColor";
     private Material[] m_StatusMaterials;
     private bool m_ChangeColorMaterial;
+    private Rigidbody _rigidbody;
 
     public bool currentlyAttached { get; set; }
     public ColorPanelObjectFSM AttachedOnThisPanel { get; set; }
@@ -34,6 +35,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     {
         startingPosition = transform.position;
         initialRotation = transform.rotation;
+        _rigidbody = GetComponent<Rigidbody>();
         
         m_Collider = GetComponentInChildren<CapsuleCollider>();
 
@@ -132,5 +134,6 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     {
         transform.position = startingPosition;
         transform.rotation = initialRotation;
+        _rigidbody.velocity = Vector3.zero;
     }
 }
