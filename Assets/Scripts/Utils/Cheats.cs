@@ -13,7 +13,21 @@ namespace Utils
             }
             else
             {
-                Debug.LogError("Not in play mode.");
+                Debug.LogWarning("Not in play mode.");
+            }
+        }
+
+        public static void ToggleGodMode()
+        {
+            if (Application.isPlaying)
+            {
+                bool infoBool = GameController.Instance.playerComponents.HealthManager.m_GodMode =
+                    !GameController.Instance.playerComponents.HealthManager.m_GodMode;
+                Debug.LogWarning(infoBool ? "Enabled god mode! >:D" : "Disabled god mode! :(" );
+            }
+            else
+            {
+                Debug.LogWarning("Not in play mode.");
             }
         }
     }

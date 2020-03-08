@@ -43,11 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f546f4850c6d2ef43ac11a33ec9b5e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerController: {fileID: 0}
   m_CanvasController: {fileID: 0}
   m_PauseMenu: {fileID: 0}
   m_GameOverMenu: {fileID: 0}
   m_BloodFrame: {fileID: 0}
-  m_AngleLocked: 0
+  m_Intro: {fileID: 0}
+  m_NoIntro: 1
+  defaultCheckpoint: {fileID: 0}
   m_GamePaused: 0
   m_PlayerDied: 0
+  m_IntroFinished: 0

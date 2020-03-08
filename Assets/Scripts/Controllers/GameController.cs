@@ -13,8 +13,9 @@ public class GameController : Singleton<GameController>
     public GameObject m_GameOverMenu;
     public Image m_BloodFrame;
     public GameObject m_Intro;
-    public bool m_NoIntro;
-
+    public bool m_NoIntro = true;
+    public Checkpoint defaultCheckpoint;
+    
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
     [HideInInspector] public bool m_IntroFinished;
@@ -55,6 +56,8 @@ public class GameController : Singleton<GameController>
                 m_CanvasController.ShowReticle();
             m_IntroFinished = true;
         }
+        
+        CheckpointManager.Init(defaultCheckpoint,FindObjectsOfType<Checkpoint>());
     }
 
     private void AddPlayerComponents()
@@ -87,6 +90,7 @@ public class GameController : Singleton<GameController>
     {
         if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
             Pause();
+       
     }
 
 

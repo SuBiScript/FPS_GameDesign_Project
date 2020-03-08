@@ -12,26 +12,10 @@ namespace Utils
             Cheats.DamagePlayer(999);
         }
 
-        [MenuItem("Cheats/Player/God Mode =) #G")]
+        [MenuItem("Cheats/Player/Toggle God Mode #G")]
         public static void GodMode()
         {
-            if (!Application.isPlaying)
-            {
-                Debug.LogError("Game not running");
-                return;
-            }
-            GameController.Instance.playerComponents.HealthManager.m_GodMode = true;
-        }
-
-        [MenuItem("Cheats/Player/Normal Mode =( %#G")]
-        public static void NormalMode()
-        {
-            if (!Application.isPlaying)
-            {
-                Debug.LogError("Game not running");
-                return;
-            }
-            GameController.Instance.playerComponents.HealthManager.m_GodMode = false;
+            Cheats.ToggleGodMode();
         }
 
         [MenuItem("Cheats/Player/Replenish Shield")]
@@ -74,6 +58,17 @@ namespace Utils
                 return;
             }
             GameController.Instance.playerComponents.HealthManager.RestoreHealth(amount);
+        }
+
+        [MenuItem("Cheats/Level/Respawn on Checkpoint #R")]
+        public static void RespawnOnCheckpoint()
+        {
+            if (Application.isPlaying)
+            {
+                Debug.LogError("Game not running!");
+            }
+            GameController.Instance.playerComponents.PlayerController.gameObject.transform.position =
+                CheckpointManager.GetRespawnPoint().position;
         }
     }
 }

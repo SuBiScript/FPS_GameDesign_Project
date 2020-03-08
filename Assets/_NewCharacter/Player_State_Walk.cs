@@ -72,7 +72,7 @@ public class Player_State_Walk : State
         attachedRigidbody = Machine.characterController.rigidbody;
         ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(true);
         coyoteFrames = 0;
-        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("OnGround", true);
+        //((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("OnGround", true);
     }
 
     protected override void OnStateExit()
@@ -80,7 +80,7 @@ public class Player_State_Walk : State
         base.OnStateExit();
         coyoteFrames = 0;
         ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", false);
-        ((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetBool("OnGround", false);
+        //((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetBool("OnGround", false);
 
     }
 }
