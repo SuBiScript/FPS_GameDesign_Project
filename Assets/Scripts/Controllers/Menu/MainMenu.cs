@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("PostpoScene");
+        SceneManager.LoadScene("OscarDesign");
         //AudioManager.instance.Stop("MenuSong");
     }
 
