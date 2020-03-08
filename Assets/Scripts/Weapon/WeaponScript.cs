@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Weapon
 {
-    public class WeaponScript : MonoBehaviour , IRestartable
+    public class WeaponScript : MonoBehaviour, IRestartable
     {
         [System.Serializable]
         public class ObjectAttacher
@@ -216,7 +216,7 @@ namespace Weapon
             if (!CanShoot()) return false;
             shootTimer = realROF;
 
-            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished)
+            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished && !GameController.Instance.m_PlayerDied)
             {
                 GameController.Instance.playerComponents.PlayerController.weaponAnimator.SetTrigger("Shoot");
                 AudioManager.instance.Play("Shot");
@@ -287,7 +287,7 @@ namespace Weapon
 
         public bool AltFire()
         {
-            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished)
+            if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished && !GameController.Instance.m_PlayerDied)
             {
                 ChangeColor((int)_currentColor < 3 ? _currentColor + 1 : (WeaponColor)1);
                 AudioManager.instance.Play("ChangeColor");
