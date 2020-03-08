@@ -15,6 +15,7 @@ public class GameController : Singleton<GameController>
     public Image m_BloodFrame;
     public GameObject m_Intro;
     public bool m_NoIntro = true;
+    public Animation m_BlackFade;
     [Header("Checkpoint settings")] public Checkpoint defaultCheckpoint;
     private List<IRestartable> _restartables = new List<IRestartable>();
 
@@ -70,6 +71,10 @@ public class GameController : Singleton<GameController>
         CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList() );
         if (startGame)
             CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
+        if (m_BlackFade != null)
+        {
+            m_BlackFade.Play();
+        }
     }
 
     private List<Checkpoint> CreateCheckpointList()
@@ -118,6 +123,8 @@ public class GameController : Singleton<GameController>
         m_PlayerDied = false;
         playerComponents.HealthManager.onCharacterRespawn.Invoke();
         m_BloodFrame.gameObject.SetActive(false);
+        m_BlackFade.Stop();
+        m_BlackFade.Play();
         //TODO Restart all restartable objects.
     }
 
