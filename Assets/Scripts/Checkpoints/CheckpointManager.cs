@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
 public static class CheckpointManager
 {
-    public static Checkpoint[] Checkpoints { get; private set; }
+    public static List<Checkpoint> Checkpoints { get; private set; }
     private static Checkpoint initialCheckpoint;
     private static Checkpoint currentCheckpoint;
 
-    public static void Init(Checkpoint defaultCheckpoint, Checkpoint[] checkpoints)
+    public static void Init(Checkpoint defaultCheckpoint, List<Checkpoint> checkpoints)
     {
         Checkpoints = checkpoints;
+        Checkpoints.Reverse();
         initialCheckpoint = defaultCheckpoint;
         EnableCheckpoints(true);
         SetNewCheckpoint(initialCheckpoint);
@@ -21,7 +24,7 @@ public static class CheckpointManager
 
     public static bool SetNewCheckpoint(Checkpoint checkpoint)
     {
-        if (!enabledCheckpoints || Checkpoints.Length <= 0)
+        if (!enabledCheckpoints || Checkpoints.Count <= 0)
         {
             Debug.LogWarning("Checkpoints are disabled.");
             return false;
@@ -32,7 +35,7 @@ public static class CheckpointManager
             return false;
         }
 
-        for (int i = 0; i < Checkpoints.Length; i++)
+        for (int i = 0; i < Checkpoints.Count; i++)
         {
             if (checkpoint.GetHashCode() == Checkpoints[i].GetHashCode())
             {
@@ -43,6 +46,21 @@ public static class CheckpointManager
         }
 
         return false;
+    }
+
+    public static bool SetObjectPositionToCheckpoint(GameObject gameObject, int index = 0)
+    {
+        try
+        {
+            Checkpoint chosenCheckpoint = index == 0 ? initialCheckpoint : Checkpoints[index];
+            gameObject.transform.position = chosenCheckpoint.respawnPosition.position;
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+            return false;
+        }
     }
 
     private static void SetStartingCheckpoint(Checkpoint checkpoint)
@@ -84,7 +102,7 @@ public static class CheckpointManager
     {
         if (enable)
         {
-            if (Checkpoints.Length <= 0)
+            if (Checkpoints.Count <= 0)
             {
                 Debug.LogWarning(
                     "No checkpoints available. Set checkpoints in Respawn Manager. (In GameManager's GameObject)");

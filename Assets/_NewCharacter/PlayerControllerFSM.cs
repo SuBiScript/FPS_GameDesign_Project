@@ -146,4 +146,10 @@ public class PlayerControllerFSM : CharacterController
     {
         m_AudioSource.PlayOneShot(m_LandSound);
     }
+
+    public void Restart(Vector3 position)
+    {
+        this.gameObject.transform.position = position;
+        rigidbody.velocity = Vector3.zero;
+    }
 }

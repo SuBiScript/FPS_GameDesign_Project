@@ -47,10 +47,14 @@ public class PauseController : MonoBehaviour
         GameController.Instance.m_CanvasController.m_textToDisplayAnim.SetActive(false);
     }
 
+
     public void Restart()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameController.Instance.playerComponents.PlayerController.Restart(CheckpointManager.GetRespawnPoint().position);
+        Resume();
+        GameController.Instance.ReloadGame();
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,10 @@ public class GameController : Singleton<GameController>
     public Image m_BloodFrame;
     public GameObject m_Intro;
     public bool m_NoIntro = true;
-    public Checkpoint defaultCheckpoint;
+    [Header("Checkpoint settings")] public Checkpoint defaultCheckpoint;
+    private List<IRestartable> _restartables = new List<IRestartable>();
+
+    public bool startGame;
 
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
@@ -46,6 +50,12 @@ public class GameController : Singleton<GameController>
             if (m_Intro != null)
                 m_Intro.gameObject.SetActive(false);
         }
+
+        var tempEnum = FindObjectsOfType<MonoBehaviour>().OfType<IRestartable>();
+        foreach (IRestartable item in tempEnum)
+        {
+            _restartables.Add(item);
+        }
     }
 
     private void Start()
@@ -57,7 +67,20 @@ public class GameController : Singleton<GameController>
             m_IntroFinished = true;
         }
 
-        CheckpointManager.Init(defaultCheckpoint, FindObjectsOfType<Checkpoint>());
+        CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList() );
+        if (startGame)
+            CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
+    }
+
+    private List<Checkpoint> CreateCheckpointList()
+    {
+        List<Checkpoint> returnList = new List<Checkpoint>();
+        var temp = FindObjectsOfType<Checkpoint>();
+        foreach (Checkpoint checkpoint in temp)
+        {
+            returnList.Add(checkpoint);
+        }
+        return returnList;
     }
 
     private void AddPlayerComponents()
@@ -75,7 +98,7 @@ public class GameController : Singleton<GameController>
         }
     }
 
-    public void OnPlayerDeath() //TODO Add player death functionality, a.k.a. show menus or play sounds.
+    public void OnPlayerDeath()
     {
         if (m_PlayerDied) return;
 
@@ -86,12 +109,23 @@ public class GameController : Singleton<GameController>
         Debug.LogWarning("Player has died.");
     }
 
+    public void ReloadGame()
+    {
+        foreach (IRestartable item in _restartables)
+        {
+            item.Restart();
+        }
+        m_PlayerDied = false;
+        playerComponents.HealthManager.onCharacterRespawn.Invoke();
+        m_BloodFrame.gameObject.SetActive(false);
+        //TODO Restart all restartable objects.
+    }
+
 
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
             Pause();
-
     }
 
 

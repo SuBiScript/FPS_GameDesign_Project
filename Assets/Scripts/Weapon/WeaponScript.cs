@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Weapon
 {
-    public class WeaponScript : MonoBehaviour
+    public class WeaponScript : MonoBehaviour , IRestartable
     {
         [System.Serializable]
         public class ObjectAttacher
@@ -428,6 +428,11 @@ namespace Weapon
         private void OnDisable()
         {
             weaponMaterial.SetColor("_EmissionColor", Color.white);
+        }
+
+        public void Restart()
+        {
+            ChangeColor(WeaponColor.Blue);
         }
     }
 }
