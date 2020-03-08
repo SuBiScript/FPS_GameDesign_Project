@@ -10,11 +10,11 @@ namespace ColorPanels
     {
         private static ColorPanelObjectFSM.ColorPanelProperties lastPanelProperties;
         private static Vector3 jumpDirection;
-        
+
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
             ColorPanelObjectFSM.ColorPanelProperties properties)
         {
-           var jumpForce = ComputeJumpForce(false, properties);
+            var jumpForce = ComputeJumpForce(false, properties);
             try
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();
@@ -26,12 +26,12 @@ namespace ColorPanels
             catch (NullReferenceException)
             {
             }
-            
+
         }
 
         public static void PlayerJump(PlayerControllerFSM player, Rigidbody rigidbody)
         {
-            player.enableAirControl = lastPanelProperties.enableAirControl; 
+            player.enableAirControl = lastPanelProperties.enableAirControl;
             rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
         }
 
@@ -43,7 +43,6 @@ namespace ColorPanels
 
         private static float ComputeJumpForce(bool isPlayer, ColorPanelObjectFSM.ColorPanelProperties properties)
         {
-            AudioManager.instance.Play("JumpPlatform");
             return isPlayer
                 ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()
                     ? properties.playerPropulsionForce

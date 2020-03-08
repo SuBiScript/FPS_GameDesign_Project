@@ -6,6 +6,11 @@ namespace ColorPanels
 {
     public class ColorPanelObjectFSM : MonoBehaviour, IRestartable
     {
+
+        [Header("Sound settings")]
+        public AudioClip m_JumpPlatform;
+        private AudioSource m_AudioSource;
+
         private WeaponScript.WeaponColor currentMode { get; set; }
 
         [System.Serializable]
@@ -49,6 +54,7 @@ namespace ColorPanels
             ChangeColor(WeaponScript.WeaponColor.None);
             m_CreateLine = false;
             m_AttachingObject = false;
+            m_AudioSource = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -129,11 +135,14 @@ namespace ColorPanels
                     {
                         ColorPanelEffects.PanelSetProperties(colorPanelProperties, transform.up);
                         pcController.stateMachine.SwitchState<Player_State_PlatformJumping>();
+                        m_AudioSource.PlayOneShot(m_JumpPlatform);
                         return;
                     }
 
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
+                    m_AudioSource.PlayOneShot(m_JumpPlatform);
                     break;
+
             }
         }
 

@@ -97,9 +97,13 @@ public class PlayerControllerFSM : CharacterController
 
         if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
         {
+            weaponAnimator.SetBool("Walking", true);
             PlayFootStepAudio();
             m_StepTime = Time.time + m_StepTimeRange;
         }
+
+        if (currentBrain.Direction.magnitude < .1f)
+            weaponAnimator.SetBool("Walking", false);
     }
 
     private void FixedUpdate()

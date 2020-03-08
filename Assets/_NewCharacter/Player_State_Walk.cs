@@ -31,8 +31,6 @@ public class Player_State_Walk : State
                 Machine.characterController.currentBrain.Direction,
                 WalkSpeed,
                 fixedTime);
-            ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", true);
-
         }
         else
         {
