@@ -4913,7 +4913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750380547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 205.7, y: 15.916016, z: 34.164062}
+  m_LocalPosition: {x: 175.28, y: 33.41, z: 34.164062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1492931526}
@@ -14199,6 +14199,11 @@ PrefabInstance:
         type: 3}
       propertyPath: colorPanelProperties.playerOnAirPropulsionForce
       value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486478162837384247, guid: 130a8e365b805db49917156ea7f4d4d9,
+        type: 3}
+      propertyPath: m_Locked
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 130a8e365b805db49917156ea7f4d4d9, type: 3}
