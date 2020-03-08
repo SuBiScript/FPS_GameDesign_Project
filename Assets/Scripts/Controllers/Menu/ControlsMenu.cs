@@ -17,7 +17,7 @@ public class ControlsMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             previousMenu.SetActive(true);
             this.gameObject.SetActive(false);
