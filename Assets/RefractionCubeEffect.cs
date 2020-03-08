@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ColorPanels;
 using UnityEngine;
 
-public class RefractionCubeEffect : MonoBehaviour
+public class RefractionCubeEffect : MonoBehaviour, IRestartable
 {
     public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
@@ -23,8 +23,18 @@ public class RefractionCubeEffect : MonoBehaviour
     //dynamic collider
     public CapsuleCollider m_Collider;
 
+    /// <summary>
+    /// Restarting positon variables
+    /// </summary>
+    private Vector3 startingPosition;
+
+    private Quaternion initialRotation;
+
     private void Start()
     {
+        startingPosition = transform.position;
+        initialRotation = transform.rotation;
+        
         m_Collider = GetComponentInChildren<CapsuleCollider>();
 
         var renderers = GetComponents<Renderer>();
@@ -116,5 +126,11 @@ public class RefractionCubeEffect : MonoBehaviour
         if(force) AttachedOnThisPanel.ForceDetach();
         AttachedOnThisPanel = null;
         currentlyAttached = false;
+    }
+
+    public void Restart()
+    {
+        transform.position = startingPosition;
+        transform.rotation = initialRotation;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ColorPanels
 {
-    public class ColorPanelObjectFSM : MonoBehaviour
+    public class ColorPanelObjectFSM : MonoBehaviour, IRestartable
     {
         private WeaponScript.WeaponColor currentMode { get; set; }
 
@@ -61,6 +61,7 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.None:
+                    m_CreateLine = false;
                     break;
                 case WeaponScript.WeaponColor.Red:
                     m_CreateLine = true;
@@ -248,6 +249,12 @@ namespace ColorPanels
         public void ForceDetach()
         {
             DetachObject();
+        }
+
+        public void Restart()
+        {
+            
+            ChangeColor(WeaponScript.WeaponColor.None);
         }
     }
 }

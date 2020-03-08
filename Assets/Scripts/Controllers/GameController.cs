@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,7 @@ public class GameController : Singleton<GameController>
     public GameObject m_Intro;
     public bool m_NoIntro = true;
     [Header("Checkpoint settings")] public Checkpoint defaultCheckpoint;
+    private List<IRestartable> _restartables = new List<IRestartable>();
 
     public bool startGame;
 
@@ -47,6 +49,12 @@ public class GameController : Singleton<GameController>
         {
             if (m_Intro != null)
                 m_Intro.gameObject.SetActive(false);
+        }
+
+        var tempEnum = FindObjectsOfType<MonoBehaviour>().OfType<IRestartable>();
+        foreach (IRestartable item in tempEnum)
+        {
+            _restartables.Add(item);
         }
     }
 
@@ -103,6 +111,10 @@ public class GameController : Singleton<GameController>
 
     public void ReloadGame()
     {
+        foreach (IRestartable item in _restartables)
+        {
+            item.Restart();
+        }
         m_PlayerDied = false;
         playerComponents.HealthManager.onCharacterRespawn.Invoke();
         m_BloodFrame.gameObject.SetActive(false);
