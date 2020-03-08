@@ -432,6 +432,7 @@ namespace Weapon
 
         public void Restart()
         {
+            m_ObjectAttacher.DetachObjectVer2(0f);
             ChangeColor(WeaponColor.Blue);
         }
     }
