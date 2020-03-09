@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        //AudioManager.instance.Play("MenuSong");
+        AudioManager.instance.Play("Perturbator");
     }
 
     void Update()
@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("PrimersNivells");
-        //AudioManager.instance.Stop("MenuSong");
+        AudioManager.instance.Stop("Perturbator");
     }
 
     public void Quit()
