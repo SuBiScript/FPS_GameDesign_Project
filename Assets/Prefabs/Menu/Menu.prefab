@@ -580,7 +580,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 28
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -591,7 +591,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESTART
+  m_Text: RELOAD CHECKPOINT
 --- !u!1 &2788854174886576024
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +751,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 28
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
@@ -762,7 +762,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EXIT
+  m_Text: EXIT TO MENU
 --- !u!1 &2788854174996875411
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +954,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 40}
-  m_SizeDelta: {x: 249.41, y: 46.76}
+  m_SizeDelta: {x: 380, y: 46.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2788854175024000711
 CanvasRenderer:
@@ -1332,7 +1332,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 249.41, y: 46.76}
+  m_SizeDelta: {x: 260, y: 46.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2788854175449472934
 CanvasRenderer:
@@ -1414,7 +1414,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2788854174886576026}
-        m_MethodName: Quit
+        m_MethodName: ExitToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

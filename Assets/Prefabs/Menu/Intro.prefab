@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5072669616132651039}
   - component: {fileID: 5072686514355590585}
   m_Layer: 5
-  m_Name: Start_Transition
+  m_Name: Intro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
