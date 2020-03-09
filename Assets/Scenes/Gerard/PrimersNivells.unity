@@ -5383,6 +5383,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1624045764810657404, guid: 524b4edef29a469489b1ffe4b5f92a24,
+        type: 3}
+      propertyPath: colorPanelProperties.playerPropulsionForce
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624045764810657404, guid: 524b4edef29a469489b1ffe4b5f92a24,
+        type: 3}
+      propertyPath: colorPanelProperties.playerOnAirPropulsionForce
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624045764810657404, guid: 524b4edef29a469489b1ffe4b5f92a24,
+        type: 3}
+      propertyPath: colorPanelProperties.objectPropulsionForce
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1624045765159870096, guid: 524b4edef29a469489b1ffe4b5f92a24,
         type: 3}
       propertyPath: m_Name
@@ -7389,7 +7404,7 @@ PrefabInstance:
     - target: {fileID: 3305226540692183281, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}
       propertyPath: sounds.Array.data[9].volume
-      value: 0.45
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4878850619585821764, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}
