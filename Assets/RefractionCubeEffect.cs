@@ -31,12 +31,14 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
 
     private Quaternion initialRotation;
 
+    private SwitchController m_raySwitch;
+
     private void Start()
     {
         startingPosition = transform.position;
         initialRotation = transform.rotation;
         _rigidbody = GetComponent<Rigidbody>();
-        
+
         m_Collider = GetComponentInChildren<CapsuleCollider>();
 
         var renderers = GetComponents<Renderer>();
@@ -65,7 +67,15 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
         m_LineRenderer.gameObject.SetActive(m_CreateRefraction);
 
         if (!m_CreateRefraction)
+        {
             m_StatusMaterials[0].SetColor(c_EmissionColor, Color.green);
+
+            if (m_raySwitch != null)
+            {
+                m_raySwitch.DisableSwith();
+                m_raySwitch = null;
+            }
+        }
 
         m_CreateRefraction = false;
         m_CubeRefracted = false;
@@ -99,6 +109,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
                 l_RaycastHit.collider.GetComponent<RefractionCubeEffect>().CreateRefraction();
             else if (l_RaycastHit.collider.tag == "Switch")
             {
+                m_raySwitch = l_RaycastHit.transform.GetComponent<SwitchController>();
                 l_RaycastHit.transform.GetComponent<SwitchController>().OpenRenderLineDoor();
             }
             else if (l_RaycastHit.transform.tag == "Player")
@@ -125,7 +136,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
 
     public void Detach(bool force = false)
     {
-        if(force) AttachedOnThisPanel.ForceDetach();
+        if (force) AttachedOnThisPanel.ForceDetach();
         AttachedOnThisPanel = null;
         currentlyAttached = false;
     }

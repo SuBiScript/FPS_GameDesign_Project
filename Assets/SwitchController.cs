@@ -56,11 +56,16 @@ public class SwitchController : MonoBehaviour
     {
         if (other.tag == "Laser")
         {
-            m_StatusMaterials[0].SetColor(c_EmissionColor, Color.red);
-            gate.SwithStatus(true);
-            m_LineButtonOpen = false;
-            PlaySound(switchDisable);
+            DisableSwith();
         }
+    }
+
+    public void DisableSwith()
+    {
+        m_StatusMaterials[0].SetColor(c_EmissionColor, Color.red);
+        gate.SwithStatus(true);
+        m_LineButtonOpen = false;
+        PlaySound(switchDisable);
     }
 
     private void PlaySound(AudioClip clip)

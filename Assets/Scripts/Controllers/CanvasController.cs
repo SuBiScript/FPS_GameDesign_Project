@@ -35,6 +35,17 @@ public class CanvasController : MonoBehaviour
         m_textShadowToDisplay.fontSize = fontSize;
     }
 
+    public void TextToDisplay(string text)
+    {
+        m_textToDisplayAnim.SetActive(false);
+        m_textToDisplayAnim.SetActive(true);
+        m_textToDisplayPos.anchoredPosition = new Vector2(0, 350);
+        m_textToDisplay.text = text;
+        m_textToDisplay.fontSize = 35;
+        m_textShadowToDisplay.text = text;
+        m_textShadowToDisplay.fontSize = 35;
+    }
+
     public void RemovingText(GameObject gameObject)
     {
         gameObject.SetActive(false);

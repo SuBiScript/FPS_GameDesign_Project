@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         es = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         //AudioManager.instance.Play("MenuSong");
     }
