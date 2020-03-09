@@ -46,6 +46,11 @@ public class PauseController : MonoBehaviour
         GameController.Instance.m_CanvasController.gameObject.SetActive(true);
         GameController.Instance.m_GamePaused = false;
         GameController.Instance.m_CanvasController.m_textToDisplayAnim.SetActive(false);
+
+        foreach (SparkController s in GameController.Instance.m_sparks)
+        {
+            s.UnpauseSound();
+        }
     }
 
 
@@ -56,7 +61,7 @@ public class PauseController : MonoBehaviour
         GameController.Instance.playerComponents.PlayerController.Restart(CheckpointManager.GetRespawnPoint().position);
         Resume();
         GameController.Instance.ReloadGame();
-        AudioManager.instance.StopAllSounds();
+        //AudioManager.instance.StopAllSounds();
         AudioManager.instance.Play("Ambience");
         AudioManager.instance.Play("MusicLevel");
     }

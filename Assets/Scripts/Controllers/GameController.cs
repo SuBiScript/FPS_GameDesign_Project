@@ -21,6 +21,8 @@ public class GameController : Singleton<GameController>
 
     public bool startGame;
 
+    [HideInInspector] public SparkController[] m_sparks;
+
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
     [HideInInspector] public bool m_IntroFinished;
@@ -57,6 +59,8 @@ public class GameController : Singleton<GameController>
         {
             _restartables.Add(item);
         }
+
+        m_sparks = FindObjectsOfType<SparkController>();
     }
 
     private void Start()
@@ -68,7 +72,7 @@ public class GameController : Singleton<GameController>
             m_IntroFinished = true;
         }
 
-        CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList() );
+        CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList());
         if (startGame)
             CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
         if (m_BlackFade != null)
@@ -128,7 +132,6 @@ public class GameController : Singleton<GameController>
         //TODO Restart all restartable objects.
     }
 
-
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
@@ -146,6 +149,11 @@ public class GameController : Singleton<GameController>
         Time.timeScale = 0;
         if (m_CanvasController != null)
             m_CanvasController.gameObject.SetActive(false);
+
+        foreach (SparkController s in m_sparks)
+        {
+            s.PauseSound();
+        }
     }
 
     public void GameOver()
