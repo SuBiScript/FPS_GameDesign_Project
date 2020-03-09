@@ -14,7 +14,8 @@ public class FinalRoomTeleportController : MonoBehaviour
     {
         m_WhiteFadeOut.GetComponent<Animator>().SetBool("WhiteFadeOut", true);
         AudioManager.instance.Play("TeleportMenu");
-        //AudioManager.instance.Stop("LevelMusic");
+        AudioManager.instance.Stop("Breathing");
+        AudioManager.instance.Stop("Ambience");
         Invoke("FadeToNextScene", 5);
     }
 
@@ -38,12 +39,6 @@ public class FinalRoomTeleportController : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        //AsyncOperation l_AsyncLoad = SceneManager.LoadSceneAsync("MainMenu");
-        //while (!l_AsyncLoad.isDone)
-        //{
-        //    yield return null;
-        //}
-
         SceneManager.LoadScene("MainMenu");
         yield return null;
     }
