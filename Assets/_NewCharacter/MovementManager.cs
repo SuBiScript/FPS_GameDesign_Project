@@ -16,6 +16,12 @@ public static class MovementManager
             rigidbody.gameObject.transform.TransformDirection(direction) * (speed * fixedDeltaTime));
     }
 
+    public static void MoveWithForce(Rigidbody rigidbody, Vector3 direction, float speed, float deltaTime, ForceMode forceMode = ForceMode.Impulse)
+    {
+        if (rigidbody == null) return;
+        rigidbody.AddForce(direction * (speed * deltaTime), forceMode);
+    }
+
     /// <summary>
     /// Movement using the AddForce method of the rigidbody.
     /// </summary>

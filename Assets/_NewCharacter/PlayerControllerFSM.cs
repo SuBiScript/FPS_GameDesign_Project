@@ -93,6 +93,7 @@ public class PlayerControllerFSM : CharacterController
             !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
         {
             stateMachine.UpdateTick(Time.deltaTime);
+            rigidbody.velocity = Vector3.ClampMagnitude(rigidbody.velocity, characterProperties.MaxVelocity);
         }
 
         if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
