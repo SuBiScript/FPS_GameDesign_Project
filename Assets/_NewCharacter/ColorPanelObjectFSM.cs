@@ -1,4 +1,5 @@
 ﻿using System;
+using PlayerFSM;
 using Weapon;
 using UnityEngine;
 
@@ -78,6 +79,17 @@ namespace ColorPanels
                     {
                         ColorPanelEffects.UpdateAttachedObject(_attachedObjectRigidbody, dragPosition,
                             m_AttachingObjectSpeed);
+                        if (lastCube != null)
+                        {
+                            autoDetach--;
+                            if (autoDetach <= 0)
+                            {
+                                lastCube = null;
+                                autoDetach = 15;
+                            }
+                        }
+                        else if (autoDetach != 15)
+                            autoDetach = 15;
                     }
                     catch (NullReferenceException)
                     {
@@ -90,18 +102,6 @@ namespace ColorPanels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            if (lastCube != null)
-            {
-                autoDetach--;
-                if (autoDetach <= 0)
-                {
-                    lastCube = null;
-                    autoDetach = 15;
-                }
-            }
-            else if (autoDetach != 15)
-                autoDetach = 15;
         }
 
         void CreateRender()
@@ -177,7 +177,7 @@ namespace ColorPanels
                     }
 
                     var newRB = collidedCollider.GetComponent<Rigidbody>();
-                    
+
                     if (collidedCollider.CompareTag("Player") || cubeEffect == null ||
                         cubeEffect.currentlyAttached || newRB == lastCube) return;
 
@@ -202,11 +202,17 @@ namespace ColorPanels
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject == GameController.Instance.playerComponents.PlayerController.gameObject) return;
-            Rigidbody otherRB = other.GetComponent<Rigidbody>();
-            if (otherRB != null && otherRB == lastCube)
+            switch (currentMode)
             {
-                lastCube = null;
+                case WeaponScript.WeaponColor.Green:
+                    if (other.gameObject == GameController.Instance.playerComponents.PlayerController.gameObject) return;
+                    Rigidbody otherRB = other.GetComponent<Rigidbody>();
+                    if (otherRB != null && otherRB == lastCube)
+                    {
+                        lastCube = null;
+                    }
+
+                    break;
             }
         }
 
@@ -221,7 +227,7 @@ namespace ColorPanels
             if (currentMode == color) return false;
             lastCube = null;
             DetachObject();
-            
+
             InternalChangeColor(color);
 
             return true;

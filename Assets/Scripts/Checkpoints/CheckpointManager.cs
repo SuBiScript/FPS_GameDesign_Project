@@ -69,9 +69,9 @@ public static class CheckpointManager
             
             gameObject.transform.position = chosenCheckpoint.respawnTransform.position;
             
-            var newQuaternion = gameObject.transform.rotation;
-            newQuaternion.y = chosenCheckpoint.respawnTransform.rotation.y;
-            gameObject.transform.rotation = newQuaternion;
+            /*var newQuaternion = gameObject.transform.rotation;
+            newQuaternion.y = chosenCheckpoint.respawnTransform.rotation.y; //TODO make it work with the camera.
+            gameObject.transform.rotation = newQuaternion;*/
             
             return true;
         }
