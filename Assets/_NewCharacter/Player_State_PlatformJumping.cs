@@ -7,7 +7,8 @@ using UnityEngine;
 public class Player_State_PlatformJumping : State
 {
     private Rigidbody attachedRigidbody;
-    private float timer;
+    private byte timer;
+    private float movementSpeed;
 
     protected override void OnStateInitialize(StateMachine machine)
     {
@@ -17,12 +18,20 @@ public class Player_State_PlatformJumping : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
-        if (timer > 0) timer -= deltaTime;
+        if (timer > 0) timer--;
     }
 
     public override void OnStateFixedTick(float fixedDeltaTime)
     {
         base.OnStateFixedTick(fixedDeltaTime);
+        if (Machine.characterController.currentBrain.Direction != Vector3.zero)
+        {
+            MovementManager.MoveRigidbody(
+                attachedRigidbody,
+                Machine.characterController.currentBrain.Direction,
+                movementSpeed,
+                fixedDeltaTime);
+        }
     }
 
     public override void OnStateCheckTransition()
@@ -46,10 +55,14 @@ public class Player_State_PlatformJumping : State
         ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(false);
 
         ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetTrigger("Jumping");
+        
+        movementSpeed =  movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
+            ? Machine.characterController.characterProperties.AirControlSpeed
+            : Machine.characterController.characterProperties.OnAirSpeed;
 
         AudioManager.instance.Play("JumpPlatform");
 
-        timer = 0.15f;
+        timer = 5;
     }
 
     protected override void OnStateExit()

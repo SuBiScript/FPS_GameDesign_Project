@@ -45,6 +45,7 @@ namespace ColorPanels
         public LayerMask m_CollisionLayerMask;
         [Range(1f, 400.0f)] public float m_MaxLineDistance;
         bool m_CreateLine;
+        private byte autoDetach = 15;
 
         void Start()
         {
@@ -89,6 +90,18 @@ namespace ColorPanels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (lastCube != null)
+            {
+                autoDetach--;
+                if (autoDetach <= 0)
+                {
+                    lastCube = null;
+                    autoDetach = 15;
+                }
+            }
+            else if (autoDetach != 15)
+                autoDetach = 15;
         }
 
         void CreateRender()
@@ -123,6 +136,8 @@ namespace ColorPanels
 
 
         private void OnCollisionEnter(Collision other) => OnCollisionInteract(other);
+
+        private void OnCollisionStay(Collision other) => OnCollisionInteract(other);
 
         private void OnCollisionInteract(Collision other) //OnCollision
         {
@@ -187,6 +202,7 @@ namespace ColorPanels
 
         private void OnTriggerExit(Collider other)
         {
+            if (other.gameObject == GameController.Instance.playerComponents.PlayerController.gameObject) return;
             Rigidbody otherRB = other.GetComponent<Rigidbody>();
             if (otherRB != null && otherRB == lastCube)
             {
@@ -203,9 +219,9 @@ namespace ColorPanels
         {
             //Here you change the weapon material of the block and stuff.
             if (currentMode == color) return false;
-
+            lastCube = null;
             DetachObject();
-
+            
             InternalChangeColor(color);
 
             return true;
