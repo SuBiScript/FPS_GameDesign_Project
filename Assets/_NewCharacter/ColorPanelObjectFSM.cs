@@ -6,9 +6,7 @@ namespace ColorPanels
 {
     public class ColorPanelObjectFSM : MonoBehaviour, IRestartable
     {
-
-        [Header("Sound settings")]
-        public AudioClip m_JumpPlatform;
+        [Header("Sound settings")] public AudioClip m_JumpPlatform;
         private AudioSource m_AudioSource;
 
         private WeaponScript.WeaponColor currentMode { get; set; }
@@ -39,6 +37,7 @@ namespace ColorPanels
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
         private Rigidbody _attachedObjectRigidbody;
+        private Rigidbody lastCube;
         public bool m_AttachingObject;
         public float m_AttachingObjectSpeed;
 
@@ -142,7 +141,6 @@ namespace ColorPanels
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
                     m_AudioSource.PlayOneShot(m_JumpPlatform);
                     break;
-
             }
         }
 
@@ -162,7 +160,11 @@ namespace ColorPanels
                     {
                         return;
                     }
-                    if (collidedCollider.CompareTag("Player") || cubeEffect == null || cubeEffect.currentlyAttached) return;
+
+                    var newRB = collidedCollider.GetComponent<Rigidbody>();
+                    
+                    if (collidedCollider.CompareTag("Player") || cubeEffect == null ||
+                        cubeEffect.currentlyAttached || newRB == lastCube) return;
 
                     if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
@@ -170,14 +172,25 @@ namespace ColorPanels
                             GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
                                 .m_ObjectAttached.gameObject)
                         {
-                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher.DetachObjectVer2(0f);
+                            GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
+                                .DetachObjectVer2(0f);
                         }
 
-                        var newRB = collidedCollider.GetComponent<Rigidbody>();
+
                         AttachObject(newRB);
+                        lastCube = newRB;
                     }
 
                     break;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            Rigidbody otherRB = other.GetComponent<Rigidbody>();
+            if (otherRB != null && otherRB == lastCube)
+            {
+                lastCube = null;
             }
         }
 
@@ -262,7 +275,6 @@ namespace ColorPanels
 
         public void Restart()
         {
-            
             ChangeColor(WeaponScript.WeaponColor.None);
         }
     }

@@ -50,7 +50,7 @@ public class CameraFSMController : MonoBehaviour
     void Aiming()
     {
         Vector2 l_DeltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-
+        
         l_DeltaMouse = Vector2.Scale(l_DeltaMouse,
             new Vector2(m_Sensitivity * m_Smoothing, m_Sensitivity * m_Smoothing));
 

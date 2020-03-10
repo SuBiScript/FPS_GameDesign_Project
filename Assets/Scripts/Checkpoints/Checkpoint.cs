@@ -1,19 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class Checkpoint : MonoBehaviour
 {
-    private Collider collider;
-
-    public Transform respawnPosition;
+    [Header("Configuration")]
+    public byte ID;
+    public Transform respawnTransform;
+    
+    [Space(10)]
     public UnityEvent checkpointActivated;
+    private Collider collider;
 
     private void Awake()
     {
         collider = GetComponent<Collider>();
         collider.enabled = true;
         collider.isTrigger = true;
+        if (!CheckpointManager.RegisterCheckpoint(this))
+        {
+            Debug.LogWarning($"Checkpoint {this.gameObject.name.ToString()} not registered!");
+        }
     }
 
     private void OnTriggerEnter(Collider collision)

@@ -7,20 +7,33 @@ using UnityEngine.Rendering.PostProcessing;
 
 public static class CheckpointManager
 {
-    public static List<Checkpoint> Checkpoints { get; private set; }
+    public static Dictionary<byte, Checkpoint> Checkpoints = new Dictionary<byte, Checkpoint>();
     private static Checkpoint initialCheckpoint;
     private static Checkpoint currentCheckpoint;
 
-    public static void Init(Checkpoint defaultCheckpoint, List<Checkpoint> checkpoints)
+    public static bool enabledCheckpoints { get; private set; }
+
+    public static void Init(Checkpoint defaultCheckpoint)
     {
-        Checkpoints = checkpoints;
-        Checkpoints.Reverse();
         initialCheckpoint = defaultCheckpoint;
         EnableCheckpoints(true);
         SetNewCheckpoint(initialCheckpoint);
     }
 
-    public static bool enabledCheckpoints { get; private set; }
+    public static bool RegisterCheckpoint(Checkpoint checkpoint)
+    {
+        if (checkpoint == null) return false;
+
+        if (Checkpoints.ContainsKey(checkpoint.ID) || Checkpoints.ContainsValue(checkpoint))
+        {
+            Debug.LogWarning("Checkpoint already registered!");
+            return false;
+        }
+
+        Checkpoints.Add(checkpoint.ID, checkpoint);
+        return true;
+    }
+
 
     public static bool SetNewCheckpoint(Checkpoint checkpoint)
     {
@@ -35,7 +48,7 @@ public static class CheckpointManager
             return false;
         }
 
-        for (int i = 0; i < Checkpoints.Count; i++)
+        for (byte i = 0; i < Checkpoints.Count; i++)
         {
             if (checkpoint.GetHashCode() == Checkpoints[i].GetHashCode())
             {
@@ -48,12 +61,18 @@ public static class CheckpointManager
         return false;
     }
 
-    public static bool SetObjectPositionToCheckpoint(GameObject gameObject, int index = 0)
+    public static bool SetObjectPositionToCheckpoint(GameObject gameObject, byte index = 0)
     {
         try
         {
-            Checkpoint chosenCheckpoint = index == 0 ? initialCheckpoint : Checkpoints[index];
-            gameObject.transform.position = chosenCheckpoint.respawnPosition.position;
+            Checkpoint chosenCheckpoint = Checkpoints[index];
+            
+            gameObject.transform.position = chosenCheckpoint.respawnTransform.position;
+            
+            var newQuaternion = gameObject.transform.rotation;
+            newQuaternion.y = chosenCheckpoint.respawnTransform.rotation.y;
+            gameObject.transform.rotation = newQuaternion;
+            
             return true;
         }
         catch (Exception e)
@@ -74,15 +93,15 @@ public static class CheckpointManager
     private static void ResetAllCheckpoints()
     {
         if (!enabledCheckpoints) return;
-        foreach (Checkpoint checkpoint in Checkpoints)
+        foreach (var dictionaryValue in Checkpoints)
         {
-            checkpoint.SetCheckpoint(false);
+            dictionaryValue.Value.SetCheckpoint(false);
         }
     }
 
     public static Transform GetRespawnPoint()
     {
-        return currentCheckpoint.respawnPosition;
+        return currentCheckpoint.respawnTransform;
     }
 
     public static void Restart()

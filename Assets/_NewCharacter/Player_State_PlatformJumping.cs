@@ -17,6 +17,7 @@ public class Player_State_PlatformJumping : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
+        if (timer > 0) timer -= deltaTime;
     }
 
     public override void OnStateFixedTick(float fixedDeltaTime)
@@ -27,17 +28,28 @@ public class Player_State_PlatformJumping : State
     public override void OnStateCheckTransition()
     {
         base.OnStateCheckTransition();
-        Machine.SwitchState<Player_State_OnAir>();
+        if (timer <= 0)
+        {
+            Machine.SwitchState<Player_State_OnAir>();
+        }
     }
 
     protected override void OnStateEnter()
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        ColorPanelEffects.PlayerJump(((PlayerControllerFSM)Machine.characterController), attachedRigidbody);
-        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
+
+        attachedRigidbody.velocity = Vector3.zero;
+
+        ColorPanelEffects.PlayerJump(((PlayerControllerFSM) Machine.characterController), attachedRigidbody);
+
+        ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(false);
+
         ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetTrigger("Jumping");
+
         AudioManager.instance.Play("JumpPlatform");
+
+        timer = 0.15f;
     }
 
     protected override void OnStateExit()

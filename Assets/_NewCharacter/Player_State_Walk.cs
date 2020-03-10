@@ -70,6 +70,8 @@ public class Player_State_Walk : State
         attachedRigidbody = Machine.characterController.rigidbody;
         ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(true);
         coyoteFrames = 0;
+        ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
+        attachedRigidbody.velocity = Vector3.zero;
         //((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("OnGround", true);
     }
 

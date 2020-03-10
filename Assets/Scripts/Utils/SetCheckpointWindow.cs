@@ -7,25 +7,25 @@ using System;
 #if UNITY_EDITOR
 public class SetCheckPointCheat : EditorWindow
 {
-    [MenuItem("Cheats/Editor/Go to Checkpoint")]
+    [MenuItem("Cheats/Editor/Teleport to Checkpoint")]
     public static void ShowWindow()
     {
-        GetWindow<SetCheckPointCheat>("Checkpoint cheats");
+        GetWindow<SetCheckPointCheat>("Player Teleporter");
     }
 
-    string checkPointNumberString = "-1";
+    string checkPointNumberString = "0";
 
     private void OnGUI()
     {
-        GUILayout.Label("Write the checkpoint number: ", EditorStyles.boldLabel);
+        GUILayout.Label("Write the checkpoint ID: ", EditorStyles.boldLabel);
 
-        checkPointNumberString = EditorGUILayout.TextField("Zone number", checkPointNumberString);
+        checkPointNumberString = EditorGUILayout.TextField("Checkpoint ID", checkPointNumberString);
 
-        if (GUILayout.Button("Set new CheckPoint"))
+        if (GUILayout.Button("Set new checkpoint."))
         {
-            int checkPointNumber = 0;
+            byte checkPointNumber = 0;
 
-            if (int.TryParse(checkPointNumberString, out checkPointNumber))
+            if (byte.TryParse(checkPointNumberString, out checkPointNumber))
             {
                 if (!Application.isPlaying)
                 {
@@ -35,18 +35,21 @@ public class SetCheckPointCheat : EditorWindow
 
                 try
                 {
-                    CheckpointManager.SetNewCheckpoint(CheckpointManager.Checkpoints[checkPointNumber]);
+                    CheckpointManager.SetObjectPositionToCheckpoint(
+                        GameController.Instance.playerComponents.PlayerController.gameObject,
+                        checkPointNumber);
+                    /*CheckpointManager.SetNewCheckpoint();
                     GameController.Instance.playerComponents.PlayerController.gameObject.transform.position =
-                        CheckpointManager.GetRespawnPoint().position;
+                        CheckpointManager.GetRespawnPoint().position;*/
                 }
-                catch (IndexOutOfRangeException)
+                catch (Exception e)
                 {
-                    Debug.LogWarning("Checkpoint does not exist.");
+                    Debug.LogWarning(e.Message);
                 }
             }
             else
             {
-                Debug.LogError("The zone is not a number.");
+                Debug.LogError("Introduce a number.");
             }
         }
     }

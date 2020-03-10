@@ -14,7 +14,7 @@ namespace ColorPanels
         public static void ThrowObject(GameObject caller, Collision collision, Vector3 direction,
             ColorPanelObjectFSM.ColorPanelProperties properties)
         {
-            var jumpForce = ComputeJumpForce(false, properties);
+            var jumpForce = ComputeJumpForce(properties);
             try
             {
                 var collisionRigidbody = collision.gameObject.GetComponent<Rigidbody>();
@@ -41,13 +41,9 @@ namespace ColorPanels
             jumpDirection = direction;
         }
 
-        private static float ComputeJumpForce(bool isPlayer, ColorPanelObjectFSM.ColorPanelProperties properties)
+        private static float ComputeJumpForce(ColorPanelObjectFSM.ColorPanelProperties properties)
         {
-            return isPlayer
-                ? (GameController.Instance.playerComponents.PlayerController.IsGrounded()
-                    ? properties.playerPropulsionForce
-                    : properties.playerOnAirPropulsionForce)
-                : properties.objectPropulsionForce;
+            return properties.objectPropulsionForce;
         }
 
         public static void AttractObject(Rigidbody attracted, GameObject attractor, float force = 5f)

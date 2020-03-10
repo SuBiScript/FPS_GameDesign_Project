@@ -17,6 +17,9 @@ namespace PlayerFSM
         protected State currentState;
 
         public CharacterController characterController;
+        [Header("Debug Options")]
+        public bool enableDebug = false;
+        
 
         private void Start()
         {
@@ -50,14 +53,17 @@ namespace PlayerFSM
                 if (oldState)
                     oldState.StateExit();
                 currentState.StateEnter();
-                /*try
+                if (enableDebug)
                 {
-                    Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
+                    try
+                    {
+                        Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Debug.Log($"{currentState.GetType()}");
+                    }
                 }
-                catch (NullReferenceException)
-                {
-                    Debug.Log($"{currentState.GetType()}");
-                }*/
 
                 return currentState;
             }

@@ -72,24 +72,13 @@ public class GameController : Singleton<GameController>
             m_IntroFinished = true;
         }
 
-        CheckpointManager.Init(defaultCheckpoint, CreateCheckpointList());
+        CheckpointManager.Init(defaultCheckpoint);
         if (startGame)
             CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
         if (m_BlackFade != null)
         {
             m_BlackFade.Play();
         }
-    }
-
-    private List<Checkpoint> CreateCheckpointList()
-    {
-        List<Checkpoint> returnList = new List<Checkpoint>();
-        var temp = FindObjectsOfType<Checkpoint>();
-        foreach (Checkpoint checkpoint in temp)
-        {
-            returnList.Add(checkpoint);
-        }
-        return returnList;
     }
 
     private void AddPlayerComponents()
