@@ -48,7 +48,7 @@ namespace ColorPanels
         bool m_CreateLine;
         private byte autoDetach = 15;
 
-        void Start()
+        void Awake()
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
