@@ -183,6 +183,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7993526128288765554, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: m_CollisionLayerMask.m_Bits
+      value: 107776
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993526128704805454, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: m_Layer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6183143d9eab56547bc84e5797204b78, type: 3}
 --- !u!1 &6494874942748036605 stripped

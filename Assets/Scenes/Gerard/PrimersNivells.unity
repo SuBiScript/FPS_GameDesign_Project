@@ -1451,7 +1451,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -1921,7 +1921,7 @@ Transform:
   - {fileID: 377015520}
   - {fileID: 2101221744}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &714660262
 PrefabInstance:
@@ -3315,7 +3315,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -3364,6 +3364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 587271071, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 32768
+      objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176084, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3427,7 +3431,12 @@ PrefabInstance:
     - target: {fileID: 8850334318765290977, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: far clip plane
-      value: 5
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850334318765290977, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 36864
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}
@@ -4268,7 +4277,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -4477,7 +4486,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -5751,7 +5760,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -7553,7 +7562,7 @@ PrefabInstance:
     - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
         type: 3}
       propertyPath: m_NoIntro
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
         type: 3}
@@ -7823,6 +7832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: colorPanelProperties.playerOnAirPropulsionForce
       value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323674402267797333, guid: 130a8e365b805db49917156ea7f4d4d9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8486478162837384247, guid: 130a8e365b805db49917156ea7f4d4d9,
         type: 3}
@@ -8826,7 +8840,7 @@ PrefabInstance:
     - target: {fileID: 4878850619585821764, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4878850619585821764, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}

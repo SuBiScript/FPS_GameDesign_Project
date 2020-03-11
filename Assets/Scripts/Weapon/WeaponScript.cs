@@ -30,7 +30,7 @@ namespace Weapon
             [HideInInspector] public bool m_Rendered;
 
             [HideInInspector]
-            public Transform[] m_ChildsAttachedObject; //change Layer attribute for rendering object attached
+            public Transform m_ChildsAttachedObject; //change Layer attribute for rendering object attached
 
             public WeaponScript weapon;
 
@@ -83,18 +83,15 @@ namespace Weapon
 
                     if (!m_Rendered)
                     {
-                        m_ChildsAttachedObject = m_ObjectAttached.GetComponentsInChildren<Transform>();
-                        foreach (Transform child in m_ChildsAttachedObject)
-                        {
-                            //if (child.tag == "MeshAttached")
-                            child.gameObject.layer = LayerMask.NameToLayer("AttachedObject");
-                            m_ObjectAttached.isKinematic = true;
-                            m_ObjectAttached.WakeUp();
-                            m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
-                            m_ObjectAttached.transform.parent = GameController.Instance.playerComponents
-                                .PlayerController.m_PitchControllerTransform;
-                            m_Rendered = true;
-                        }
+                        m_ChildsAttachedObject = m_ObjectAttached.GetComponent<Transform>();
+                        m_ChildsAttachedObject.gameObject.layer = LayerMask.NameToLayer("AttachedObject");
+                        m_ObjectAttached.isKinematic = true;
+                        m_ObjectAttached.WakeUp();
+                        m_ObjectAttached.GetComponent<Collider>().isTrigger = true;
+                        m_ObjectAttached.transform.parent = GameController.Instance.playerComponents
+                            .PlayerController.m_PitchControllerTransform;
+                        m_Rendered = true;
+
                     }
                 }
             }
@@ -113,11 +110,7 @@ namespace Weapon
             {
                 if (m_ObjectAttached == null) return;
 
-                foreach (Transform child in m_ChildsAttachedObject)
-                {
-                    //if (child.tag == "MeshAttached")
-                    child.gameObject.layer = LayerMask.NameToLayer("Cube");
-                }
+                m_ChildsAttachedObject.gameObject.layer = LayerMask.NameToLayer("Cube");
 
                 try
                 {

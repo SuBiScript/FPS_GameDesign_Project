@@ -123,7 +123,7 @@ namespace ColorPanels
                     }
                 }
 
-                else if (l_RaycastHit.transform.tag == "Cube" || l_RaycastHit.collider.tag == "Attached")
+                else if (l_RaycastHit.transform.GetComponent<RefractionCubeEffect>())
                 {
                     l_RaycastHit.collider.GetComponent<RefractionCubeEffect>().CreateRefraction();
                 }
