@@ -13,5 +13,7 @@ public class MainmenuSceneManager : MonoBehaviour
         {
             panel.ChangeColor(WeaponScript.WeaponColor.Blue);
         }
+
+        //AudioManager.instance.Play("Perturbator");
     }
 }

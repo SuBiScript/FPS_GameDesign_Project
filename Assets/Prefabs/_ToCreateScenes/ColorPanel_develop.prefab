@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_JumpPlatform: {fileID: 8300000, guid: 9090194291d987d4dbefee67f4ddcb60, type: 3}
+  magnetSound: {fileID: 8300000, guid: 7085a4795a3635840ab96091d402b30a, type: 3}
   colorPanelProperties:
     materialList: {fileID: 11400000, guid: b3ccc48bba671094e876a742569fb608, type: 2}
     playerPropulsionForce: 5

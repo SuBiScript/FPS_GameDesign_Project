@@ -13,7 +13,8 @@ public class MenuCubeSelector : MonoBehaviour
     public TextMeshPro TextMeshPro;
     public Animation blackFadeOut;
 
-    [Header("Transitions")] public float standardWaitTime = 1f;
+    [Header("Transitions")] [Range(0f, 5f)] [Tooltip("Wait time between selecting an option and fading.")]
+    public float standardWaitTime = 1f;
 
     private int _currentOption;
     private bool optionSelected;
