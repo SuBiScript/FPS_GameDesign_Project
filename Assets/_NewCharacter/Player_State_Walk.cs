@@ -17,6 +17,11 @@ public class Player_State_Walk : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
+        if (attachedRigidbody.gameObject.transform.parent != null)
+        {
+            attachedRigidbody.velocity = Vector3.ClampMagnitude(attachedRigidbody.velocity,
+                ((PlayerControllerFSM) Machine.characterController).characterProperties.WalkSpeed);
+        }
     }
 
     public override void OnStateFixedTick(float fixedTime)
@@ -50,7 +55,7 @@ public class Player_State_Walk : State
         var isGrounded = ((PlayerControllerFSM) Machine.characterController).IsGrounded();
         if (!isGrounded)
         {
-            ((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetBool("Walking", false);
+            ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", false);
             coyoteFrames++;
             if (coyoteFrames >= Machine.characterController.characterProperties.MaxCoyoteFrames)
             {
@@ -70,8 +75,8 @@ public class Player_State_Walk : State
         attachedRigidbody = Machine.characterController.rigidbody;
         ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(true);
         coyoteFrames = 0;
-        ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
-        attachedRigidbody.velocity = Vector3.zero;
+        ((PlayerControllerFSM) Machine.characterController).enableAirControl = true;
+        attachedRigidbody.velocity = new Vector3(0f, attachedRigidbody.velocity.y, 0f);
         //((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("OnGround", true);
     }
 
@@ -81,6 +86,5 @@ public class Player_State_Walk : State
         coyoteFrames = 0;
         ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetBool("Walking", false);
         //((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetBool("OnGround", false);
-
     }
 }

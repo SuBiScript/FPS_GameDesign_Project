@@ -7,6 +7,7 @@ public class Player_State_OnAir : State
 {
     private Rigidbody attachedRigidbody;
     private float movementSpeed;
+    private bool airPropulsed;
     
     protected override void OnStateInitialize(StateMachine machine)
     {
@@ -21,7 +22,7 @@ public class Player_State_OnAir : State
     public override void OnStateFixedTick(float fixedDeltaTime)
     {
         base.OnStateFixedTick(fixedDeltaTime);
-        if (Machine.characterController.currentBrain.Direction != Vector3.zero)
+        if (Machine.characterController.currentBrain.Direction != Vector3.zero && !airPropulsed)
         {
             MovementManager.MoveRigidbody(
                 attachedRigidbody,
@@ -29,7 +30,6 @@ public class Player_State_OnAir : State
                 movementSpeed,
                 fixedDeltaTime);
         }
-
     }
 
     public override void OnStateCheckTransition()
@@ -45,7 +45,10 @@ public class Player_State_OnAir : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        movementSpeed = ((PlayerControllerFSM) Machine.characterController).enableAirControl
+
+        
+        
+        movementSpeed = ((PlayerControllerFSM)Machine.characterController).AirPropulsed ? Machine.characterController.characterProperties.TemporalPropulsionSpeed : ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.AirControlSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
         
