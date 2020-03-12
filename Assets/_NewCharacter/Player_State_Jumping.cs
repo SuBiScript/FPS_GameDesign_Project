@@ -37,11 +37,12 @@ public class Player_State_Jumping : State
         ((PlayerControllerFSM) Machine.characterController).AirPropulsed =
             attachedRigidbody.gameObject.transform.parent != null;
 
-        if (attachedRigidbody.gameObject.transform.parent != null)
+        if (((PlayerControllerFSM) Machine.characterController).AirPropulsed)
         {
             var MovingPlatformAsParent = attachedRigidbody.transform.parent.GetComponentInChildren<MovingPlatform>();
             Machine.characterController.characterProperties.TemporalPropulsionSpeed =
-                (MovingPlatformAsParent.m_MaxSpeed * MovingPlatformAsParent.movementDirection.magnitude);
+                ((MovingPlatformAsParent.m_MaxSpeed + 1f) * Mathf.Max(MovingPlatformAsParent.movementDirection.magnitude,
+                     1f));
         }
         else
         {
