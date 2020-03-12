@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 377015521}
-  m_IndirectSpecularColor: {r: 0.18061805, g: 0.18287587, b: 0.19779396, a: 1}
+  m_IndirectSpecularColor: {r: 0.02298857, g: 0.023580465, b: 0.02778348, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1372,6 +1372,11 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.w
       value: 4.5e-44
       objectReference: {fileID: 0}
+    - target: {fileID: 5716755786303706972, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8476019672177359347, guid: e5a246a1357a19140aeec254de9af348,
         type: 3}
       propertyPath: m_Enabled
@@ -2629,6 +2634,11 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.w
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6809129279955627599, guid: d3ad6cbb1907be94283fcd9d37e8126e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8109792963139268999, guid: d3ad6cbb1907be94283fcd9d37e8126e,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3368,6 +3378,11 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 32768
       objectReference: {fileID: 0}
+    - target: {fileID: 8850334316698952884, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176084, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3955,6 +3970,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: 3.761582e-37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729795846957032595, guid: de8e5b3b52725014593c3907521c0579,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3091906071515678065, guid: de8e5b3b52725014593c3907521c0579,
         type: 3}
@@ -7653,6 +7673,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7323674400370859781, guid: 130a8e365b805db49917156ea7f4d4d9,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7323674400543874246, guid: 130a8e365b805db49917156ea7f4d4d9,
         type: 3}
       propertyPath: m_Enabled
@@ -7732,6 +7757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323674401434057181, guid: 130a8e365b805db49917156ea7f4d4d9,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7323674401486818258, guid: 130a8e365b805db49917156ea7f4d4d9,
         type: 3}
