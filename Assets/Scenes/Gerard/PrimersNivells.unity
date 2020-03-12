@@ -415,7 +415,7 @@ PrefabInstance:
     - target: {fileID: 27388924567528403, guid: a7f5eeab938b77145946135fb8f5fbbd,
         type: 3}
       propertyPath: OnPlayerDetection.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Red Color panels will cast a powerful laser.
+      value: Red color panels will cast a powerful laser
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f5eeab938b77145946135fb8f5fbbd, type: 3}
@@ -2986,7 +2986,7 @@ PrefabInstance:
     - target: {fileID: 27388924567528403, guid: a7f5eeab938b77145946135fb8f5fbbd,
         type: 3}
       propertyPath: OnPlayerDetection.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Blue Panels can also boost cubes!
+      value: Blue panels can also boost cubes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f5eeab938b77145946135fb8f5fbbd, type: 3}
@@ -5268,7 +5268,7 @@ PrefabInstance:
     - target: {fileID: 27388924567528403, guid: a7f5eeab938b77145946135fb8f5fbbd,
         type: 3}
       propertyPath: OnPlayerDetection.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Lasers power door's buttons and cubes.
+      value: Lasers power door's buttons and cubes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f5eeab938b77145946135fb8f5fbbd, type: 3}
@@ -6225,7 +6225,7 @@ PrefabInstance:
     - target: {fileID: 27388924567528403, guid: a7f5eeab938b77145946135fb8f5fbbd,
         type: 3}
       propertyPath: OnPlayerDetection.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Blue Panels make you jump higher.
+      value: Blue panels make you jump higher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f5eeab938b77145946135fb8f5fbbd, type: 3}
@@ -6723,7 +6723,7 @@ PrefabInstance:
     - target: {fileID: 27388924567528403, guid: a7f5eeab938b77145946135fb8f5fbbd,
         type: 3}
       propertyPath: OnPlayerDetection.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Green Panel will magnitize the attached cube
+      value: Green panel will magnitize the attached cube
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f5eeab938b77145946135fb8f5fbbd, type: 3}
