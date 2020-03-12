@@ -32,7 +32,12 @@ public class Player_State_Jumping : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
+        
+        ((PlayerControllerFSM) Machine.characterController).AirPropulsed =
+            attachedRigidbody.gameObject.transform.parent != null;
 
+        Machine.characterController.characterProperties.TemporalPropulsionSpeed = attachedRigidbody.velocity.magnitude;
+        
         RemoveVerticalSpeed();
         ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);

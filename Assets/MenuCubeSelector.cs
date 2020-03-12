@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ColorPanels;
 using JetBrains.Annotations;
@@ -115,6 +116,15 @@ public class MenuCubeSelector : MonoBehaviour
     {
         SceneManager.LoadScene("PrimersNivells");
         AudioManager.instance.Stop("Perturbator");
+        try
+        {
+            CheckpointManager.ClearListOfCheckpoints();
+            CheckpointManager.Restart();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
     }
 
     void Options()

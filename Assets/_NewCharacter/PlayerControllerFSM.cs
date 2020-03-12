@@ -25,13 +25,13 @@ public class PlayerControllerFSM : CharacterController
     private AudioSource m_AudioSource;
 
     [Header("Ground Detection")] public Transform groundPosition;
-    [Range(0.1f, 10f)] public float castRadius = 1f;
+    [Range(0.01f, 1f)] public float castRadius = 1f;
     public LayerMask walkableLayers;
     public bool isPlayerGrounded { get; private set; }
 
     public PhysicMaterial onAirMaterial;
     public PhysicMaterial onGroundMaterial;
-
+    public bool AirPropulsed { get; set; }
     public Animator weaponAnimator;
 
     public void Awake()
@@ -63,6 +63,7 @@ public class PlayerControllerFSM : CharacterController
         m_AudioSource = GetComponent<AudioSource>();
         m_StepTime = Time.time + m_StepTimeRange;
         m_StepTimeRange = m_StepTimeWaking;
+        AirPropulsed = false;
     }
 
     private void Start()

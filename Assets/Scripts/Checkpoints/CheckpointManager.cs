@@ -139,4 +139,9 @@ public static class CheckpointManager
             return;
         }
     }
+
+    public static void ClearListOfCheckpoints()
+    {
+        Checkpoints = new Dictionary<byte, Checkpoint>();
+    }
 }

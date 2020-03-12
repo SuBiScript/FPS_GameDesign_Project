@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -105,8 +106,25 @@ public class MovingPlatform : MonoBehaviour
             return false;
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.transform.position.y > this.gameObject.transform.position.y &&
+            other.gameObject.transform.parent != this.gameObject.transform)
+        {
+            other.gameObject.transform.parent = this.gameObject.transform;
+        }
+    }
 
-    void OnTriggerEnter(Collider col)
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.transform.parent == this.gameObject.transform)
+        {
+            other.gameObject.transform.parent = null;
+        }
+    }
+
+
+    /*void OnTriggerEnter(Collider col)
     {
         if (col.gameObject == this.gameObject) return;
 
@@ -136,6 +154,6 @@ public class MovingPlatform : MonoBehaviour
             m_AvoidPathFinding = false;
             m_CurrentPatrolPositionId = -1;
         }
-    }
+    }*/
 
 }
