@@ -18,17 +18,14 @@ namespace ColorPanels
         {
             public MaterialList materialList;
             public float playerPropulsionForce;
-            public float playerOnAirPropulsionForce;
             public float objectPropulsionForce;
             public bool enableAirControl;
 
             public ColorPanelProperties(MaterialList materialList, float playerPropulsionForce,
-                float playerOnAirPropulsionForce,
                 float objectPropulsionForce, bool enableAirControl)
             {
                 this.materialList = materialList;
                 this.playerPropulsionForce = playerPropulsionForce;
-                this.playerOnAirPropulsionForce = playerOnAirPropulsionForce;
                 this.objectPropulsionForce = objectPropulsionForce;
                 this.enableAirControl = enableAirControl;
             }
