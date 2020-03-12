@@ -17,6 +17,7 @@ public class Player_State_Falling : State
     public override void OnStateTick(float deltaTime)
     {
         base.OnStateTick(deltaTime);
+        //SetDesiredSpeed();
     }
 
     public override void OnStateFixedTick(float fixedDeltaTime)
@@ -45,16 +46,23 @@ public class Player_State_Falling : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        movementSpeed = ((PlayerControllerFSM)Machine.characterController).enableAirControl
+        
+        movementSpeed = ((PlayerControllerFSM)Machine.characterController).AirPropulsed ? Machine.characterController.characterProperties.TemporalPropulsionSpeed : ((PlayerControllerFSM) Machine.characterController).enableAirControl
             ? Machine.characterController.characterProperties.AirControlSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
+        
         ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
-
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
         ((PlayerControllerFSM)Machine.characterController).LandSound();
+        ((PlayerControllerFSM) Machine.characterController).AirPropulsed = false;
+    }
+
+    private void SetDesiredSpeed(float desiredSpeed)
+    {
+        movementSpeed = Mathf.Lerp(movementSpeed, desiredSpeed, 0.2f);
     }
 }

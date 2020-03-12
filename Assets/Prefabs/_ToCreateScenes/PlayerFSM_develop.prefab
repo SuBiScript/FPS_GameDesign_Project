@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
+  enableDebug: 0
 --- !u!114 &8850334317767176092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +731,7 @@ MonoBehaviour:
   m_LandSound: {fileID: 8300000, guid: c3b368aeefccee14789432a4741212d1, type: 3}
   m_StepTimeWaking: 0.5
   groundPosition: {fileID: 8850334316947868405}
-  castRadius: 0.2
+  castRadius: 0.1
   walkableLayers:
     serializedVersion: 2
     m_Bits: 76800

@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 285c0acf0b472364ba9ae196904362cb
   - enabled: 0
@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Gerard/OscarDesign.unity
     guid: 3515e1cc48c14b44988b93a1c9d42dff
+  - enabled: 1
+    path: Assets/Scenes/ReleaseScenes/MainMenuRenderScene.unity
+    guid: a294bb603c7f76a458c59967b09c6bf6
   - enabled: 1
     path: Assets/Scenes/Gerard/PrimersNivells.unity
     guid: 3044f503589812f4185027755c2a2b7f

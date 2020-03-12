@@ -73,7 +73,7 @@ public class PauseController : MonoBehaviour
 
         if (FindObjectOfType<AudioManager>() != null)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenuRenderScene");
             AudioManager.instance.StopAllSounds();
         }
     }

@@ -8,6 +8,7 @@ namespace ColorPanels
     public class ColorPanelObjectFSM : MonoBehaviour, IRestartable
     {
         [Header("Sound settings")] public AudioClip m_JumpPlatform;
+        public AudioClip magnetSound;
         private AudioSource m_AudioSource;
 
         private WeaponScript.WeaponColor currentMode { get; set; }
@@ -48,7 +49,7 @@ namespace ColorPanels
         bool m_CreateLine;
         private byte autoDetach = 15;
 
-        void Start()
+        void Awake()
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
@@ -149,12 +150,12 @@ namespace ColorPanels
                     {
                         ColorPanelEffects.PanelSetProperties(colorPanelProperties, transform.up);
                         pcController.stateMachine.SwitchState<Player_State_PlatformJumping>();
-                        m_AudioSource.PlayOneShot(m_JumpPlatform);
+                        ClipAndPlay(m_JumpPlatform, 0.25f);
                         return;
                     }
 
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
-                    m_AudioSource.PlayOneShot(m_JumpPlatform);
+                    ClipAndPlay(m_JumpPlatform, 0.25f);
                     break;
             }
         }
@@ -273,7 +274,18 @@ namespace ColorPanels
             _attachedObjectRigidbody.useGravity = false;
             _attachedObjectRigidbody.isKinematic = true;
             _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Attach(this);
-            AudioManager.instance.Play("Magnet");
+            ClipAndPlay(magnetSound, 1f);
+            //AudioManager.instance.Play("Magnet");
+        }
+
+        private void ClipAndPlay(AudioClip clip, float volume = 0.25f)
+        {
+            if (m_AudioSource != null)
+            {
+                m_AudioSource.volume = volume;
+                m_AudioSource.clip = clip;
+                m_AudioSource.Play();
+            }
         }
 
         private void DetachObject(float l_DetachForce = 10f)
