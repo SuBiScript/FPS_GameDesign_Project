@@ -11,19 +11,25 @@ using Weapon;
 public class MenuCubeSelector : MonoBehaviour
 {
     public ColorPanelObjectFSM[] options;
+    public RefractionCubeEffect selectorCube;
     public TextMeshPro TextMeshPro;
     public Animation blackFadeOut;
+
+    public GameObject optionsPanel;
+
 
     [Header("Transitions")] [Range(0f, 5f)] [Tooltip("Wait time between selecting an option and fading.")]
     public float standardWaitTime = 1f;
 
+    private Coroutine hideCube;
     private int _currentOption;
     private bool optionSelected;
+    private bool inOptionsMenu;
 
     private string[] texts = new[]
     {
         "Play",
-        "Options",
+        "Controls",
         "Exit"
     };
 
@@ -51,6 +57,7 @@ public class MenuCubeSelector : MonoBehaviour
 
     void Start()
     {
+        optionsPanel.SetActive(false);
         optionSelected = false;
         foreach (ColorPanelObjectFSM panel in options)
         {
@@ -58,17 +65,18 @@ public class MenuCubeSelector : MonoBehaviour
         }
 
         currentOption = 0;
+        inOptionsMenu = false;
     }
 
     void Update()
     {
         if (!optionSelected)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && !inOptionsMenu)
             {
                 currentOption++;
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && !inOptionsMenu)
             {
                 currentOption--;
             }
@@ -76,22 +84,27 @@ public class MenuCubeSelector : MonoBehaviour
             {
                 //ACTIVATE OPTION
                 options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
-                optionSelected = true;
                 switch (currentOption)
                 {
                     case 0:
                         StartCoroutine(StartPlaying());
+                        optionSelected = true;
                         break;
                     case 1:
-                        Debug.LogWarning("NO OPTIONS AVAILABLE! DAMN!");
+                        Options();
                         break;
                     case 2:
                         StartCoroutine(QuitWithStyle());
+                        optionSelected = true;
                         break;
                     default:
                         Debug.LogWarning("WTF, how did you even... nevermind.");
                         break;
                 }
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && inOptionsMenu)
+            {
+                Options();
             }
         }
     }
@@ -130,6 +143,21 @@ public class MenuCubeSelector : MonoBehaviour
     void Options()
     {
         //TODO SHOW THE DAMN OPTIONS!
+        if (optionsPanel.activeSelf)
+        {
+            optionsPanel.SetActive(false);
+            options[currentOption].ChangeColor(WeaponScript.WeaponColor.Green);
+            selectorCube.gameObject.SetActive(true);
+            selectorCube.Restart();
+            StopCoroutine(hideCube);
+            inOptionsMenu = false;
+        }
+        else
+        {
+            optionsPanel.SetActive(true);
+            hideCube = ExecuteCoroutine(hideCube, CubeStopper());
+            inOptionsMenu = true;
+        }
     }
 
     void QuitGame()
@@ -138,6 +166,20 @@ public class MenuCubeSelector : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    private Coroutine ExecuteCoroutine(Coroutine l_CoroutineHolder, IEnumerator l_MethodName)
+    {
+        if (l_CoroutineHolder != null)
+            StopCoroutine(l_CoroutineHolder);
+        return StartCoroutine(l_MethodName);
+    }
+
+    IEnumerator CubeStopper()
+    {
+        yield return new WaitForSeconds(standardWaitTime);
+
+        selectorCube.gameObject.SetActive(false);
     }
 
     IEnumerator StartPlaying()
