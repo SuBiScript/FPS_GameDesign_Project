@@ -16,6 +16,7 @@ public class MovingPlatform : MonoBehaviour
     public List<Transform> m_PatrolPositions;
     public float m_MaxSpeed;
     public float m_stopBetweenSpots;
+    public Vector3 movementDirection;
 
     int m_CurrentPatrolPositionId;
     float m_CurrentTime;
@@ -76,11 +77,15 @@ public class MovingPlatform : MonoBehaviour
     {
         if (m_MoveToNextPatrolPosition)
         {
-            Vector3 l_Direction = (m_PatrolPositions[m_CurrentPatrolPositionId].position - transform.position).normalized;
-            m_RigidBody.MovePosition(transform.position + l_Direction * m_MaxSpeed * Time.fixedDeltaTime);
+            movementDirection = (m_PatrolPositions[m_CurrentPatrolPositionId].position - transform.position).normalized;
+            m_RigidBody.MovePosition(transform.position + movementDirection * m_MaxSpeed * Time.fixedDeltaTime);
 
             //transform.position += ((l_Direction * m_MaxSpeed) * Time.fixedDeltaTime);
             //transform.position = Vector3.MoveTowards(transform.position, m_PatrolPositions[m_CurrentPatrolPositionId].position, m_MaxSpeed * Time.deltaTime);
+        }
+        else
+        {
+            movementDirection = Vector3.zero;
         }
     }
 

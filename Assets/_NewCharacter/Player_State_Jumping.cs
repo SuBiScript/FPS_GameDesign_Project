@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PlayerFSM;
 using UnityEngine;
@@ -32,21 +33,31 @@ public class Player_State_Jumping : State
     {
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
-        
+
         ((PlayerControllerFSM) Machine.characterController).AirPropulsed =
             attachedRigidbody.gameObject.transform.parent != null;
 
-        Machine.characterController.characterProperties.TemporalPropulsionSpeed = attachedRigidbody.velocity.magnitude;
-        
+        if (attachedRigidbody.gameObject.transform.parent != null)
+        {
+            var MovingPlatformAsParent = attachedRigidbody.transform.parent.GetComponentInChildren<MovingPlatform>();
+            Machine.characterController.characterProperties.TemporalPropulsionSpeed =
+                (MovingPlatformAsParent.m_MaxSpeed * MovingPlatformAsParent.movementDirection.magnitude) +
+                Machine.characterController.characterProperties.WalkSpeed;
+        }
+        else
+        {
+            Machine.characterController.characterProperties.TemporalPropulsionSpeed = 1f;
+        }
+
         RemoveVerticalSpeed();
-        ((PlayerControllerFSM)Machine.characterController).enableAirControl = true;
-        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
+        ((PlayerControllerFSM) Machine.characterController).enableAirControl = true;
+        ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(false);
         MovementManager.RigidbodyAddForce(
             Machine.characterController.rigidbody,
             Machine.transform.up,
             Machine.characterController.characterProperties.JumpForce,
             ForceMode.Impulse);
-        ((PlayerControllerFSM)Machine.characterController).weaponAnimator.SetTrigger("Jumping");
+        ((PlayerControllerFSM) Machine.characterController).weaponAnimator.SetTrigger("Jumping");
         AudioManager.instance.Play("Jump");
     }
 

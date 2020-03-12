@@ -8,7 +8,7 @@ public class Player_State_OnAir : State
     private Rigidbody attachedRigidbody;
     private float movementSpeed;
     private bool airPropulsed;
-    
+
     protected override void OnStateInitialize(StateMachine machine)
     {
         base.OnStateInitialize(machine);
@@ -46,18 +46,17 @@ public class Player_State_OnAir : State
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
 
-        
-        
-        movementSpeed = ((PlayerControllerFSM)Machine.characterController).AirPropulsed ? Machine.characterController.characterProperties.TemporalPropulsionSpeed : ((PlayerControllerFSM) Machine.characterController).enableAirControl
-            ? Machine.characterController.characterProperties.AirControlSpeed
-            : Machine.characterController.characterProperties.OnAirSpeed;
-        
-        ((PlayerControllerFSM)Machine.characterController).ChangeMaterialFriction(false);
+        movementSpeed = ((PlayerControllerFSM) Machine.characterController).AirPropulsed //Question
+            ? Machine.characterController.characterProperties.TemporalPropulsionSpeed
+            : ((PlayerControllerFSM) Machine.characterController).enableAirControl //Question
+                ? Machine.characterController.characterProperties.AirControlSpeed
+                : Machine.characterController.characterProperties.OnAirSpeed;
+
+        ((PlayerControllerFSM) Machine.characterController).ChangeMaterialFriction(false);
     }
 
     protected override void OnStateExit()
     {
         base.OnStateExit();
-        
     }
 }
