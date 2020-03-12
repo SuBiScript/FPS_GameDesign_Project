@@ -41,8 +41,7 @@ public class Player_State_Jumping : State
         {
             var MovingPlatformAsParent = attachedRigidbody.transform.parent.GetComponentInChildren<MovingPlatform>();
             Machine.characterController.characterProperties.TemporalPropulsionSpeed =
-                (MovingPlatformAsParent.m_MaxSpeed * MovingPlatformAsParent.movementDirection.magnitude) +
-                Machine.characterController.characterProperties.WalkSpeed;
+                (MovingPlatformAsParent.m_MaxSpeed * MovingPlatformAsParent.movementDirection.magnitude);
         }
         else
         {
