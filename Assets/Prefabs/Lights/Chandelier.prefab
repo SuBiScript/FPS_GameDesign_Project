@@ -1177,7 +1177,7 @@ Light:
   m_Color: {r: 0.6, g: 1, b: 0.93333334, a: 1}
   m_Intensity: 3
   m_Range: 20
-  m_SpotAngle: 60
+  m_SpotAngle: 50
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -1206,7 +1206,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 1

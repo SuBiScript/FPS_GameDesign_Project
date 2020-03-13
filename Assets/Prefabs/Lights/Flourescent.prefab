@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8819779549093847971}
   - component: {fileID: 5838410836840904684}
+  - component: {fileID: 655182947844508699}
   m_Layer: 0
   m_Name: Fluorescent_PL
   m_TagString: Untagged
@@ -74,7 +75,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 8900000, guid: 8dd8b695d21ccce48b3266ad57984594, type: 3}
+  m_Cookie: {fileID: 8900000, guid: 50732df234b690f4bb9ff7eb49e2c1e4, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 1
@@ -92,6 +93,21 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!111 &655182947844508699
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703917787521817139}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3443759994580133072
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +119,7 @@ GameObject:
   - component: {fileID: 1842509499939722947}
   - component: {fileID: 7262879169657154805}
   - component: {fileID: 4032524266773958668}
+  - component: {fileID: 6719932840931042514}
   m_Layer: 0
   m_Name: Flourescent
   m_TagString: Untagged
@@ -173,3 +190,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!111 &6719932840931042514
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443759994580133072}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
