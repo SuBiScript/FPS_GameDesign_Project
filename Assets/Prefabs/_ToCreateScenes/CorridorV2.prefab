@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 262167881613729738}
   - component: {fileID: 7571941205668473620}
   m_Layer: 0
-  m_Name: Flourescent
+  m_Name: CorridorLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,8 +163,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990518743121816342}
   m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0.00000019861236, w: 0.00000019861236}
-  m_LocalPosition: {x: 0.011, y: 1.1121, z: -0.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.011, y: 1.24, z: 0.05}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 5634893726562151525}
   m_Father: {fileID: 2426936738890881856}
@@ -177,7 +177,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990518743121816342}
-  m_Mesh: {fileID: 1609477842768579145, guid: a2b45399c75a3654f80a0fb13030a86a, type: 3}
+  m_Mesh: {fileID: 2762028740915945764, guid: 3888258465488de4cba9a2dae7152c55, type: 3}
 --- !u!23 &262167881613729738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -196,8 +196,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: a59c4d21332c3754293b8feba8a8c31f, type: 2}
   - {fileID: 2100000, guid: 86cae28f4c0bd6c459c8d7a608dc9f5c, type: 2}
-  - {fileID: 2100000, guid: 5277b33cda7d6314ab3ad3bc37063552, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -227,9 +227,10 @@ Animation:
   m_GameObject: {fileID: 1990518743121816342}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 34ebed3b8e3bb6c458dd8ae9c5a03bbe, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 34ebed3b8e3bb6c458dd8ae9c5a03bbe, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -246,7 +247,7 @@ GameObject:
   - component: {fileID: 7301245945723713578}
   - component: {fileID: 4414269064273478621}
   m_Layer: 0
-  m_Name: Fluorescent_PL
+  m_Name: Corridor_PL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2589718268018890229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.529999, y: 0, z: -0.7600001}
+  m_LocalPosition: {x: 2.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3298015470470207749}
@@ -339,7 +340,6 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 201163db978f1e343841c2047e1f75dd, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 201163db978f1e343841c2047e1f75dd, type: 2}
-  - {fileID: 7400000, guid: 34ebed3b8e3bb6c458dd8ae9c5a03bbe, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

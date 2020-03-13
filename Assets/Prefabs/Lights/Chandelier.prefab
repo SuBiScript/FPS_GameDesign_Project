@@ -76,7 +76,7 @@ Light:
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 8900000, guid: 9ca09e45421bf2f47be27f18eaa2165d, type: 3}
   m_DrawHalo: 0
-  m_Flare: {fileID: 12100000, guid: d658006f573c00e40a9bc0095afa70fe, type: 2}
+  m_Flare: {fileID: 0}
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1079,7 +1079,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3694342531306873765}
-  m_Layer: 0
+  - component: {fileID: 7376738467816161574}
+  m_Layer: 17
   m_Name: Light01
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -1101,6 +1102,22 @@ Transform:
   m_Father: {fileID: 3694342531222048961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -30, y: 180, z: 0}
+--- !u!123 &7376738467816161574
+LensFlare:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3694342531306873766}
+  m_Enabled: 1
+  m_Flare: {fileID: 12100000, guid: d658006f573c00e40a9bc0095afa70fe, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Brightness: 1.69
+  m_FadeSpeed: 3
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 6
+  m_Directional: 0
 --- !u!1 &3694342531548472925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5486981677745829129}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -7.7, z: 0}
+  m_LocalPosition: {x: 0, y: -5.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3694342531222048961}
@@ -1206,7 +1223,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+  m_Cookie: {fileID: 2800000, guid: f99e31cee6209fd479365be4257e5835, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 1
