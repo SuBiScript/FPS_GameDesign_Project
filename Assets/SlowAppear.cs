@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SlowAppear : MonoBehaviour
 {
-    public RectTransform transformo;
+    public Transform transformo;
 
     public float targetX;
     public float speedo;
     // Start is called before the first frame update
     void Start()
     {
-        transformo = GetComponent<RectTransform>();
+        transformo = GetComponent<Transform>();
     }
 
     // Update is called once per frame

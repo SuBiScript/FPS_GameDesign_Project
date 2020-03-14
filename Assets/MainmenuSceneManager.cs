@@ -7,6 +7,7 @@ public class MainmenuSceneManager : MonoBehaviour
     public ColorPanelObjectFSM[] colorPanelObject;
     void Start()
     {
+        Cursor.visible = false;
         //colorPanelObject = FindObjectsOfType<ColorPanelObjectFSM>();
         if (colorPanelObject.Length <= 0) return;
         foreach (ColorPanelObjectFSM panel in colorPanelObject)
