@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, InterfaceCanParent
 {
-    public Boo.Lang.List<ObjectInformation> ParentInfos { get; set; } //Interface imported
 
     public enum PlatformType
     {
         Standard,
         Trigger
     }
+    
+    public List<ObjectInformation> ParentInfos { get; set; } //Interface imported
 
     public PlatformType m_PlatformType;
     public List<Transform> m_PatrolPositions;
@@ -36,7 +37,7 @@ public class MovingPlatform : MonoBehaviour, InterfaceCanParent
         m_PlatformTriggered = false;
         m_AvoidPathFinding = false;
         m_RigidBody = GetComponent<Rigidbody>();
-        ParentInfos = new Boo.Lang.List<ObjectInformation>();
+        ParentInfos = new List<ObjectInformation>();
     }
 
     void Update()
