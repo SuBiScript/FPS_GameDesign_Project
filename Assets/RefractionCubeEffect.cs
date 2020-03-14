@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ColorPanels;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class RefractionCubeEffect : MonoBehaviour, IRestartable
+public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IAttachable
 {
     public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
@@ -16,7 +18,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     private const string c_EmissionColor = "_EmissionColor";
     private Material[] m_StatusMaterials;
     private bool m_ChangeColorMaterial;
-    private Rigidbody _rigidbody;
+    public Rigidbody ownRigidbody { get; set; }
 
     public bool currentlyAttached { get; set; }
     public ColorPanelObjectFSM AttachedOnThisPanel { get; set; }
@@ -33,11 +35,13 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
 
     private SwitchController m_raySwitch;
 
+    private FixedJoint _joint;
+
     private void Start()
     {
         startingPosition = transform.position;
         initialRotation = transform.rotation;
-        _rigidbody = GetComponent<Rigidbody>();
+        ownRigidbody = GetComponent<Rigidbody>();
 
         m_Collider = GetComponentInChildren<CapsuleCollider>();
 
@@ -132,6 +136,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     {
         AttachedOnThisPanel = attachedTo;
         currentlyAttached = true;
+        if (_joint != null) Destroy(_joint);
     }
 
     public void Detach(bool force = false)
@@ -145,6 +150,57 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable
     {
         transform.position = startingPosition;
         transform.rotation = initialRotation;
-        _rigidbody.velocity = Vector3.zero;
+        ownRigidbody.velocity = Vector3.zero;
+    }
+
+    public Transform ReturnSelf()
+    {
+        return this.gameObject.transform;
+    }
+
+    public bool Emparent(GameObject newParent)
+    {
+        RaycastHit raycastHit;
+        if (Physics.Raycast(this.gameObject.transform.position, this.transform.up * -1, out raycastHit, 5f))
+        {
+            if (raycastHit.collider.gameObject.GetHashCode() == newParent.GetHashCode())
+            {
+                _joint = gameObject.AddComponent<FixedJoint>();
+                _joint.enableCollision = true;
+                _joint.connectedBody = newParent.GetComponent<Rigidbody>();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public bool Deparent(Transform oldParent)
+    {
+        try
+        {
+            this.gameObject.transform.parent = oldParent;
+            Destroy(_joint);
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message);
+            return false;
+        }
+    }
+
+    public void Attach()
+    {
+        if (_joint) Destroy(_joint);
+    }
+
+    public void Detach()
+    {
+        //Nothing for now
     }
 }

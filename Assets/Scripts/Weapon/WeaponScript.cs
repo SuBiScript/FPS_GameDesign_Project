@@ -211,7 +211,8 @@ namespace Weapon
 
             if (!m_ObjectAttacher.m_AttachedObject && GameController.Instance.m_IntroFinished && !GameController.Instance.m_PlayerDied)
             {
-                GameController.Instance.playerComponents.PlayerController.weaponAnimator.SetTrigger("Shoot");
+                m_AttachedCharacter.weaponAnimator.SetTrigger("Shoot");
+                //GameController.Instance.playerComponents.PlayerController.weaponAnimator.SetTrigger("Shoot");
                 AudioManager.instance.Play("Shot");
                 switch (_currentColor)
                 {
@@ -245,7 +246,7 @@ namespace Weapon
                         return true;
                     }
                     if (_currentColor == WeaponColor.Green &&
-                        hit.collider.gameObject.GetComponent<RefractionCubeEffect>())
+                        hit.collider.gameObject.GetComponent<IAttachable>() != null)
                     {
                         attractObjectCoroutine = AttractObjectThroughTime(hit);
                         RestartCoroutine(attractObjectCoroutine);
@@ -288,7 +289,7 @@ namespace Weapon
             }
             else
             {
-                m_ObjectAttacher.DetachObjectVer2(0);
+                m_ObjectAttacher.DetachObjectVer2(0);//TODO Add object interface detachment!
                 return false;
             }
 
@@ -299,13 +300,16 @@ namespace Weapon
         {
             try
             {
-                var rb = hitInfo.collider.gameObject.GetComponent<Rigidbody>();
+                var rb = hitInfo.collider.gameObject.GetComponent<IAttachable>();
+                rb.Attach();
+                if (rb == null) return;
                 //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
-                rb.velocity = Vector3.zero;
-                m_ObjectAttacher.AttachObjectVer2(rb);
+                rb.ownRigidbody.velocity = Vector3.zero;
+                m_ObjectAttacher.AttachObjectVer2(rb.ownRigidbody);
             }
             catch (MissingComponentException)
             {
+                
             }
         }
 

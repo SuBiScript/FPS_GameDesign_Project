@@ -7,7 +7,7 @@ using Weapon;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerControllerFSM : CharacterController
+public class PlayerControllerFSM : CharacterController, IParentable
 {
     public CameraFSMController cameraController;
     public bool enableAirControl { get; set; }
@@ -156,5 +156,24 @@ public class PlayerControllerFSM : CharacterController
     {
         this.gameObject.transform.position = position;
         rigidbody.velocity = Vector3.zero;
+    }
+
+    public Transform ReturnSelf()
+    {
+        return this.gameObject.transform;
+    }
+
+    public bool Emparent(GameObject newParent)
+    {
+        AirPropulsed = true;
+        this.gameObject.transform.parent = newParent.transform;
+        return true;
+    }
+
+    public bool Deparent(Transform oldParent)
+    {
+        AirPropulsed = false;
+        this.gameObject.transform.parent = oldParent;
+        return true;
     }
 }

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour, InterfaceCanParent
 {
+    public Boo.Lang.List<ObjectInformation> ParentInfos { get; set; } //Interface imported
 
     public enum PlatformType
     {
@@ -35,6 +36,7 @@ public class MovingPlatform : MonoBehaviour
         m_PlatformTriggered = false;
         m_AvoidPathFinding = false;
         m_RigidBody = GetComponent<Rigidbody>();
+        ParentInfos = new Boo.Lang.List<ObjectInformation>();
     }
 
     void Update()
@@ -54,6 +56,7 @@ public class MovingPlatform : MonoBehaviour
                     if (PathComplete())
                         m_PathComplete = true;
                 }
+
                 break;
             default:
                 if (m_PathComplete && m_PlatformTriggered)
@@ -69,6 +72,7 @@ public class MovingPlatform : MonoBehaviour
                         if (PathComplete())
                             m_PathComplete = true;
                 }
+
                 break;
         }
     }
@@ -113,52 +117,69 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.transform.position.y > this.gameObject.transform.position.y &&
-            other.gameObject.transform.parent != this.gameObject.transform)
+        try
         {
-            other.gameObject.transform.parent = this.gameObject.transform;
+            IParentable parentableObject = other.gameObject.GetComponent<IParentable>();
+            if (parentableObject == null) return;
+
+            Transform collidedObject = parentableObject.ReturnSelf();
+
+            if (collidedObject.position.y > this.gameObject.transform.position.y &&
+                collidedObject.parent != this.gameObject.transform)
+            {
+                EmparentObject(parentableObject);
+            }
+        }
+        catch (Exception e)
+        {
+            //None
+            Debug.LogError(e.Message);
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.transform.parent == this.gameObject.transform)
+        try
         {
-            other.gameObject.transform.parent = null;
+            IParentable parentableObject = other.gameObject.GetComponent<IParentable>();
+            if (parentableObject == null) return;
+
+            Transform collidedObject = parentableObject.ReturnSelf();
+            DeparentObject(parentableObject);
+        }
+        catch (Exception e)
+
+        {
+            Debug.LogError(e.Message);
+            //None
         }
     }
 
-
-    /*void OnTriggerEnter(Collider col)
+    public void EmparentObject(IParentable parentableObject)
     {
-        if (col.gameObject == this.gameObject) return;
-
-        if (col.tag == "Player")
+        ObjectInformation newObjectInfo;
+        newObjectInfo.associatedGameObject = parentableObject.ReturnSelf().gameObject;
+        newObjectInfo.oldParent = newObjectInfo.associatedGameObject.transform.parent;
+        if (parentableObject.Emparent(this.gameObject))
         {
-            GameController.Instance.playerComponents.PlayerController.transform.parent = transform;
+            ParentInfos.Add(newObjectInfo);
         }
+        else return;
 
-        if (m_PlatformType == PlatformType.Trigger)
-        {
-            m_PlatformTriggered = true;
-            m_AvoidPathFinding = true;
-        }
-
+        //newObjectInfo.associatedGameObject.transform.parent = this.gameObject.transform;
     }
 
-    private void OnTriggerExit(Collider col)
+    public void DeparentObject(IParentable parentableObject)
     {
-        if (col.gameObject == this.gameObject) return;
-        if (col.tag == "Player")
-            GameController.Instance.playerComponents.PlayerController.transform.parent = null;
-
-        if (m_PlatformType == PlatformType.Trigger)
+        foreach (ObjectInformation objectInformation in ParentInfos)
         {
-            m_MoveToNextPatrolPosition = false;
-            m_PathComplete = true;
-            m_AvoidPathFinding = false;
-            m_CurrentPatrolPositionId = -1;
+            if (parentableObject.ReturnSelf().GetHashCode() ==
+                objectInformation.associatedGameObject.transform.GetHashCode())
+            {
+                parentableObject.Deparent(objectInformation.oldParent);
+                ParentInfos.Remove(objectInformation);
+                return;
+            }
         }
-    }*/
-
+    }
 }

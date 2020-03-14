@@ -34,20 +34,20 @@ public class Player_State_Jumping : State
         base.OnStateEnter();
         attachedRigidbody = Machine.characterController.rigidbody;
 
-        ((PlayerControllerFSM) Machine.characterController).AirPropulsed =
-            attachedRigidbody.gameObject.transform.parent != null;
-
         if (((PlayerControllerFSM) Machine.characterController).AirPropulsed)
         {
             var MovingPlatformAsParent = attachedRigidbody.transform.parent.GetComponentInChildren<MovingPlatform>();
             Machine.characterController.characterProperties.TemporalPropulsionSpeed =
-                ((MovingPlatformAsParent.m_MaxSpeed + 1f) * Mathf.Max(MovingPlatformAsParent.movementDirection.magnitude,
-                     1f));
+                MovingPlatformAsParent.movementDirection.normalized != Vector3.zero
+                    ? MovingPlatformAsParent.m_MaxSpeed
+                    : Machine.characterController.characterProperties.AirControlSpeed;
         }
         else
         {
             Machine.characterController.characterProperties.TemporalPropulsionSpeed = 1f;
         }
+
+        attachedRigidbody.gameObject.transform.parent = null;
 
         RemoveVerticalSpeed();
         ((PlayerControllerFSM) Machine.characterController).enableAirControl = true;
