@@ -49,7 +49,10 @@ MonoBehaviour:
   m_BloodFrame: {fileID: 0}
   m_Intro: {fileID: 0}
   m_NoIntro: 1
+  m_BlackFade: {fileID: 0}
   defaultCheckpoint: {fileID: 0}
+  startGame: 0
+  m_sparks: []
   m_GamePaused: 0
   m_PlayerDied: 0
   m_IntroFinished: 0

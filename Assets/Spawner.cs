@@ -11,11 +11,10 @@ public class Spawner : MonoBehaviour
     [Range(0, byte.MaxValue)]public byte delay;
     public bool spawnObject;
 
-    [CanBeNull] private IEnumerator spawnCoroutine;
+    [CanBeNull] private Coroutine spawnCoroutine;
     void Start()
     {
-        spawnCoroutine = CubeSpawner();
-        if(spawnObject) RestartCoroutine();
+        spawnCoroutine = executeCoroutine(spawnCoroutine, CubeSpawner());
     }
 
     IEnumerator CubeSpawner()
@@ -27,19 +26,16 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void RestartCoroutine()
+    Coroutine executeCoroutine(Coroutine coroutineHolder, IEnumerator coroutine)
     {
-        if (spawnCoroutine != null)
-        {
-            StopCoroutine(spawnCoroutine);
-        }
-        StartCoroutine(spawnCoroutine);
+        if(coroutineHolder != null) StopCoroutine(coroutineHolder);
+       return StartCoroutine(coroutine);
     }
 
     private void OnValidate()
     {
         if (!Application.isPlaying) return;
-        if(spawnObject) RestartCoroutine();
+        if(spawnObject) spawnCoroutine = executeCoroutine(spawnCoroutine, CubeSpawner());
     }
 
     private void OnApplicationQuit()

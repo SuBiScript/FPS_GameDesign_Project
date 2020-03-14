@@ -2,6 +2,7 @@
 using PlayerFSM;
 using Weapon;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ColorPanels
 {
@@ -11,6 +12,7 @@ namespace ColorPanels
         public AudioClip magnetSound;
         private AudioSource m_AudioSource;
 
+        public WeaponScript.WeaponColor defaultMode = WeaponScript.WeaponColor.None;
         private WeaponScript.WeaponColor currentMode { get; set; }
 
         [System.Serializable]
@@ -36,6 +38,8 @@ namespace ColorPanels
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
         private Rigidbody _attachedObjectRigidbody;
+        //public bool lastCubeRegistered = true;
+        public bool forceDetach = false;
         private Rigidbody lastCube;
         public bool m_AttachingObject;
         public float m_AttachingObjectSpeed;
@@ -177,7 +181,7 @@ namespace ColorPanels
                     var newRB = collidedCollider.GetComponent<Rigidbody>();
 
                     if (collidedCollider.CompareTag("Player") || cubeEffect == null ||
-                        cubeEffect.currentlyAttached || newRB == lastCube) return;
+                        cubeEffect.currentlyAttached || (newRB == lastCube )) return;
 
                     if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
@@ -188,7 +192,6 @@ namespace ColorPanels
                             GameController.Instance.playerComponents.PlayerController.equippedWeapon.m_ObjectAttacher
                                 .DetachObjectVer2(0f);
                         }
-
 
                         AttachObject(newRB);
                         lastCube = newRB;
@@ -204,6 +207,7 @@ namespace ColorPanels
             {
                 case WeaponScript.WeaponColor.Green:
                     if (other.gameObject == GameController.Instance.playerComponents.PlayerController.gameObject) return;
+                    
                     Rigidbody otherRB = other.GetComponent<Rigidbody>();
                     if (otherRB != null && otherRB == lastCube)
                     {
@@ -221,13 +225,10 @@ namespace ColorPanels
 
         public bool ChangeColor(WeaponScript.WeaponColor color)
         {
-            //Here you change the weapon material of the block and stuff.
             if (currentMode == color) return false;
+            DetachObject(0);
             lastCube = null;
-            DetachObject();
-
             InternalChangeColor(color);
-
             return true;
         }
 
@@ -295,7 +296,7 @@ namespace ColorPanels
                 _attachedObjectRigidbody.isKinematic = false;
             }
 
-            _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Detach();
+            _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Detach(forceDetach);
             _attachedObjectRigidbody = null;
         }
 
@@ -306,7 +307,7 @@ namespace ColorPanels
 
         public void Restart()
         {
-            ChangeColor(WeaponScript.WeaponColor.None);
+            ChangeColor(defaultMode);
         }
     }
 }
