@@ -71,13 +71,20 @@ public class GameController : Singleton<GameController>
                 m_CanvasController.ShowReticle();
             m_IntroFinished = true;
         }
+        else
+        {
+            if (m_BlackFade != null)
+            {
+                m_BlackFade.Play();
+            }
+        }
 
         CheckpointManager.Init(defaultCheckpoint);
+
         if (startGame)
-            CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
-        if (m_BlackFade != null)
         {
-            m_BlackFade.Play();
+            CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
+            
         }
     }
 
@@ -113,6 +120,7 @@ public class GameController : Singleton<GameController>
         {
             item.Restart();
         }
+
         m_PlayerDied = false;
         playerComponents.HealthManager.onCharacterRespawn.Invoke();
         m_BloodFrame.gameObject.SetActive(false);

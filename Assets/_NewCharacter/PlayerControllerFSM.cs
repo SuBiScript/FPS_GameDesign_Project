@@ -7,7 +7,7 @@ using Weapon;
 [RequireComponent(typeof(State))]
 [RequireComponent(typeof(StateMachine))]
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerControllerFSM : CharacterController, IParentable
+public class PlayerControllerFSM : CharacterController, IParentable, IRestartable
 {
     public CameraFSMController cameraController;
     public bool enableAirControl { get; set; }
@@ -152,12 +152,6 @@ public class PlayerControllerFSM : CharacterController, IParentable
         m_AudioSource.PlayOneShot(m_LandSound);
     }
 
-    public void Restart(Vector3 position)
-    {
-        this.gameObject.transform.position = position;
-        rigidbody.velocity = Vector3.zero;
-    }
-
     public Transform ReturnSelf()
     {
         return this.gameObject.transform;
@@ -175,5 +169,11 @@ public class PlayerControllerFSM : CharacterController, IParentable
         AirPropulsed = false;
         this.gameObject.transform.parent = oldParent;
         return true;
+    }
+
+    public void Restart()
+    {
+        this.gameObject.transform.position = CheckpointManager.GetRespawnPoint().position;
+        rigidbody.velocity = Vector3.zero;
     }
 }

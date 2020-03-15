@@ -58,7 +58,7 @@ public class PauseController : MonoBehaviour
     {
         Time.timeScale = 1;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameController.Instance.playerComponents.PlayerController.Restart(CheckpointManager.GetRespawnPoint().position);
+        //GameController.Instance.playerComponents.PlayerController.Restart(CheckpointManager.GetRespawnPoint().position);
         Resume();
         GameController.Instance.ReloadGame();
         //AudioManager.instance.StopAllSounds();
