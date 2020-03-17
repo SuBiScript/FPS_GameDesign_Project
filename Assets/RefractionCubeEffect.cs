@@ -48,14 +48,14 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     private void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
         startingPosition = transform.position;
         initialRotation = transform.rotation;
         ownRigidbody = GetComponent<Rigidbody>();
 
         m_Collider = GetComponentInChildren<CapsuleCollider>();
 
-        var renderers = GetComponents<Renderer>();
+        var renderers = GetComponentsInChildren<Renderer>();
         for (int i = 0; i < renderers.Length; ++i)
         {
             var materials = renderers[i].sharedMaterials;
