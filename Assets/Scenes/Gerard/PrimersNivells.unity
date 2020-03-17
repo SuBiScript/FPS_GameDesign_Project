@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &15666686 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1882146848437821109, guid: 230c37d3ad50d974f8d5936e2e089781,
+    type: 3}
+  m_PrefabInstance: {fileID: 653436607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fcead2f4640f7439cb4f579d93ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &20553467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7591488072791211849, guid: 54a8280483e967142b9d4ab45360c1d8,
@@ -197,6 +209,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4765868734766432, guid: 02f14e5e2077bb44cb3beff6ce148a8d,
     type: 3}
   m_PrefabInstance: {fileID: 2043837849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &119256750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2053439341034909611, guid: af44c25cd1855604e8bb72fe07c8b992,
+    type: 3}
+  m_PrefabInstance: {fileID: 2053439339082913042}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &126086292 stripped
 GameObject:
@@ -447,7 +465,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -474,6 +492,41 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 178772994}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2067048145}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -689,6 +742,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &286904618 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 872473259545905325, guid: af44c25cd1855604e8bb72fe07c8b992,
+    type: 3}
+  m_PrefabInstance: {fileID: 2053439339082913042}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fcead2f4640f7439cb4f579d93ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &330680738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2813492937637170907, guid: 230c37d3ad50d974f8d5936e2e089781,
@@ -1197,6 +1262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room06_AfterTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 1370008937393834999, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1761656335710869569, guid: e5a246a1357a19140aeec254de9af348,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -1256,6 +1326,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
       value: 1.04e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933696889279327, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -4.4777163e-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697526380450, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697526380450, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697526380450, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697604463128, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697604463128, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697604463128, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697856347036, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697856347036, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146933697856347036, guid: e5a246a1357a19140aeec254de9af348,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3227530356195385943, guid: e5a246a1357a19140aeec254de9af348,
         type: 3}
@@ -1406,7 +1526,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -1418,6 +1538,96 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 462046791}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1215662745}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 828147282}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 767731097}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleGateStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1827,6 +2037,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664978794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1370008937393834999, guid: e5a246a1357a19140aeec254de9af348,
+    type: 3}
+  m_PrefabInstance: {fileID: 443339096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &681993084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2833,6 +3049,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 758405088}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &767731097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5359688132164294170, guid: de8e5b3b52725014593c3907521c0579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1284173579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fcead2f4640f7439cb4f579d93ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &828147282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 284607958359422980, guid: 230c37d3ad50d974f8d5936e2e089781,
+    type: 3}
+  m_PrefabInstance: {fileID: 653436607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &829177188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4893785584091620, guid: b36fdca5c62f10f4dac67823031d7e12,
@@ -3275,7 +3509,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -3287,6 +3521,96 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 1060178728}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2055925517}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 119256750}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 15666686}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleGateStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3437,6 +3761,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8850334317767176086, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176092, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
@@ -3759,6 +4088,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f71d39cddd667344a87a4859f231df89, type: 3}
+--- !u!1 &1215662745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1624045765159870096, guid: 524b4edef29a469489b1ffe4b5f92a24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1624045765908052115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1216303228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 499100184307745309, guid: 524b4edef29a469489b1ffe4b5f92a24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1624045765908052115}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fcead2f4640f7439cb4f579d93ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1234650004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7707126726398199777, guid: af44c25cd1855604e8bb72fe07c8b992,
@@ -4001,6 +4348,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room03_RedTutorial
       objectReference: {fileID: 0}
+    - target: {fileID: 6737448112025741838, guid: de8e5b3b52725014593c3907521c0579,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6737448112025741839, guid: de8e5b3b52725014593c3907521c0579,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4232,7 +4584,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -4243,16 +4595,16 @@ PrefabInstance:
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2067048145}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TextToDisplay
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Green Panel will magnitize the attached cube
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -4264,6 +4616,76 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 1289181850}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 664978794}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 286904618}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleGateStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4441,7 +4863,7 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -4452,16 +4874,16 @@ PrefabInstance:
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1988673250}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TextToDisplay
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Green Panel will magnitize the attached cube
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -4473,6 +4895,76 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 1333651437}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 119256750}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1216303228}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ToggleGateStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5715,22 +6207,22 @@ PrefabInstance:
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1215662745}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TextToDisplay
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Green Panel will magnitize the attached cube
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
@@ -5747,6 +6239,41 @@ PrefabInstance:
       propertyPath: respawnTransform
       value: 
       objectReference: {fileID: 1692623273}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ToggleGateStatus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002753125992287937, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
+        type: 3}
+      propertyPath: checkpointActivated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1835145912}
     - target: {fileID: 5002753125992287939, guid: 45fb41fa081cfab43b3bdd11b1410c4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6269,6 +6796,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1835145912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2146933697810481160, guid: e5a246a1357a19140aeec254de9af348,
+    type: 3}
+  m_PrefabInstance: {fileID: 443339096}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27fcead2f4640f7439cb4f579d93ec8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1988673250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 155413525207298788, guid: d3ad6cbb1907be94283fcd9d37e8126e,
+    type: 3}
+  m_PrefabInstance: {fileID: 728767012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2043837849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6326,6 +6871,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02f14e5e2077bb44cb3beff6ce148a8d, type: 3}
+--- !u!1 &2055925517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7323674402055145207, guid: 130a8e365b805db49917156ea7f4d4d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7323674401954043368}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2067048145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6737448112025741838, guid: de8e5b3b52725014593c3907521c0579,
+    type: 3}
+  m_PrefabInstance: {fileID: 1284173579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2101221743
 GameObject:
   m_ObjectHideFlags: 0
@@ -6798,6 +7355,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room05_LaserTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624045765159870096, guid: 524b4edef29a469489b1ffe4b5f92a24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1624045765159870103, guid: 524b4edef29a469489b1ffe4b5f92a24,
         type: 3}
@@ -7483,6 +8045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room04_JumpingCombo
       objectReference: {fileID: 0}
+    - target: {fileID: 2053439341034909611, guid: af44c25cd1855604e8bb72fe07c8b992,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3266287682746309808, guid: af44c25cd1855604e8bb72fe07c8b992,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -7652,7 +8219,7 @@ PrefabInstance:
     - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
         type: 3}
       propertyPath: m_NoIntro
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
         type: 3}
