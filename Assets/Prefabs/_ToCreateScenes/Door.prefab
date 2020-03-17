@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &10699384
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181330675396789161}
-  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.2937818, y: 1.9799166, z: 0.77607083}
-  m_Center: {x: 0.55491185, y: 0.00000011920929, z: 0.0017768145}
 --- !u!65 &33713560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39,6 +26,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.845398, y: 5.0106883, z: 1.9463755}
   m_Center: {x: 2.832398, y: 0, z: 0}
+--- !u!65 &10699384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181330675396789161}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2937818, y: 1.9799166, z: 0.77607083}
+  m_Center: {x: 0.55491185, y: 0.00000011920929, z: 0.0017768145}
 --- !u!65 &1825074766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,8 +105,13 @@ PrefabInstance:
     - target: {fileID: 4326495713720732428, guid: 415328a75e6dda94c81365f143b583da,
         type: 3}
       propertyPath: m_Name
-      value: Door (1)
+      value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 4326495713720732429, guid: 415328a75e6dda94c81365f143b583da,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 495aa4321e645d54d9c2a85100bdb840, type: 2}
     - target: {fileID: 4326495713720732431, guid: 415328a75e6dda94c81365f143b583da,
         type: 3}
       propertyPath: m_LocalPosition.x
