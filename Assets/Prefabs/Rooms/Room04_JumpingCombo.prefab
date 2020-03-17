@@ -2497,15 +2497,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2053439339650782333}
     m_Modifications:
+    - target: {fileID: 1125258983, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125258984, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125258985, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 443897383897151708, guid: 603e1f9385f452a4fb883c19808feb92,
         type: 3}
       propertyPath: m_Name
       value: ModulableWall (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 443897383897151708, guid: 603e1f9385f452a4fb883c19808feb92,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3121865430993962285, guid: 603e1f9385f452a4fb883c19808feb92,
         type: 3}
@@ -2737,6 +2744,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2053439339650782333}
     m_Modifications:
+    - target: {fileID: 1125258983, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125258984, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125258985, guid: 603e1f9385f452a4fb883c19808feb92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 443897383897151708, guid: 603e1f9385f452a4fb883c19808feb92,
         type: 3}
       propertyPath: m_Name
