@@ -3698,15 +3698,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 587271071, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 32768
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850334316698952884, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
-        type: 3}
-      propertyPath: m_Depth
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176084, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3762,30 +3753,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8850334317767176086, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850334317767176092, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
-        type: 3}
-      propertyPath: castRadius
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8850334317767176094, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
         type: 3}
       propertyPath: m_Name
       value: PlayerFSM_develop
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850334318765290977, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
-        type: 3}
-      propertyPath: far clip plane
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850334318765290977, guid: 2ff7c5eda02fc2d449d4d82654ec0c15,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 36864
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff7c5eda02fc2d449d4d82654ec0c15, type: 3}

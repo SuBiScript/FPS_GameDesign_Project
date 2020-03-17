@@ -470,7 +470,7 @@ MonoBehaviour:
     m_GravityShot: 0
     m_CubeButton: 0
     m_Rendered: 0
-    m_ChildsAttachedObject: []
+    m_ChildsAttachedObject: {fileID: 0}
     weapon: {fileID: 8850334316833739102}
   m_WeaponParticleList:
   - {fileID: 198624090417057397}
@@ -549,7 +549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8850334317546743797}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 1.89}
+  m_LocalPosition: {x: 0, y: -0.491, z: 1.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8850334318145195918}
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_LandSound: {fileID: 8300000, guid: c3b368aeefccee14789432a4741212d1, type: 3}
   m_StepTimeWaking: 0.5
   groundPosition: {fileID: 8850334316947868405}
-  castRadius: 0.1
+  castRadius: 0.2
   walkableLayers:
     serializedVersion: 2
     m_Bits: 76800
@@ -966,7 +966,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
