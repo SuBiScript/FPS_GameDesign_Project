@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using ColorPanels;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -208,6 +207,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     public void Attach()
     {
         if (_joint) Destroy(_joint);
+        Physics.IgnoreCollision(m_Collider, GameController.Instance.playerComponents.PlayerController.attachedCollider, true);
         //ChangeMaterials(cubeMaterialList[1]);
     }
 
@@ -224,6 +224,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     public void Detach()
     {
         //Nothing for now
+        Physics.IgnoreCollision(m_Collider, GameController.Instance.playerComponents.PlayerController.attachedCollider, false);
         //ChangeMaterials(cubeMaterialList[0]);
     }
 

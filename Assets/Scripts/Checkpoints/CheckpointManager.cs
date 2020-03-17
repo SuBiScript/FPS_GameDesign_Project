@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 public static class CheckpointManager
 {

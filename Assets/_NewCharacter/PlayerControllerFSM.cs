@@ -1,5 +1,4 @@
-﻿using ColorPanels;
-using PlayerFSM;
+﻿using PlayerFSM;
 using UnityEngine;
 using Weapon;
 

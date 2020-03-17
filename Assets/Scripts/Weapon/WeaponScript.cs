@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using ColorPanels;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -50,7 +48,8 @@ namespace Weapon
                 {
                     Vector3 l_Direction = m_AttachingPosition.transform.position - m_ObjectAttached.transform.position;
                     float l_Distance = l_Direction.magnitude;
-                    float l_Movement = m_AttachingObjectSpeed * Time.deltaTime;
+                    float l_Movement = (m_AttachingObjectSpeed + 25f ) * Time.deltaTime;
+                    Debug.Log(l_Movement + "/" + l_Distance);
 
                     if (l_Movement >= l_Distance)
                     {
