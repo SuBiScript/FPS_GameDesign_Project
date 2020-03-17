@@ -188,6 +188,26 @@ PrefabInstance:
       propertyPath: m_CollisionLayerMask.m_Bits
       value: 107776
       objectReference: {fileID: 0}
+    - target: {fileID: 7993526128288765554, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: cubeMaterialList.Array.data[0].cubeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b173d1ab461ff048862b03339f310dd, type: 2}
+    - target: {fileID: 7993526128288765554, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: cubeMaterialList.Array.data[0].colorIndicatorMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: ace367847602a474382a55019e5ba553, type: 2}
+    - target: {fileID: 7993526128288765554, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: cubeMaterialList.Array.data[1].cubeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f6c1f621b92a764f94db00caa126680, type: 2}
+    - target: {fileID: 7993526128288765554, guid: 6183143d9eab56547bc84e5797204b78,
+        type: 3}
+      propertyPath: cubeMaterialList.Array.data[1].colorIndicatorMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c922406a29a3f84f9c51e50065ac658, type: 2}
     - target: {fileID: 7993526128704805454, guid: 6183143d9eab56547bc84e5797204b78,
         type: 3}
       propertyPath: m_Layer

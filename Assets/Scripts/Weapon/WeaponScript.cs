@@ -126,6 +126,7 @@ namespace Weapon
                     weapon.RestoreMass(m_ObjectAttached);
                     weapon.RestoreLayers();
                     m_ObjectAttached.AddForce(m_AttachingPosition.forward * force);
+                    m_ObjectAttached.GetComponentInChildren<IAttachable>().Detach();
                     m_ObjectAttached = null;
                 }
                 catch (Exception e)

@@ -1449,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
@@ -2913,7 +2913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
@@ -3150,7 +3150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 18
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
@@ -10657,6 +10657,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af9f8d033ffa994990c156fcf8a705c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cubeMaterialList:
+  - cubeMaterial: {fileID: 2100000, guid: 1b173d1ab461ff048862b03339f310dd, type: 2}
+    colorIndicatorMaterial: {fileID: 2100000, guid: ace367847602a474382a55019e5ba553,
+      type: 2}
+  - cubeMaterial: {fileID: 2100000, guid: 7f6c1f621b92a764f94db00caa126680, type: 2}
+    colorIndicatorMaterial: {fileID: 2100000, guid: 4c922406a29a3f84f9c51e50065ac658,
+      type: 2}
   m_LineRenderer: {fileID: 6494874942575463050}
   m_CollisionLayerMask:
     serializedVersion: 2
@@ -10664,6 +10671,7 @@ MonoBehaviour:
   m_MaxLineDistance: 200
   m_StatusMaterial: {fileID: 2100000, guid: ace367847602a474382a55019e5ba553, type: 2}
   m_Collider: {fileID: 3804657613222350696}
+  meshRenderer: {fileID: 0}
 --- !u!54 &6494874942427858619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10717,7 +10725,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b9c30dee921ff448827fcefebb9fddc, type: 2}
+  - {fileID: 2100000, guid: 4c922406a29a3f84f9c51e50065ac658, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

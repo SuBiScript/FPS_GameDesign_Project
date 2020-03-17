@@ -1,9 +1,20 @@
 ﻿using System;
+using System.Diagnostics;
 using ColorPanels;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IAttachable
 {
+    [System.Serializable]
+    public struct CubeMaterials
+    {
+        public Material cubeMaterial;
+        public Material colorIndicatorMaterial;
+    }
+
+    public CubeMaterials[] cubeMaterialList = new CubeMaterials[2];
+    [Space(10)]
     public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
     [Range(1f, 400.0f)] public float m_MaxLineDistance;
@@ -22,6 +33,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     //dynamic collider
     public CapsuleCollider m_Collider;
+    public MeshRenderer meshRenderer;
 
     /// <summary>
     /// Restarting positon variables
@@ -36,6 +48,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     private void Start()
     {
+        meshRenderer = GetComponent<MeshRenderer>();
         startingPosition = transform.position;
         initialRotation = transform.rotation;
         ownRigidbody = GetComponent<Rigidbody>();
@@ -134,6 +147,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         AttachedOnThisPanel = attachedTo;
         currentlyAttached = true;
         if (_joint != null) Destroy(_joint);
+        ChangeMaterials(cubeMaterialList[0]);
     }
 
     public void Detach(bool force = false)
@@ -148,6 +162,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         transform.position = startingPosition;
         transform.rotation = initialRotation;
         ownRigidbody.velocity = Vector3.zero;
+        ChangeMaterials(cubeMaterialList[0]);
     }
 
     public Transform ReturnSelf()
@@ -194,10 +209,22 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     public void Attach()
     {
         if (_joint) Destroy(_joint);
+        ChangeMaterials(cubeMaterialList[1]);
     }
 
     public void Detach()
     {
         //Nothing for now
+        ChangeMaterials(cubeMaterialList[0]);
+    }
+
+    public void ChangeMaterials(CubeMaterials materialList)
+    {
+        Material[] newMaterials = new[]
+        {
+            Instantiate(materialList.cubeMaterial),
+            Instantiate(materialList.colorIndicatorMaterial),
+        };
+        meshRenderer.materials = newMaterials;
     }
 }
