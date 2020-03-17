@@ -147,7 +147,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         AttachedOnThisPanel = attachedTo;
         currentlyAttached = true;
         if (_joint != null) Destroy(_joint);
-        ChangeMaterials(cubeMaterialList[0]);
+        //ChangeMaterials(cubeMaterialList[0]);
     }
 
     public void Detach(bool force = false)
@@ -162,7 +162,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         transform.position = startingPosition;
         transform.rotation = initialRotation;
         ownRigidbody.velocity = Vector3.zero;
-        ChangeMaterials(cubeMaterialList[0]);
+        //ChangeMaterials(cubeMaterialList[0]);
     }
 
     public Transform ReturnSelf()
@@ -209,13 +209,13 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     public void Attach()
     {
         if (_joint) Destroy(_joint);
-        ChangeMaterials(cubeMaterialList[1]);
+        //ChangeMaterials(cubeMaterialList[1]);
     }
 
     public void Detach()
     {
         //Nothing for now
-        ChangeMaterials(cubeMaterialList[0]);
+        //ChangeMaterials(cubeMaterialList[0]);
     }
 
     public void ChangeMaterials(CubeMaterials materialList)
