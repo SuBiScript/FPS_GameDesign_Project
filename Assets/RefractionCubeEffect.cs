@@ -14,8 +14,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     }
 
     public CubeMaterials[] cubeMaterialList = new CubeMaterials[2];
-    [Space(10)]
-    public LineRenderer m_LineRenderer;
+    [Space(10)] public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
     [Range(1f, 400.0f)] public float m_MaxLineDistance;
     bool m_CreateRefraction;
@@ -210,6 +209,16 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     {
         if (_joint) Destroy(_joint);
         //ChangeMaterials(cubeMaterialList[1]);
+    }
+
+    public void ChangeLayers(string newLayer)
+    {
+        meshRenderer.gameObject.layer = LayerMask.NameToLayer(newLayer);
+    }
+
+    public void MakeTransparent(bool makeTransparent)
+    {
+        ChangeMaterials(!makeTransparent ? cubeMaterialList[0] : cubeMaterialList[1] );
     }
 
     public void Detach()
