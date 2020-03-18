@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2855677386788833547}
   - component: {fileID: 6555659732607382333}
   - component: {fileID: 704506167009660868}
+  - component: {fileID: 1383300469841829592}
   m_Layer: 0
   m_Name: WallLight
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1383300469841829592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295416755157269272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0940206, y: 1.3637639, z: 1.6283401}
+  m_Center: {x: -0.09414551, y: -0.000000059604645, z: 0.000000834465}
 --- !u!1 &2799078638658238948
 GameObject:
   m_ObjectHideFlags: 0
