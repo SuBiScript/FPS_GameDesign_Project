@@ -16,6 +16,7 @@ public class MenuCubeSelector : MonoBehaviour
     public Animation blackFadeOut;
 
     public GameObject optionsPanel;
+    public GameObject loadingPanel;
 
 
     [Header("Transitions")] [Range(0f, 5f)] [Tooltip("Wait time between selecting an option and fading.")]
@@ -57,6 +58,7 @@ public class MenuCubeSelector : MonoBehaviour
 
     void Start()
     {
+        AudioManager.instance.Play("Perturbator");
         optionsPanel.SetActive(false);
         optionSelected = false;
         foreach (ColorPanelObjectFSM panel in options)
