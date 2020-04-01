@@ -671,6 +671,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorPanel_develop
       objectReference: {fileID: 0}
+    - target: {fileID: 5867245193151003913, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7437692251183304474, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1009,6 +1014,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ColorPanel_develop (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867245193151003913, guid: 945fd6c2b12785748813b91d2fa5d7a5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7437692251183304474, guid: 945fd6c2b12785748813b91d2fa5d7a5,
         type: 3}

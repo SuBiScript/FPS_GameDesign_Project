@@ -103,8 +103,8 @@ public class MenuCubeSelector : MonoBehaviour
                 {
                     try
                     {
-                        SetAsCurrentOption(rayInfo.transform.GetComponent<ColorPanelObjectFSM>());
-                        if (Input.GetMouseButtonDown(0))
+                        if (SetAsCurrentOption(rayInfo.transform.GetComponent<ColorPanelObjectFSM>()) &&
+                            Input.GetMouseButtonDown(0))
                         {
                             ActivateOption();
                         }
@@ -115,13 +115,13 @@ public class MenuCubeSelector : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Return))
-            {
-                ActivateOption();
-            }
             else if (Input.GetKeyDown(KeyCode.Escape) && inOptionsMenu)
             {
                 Options();
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                ActivateOption();
             }
         }
     }
@@ -209,16 +209,18 @@ public class MenuCubeSelector : MonoBehaviour
 #endif
     }
 
-    void SetAsCurrentOption(ColorPanelObjectFSM newPanel)
+    bool SetAsCurrentOption(ColorPanelObjectFSM newPanel)
     {
         for (int i = 0; i < options.Length; i++)
         {
             if (newPanel.GetHashCode() == options[i].GetHashCode())
             {
                 currentOption = i;
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     private Coroutine ExecuteCoroutine(Coroutine l_CoroutineHolder, IEnumerator l_MethodName)
