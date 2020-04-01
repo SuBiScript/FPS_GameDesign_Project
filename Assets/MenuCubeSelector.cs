@@ -10,6 +10,9 @@ using Weapon;
 
 public class MenuCubeSelector : MonoBehaviour
 {
+    [Header("RaycastRequired Info")] public Camera mainSceneCamera;
+    public LayerMask platformLayer;
+
     public ColorPanelObjectFSM[] options;
     public RefractionCubeEffect selectorCube;
     public TextMeshPro TextMeshPro;
@@ -26,6 +29,7 @@ public class MenuCubeSelector : MonoBehaviour
     private int _currentOption;
     private bool optionSelected;
     private bool inOptionsMenu;
+    private bool usingKeys;
 
     private string[] texts = new[]
     {
@@ -58,6 +62,11 @@ public class MenuCubeSelector : MonoBehaviour
 
     void Start()
     {
+        usingKeys = false;
+        //Set cursor visible to select the options.
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+
         AudioManager.instance.Play("Perturbator");
         optionsPanel.SetActive(false);
         optionSelected = false;
@@ -77,37 +86,67 @@ public class MenuCubeSelector : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && !inOptionsMenu)
             {
                 currentOption++;
+                usingKeys = true;
             }
             else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && !inOptionsMenu)
             {
                 currentOption--;
+                usingKeys = true;
+            }
+            else if ((Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Mouse Y") > 0 || !usingKeys ||
+                      Input.GetMouseButtonDown(0)) && !inOptionsMenu)
+            {
+                usingKeys = false;
+                Ray mouseRay = mainSceneCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit rayInfo;
+                if (Physics.Raycast(mouseRay, out rayInfo, 250, platformLayer))
+                {
+                    try
+                    {
+                        SetAsCurrentOption(rayInfo.transform.GetComponent<ColorPanelObjectFSM>());
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            ActivateOption();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log(e.Message);
+                    }
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Return))
             {
-                //ACTIVATE OPTION
-                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
-                switch (currentOption)
-                {
-                    case 0:
-                        StartCoroutine(StartPlaying());
-                        optionSelected = true;
-                        break;
-                    case 1:
-                        Options();
-                        break;
-                    case 2:
-                        StartCoroutine(QuitWithStyle());
-                        optionSelected = true;
-                        break;
-                    default:
-                        Debug.LogWarning("WTF, how did you even... nevermind.");
-                        break;
-                }
+                ActivateOption();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && inOptionsMenu)
             {
                 Options();
             }
+        }
+    }
+
+    void ActivateOption()
+    {
+        //ACTIVATE OPTION
+        switch (currentOption)
+        {
+            case 0:
+                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
+                StartCoroutine(StartPlaying());
+                optionSelected = true;
+                break;
+            case 1:
+                Options();
+                break;
+            case 2:
+                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
+                StartCoroutine(QuitWithStyle());
+                optionSelected = true;
+                break;
+            default:
+                Debug.LogWarning("WTF, how did you even... nevermind.");
+                break;
         }
     }
 
@@ -168,6 +207,18 @@ public class MenuCubeSelector : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+
+    void SetAsCurrentOption(ColorPanelObjectFSM newPanel)
+    {
+        for (int i = 0; i < options.Length; i++)
+        {
+            if (newPanel.GetHashCode() == options[i].GetHashCode())
+            {
+                currentOption = i;
+                return;
+            }
+        }
     }
 
     private Coroutine ExecuteCoroutine(Coroutine l_CoroutineHolder, IEnumerator l_MethodName)
