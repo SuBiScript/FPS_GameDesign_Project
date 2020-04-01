@@ -24,6 +24,7 @@ public class MenuCubeSelector : MonoBehaviour
 
     [Header("Transitions")] [Range(0f, 5f)] [Tooltip("Wait time between selecting an option and fading.")]
     public float standardWaitTime = 1f;
+    [Range(0f, 3f)]  [Tooltip("Wait time before accepting any input")] public float timeBeforeStartup = 2f;
 
     private Coroutine hideCube;
     private int _currentOption;
@@ -81,6 +82,14 @@ public class MenuCubeSelector : MonoBehaviour
 
     void Update()
     {
+        if (timeBeforeStartup <= 0)
+            ScanForInput();
+        else if (timeBeforeStartup > 0)
+            timeBeforeStartup -= Time.deltaTime;
+    }
+
+    void ScanForInput()
+    {
         if (!optionSelected)
         {
             if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && !inOptionsMenu)
@@ -119,6 +128,7 @@ public class MenuCubeSelector : MonoBehaviour
             {
                 Options();
             }
+
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 ActivateOption();
@@ -189,14 +199,14 @@ public class MenuCubeSelector : MonoBehaviour
             optionsPanel.SetActive(false);
             options[currentOption].ChangeColor(WeaponScript.WeaponColor.Green);
             selectorCube.gameObject.SetActive(true);
-            selectorCube.Restart();
-            StopCoroutine(hideCube);
+            //selectorCube.Restart();
+            //StopCoroutine(hideCube);
             inOptionsMenu = false;
         }
         else
         {
             optionsPanel.SetActive(true);
-            hideCube = ExecuteCoroutine(hideCube, CubeStopper());
+            //hideCube = ExecuteCoroutine(hideCube, CubeStopper());
             inOptionsMenu = true;
         }
     }

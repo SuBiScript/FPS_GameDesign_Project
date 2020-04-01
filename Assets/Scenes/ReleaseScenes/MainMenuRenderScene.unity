@@ -1299,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
@@ -1997,6 +1997,7 @@ MonoBehaviour:
   optionsPanel: {fileID: 1652149283}
   loadingPanel: {fileID: 0}
   standardWaitTime: 1
+  timeBeforeStartup: 1
 --- !u!4 &1624916352
 Transform:
   m_ObjectHideFlags: 0
@@ -2721,7 +2722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
@@ -2983,7 +2984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 953848934, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
       propertyPath: lastCubeRegistered
