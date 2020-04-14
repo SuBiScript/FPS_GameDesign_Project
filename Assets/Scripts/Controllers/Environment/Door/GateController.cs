@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
-    [SerializeField] private Color m_LockedColor = Color.red;
-    [SerializeField] private Color m_UnlockedColor = Color.green;
-    public AudioClip gateOpen;
-    public AudioClip gateClose;
-    public Material m_StatusMaterial;
+    [Header("Door Config")]
     public bool m_Locked;
+    [Header("Color Settings")] [SerializeField]
+    private Color m_LockedColor = Color.red;
+
+    [SerializeField] private Color m_UnlockedColor = Color.green;
+    [Range(0, 5f)] public float colorIntensity = 4f;
+    
+    [Header("Audio")] public AudioClip gateOpen;
+    public AudioClip gateClose;
+    [Header("Materials")]
+    public Material m_StatusMaterial;
 
     private const string c_ColorText = "_Color";
     private const string c_EmissionColor = "_EmissionColor";
@@ -27,12 +33,14 @@ public class GateController : MonoBehaviour
         m_AudioSource = GetComponent<AudioSource>();
 
         var renderers = GetComponentsInChildren<Renderer>();
+
         for (int i = 0; i < renderers.Length; ++i)
         {
             var materials = renderers[i].sharedMaterials;
             for (int j = 0; j < materials.Length; ++j)
             {
-                if (materials[j] != m_StatusMaterial) //the shared material will allow for a valid comparison. The instance material should not be compared.
+                if (materials[j] != m_StatusMaterial
+                ) //the shared material will allow for a valid comparison. The instance material should not be compared.
                     continue;
 
                 if (m_StatusMaterials == null)
@@ -40,7 +48,9 @@ public class GateController : MonoBehaviour
                 else
                     System.Array.Resize(ref m_StatusMaterials, m_StatusMaterials.Length + 1);
 
-                m_StatusMaterials[m_StatusMaterials.Length - 1] = renderers[i].materials[j]; //cache the instance material so each status light operates independently.
+                m_StatusMaterials[m_StatusMaterials.Length - 1] =
+                    renderers[i]
+                        .materials[j]; //cache the instance material so each status light operates independently.
             }
         }
 
@@ -74,7 +84,7 @@ public class GateController : MonoBehaviour
             {
                 var locked = m_Locked;
                 //m_StatusMaterials[i].SetColor(c_ColorText, locked ? m_LockedColor : m_UnlockedColor);
-                m_StatusMaterials[i].SetColor(c_EmissionColor, locked ? m_LockedColor : m_UnlockedColor);
+                m_StatusMaterials[i].SetColor(c_EmissionColor, (locked ? m_LockedColor : m_UnlockedColor) * colorIntensity);
             }
         }
     }
@@ -92,6 +102,7 @@ public class GateController : MonoBehaviour
             m_DoorAnim.SetBool(s_OpenHash, false);
             m_AudioSource.PlayOneShot(gateClose);
         }
+
         m_Locked = !m_Locked;
         UpdateGateStatus();
     }

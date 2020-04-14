@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 5809609605504934707}
   - component: {fileID: 262167881613729738}
   - component: {fileID: 7571941205668473620}
+  - component: {fileID: 8274029678560560396}
   m_Layer: 0
   m_Name: CorridorLight
   m_TagString: Untagged
@@ -165,8 +166,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0.00000019861236, w: 0.00000019861236}
   m_LocalPosition: {x: 0.011, y: 1.24, z: 0.05}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 5634893726562151525}
+  m_Children: []
   m_Father: {fileID: 2426936738890881856}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: -90}
@@ -235,45 +235,13 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!1 &2589718268018890229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5634893726562151525}
-  - component: {fileID: 7301245945723713578}
-  - component: {fileID: 4414269064273478621}
-  m_Layer: 0
-  m_Name: Corridor_PL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5634893726562151525
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589718268018890229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3298015470470207749}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &7301245945723713578
+--- !u!108 &8274029678560560396
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589718268018890229}
+  m_GameObject: {fileID: 1990518743121816342}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
@@ -328,19 +296,3 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!111 &4414269064273478621
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2589718268018890229}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 201163db978f1e343841c2047e1f75dd, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 201163db978f1e343841c2047e1f75dd, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0

@@ -151,12 +151,12 @@ namespace ColorPanels
                     {
                         ColorPanelEffects.PanelSetProperties(colorPanelProperties, transform.up);
                         pcController.stateMachine.SwitchState<Player_State_PlatformJumping>();
-                        ClipAndPlay(m_JumpPlatform, 0.5f);
+                        ClipAndPlay(m_JumpPlatform);
                         return;
                     }
 
                     ColorPanelEffects.ThrowObject(this.gameObject, other, transform.up, colorPanelProperties);
-                    ClipAndPlay(m_JumpPlatform, 0.5f);
+                    ClipAndPlay(m_JumpPlatform);
                     break;
             }
         }
@@ -272,15 +272,13 @@ namespace ColorPanels
             _attachedObjectRigidbody.useGravity = false;
             _attachedObjectRigidbody.isKinematic = true;
             _attachedObjectRigidbody.gameObject.GetComponent<RefractionCubeEffect>().Attach(this);
-            ClipAndPlay(magnetSound, 1f);
-            //AudioManager.instance.Play("Magnet");
+            ClipAndPlay(magnetSound);
         }
 
-        private void ClipAndPlay(AudioClip clip, float volume = 1f)
+        private void ClipAndPlay(AudioClip clip)
         {
             if (m_AudioSource != null)
             {
-                m_AudioSource.volume = volume;
                 m_AudioSource.clip = clip;
                 m_AudioSource.Play();
             }

@@ -49,19 +49,19 @@ MonoBehaviour:
   extendStepsSound: 0
   sounds:
   - source: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     name: Ambience
     clip: {fileID: 8300000, guid: 89f1b5aafb7925d4eab535f4eec6eef0, type: 3}
     loop: 1
   - source: {fileID: 0}
-    volume: 0.85
+    volume: 0.33
     pitch: 1
     name: MusicLevel
     clip: {fileID: 8300000, guid: e6fe46d87d059724cac729ca4af0e66a, type: 3}
     loop: 1
   - source: {fileID: 0}
-    volume: 0.1
+    volume: 0.067
     pitch: 1
     name: Breathing
     clip: {fileID: 8300000, guid: a8e479000c7573c479a7c9c110648bec, type: 3}
@@ -79,37 +79,37 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9090194291d987d4dbefee67f4ddcb60, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 1
+    volume: 0.67
     pitch: 1
     name: ChangeColor
     clip: {fileID: 8300000, guid: 0163c1dc67955b64ba61270cfb48b55e, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 1
+    volume: 0.85
     pitch: 1
     name: Shot
     clip: {fileID: 8300000, guid: 894a6bc956af7424180be99f75712265, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 0.9
+    volume: 0.82
     pitch: 1
     name: Scream
     clip: {fileID: 8300000, guid: 873d40caf2c087e4ab79831d8b782c1b, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 1
+    volume: 0.66
     pitch: 1
     name: Magnet
     clip: {fileID: 8300000, guid: 7085a4795a3635840ab96091d402b30a, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 0.9
+    volume: 0.3
     pitch: 1
     name: Perturbator
     clip: {fileID: 8300000, guid: 2f7c5c5ed9e2d104fa01c2adcbe5e1dd, type: 3}
     loop: 1
   - source: {fileID: 0}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     name: TeleportMenu
     clip: {fileID: 8300000, guid: 40bc8b7a25c835b4187dcbe2ba0da52a, type: 3}

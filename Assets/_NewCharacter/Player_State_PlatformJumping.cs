@@ -60,8 +60,6 @@ public class Player_State_PlatformJumping : State
             ? Machine.characterController.characterProperties.AirControlSpeed
             : Machine.characterController.characterProperties.OnAirSpeed;
 
-        AudioManager.instance.Play("JumpPlatform");
-
         timer = 5;
     }
 

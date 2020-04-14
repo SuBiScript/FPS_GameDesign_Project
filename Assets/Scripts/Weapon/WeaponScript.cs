@@ -49,7 +49,6 @@ namespace Weapon
                     Vector3 l_Direction = m_AttachingPosition.transform.position - m_ObjectAttached.transform.position;
                     float l_Distance = l_Direction.magnitude;
                     float l_Movement = (m_AttachingObjectSpeed + 25f ) * Time.deltaTime;
-                    Debug.Log(l_Movement + "/" + l_Distance);
 
                     if (l_Movement >= l_Distance)
                     {
@@ -421,7 +420,6 @@ namespace Weapon
             {
                 newWeaponMaterial[1] = _currentMaterial;
             }
-
             weaponMeshRenderer.materials = newWeaponMaterial;*/
         }
 
