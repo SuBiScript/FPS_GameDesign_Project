@@ -55,10 +55,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 89f1b5aafb7925d4eab535f4eec6eef0, type: 3}
     loop: 1
   - source: {fileID: 0}
-    volume: 1
+    volume: 0.85
     pitch: 1
     name: MusicLevel
-    clip: {fileID: 8300000, guid: 514bcab2fd8d6d84f9e05c199f5c7d9e, type: 3}
+    clip: {fileID: 8300000, guid: e6fe46d87d059724cac729ca4af0e66a, type: 3}
     loop: 1
   - source: {fileID: 0}
     volume: 0.1
@@ -103,10 +103,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7085a4795a3635840ab96091d402b30a, type: 3}
     loop: 0
   - source: {fileID: 0}
-    volume: 0.3
+    volume: 0.9
     pitch: 1
     name: Perturbator
-    clip: {fileID: 8300000, guid: 43ddc74f92b7682448c46c7373d47e02, type: 3}
+    clip: {fileID: 8300000, guid: 2f7c5c5ed9e2d104fa01c2adcbe5e1dd, type: 3}
     loop: 1
   - source: {fileID: 0}
     volume: 0.7

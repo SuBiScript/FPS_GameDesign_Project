@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 377015521}
-  m_IndirectSpecularColor: {r: 0.18061805, g: 0.18287587, b: 0.19779396, a: 1}
+  m_IndirectSpecularColor: {r: 0.16405293, g: 0.16638553, b: 0.18204466, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11826,18 +11826,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1033473306}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &666941671 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7625486544806065410, guid: e5a246a1357a19140aeec254de9af348,
-    type: 3}
-  m_PrefabInstance: {fileID: 3224140732792519122}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 968eab57ee12ef84f8e3c9b664704143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &668140141
 GameObject:
   m_ObjectHideFlags: 0
@@ -34770,7 +34758,7 @@ PrefabInstance:
         type: 3}
       propertyPath: defaultCheckpoint
       value: 
-      objectReference: {fileID: 666941671}
+      objectReference: {fileID: 0}
     - target: {fileID: 5698139758523322799, guid: d110f66c4a378a64abf6e49f4781c499,
         type: 3}
       propertyPath: startGame
@@ -34790,21 +34778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3305226540692183281, guid: f138aabbab3b4404abcec0db2db07e6e,
-        type: 3}
-      propertyPath: sounds.Array.data[9].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 40bc8b7a25c835b4187dcbe2ba0da52a, type: 3}
-    - target: {fileID: 3305226540692183281, guid: f138aabbab3b4404abcec0db2db07e6e,
-        type: 3}
-      propertyPath: sounds.Array.data[9].name
-      value: TeleportMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 3305226540692183281, guid: f138aabbab3b4404abcec0db2db07e6e,
-        type: 3}
-      propertyPath: sounds.Array.data[9].volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4878850619585821764, guid: f138aabbab3b4404abcec0db2db07e6e,
         type: 3}
       propertyPath: m_LocalPosition.x
