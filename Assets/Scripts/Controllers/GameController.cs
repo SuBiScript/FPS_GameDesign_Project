@@ -24,6 +24,15 @@ public class GameController : Singleton<GameController>
     [HideInInspector] public bool m_PlayerDied;
     [HideInInspector] public bool m_IntroFinished;
 
+    [System.Serializable]
+    public struct LevelInfo
+    {
+        public bool enabled;
+        public GameObject levelPrefab;
+    }
+
+    public LevelInfo[] levelInfos;
+
     public struct PlayerComponents
     {
         public readonly HealthManager HealthManager;
@@ -56,7 +65,8 @@ public class GameController : Singleton<GameController>
         {
             _restartables.Add(item);
         }
-
+        
+        SetupLevels();
         m_sparks = FindObjectsOfType<SparkController>();
     }
 
@@ -81,7 +91,6 @@ public class GameController : Singleton<GameController>
         if (startGame)
         {
             CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
-            
         }
     }
 
@@ -97,6 +106,20 @@ public class GameController : Singleton<GameController>
         {
             Debug.LogError("FATAL ERROR. Player components not found.");
             Time.timeScale = 0f;
+        }
+    }
+
+    private void SetupLevels()
+    {
+        if (levelInfos == null || levelInfos.Length <= 0)
+        {
+            Debug.LogWarning("Couldn't setup levels.");
+            return;
+        }
+
+        foreach (LevelInfo level in levelInfos)
+        {
+            level.levelPrefab.SetActive(level.enabled);
         }
     }
 
