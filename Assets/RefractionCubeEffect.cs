@@ -44,6 +44,9 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     private FixedJoint _joint;
 
+    [Header("Particles")]
+    public ParticleSystem laserParticles;
+
     private void Start()
     {
         meshRenderer = GetComponentInChildren<MeshRenderer>();
@@ -81,7 +84,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         if (!m_CreateRefraction)
         {
             m_StatusMaterials[0].SetColor(c_EmissionColor, Color.green);
-
+            ToggleLaserParticles(false, transform.position, transform.forward);
             if (m_raySwitch != null)
             {
                 m_raySwitch.DisableSwith();
@@ -134,6 +137,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
             }
         }
 
+        ToggleLaserParticles(true, l_RaycastHit.point, l_RaycastHit.normal);
         m_LineRenderer.SetPosition(1, l_EndRaycastPosition);
 
         m_Collider.height = l_RaycastHit.distance + 1;
@@ -236,5 +240,23 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
             Instantiate(materialList.colorIndicatorMaterial),
         };
         meshRenderer.materials = newMaterials;
+    }
+    
+    private void ToggleLaserParticles(bool enable, Vector3 position, Vector3 forward)
+    {
+        if (laserParticles == null) return;
+        Transform laserPartGO = laserParticles.gameObject.transform;
+        laserPartGO.position = position;
+        laserPartGO.forward = forward;
+        if (enable && !laserParticles.gameObject.activeSelf)
+        {
+            laserParticles.gameObject.SetActive(true);
+            laserParticles.Play();
+        }
+        else if (!enable && laserParticles.gameObject.activeSelf)
+        {
+            laserParticles.Stop();
+            laserParticles.gameObject.SetActive(false);
+        }
     }
 }

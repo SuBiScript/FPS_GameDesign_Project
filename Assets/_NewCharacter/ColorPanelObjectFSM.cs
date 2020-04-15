@@ -37,12 +37,16 @@ namespace ColorPanels
         public MeshRenderer meshRenderer;
 
         [Header("Magnet Mode Settings")] public GameObject dragPosition;
+
         private Rigidbody _attachedObjectRigidbody;
+
         //public bool lastCubeRegistered = true;
         public bool forceDetach = false;
         private Rigidbody lastCube;
         public bool m_AttachingObject;
         public float m_AttachingObjectSpeed;
+
+        public ParticleSystem laserParticles;
 
         [Header("LineRenderer Settings")] public LineRenderer m_LineRenderer;
         public LayerMask m_CollisionLayerMask;
@@ -54,7 +58,7 @@ namespace ColorPanels
         {
             //meshRenderer = GetComponent<MeshRenderer>();
             _attachedObjectRigidbody = null;
-            ChangeColor(WeaponScript.WeaponColor.None);
+            ChangeColor(defaultMode);
             m_CreateLine = false;
             m_AttachingObject = false;
             m_AudioSource = GetComponent<AudioSource>();
@@ -66,6 +70,10 @@ namespace ColorPanels
 
             if (m_CreateLine)
                 CreateRender();
+            else
+            {
+                ToggleLaserParticles(false, this.transform.position, this.transform.forward);
+            }
 
             switch (currentMode)
             {
@@ -131,6 +139,7 @@ namespace ColorPanels
                 }
             }
 
+            ToggleLaserParticles(true, l_RaycastHit.point, l_RaycastHit.normal);
             m_LineRenderer.SetPosition(1, l_EndRaycastPosition);
 
             Debug.DrawRay(m_LineRenderer.transform.position, m_LineRenderer.transform.forward * 200.0f, Color.blue);
@@ -181,7 +190,7 @@ namespace ColorPanels
                     var newRB = collidedCollider.GetComponent<Rigidbody>();
 
                     if (collidedCollider.CompareTag("Player") || cubeEffect == null ||
-                        cubeEffect.currentlyAttached || (newRB == lastCube )) return;
+                        cubeEffect.currentlyAttached || (newRB == lastCube)) return;
 
                     if (_attachedObjectRigidbody == null && !m_AttachingObject)
                     {
@@ -206,8 +215,9 @@ namespace ColorPanels
             switch (currentMode)
             {
                 case WeaponScript.WeaponColor.Green:
-                    if (other.gameObject == GameController.Instance.playerComponents.PlayerController.gameObject) return;
-                    
+                    if (other.gameObject ==
+                        GameController.Instance.playerComponents.PlayerController.gameObject) return;
+
                     Rigidbody otherRB = other.GetComponent<Rigidbody>();
                     if (otherRB != null && otherRB == lastCube)
                     {
@@ -223,12 +233,32 @@ namespace ColorPanels
             //DetachObject();
         }
 
+        private void ToggleLaserParticles(bool enable, Vector3 position, Vector3 forward)
+        {
+            if (laserParticles == null) return;
+            Transform laserPartGO = laserParticles.gameObject.transform;
+            laserPartGO.position = position;
+            laserPartGO.forward = forward;
+            if (enable && !laserParticles.gameObject.activeSelf)
+            {
+                laserParticles.gameObject.SetActive(true);
+                laserParticles.Play();
+            }
+            else if (!enable && laserParticles.gameObject.activeSelf)
+            {
+                laserParticles.Stop();
+                laserParticles.gameObject.SetActive(false);
+            }
+        }
+
+
         public bool ChangeColor(WeaponScript.WeaponColor color)
         {
             if (currentMode == color) return false;
             DetachObject(0);
             lastCube = null;
             InternalChangeColor(color);
+            ToggleLaserParticles(false, this.transform.position, this.transform.forward);
             return true;
         }
 
