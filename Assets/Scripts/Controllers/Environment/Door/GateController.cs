@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GateController : MonoBehaviour
 {
-    [Header("Door Config")]
-    public bool m_Locked;
+    [Header("Door Config")] public bool m_Locked;
+
     [Header("Color Settings")] [SerializeField]
     private Color m_LockedColor = Color.red;
 
     [SerializeField] private Color m_UnlockedColor = Color.green;
     [Range(0, 5f)] public float colorIntensity = 4f;
-    
+
     [Header("Audio")] public AudioClip gateOpen;
     public AudioClip gateClose;
-    [Header("Materials")]
-    public Material m_StatusMaterial;
+    [Header("Materials")] public Material m_StatusMaterial;
 
     private const string c_ColorText = "_Color";
     private const string c_EmissionColor = "_EmissionColor";
@@ -26,6 +26,9 @@ public class GateController : MonoBehaviour
     private Animator m_DoorAnim;
     private static int s_OpenHash = Animator.StringToHash("Open");
     private AudioSource m_AudioSource;
+
+    [Header("Events")] public UnityEvent OnGateBeginOpen;
+    public UnityEvent OnGateEndClose;
 
     private void Start()
     {
@@ -63,6 +66,7 @@ public class GateController : MonoBehaviour
         {
             UpdateGateStatus();
             m_DoorAnim.SetBool(s_OpenHash, true);
+            OnGateBeginOpen.Invoke();
             m_AudioSource.PlayOneShot(gateOpen);
         }
     }
@@ -84,7 +88,8 @@ public class GateController : MonoBehaviour
             {
                 var locked = m_Locked;
                 //m_StatusMaterials[i].SetColor(c_ColorText, locked ? m_LockedColor : m_UnlockedColor);
-                m_StatusMaterials[i].SetColor(c_EmissionColor, (locked ? m_LockedColor : m_UnlockedColor) * colorIntensity);
+                m_StatusMaterials[i].SetColor(c_EmissionColor,
+                    (locked ? m_LockedColor : m_UnlockedColor) * colorIntensity);
             }
         }
     }
@@ -111,5 +116,10 @@ public class GateController : MonoBehaviour
     {
         m_Locked = door;
         UpdateGateStatus();
+    }
+
+    public void InvokeGateClose()
+    {
+        OnGateEndClose.Invoke();
     }
 }
