@@ -26,16 +26,18 @@ namespace ColorPanels
             catch (NullReferenceException)
             {
             }
-
         }
 
         public static void PlayerJump(PlayerControllerFSM player, Rigidbody rigidbody)
         {
             player.enableAirControl = lastPanelProperties.enableAirControl;
-            rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
+            //rigidbody.AddForce(jumpDirection * lastPanelProperties.playerPropulsionForce, ForceMode.Impulse);
+            MovementManager.RigidbodyAddForce(rigidbody, jumpDirection, lastPanelProperties.playerPropulsionForce,
+                ForceMode.Impulse);
         }
 
-        public static void PanelSetProperties(ColorPanelObjectFSM.ColorPanelProperties panelProperties, Vector3 direction)
+        public static void PanelSetProperties(ColorPanelObjectFSM.ColorPanelProperties panelProperties,
+            Vector3 direction)
         {
             lastPanelProperties = panelProperties;
             jumpDirection = direction;
