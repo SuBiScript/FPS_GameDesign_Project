@@ -54,7 +54,6 @@ public class PauseController : MonoBehaviour
         }
     }
 
-
     public void Restart()
     {
         Time.timeScale = 1;
@@ -67,7 +66,6 @@ public class PauseController : MonoBehaviour
         AudioManager.instance.Play("MusicLevel");
     }
 
-
     public void ExitToMenu()
     {
         Time.timeScale = 1;
@@ -78,7 +76,6 @@ public class PauseController : MonoBehaviour
             AudioManager.instance.StopAllSounds();
         }
     }
-
 
     public void Quit()
     {
