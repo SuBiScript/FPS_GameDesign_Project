@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1459543618119328, guid: 6860b0e968b2fca44a3baa44b9d2aaee, type: 3}
       propertyPath: m_Name
-      value: Moving Platform
+      value: Moving Platform2
       objectReference: {fileID: 0}
     - target: {fileID: 1459543618119328, guid: 6860b0e968b2fca44a3baa44b9d2aaee, type: 3}
       propertyPath: m_Layer
@@ -131,6 +131,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23991827662836834, guid: 6860b0e968b2fca44a3baa44b9d2aaee,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 24c34d8ee22c61742a3f0cddd3a557b0, type: 2}
     - target: {fileID: 54872558694391928, guid: 6860b0e968b2fca44a3baa44b9d2aaee,
         type: 3}
       propertyPath: m_Constraints

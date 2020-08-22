@@ -155,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1084ce899df7fb04989867d61f3f39cd, type: 2}
+  - {fileID: 2100000, guid: 24c34d8ee22c61742a3f0cddd3a557b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   - {fileID: 4919702553194968}
   m_MaxSpeed: 5
   m_stopBetweenSpots: 3
+  movementDirection: {x: 0, y: 0, z: 0}
 --- !u!64 &7275787124458518459
 MeshCollider:
   m_ObjectHideFlags: 0
