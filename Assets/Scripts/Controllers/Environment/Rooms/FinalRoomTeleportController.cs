@@ -39,7 +39,7 @@ public class FinalRoomTeleportController : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-        SceneManager.LoadScene("MainMenuRenderScene");
+        SceneManager.LoadScene((int)SceneIndexes.Manager_Scene);
         yield return null;
     }
 }

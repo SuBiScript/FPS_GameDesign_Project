@@ -11,7 +11,7 @@ public class Checkpoint : MonoBehaviour
     
     [Space(10)]
     public UnityEvent checkpointActivated;
-    private Collider collider;
+    private new Collider collider;
 
     private void Awake()
     {

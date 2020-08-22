@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public class SparkController : MonoBehaviour , IRestartable
+public class SparkController : MonoBehaviour, IRestartable
 {
 
     [Header("Sound settings")]
@@ -22,7 +22,8 @@ public class SparkController : MonoBehaviour , IRestartable
     {
         m_SparkParticle.Stop();
         m_SparkParticle.Play();
-        m_AudioSource.Play();
+        if (m_AudioSource != null)
+            m_AudioSource.Play();
     }
 
     public void PauseSound()

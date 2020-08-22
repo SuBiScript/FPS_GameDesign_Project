@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &5540977357366218567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328239587781432453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01d29d88278f45458d99e6b5199e920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 0.5
+  useScattering: 0
+  overrideScattering: 0
+  overridingScattering: 0.5
+  scatteringBias: 0
+  useColorTemperatureTint: 0
+  overrideColor: 0
+  overridingColor: {r: 1, g: 1, b: 1, a: 1}
+  useShadow: 1
+  useCookie: 1
+  cookieMapRenderTexture: {fileID: 0}
+  enableOutOfPhaseColor: 0
+  outOfPhaseColorStrength: 0.1
+  outOfPhaseColor: {r: 0, g: 1, b: 1, a: 1}
+  customDistanceFalloffThreshold: 0.5
+  customDistanceFalloffPower: 2
+  customCookieDistanceFalloffStartThreshold: 0.1
+  customCookieDistanceFalloffEndThreshold: 0.25
+  customCookieDistanceFalloffPower: 2
+  customAngularFalloffThreshold: 0.8
+  customAngularFalloffPower: 2
 --- !u!1001 &8145392495205641569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11,6 +44,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307885629156901941, guid: a585ea174b9604e4a8bacf842670b43e,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2855677386788833547, guid: a585ea174b9604e4a8bacf842670b43e,
         type: 3}
@@ -67,5 +105,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8263928887399092022, guid: a585ea174b9604e4a8bacf842670b43e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.262
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a585ea174b9604e4a8bacf842670b43e, type: 3}
+--- !u!1 &6328239587781432453 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799078638658238948, guid: a585ea174b9604e4a8bacf842670b43e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8145392495205641569}
+  m_PrefabAsset: {fileID: 0}

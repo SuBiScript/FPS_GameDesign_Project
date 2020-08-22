@@ -115,7 +115,6 @@ public class PlayerControllerFSM : CharacterController, IParentable, IRestartabl
 
     private bool CheckOnGround()
     {
-        bool foundGround;
         var list = Physics.OverlapSphere(groundPosition.position, castRadius, walkableLayers);
         return list.Length > 0;
     }

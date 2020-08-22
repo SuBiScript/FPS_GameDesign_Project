@@ -6,8 +6,10 @@ using UnityEngine.Events;
 public class GateController : MonoBehaviour
 {
     [Header("Door Config")] public bool m_Locked;
+    private bool m_ClosingDoor;
 
-    [Header("Color Settings")] [SerializeField]
+    [Header("Color Settings")]
+    [SerializeField]
     private Color m_LockedColor = Color.red;
 
     [SerializeField] private Color m_UnlockedColor = Color.green;
@@ -75,6 +77,7 @@ public class GateController : MonoBehaviour
     {
         if (col.tag == "Player" && !m_Locked)
         {
+            m_ClosingDoor = true;
             m_DoorAnim.SetBool(s_OpenHash, false);
             m_AudioSource.PlayOneShot(gateClose);
         }
@@ -120,6 +123,10 @@ public class GateController : MonoBehaviour
 
     public void InvokeGateClose()
     {
-        OnGateEndClose.Invoke();
+        if (m_ClosingDoor)
+        {
+            OnGateEndClose.Invoke();
+            m_ClosingDoor = false;
+        }
     }
 }

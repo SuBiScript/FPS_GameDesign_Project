@@ -161,9 +161,12 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     public void Restart()
     {
-        transform.position = startingPosition;
-        transform.rotation = initialRotation;
-        ownRigidbody.velocity = Vector3.zero;
+        if (gameObject.activeInHierarchy)
+        {
+            transform.position = startingPosition;
+            transform.rotation = initialRotation;
+            ownRigidbody.velocity = Vector3.zero;
+        }
         //ChangeMaterials(cubeMaterialList[0]);
     }
 
@@ -222,7 +225,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
 
     public void MakeTransparent(bool makeTransparent)
     {
-        ChangeMaterials(!makeTransparent ? cubeMaterialList[0] : cubeMaterialList[1] );
+        ChangeMaterials(!makeTransparent ? cubeMaterialList[0] : cubeMaterialList[1]);
     }
 
     public void Detach()
@@ -241,7 +244,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         };
         meshRenderer.materials = newMaterials;
     }
-    
+
     private void ToggleLaserParticles(bool enable, Vector3 position, Vector3 forward)
     {
         if (laserParticles == null) return;

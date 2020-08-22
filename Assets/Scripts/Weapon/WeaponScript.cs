@@ -294,8 +294,6 @@ namespace Weapon
                 m_ObjectAttacher.DetachObjectVer2(0);//TODO Add object interface detachment!
                 return false;
             }
-
-            return false;
         }
 
         public void AttractObject(RaycastHit hitInfo)

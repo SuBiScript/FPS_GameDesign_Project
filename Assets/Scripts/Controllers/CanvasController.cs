@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Video;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CanvasController : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class CanvasController : MonoBehaviour
     public RectTransform m_textToDisplayPos;
     public Text m_textToDisplay;
     public Text m_textShadowToDisplay;
+    public GameObject m_VideoPanel;
+    public TextMeshProUGUI m_VideoPanelTextToDisplay;
+    public VideoPlayer m_VideoPlayer;
+    public TextMeshProUGUI m_ColorTipText;
 
     [HideInInspector] public GameObject m_textToDisplayAnim;
 
@@ -73,5 +79,46 @@ public class CanvasController : MonoBehaviour
     public void ShowReticle()
     {
         m_Reticle.enabled = true;
+    }
+
+    public void VideoToDisplay(string text, PlayerDetector.ColorPanel colorpanel, VideoClip videoClip)
+    {
+        m_VideoPanel.SetActive(true);
+        m_VideoPlayer.clip = videoClip;
+        m_VideoPanelTextToDisplay.text = text;
+        GameController.Instance.m_VideoPlaying = true;
+        GameController.Instance.m_GamePaused = true;
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        m_Reticle.enabled = false;
+
+        switch (colorpanel)
+        {
+            case PlayerDetector.ColorPanel.Blue:
+                m_ColorTipText.text = "BLUE";
+                m_ColorTipText.color = Color.blue;
+                break;
+            case PlayerDetector.ColorPanel.Green:
+                m_ColorTipText.text = "GREEN";
+                m_ColorTipText.color = Color.green;
+                break;
+            default:
+                m_ColorTipText.text = "RED";
+                m_ColorTipText.color = Color.red;
+                break;
+        }
+    }
+
+    public void RemovePlayingVideo()
+    {
+        m_VideoPlayer.Stop();
+        m_VideoPlayer.clip = null;
+        m_VideoPanel.SetActive(false);
+        GameController.Instance.m_VideoPlaying = false;
+        GameController.Instance.m_GamePaused = false;
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        ShowReticle();
     }
 }

@@ -43,6 +43,7 @@ public class PauseController : MonoBehaviour
         Cursor.visible = false;
         Time.timeScale = 1;
         gameObject.SetActive(false);
+        GameController.Instance.m_Blur.gameObject.SetActive(false);
         GameController.Instance.m_CanvasController.gameObject.SetActive(true);
         GameController.Instance.m_GamePaused = false;
         GameController.Instance.m_CanvasController.m_textToDisplayAnim.SetActive(false);
@@ -73,7 +74,7 @@ public class PauseController : MonoBehaviour
 
         if (FindObjectOfType<AudioManager>() != null)
         {
-            SceneManager.LoadScene("MainMenuRenderScene");
+            SceneManager.LoadScene((int)SceneIndexes.Manager_Scene);
             AudioManager.instance.StopAllSounds();
         }
     }

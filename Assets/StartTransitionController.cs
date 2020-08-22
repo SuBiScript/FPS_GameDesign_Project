@@ -24,7 +24,6 @@ public class StartTransitionController : MonoBehaviour
     {
         GameController.Instance.m_CanvasController.ShowReticle();
         GameController.Instance.m_IntroFinished = true;
-
     }
 
     public void ShowText()
@@ -40,17 +39,17 @@ public class StartTransitionController : MonoBehaviour
 
     IEnumerator LightInterpolation()
     {
-        yield return new WaitForSeconds(Time.deltaTime * 0.2f);
+        yield return new WaitForSeconds(Time.deltaTime * 0.01f);
 
-        if (m_chromatic.intensity.value <= 0.1f)
+        if (m_chromatic.intensity.value <= 0.001f)
         {
+            m_chromatic.intensity.value = 0.0f;
             yield return 0;
-            Destroy(gameObject);
         }
 
         else
         {
-            m_chromatic.intensity.value -= 0.005f;
+            m_chromatic.intensity.value -= 0.01f;
             StartCoroutine(LightInterpolation());
         }
     }

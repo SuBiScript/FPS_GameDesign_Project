@@ -22,9 +22,11 @@ public class MenuCubeSelector : MonoBehaviour
     public GameObject loadingPanel;
 
 
-    [Header("Transitions")] [Range(0f, 5f)] [Tooltip("Wait time between selecting an option and fading.")]
+    [Header("Transitions")]
+    [Range(0f, 5f)]
+    [Tooltip("Wait time between selecting an option and fading.")]
     public float standardWaitTime = 1f;
-    [Range(0f, 3f)]  [Tooltip("Wait time before accepting any input")] public float timeBeforeStartup = 2f;
+    [Range(0f, 3f)] [Tooltip("Wait time before accepting any input")] public float timeBeforeStartup = 2f;
 
     private Coroutine hideCube;
     private int _currentOption;
@@ -66,7 +68,7 @@ public class MenuCubeSelector : MonoBehaviour
         usingKeys = false;
         //Set cursor visible to select the options.
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.None;
 
         AudioManager.instance.Play("Perturbator");
         optionsPanel.SetActive(false);
@@ -178,7 +180,11 @@ public class MenuCubeSelector : MonoBehaviour
 
     void Play() //Play it with style, with a coroutine.
     {
-        SceneManager.LoadScene("PrimersNivells");
+        if (SceneController.instance != null)
+            SceneController.instance.LoadGame();
+        else
+            SceneManager.LoadScene((int)SceneIndexes.Level);
+
         AudioManager.instance.Stop("Perturbator");
         try
         {

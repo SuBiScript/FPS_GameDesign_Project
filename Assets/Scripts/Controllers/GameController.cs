@@ -13,7 +13,9 @@ public class GameController : Singleton<GameController>
     public GameObject m_Intro;
     public bool m_NoIntro = true;
     public Animation m_BlackFade;
+    public GameObject m_Blur;
     [Header("Checkpoint settings")] public Checkpoint defaultCheckpoint;
+
     private List<IRestartable> _restartables = new List<IRestartable>();
 
     public bool startGame;
@@ -23,6 +25,7 @@ public class GameController : Singleton<GameController>
     [HideInInspector] public bool m_GamePaused;
     [HideInInspector] public bool m_PlayerDied;
     [HideInInspector] public bool m_IntroFinished;
+    [HideInInspector] public bool m_VideoPlaying;
 
     [System.Serializable]
     public struct LevelInfo
@@ -65,7 +68,7 @@ public class GameController : Singleton<GameController>
         {
             _restartables.Add(item);
         }
-        
+
         SetupLevels();
         m_sparks = FindObjectsOfType<SparkController>();
     }
@@ -141,6 +144,7 @@ public class GameController : Singleton<GameController>
             item.Restart();
         }
 
+        m_CanvasController.ShowReticle();
         m_PlayerDied = false;
         playerComponents.HealthManager.onCharacterRespawn.Invoke();
         m_BloodFrame.gameObject.SetActive(false);
@@ -151,8 +155,12 @@ public class GameController : Singleton<GameController>
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished) //TODO Readd pause menu
+        if (Input.GetButtonDown("Cancel") && !m_GamePaused && !m_PlayerDied && m_IntroFinished && !m_VideoPlaying) //TODO Readd pause menu
             Pause();
+        else if (Input.GetButtonDown("Cancel") && m_VideoPlaying)
+        {
+            m_CanvasController.RemovePlayingVideo();
+        }
     }
 
 
@@ -166,6 +174,9 @@ public class GameController : Singleton<GameController>
         Time.timeScale = 0;
         if (m_CanvasController != null)
             m_CanvasController.gameObject.SetActive(false);
+
+        if (m_Blur != null)
+            m_Blur.SetActive(true);
 
         foreach (SparkController s in m_sparks)
         {
@@ -181,5 +192,8 @@ public class GameController : Singleton<GameController>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0;
+        if (m_Blur != null)
+            m_Blur.SetActive(true);
+        m_CanvasController.m_Reticle.enabled = false;
     }
 }
