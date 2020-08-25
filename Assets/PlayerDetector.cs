@@ -16,7 +16,8 @@ public class PlayerDetector : MonoBehaviour, IRestartable
     public ColorPanel m_ColorPanelTutorial = ColorPanel.Blue;
     public VideoClip m_VideoClip;
     public String m_TipToDisplay;
-    
+    public UnityEvent m_ChangeRoomsStatus;
+
     [Space(10)]
     [Tooltip("Invoked when Player enters the trigger zone. Can be reset.")]
     //public UnityEvent OnPlayerDetection;
@@ -73,6 +74,7 @@ public class PlayerDetector : MonoBehaviour, IRestartable
                 m_TutorialChange?.Invoke(m_TipToDisplay, m_ColorPanelTutorial, m_VideoClip);
                 HasBeenTriggered = true;
                 attachedCollider.enabled = false;
+                m_ChangeRoomsStatus.Invoke();
                 return;
             }
         }

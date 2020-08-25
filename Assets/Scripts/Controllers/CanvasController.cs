@@ -16,6 +16,7 @@ public class CanvasController : MonoBehaviour
     public TextMeshProUGUI m_VideoPanelTextToDisplay;
     public VideoPlayer m_VideoPlayer;
     public TextMeshProUGUI m_ColorTipText;
+    public VideoPlayer m_BlackScreenVideoPlayer;
 
     [HideInInspector] public GameObject m_textToDisplayAnim;
 
@@ -120,5 +121,6 @@ public class CanvasController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         ShowReticle();
+        m_BlackScreenVideoPlayer.Play();
     }
 }

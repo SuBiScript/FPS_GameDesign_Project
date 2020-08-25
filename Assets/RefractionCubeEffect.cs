@@ -149,7 +149,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         AttachedOnThisPanel = attachedTo;
         currentlyAttached = true;
         if (_joint != null) Destroy(_joint);
-        //ChangeMaterials(cubeMaterialList[0]);
+        ChangeMaterials(cubeMaterialList[0]);
     }
 
     public void Detach(bool force = false)
