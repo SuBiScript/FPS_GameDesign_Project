@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18064263, g: 0.18290669, b: 0.19784334, a: 1}
+  m_IndirectSpecularColor: {r: 0.02133365, g: 0.032311775, b: 0.08569694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1153,41 +1153,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 945fd6c2b12785748813b91d2fa5d7a5, type: 3}
---- !u!84 &967336422
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Fluorescent_PL : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 512
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1002471484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2303,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9212613, y: 0.64632744, z: 4.921263}
   m_Center: {x: -0.0000000016269155, y: -0.013647556, z: 0.0000038130709}
+--- !u!84 &1540833334
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Fluorescent_PL : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 512
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!114 &1598415682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3938,7 +3938,7 @@ PrefabInstance:
     - target: {fileID: 4330103891815286946, guid: dd5df3390e38c504a9fde4b2617f3370,
         type: 3}
       propertyPath: m_Range
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4330103891815286946, guid: dd5df3390e38c504a9fde4b2617f3370,
         type: 3}
@@ -3993,12 +3993,12 @@ PrefabInstance:
     - target: {fileID: 8035058088349905633, guid: dd5df3390e38c504a9fde4b2617f3370,
         type: 3}
       propertyPath: m_Range
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8280103394550428298, guid: dd5df3390e38c504a9fde4b2617f3370,
         type: 3}
       propertyPath: m_Range
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8280103394550428298, guid: dd5df3390e38c504a9fde4b2617f3370,
         type: 3}
@@ -6442,7 +6442,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.05e-43, y: 7.1e-44, z: 0, w: 0.0000000026765914}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 3
   m_ShadowAngle: 0
