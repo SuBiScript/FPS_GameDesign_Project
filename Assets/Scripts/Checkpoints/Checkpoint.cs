@@ -8,9 +8,10 @@ public class Checkpoint : MonoBehaviour
     [Header("Configuration")]
     public byte ID;
     public Transform respawnTransform;
+    public Transform synchedRoom;
     
     [Space(10)]
-    public UnityEvent checkpointActivated;
+    public UnityEvent OnCheckpointActivation;
     private new Collider collider;
 
     private void Awake()
@@ -22,6 +23,8 @@ public class Checkpoint : MonoBehaviour
         {
             Debug.LogWarning($"Checkpoint {this.gameObject.name.ToString()} not registered!");
         }
+
+        gameObject.name = "Checkpoint_" + ID + "_" + (synchedRoom!=null ? synchedRoom.gameObject.name : "");
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -30,7 +33,7 @@ public class Checkpoint : MonoBehaviour
         {
             if (CheckpointManager.SetNewCheckpoint(this))
             {
-                checkpointActivated.Invoke();
+                OnCheckpointActivation.Invoke();
                 this.SetCheckpoint(true);
             }
         }
@@ -43,5 +46,10 @@ public class Checkpoint : MonoBehaviour
     public void SetCheckpoint(bool disable)
     {
         this.collider.enabled = !disable;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return respawnTransform.position;
     }
 }

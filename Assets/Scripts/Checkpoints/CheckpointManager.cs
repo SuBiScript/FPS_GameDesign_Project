@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class CheckpointManager
 {
-    public static Dictionary<byte, Checkpoint> Checkpoints = new Dictionary<byte, Checkpoint>();
+    private static Dictionary<int, Checkpoint> Checkpoints = new Dictionary<int, Checkpoint>();
     private static Checkpoint initialCheckpoint;
     private static Checkpoint currentCheckpoint;
 
@@ -58,13 +58,13 @@ public static class CheckpointManager
         return false;
     }
 
-    public static bool SetObjectPositionToCheckpoint(GameObject gameObject, byte index = 0)
+    public static bool TeleportToCheckpoint(Transform _transform, int index)
     {
         try
         {
             Checkpoint chosenCheckpoint = Checkpoints[index];
             
-            gameObject.transform.position = chosenCheckpoint.respawnTransform.position;
+            _transform.position = chosenCheckpoint.respawnTransform.position;
             
             /*var newQuaternion = gameObject.transform.rotation;
             newQuaternion.y = chosenCheckpoint.respawnTransform.rotation.y; //TODO make it work with the camera.
@@ -78,6 +78,20 @@ public static class CheckpointManager
             return false;
         }
     }
+    
+    public static void TeleportToCurrentCheckpoint(Transform _transform)
+    {
+        try
+        {
+            _transform.transform.position =
+                currentCheckpoint.GetPosition(); //chosenCheckpoint.respawnTransform.position;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.Message, _transform);
+        }
+    }
+    
 
     private static void SetStartingCheckpoint(Checkpoint checkpoint)
     {
@@ -139,6 +153,18 @@ public static class CheckpointManager
 
     public static void ClearListOfCheckpoints()
     {
-        Checkpoints = new Dictionary<byte, Checkpoint>();
+        Checkpoints = new Dictionary<int, Checkpoint>();
+    }
+
+    public static List<Checkpoint> GetCheckpoints()
+    {
+        List<Checkpoint> checkpoints=new List<Checkpoint>();
+        var Check = Checkpoints.Values;
+        foreach (Checkpoint l_Checkpoint in Checkpoints.Values)
+        {
+            checkpoints.Add(l_Checkpoint);
+        }
+
+        return checkpoints;
     }
 }

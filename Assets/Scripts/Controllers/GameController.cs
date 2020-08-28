@@ -93,7 +93,7 @@ public class GameController : Singleton<GameController>
 
         if (startGame)
         {
-            CheckpointManager.SetObjectPositionToCheckpoint(playerComponents.PlayerController.gameObject);
+            CheckpointManager.TeleportToCurrentCheckpoint(playerComponents.PlayerController.gameObject.transform);
         }
     }
 
