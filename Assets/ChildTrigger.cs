@@ -1,24 +1,26 @@
-﻿using UnityEngine;
+﻿using Panels;
+using UnityEngine;
 
-namespace ColorPanels
+public class ChildTrigger : MonoBehaviour
 {
-    public class ChildTrigger : MonoBehaviour
+    public bool OnTriggerEnterEnabled = true;
+    public bool OnTriggerExitEnabled = true;
+    private Panel parentController;
+
+    private void Start()
     {
-        private ColorPanelObjectFSM parentController;
+        parentController = GetComponentInParent<Panel>();
+    }
 
-        private void Start()
-        {
-            parentController = GetComponentInParent<ColorPanelObjectFSM>();
-        }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!OnTriggerEnterEnabled) return;
+        parentController.OnChildTriggerEnter(other);
+    }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            parentController.OnChildTriggerEnter(other);
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            parentController.OnChildTriggerExit(other);
-        }
+    private void OnTriggerExit(Collider other)
+    {
+        if (!OnTriggerExitEnabled) return;
+        parentController.OnChildTriggerExit(other);
     }
 }

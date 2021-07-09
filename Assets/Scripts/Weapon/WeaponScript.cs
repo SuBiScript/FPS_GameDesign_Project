@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ColorPanels;
+using Interfaces;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -82,7 +83,7 @@ namespace Weapon
                     if (!m_Rendered)
                     {
                         m_ChildsAttachedObject = m_ObjectAttached.GetComponentInChildren<IAttachable>();
-                        m_ChildsAttachedObject.ChangeLayers("AttachedObject");
+                        //m_ChildsAttachedObject.ChangeLayers("AttachedObject");
                         
                         m_ObjectAttached.isKinematic = true;
                         m_ObjectAttached.gameObject.GetComponent<RefractionCubeEffect>().MakeTransparent(true);
@@ -110,7 +111,7 @@ namespace Weapon
             {
                 if (m_ObjectAttached == null) return;
 
-                m_ChildsAttachedObject.ChangeLayers("Cube");
+                //m_ChildsAttachedObject.ChangeLayers("Cube");
 
                 try
                 {
@@ -141,16 +142,7 @@ namespace Weapon
 
         [Header("Weapon Effects")] public List<ParticleSystem> m_WeaponParticleList;
         public List<GameObject> m_WeaponMuzzleList;
-
-
-        public enum WeaponColor
-        {
-            None,
-            Red,
-            Green,
-            Blue
-        }
-
+        
         public MaterialList materialList;
         public MeshRenderer weaponMeshRenderer;
         public Material weaponMaterial;
@@ -301,7 +293,7 @@ namespace Weapon
             try
             {
                 var rb = hitInfo.collider.gameObject.GetComponent<IAttachable>();
-                rb.Attach();
+                // rb.Attach(); DOESNT WORK ANYMORE! MUST PROVIDE WITH A POINT.
                 if (rb == null) return;
                 //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Cube"), true);
                 rb.ownRigidbody.velocity = Vector3.zero;

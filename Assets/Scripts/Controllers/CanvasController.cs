@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.Video;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {

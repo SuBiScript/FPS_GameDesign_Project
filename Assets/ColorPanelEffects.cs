@@ -80,5 +80,31 @@ namespace ColorPanels
                     1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
             }
         }
+        
+        public static void UpdateAttachedObject(Rigidbody objectAttached, Vector3 attachingPosition, Vector3 eulerAngles,
+            float attachingObjectSpeed = 25f)
+        {
+            //if (objectAttached == null) return;
+            //objectAttached.gameObject.transform.parent = m_AttachingPosition.transform;
+
+            var transform = objectAttached.transform;
+            Vector3 direction = attachingPosition - transform.position;
+
+            float distance = direction.magnitude;
+
+            if (attachingObjectSpeed * Time.deltaTime >=  distance)
+            {
+                objectAttached.MovePosition(attachingPosition);
+                objectAttached.MoveRotation(Quaternion.Euler(0.0f, eulerAngles.y, eulerAngles.z));
+            }
+            else
+            {
+                direction /=  distance;
+                objectAttached.MovePosition(attachingPosition);
+                objectAttached.MoveRotation(Quaternion.Lerp(transform.rotation,
+                    Quaternion.Euler(0.0f, eulerAngles.y, eulerAngles.z),
+                    1.0f - Mathf.Min(distance / 1.5f, 1.0f)));
+            }
+        }
     }
 }

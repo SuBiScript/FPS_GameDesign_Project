@@ -12,7 +12,7 @@ public class MainmenuSceneManager : MonoBehaviour
         if (colorPanelObject.Length <= 0) return;
         foreach (ColorPanelObjectFSM panel in colorPanelObject)
         {
-            panel.ChangeColor(WeaponScript.WeaponColor.Blue);
+            panel.ChangeColor(WeaponColor.Blue);
         }
 
         //AudioManager.instance.Play("Perturbator");

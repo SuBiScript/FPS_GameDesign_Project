@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour, InterfaceCanParent
 {
-
     public enum PlatformType
     {
         Standard,
         Trigger
     }
-    
+
     public List<ObjectInformation> ParentInfos { get; set; } //Interface imported
 
     public PlatformType m_PlatformType;
@@ -27,6 +26,7 @@ public class MovingPlatform : MonoBehaviour, InterfaceCanParent
     bool m_PlatformTriggered;
     bool m_AvoidPathFinding;
     Rigidbody m_RigidBody;
+    public Mesh Mesh;
 
     void Start()
     {
@@ -181,6 +181,15 @@ public class MovingPlatform : MonoBehaviour, InterfaceCanParent
                 ParentInfos.Remove(objectInformation);
                 return;
             }
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        for (int i = 0; i < m_PatrolPositions.Count; i++)
+        {
+            Gizmos.DrawLine(this.gameObject.transform.position, m_PatrolPositions[i].transform.position);
+            Gizmos.DrawWireMesh(Mesh, m_PatrolPositions[i].transform.position, Quaternion.identity, transform.localScale);
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 
 #if UNITY_EDITOR
+#pragma warning disable CS0414
 public class SetCheckPointCheat : EditorWindow
 {
     [MenuItem("Cheats/Editor/Teleport to Checkpoint")]

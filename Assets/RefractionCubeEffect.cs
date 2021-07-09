@@ -1,9 +1,12 @@
 ﻿using System;
 using ColorPanels;
+using Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 
-public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IAttachable
+public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IAttachable, IBoostable
 {
     [System.Serializable]
     public struct CubeMaterials
@@ -159,6 +162,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         currentlyAttached = false;
     }
 
+    [Button("Restart", ButtonSizes.Medium)]
     public void Restart()
     {
         if (gameObject.activeInHierarchy)
@@ -211,7 +215,7 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
         }
     }
 
-    public void Attach()
+    public void Attach(Rigidbody rb)
     {
         if (_joint) Destroy(_joint);
         Physics.IgnoreCollision(m_Collider, GameController.Instance.playerComponents.PlayerController.attachedCollider, true);
@@ -222,6 +226,8 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
     {
         meshRenderer.gameObject.layer = LayerMask.NameToLayer(newLayer);
     }
+
+    public UnityEvent OnAttachOverride { get; set; }
 
     public void MakeTransparent(bool makeTransparent)
     {
@@ -261,5 +267,14 @@ public class RefractionCubeEffect : MonoBehaviour, IRestartable, IParentable, IA
             laserParticles.Stop();
             laserParticles.gameObject.SetActive(false);
         }
+    }
+
+    public void Boost(Vector3 Force)
+    {
+        // Maybe reset the angular velocity?
+        // Maybe stop it before boosting it tbh.
+        ownRigidbody.velocity = Force;
+        // ownRigidbody.AddForce(Force, ForceMode.Impulse);
+        //ownRigidbody.velocity = Force;
     }
 }

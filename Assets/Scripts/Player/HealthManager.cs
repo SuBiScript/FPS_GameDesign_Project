@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using UnityEngine.Events;
 
 public class HealthManager : MonoBehaviour
@@ -46,7 +46,7 @@ public class HealthManager : MonoBehaviour
         if (m_IsAttachedCharacterDead || m_GodMode) return;
         if (l_Damage <= 0)
         {
-            Debug.LogError($"Someone sent incorrect damage values to {this.gameObject.name}");
+            //Debug.LogError($"Someone sent incorrect damage values to {this.gameObject.name}");
             return;
         }
 
@@ -63,8 +63,16 @@ public class HealthManager : MonoBehaviour
         }
 
         onDamageTaken.Invoke();
-        if (!m_OwnerIsPlayer)
-            Debug.Log($"{this.gameObject.name} stats: {m_CurrentHealth} / {m_CurrentShield}");
+        
+        #if UNITY_EDITOR
+        //if (!m_OwnerIsPlayer)
+            //Debug.Log($"{this.gameObject.name} stats: {m_CurrentHealth} / {m_CurrentShield}");
+        #endif
+    }
+
+    public void Kill()
+    {
+        DealDamage(m_MaxHealth);
     }
 
     //Getters

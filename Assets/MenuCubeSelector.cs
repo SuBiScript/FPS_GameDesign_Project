@@ -75,7 +75,7 @@ public class MenuCubeSelector : MonoBehaviour
         optionSelected = false;
         foreach (ColorPanelObjectFSM panel in options)
         {
-            panel.ChangeColor(WeaponScript.WeaponColor.None);
+            panel.ChangeColor(WeaponColor.None);
         }
 
         currentOption = 0;
@@ -144,7 +144,7 @@ public class MenuCubeSelector : MonoBehaviour
         switch (currentOption)
         {
             case 0:
-                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
+                options[currentOption].ChangeColor(WeaponColor.Blue);
                 StartCoroutine(StartPlaying());
                 optionSelected = true;
                 break;
@@ -152,7 +152,7 @@ public class MenuCubeSelector : MonoBehaviour
                 Options();
                 break;
             case 2:
-                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Blue);
+                options[currentOption].ChangeColor(WeaponColor.Blue);
                 StartCoroutine(QuitWithStyle());
                 optionSelected = true;
                 break;
@@ -168,12 +168,12 @@ public class MenuCubeSelector : MonoBehaviour
         {
             if (i == currentOption)
             {
-                options[currentOption].ChangeColor(WeaponScript.WeaponColor.Green);
+                options[currentOption].ChangeColor(WeaponColor.Green);
                 TextMeshPro.text = texts[currentOption];
             }
             else
             {
-                options[i].ChangeColor(WeaponScript.WeaponColor.None);
+                options[i].ChangeColor(WeaponColor.None);
             }
         }
     }
@@ -203,7 +203,7 @@ public class MenuCubeSelector : MonoBehaviour
         if (optionsPanel.activeSelf)
         {
             optionsPanel.SetActive(false);
-            options[currentOption].ChangeColor(WeaponScript.WeaponColor.Green);
+            options[currentOption].ChangeColor(WeaponColor.Green);
             selectorCube.gameObject.SetActive(true);
             //selectorCube.Restart();
             //StopCoroutine(hideCube);

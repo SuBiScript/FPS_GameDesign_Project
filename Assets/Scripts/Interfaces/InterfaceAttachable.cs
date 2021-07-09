@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-public interface IAttachable
+namespace Interfaces
 {
-    Rigidbody ownRigidbody { get; set; }
-    void Attach();
-    void Detach();
-    void ChangeLayers(string newLayer);
+    public interface IAttachable
+    {
+        Rigidbody ownRigidbody { get; set; }
+        void Attach(Rigidbody rb);
+        void Detach();
+        // void ChangeLayers(string newLayer);
+        UnityEvent OnAttachOverride { get; set; }
+    }
 }
